@@ -1,1 +1,36 @@
-<p>login-page works!</p>
+<div class="outer">
+  <div class="container">
+    <form action="" #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
+      <label for="username">Username</label>
+      <div class="card flex justify-content-center" >
+        <input
+          type="text"
+          id="username"
+          name="username"
+          pInputText
+          ngModel
+          required
+        />
+      </div>
+      <label for="password">Password</label>
+      <div class="card flex justify-content-center">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          pInputText
+          required
+          ngModel
+          #password="ngModel"
+          minlength="5"
+        />
+        <span *ngIf="password.invalid && password.touched">Password must be longer than 5 character</span>
+      </div>
+  
+      <div class="card flex justify-content-center">
+        <button [disabled]="!myForm.valid" pButton pRipple label="Login" class="p-button-success"></button>
+      </div>
+    </form>
+  </div>
+  
+</div>
