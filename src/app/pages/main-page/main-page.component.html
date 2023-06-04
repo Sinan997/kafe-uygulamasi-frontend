@@ -1,0 +1,4 @@
+<app-sidebar (isSidebarOpen)="handleSidebar($event)"></app-sidebar>
+<div [ngClass]="isSidebarOpen ? 'home-section open' : 'home-section'">
+  <router-outlet></router-outlet>
+</div>

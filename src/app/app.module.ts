@@ -11,9 +11,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, HomeComponent, MenuComponent, ErrorPageComponent],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, HomeComponent, MenuComponent, ErrorPageComponent, SidebarComponent, MainPageComponent, DashboardPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

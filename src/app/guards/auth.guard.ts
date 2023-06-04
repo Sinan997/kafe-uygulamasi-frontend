@@ -6,6 +6,12 @@ import { JwtModule as jwt } from "@auth0/angular-jwt";
 
 export const isLoggedIn: CanActivateFn = (route:ActivatedRouteSnapshot, state:RouterStateSnapshot) => {
   const authService = inject(AuthService)
-  return authService.isLoggedIn();
+  const router = inject(Router)
+  if(authService.isLoggedIn()){
+    return true
+  }else{
+    router.navigate(['login'])
+    return false
+  }
 };
 

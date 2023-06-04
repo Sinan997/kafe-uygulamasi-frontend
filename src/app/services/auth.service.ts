@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('token') ? true : false;
+    return localStorage.getItem('accessToken') ? true : false;
   }
   // getLogin() {
   //   this.http.get('http://localhost:8080/login').subscribe((val) => {

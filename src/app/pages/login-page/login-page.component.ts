@@ -25,8 +25,9 @@ export class LoginPageComponent {
             res = res as loginResponse;
             console.log('navigate edildi');
             localStorage.setItem('accessToken', res.accessToken);
+            localStorage.setItem('user',JSON.stringify(res.user))
             this.loading = false
-            this.router.navigate(['home']);
+            this.router.navigate(['']);
         },
         error: (err) => {
           const error: errorResponse = err.error

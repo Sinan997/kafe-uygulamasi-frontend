@@ -1,5 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root{
+  --color-default:#004f83;
+  --color-second:#0067ac;
+  --color-white:#fff;
+  --color-body:#e4e9f7;
+  --color-light:#e0e0e0;
+}
+
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
 body {
-  font-family: var(--font-family);
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -8,3 +21,8 @@ body {
 .p-toast{
   width: 20rem !important;
 }
+
+
+
+
+
