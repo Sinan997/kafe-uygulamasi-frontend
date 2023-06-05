@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<div *ngIf="authService.isLoggedIn();else other_content">
+  <app-sidebar (isSidebarOpenEvent)="handleSidebar($event)" (onLogout)="logout()"></app-sidebar>
+  <div [ngClass]="isSidebarOpen ? 'home-section open' : 'home-section'">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<ng-template #other_content>
+  <router-outlet></router-outlet>
+</ng-template>

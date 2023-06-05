@@ -10,7 +10,7 @@ export const isLoggedIn: CanActivateFn = (route:ActivatedRouteSnapshot, state:Ro
   if(authService.isLoggedIn()){
     return true
   }else{
-    router.navigate(['login'])
+    router.navigate(['menu'])
     return false
   }
 };

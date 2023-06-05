@@ -9,14 +9,15 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { MainPageComponent } from './pages/main-page/main-page.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { TablesPageComponent } from './pages/tables-page/tables-page.component';
+import { WaiterPageComponent } from './pages/waiter-page/waiter-page.component';
+import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, HomeComponent, MenuComponent, ErrorPageComponent, SidebarComponent, MainPageComponent, DashboardPageComponent],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, HomeComponent, ErrorPageComponent, SidebarComponent, DashboardPageComponent, TablesPageComponent, WaiterPageComponent, MenuPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

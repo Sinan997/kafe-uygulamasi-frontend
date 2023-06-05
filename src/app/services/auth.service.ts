@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/userModel';
-import jwt_decode from 'jwt-decode';
+import { loginModel } from '../models/userModel';
 import { ApiRequestService } from './api-request.service';
-import { loginResponse } from '../models/apiModels/loginResponse';
-import { errorResponse } from '../models/apiModels/errorResponse';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -16,8 +12,13 @@ export class AuthService {
     private route: Router
   ) {}
 
-  doLogin(user: User) {
+  doLogin(user: loginModel) {
     return this.requestService.postLogin(user)
+  }
+
+  logout(){
+    localStorage.clear()
+    this.route.navigate(['login'])
   }
 
   isTokenExist(): boolean {
@@ -29,10 +30,6 @@ export class AuthService {
     } else {
       return false;
     }
-  }
-
-  getJWTPayload() {
-    return jwt_decode(localStorage.getItem('accessToken')!);
   }
 
   isLoggedIn(): boolean {

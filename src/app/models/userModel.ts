@@ -1,5 +1,10 @@
-export interface User {
+export interface loginModel {
   username: string;
   password: string;
-  role?: string;
+}
+
+export interface User{
+  id:number,
+  username:string,
+  role:string
 }
