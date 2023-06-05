@@ -31,6 +31,7 @@ export class SidebarComponent implements OnInit {
       { path: 'dashboard', class: 'bx bx-grid-alt', label: 'Panel' },
       { path: 'tables', class: 'bx bx-table', label: 'Masalar' },
       { path: 'waiter', class: 'bx bx-male', label: 'Garson' },
+      { path: 'orders', class: 'bx bx-restaurant', label: 'Siparişler' },
       { path: 'menu', class: 'bx bxs-food-menu', label: 'Menü' },
     ]
     this.user = JSON.parse(localStorage.getItem('user')!)

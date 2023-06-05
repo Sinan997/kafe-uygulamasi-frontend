@@ -15,9 +15,10 @@ import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.co
 import { TablesPageComponent } from './pages/tables-page/tables-page.component';
 import { WaiterPageComponent } from './pages/waiter-page/waiter-page.component';
 import { MenuPageComponent } from './pages/menu-page/menu-page.component';
+import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, HomeComponent, ErrorPageComponent, SidebarComponent, DashboardPageComponent, TablesPageComponent, WaiterPageComponent, MenuPageComponent],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, HomeComponent, ErrorPageComponent, SidebarComponent, DashboardPageComponent, TablesPageComponent, WaiterPageComponent, MenuPageComponent, OrdersPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
