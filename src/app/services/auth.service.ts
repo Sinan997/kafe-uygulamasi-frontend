@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { loginModel } from '../models/userModel';
-import { ApiRequestService } from './api-request.service';
+import { ApiRequestService } from './request-services/auth-request.service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -13,12 +13,12 @@ export class AuthService {
   ) {}
 
   doLogin(user: loginModel) {
-    return this.requestService.postLogin(user)
+    return this.requestService.postLogin(user);
   }
 
-  logout(){
-    localStorage.clear()
-    this.route.navigate(['login'])
+  logout() {
+    localStorage.clear();
+    this.route.navigate(['login']);
   }
 
   isTokenExist(): boolean {
@@ -35,9 +35,8 @@ export class AuthService {
   isLoggedIn(): boolean {
     return localStorage.getItem('accessToken') ? true : false;
   }
-  // getLogin() {
-  //   this.http.get('http://localhost:8080/login').subscribe((val) => {
-  //     console.log('is logged in');
-  //   });
-  // }
+
+  get token(): string {
+    return localStorage.getItem('accessToken')!;
+  }
 }

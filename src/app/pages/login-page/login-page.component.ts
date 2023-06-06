@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { User, loginModel } from '../../models/userModel';
 import { AuthService } from '../../services/auth.service';
 import { MessageService } from 'primeng/api';
-import { loginResponse } from 'src/app/models/apiModels/loginResponse';
+import { loginResponse } from 'src/app/models/api-response-models/loginResponse';
 import { Router } from '@angular/router';
-import { errorResponse } from 'src/app/models/apiModels/errorResponse';
+import { errorResponse } from 'src/app/models/api-response-models/errorResponse';
 
 @Component({
   selector: 'app-login-page',
@@ -23,7 +23,6 @@ export class LoginPageComponent {
       {
         next: (res) => {
             res = res as loginResponse;
-            console.log('navigate edildi');
             localStorage.setItem('accessToken', res.accessToken);
             localStorage.setItem('user',JSON.stringify(res.user))
             this.loading = false

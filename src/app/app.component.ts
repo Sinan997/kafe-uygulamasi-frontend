@@ -8,21 +8,19 @@ import { User } from './models/userModel';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   isSidebarOpen: boolean = false;
   pages: sidebarPageModel[] = [];
 
-  constructor(public authService:AuthService){}
-  
-  ngOnInit(): void {
-    console.log('this.pages in app.component ngOnInit',this.pages);
-  }
+  constructor(public authService: AuthService) {}
+
+  ngOnInit(): void {}
 
   handleSidebar(val: boolean) {
     this.isSidebarOpen = val;
   }
 
-  logout(){
-    this.authService.logout()
+  logout() {
+    this.authService.logout();
   }
 }
