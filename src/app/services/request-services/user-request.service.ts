@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { allUserResponse } from 'src/app/models/api-response-models/allUserResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class UserRequestService {
   }
 
   getAllUsers() {
-    return this.http.get(this.userUrl + '/all-users', {
+    return this.http.get<allUserResponse>(this.userUrl + '/all-users', {
       headers: this.headers,
     });
   }

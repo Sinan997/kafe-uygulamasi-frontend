@@ -4,7 +4,7 @@ export interface loginModel {
 }
 
 export interface User{
-  id:number,
+  id:string,
   name:string,
   surname:string,
   username:string,

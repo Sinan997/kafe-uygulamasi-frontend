@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
     name: 'user',
     surname: 'user',
     role: 'role',
-    id: 123,
+    id: '123',
   };
 
   isSidebarOpen?: boolean;
