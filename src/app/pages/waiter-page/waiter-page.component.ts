@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserRequestService } from 'src/app/services/request-services/user-request.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { User } from 'src/app/models/userModel';
+import { roleModel } from 'src/app/models/roleModel';
 
 @Component({
   selector: 'app-waiter-page',
@@ -11,10 +12,12 @@ import { User } from 'src/app/models/userModel';
 })
 export class WaiterPageComponent implements OnInit {
   user?: User;
-  users: User[] = [];
   submitted?: boolean;
   userDialog?: boolean;
+  users: User[] = [];
   selectedUsers: User[] | null = [];
+  roles:roleModel[] = []
+  selectedRole?:roleModel
 
   constructor(
     private userRequestService: UserRequestService,
@@ -26,10 +29,19 @@ export class WaiterPageComponent implements OnInit {
     this.userRequestService.getAllUsers().subscribe((result) => {
       this.users = result.users;
     });
+
+    this.roles = [
+      { label: 'Admin', value: 'admin' },
+      { label: 'Garson', value: 'waiter' }
+    ];
+  }
+
+  clicked(){
+    console.log('clicked');
   }
 
   openNew() {
-    this.user = { id: '', name: '', role: '', surname: '', username: '' };
+    this.user = { id: '', name: '', role: '', surname: '', username: '', password: '' };
     this.submitted = false;
     this.userDialog = true;
   }
@@ -53,4 +65,11 @@ export class WaiterPageComponent implements OnInit {
 
   deleteUser(user:User){}
 
+  hideDialog(){
+
+  }
+
+  saveUser(){
+    this.submitted = true
+  }
 }

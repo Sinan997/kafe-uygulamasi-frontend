@@ -2,10 +2,11 @@
 <div class="card">
   <p-toast></p-toast>
   <p-toolbar styleClass="mb-4 gap-2">
-      <ng-template pTemplate="right">
-          <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-          <button pButton pRipple [label]="'Delete'" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
-      </ng-template>
+    <ng-template pTemplate="left"></ng-template>
+    <ng-template pTemplate="right">
+        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+        <button pButton pRipple [label]="'Delete'" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
+    </ng-template>
   </p-toolbar>
 
   <p-table
@@ -13,20 +14,20 @@
       [value]="users"
       [rows]="10"
       [paginator]="true"
-      [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
-      [tableStyle]="{ 'min-width': '35rem' }"
+      [globalFilterFields]="['name', 'username', 'surname', 'role']"
+      [tableStyle]="{ 'width': '100%' }"
       [(selection)]="selectedUsers"
       [rowHover]="true"
-      dataKey="id"
+      dataKey="username"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [showCurrentPageReport]="true"
   >
       <ng-template pTemplate="caption">
           <div class="flex align-items-center justify-content-between">
-              <h5 class="m-0">Manage Products</h5>
+              <h5 class="m-0">Kullanıcı Yönetimi</h5>
               <span class="p-input-icon-left">
                   <i class="pi pi-search"></i>
-                  <input pInputText type="text" #thisInput (input)="dt.filterGlobal(thisInput.value, 'contains')" placeholder="Search..." />
+                  <input pInputText type="text" #thisInput (input)="dt.filterGlobal(thisInput.value, 'contains')" placeholder="Ara..." />
               </span>
           </div>
       </ng-template>
@@ -35,11 +36,11 @@
               <th style="width: 4rem">
                   <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
               </th>
-              <th pSortableColumn="name" style="min-width:15rem">Name<p-sortIcon field="name"></p-sortIcon></th>
-              <th>Username</th>
-              <th pSortableColumn="price">Role<p-sortIcon field="price"></p-sortIcon></th>
-              <th pSortableColumn="category" style="min-width:10rem">Info <p-sortIcon field="category"></p-sortIcon></th>
-              <th pSortableColumn="rating">Edit<p-sortIcon field="rating"></p-sortIcon></th>
+              <th pSortableColumn="name" style="min-width:15rem">İsim<p-sortIcon field="name"></p-sortIcon></th>
+              <th pSortableColumn="username">Kullanıcı Adı</th>
+              <th pSortableColumn="role">Rol<p-sortIcon field="price"></p-sortIcon></th>
+              <th style="min-width:10rem">Bilgi</th>
+              <th>Düzenle</th>
               <th></th>
           </tr>
       </ng-template>
@@ -59,57 +60,45 @@
           </tr>
       </ng-template>
       <ng-template pTemplate="summary">
-          <div class="flex align-items-center justify-content-between">In total there are {{ users ? users.length : 0 }} users.</div>
+          <div class="flex align-items-center justify-content-between">Toplam {{ users ? users.length : 0 }} kullanıcı mevcut.</div>
       </ng-template>
   </p-table>
 </div>
-<!-- <p-dialog [(visible)]="userDialog" [style]="{ width: '450px' }" header="Product Details" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="userDialog" [style]="{ width: '45%',maxWidth:'450px'}" header="Kullanıcı Ekle" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
-      <div class="field">
-          <label for="name">Name</label>
-          <input type="text" pInputText id="name" [(ngModel)]="user!.name" required autofocus />
-          <small class="p-error" *ngIf="submitted && !user!.name">Name is required.</small>
-      </div>
-      <div class="field">
-          <label for="description">Description</label>
-          <textarea id="description" pInputTextarea [(ngModel)]="user!.username" required rows="3" cols="20"></textarea>
+      <div class="field grid">
+        <div class="col">
+            <label for="name">İsim</label>
+            <input type="text" pInputText id="name" [(ngModel)]="user!.name" required autofocus />
+            <small class="p-error" *ngIf="submitted && !user!.name">İsim zorunludur.</small>
+        </div>
+        <div class="col">
+            <label for="surname">Soyisim</label>
+            <input type="text" pInputText id="surname" [(ngModel)]="user!.surname" required autofocus />
+            <small class="p-error" *ngIf="submitted && !user!.name">Soyisim zorunludur.</small>
+        </div>
       </div>
 
       <div class="field">
-          <label for="inventoryStatus">Inventory Status</label>
-          <p-dropdown [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses">
-              <ng-template pTemplate="selectedItem">
-                  <p-tag [value]="product.inventoryStatus.toUpperCase()" [severity]="getSeverity(product.inventoryStatus.toUpperCase())"></p-tag>
-              </ng-template>
-              <ng-template let-option pTemplate="item">
-                  <p-tag [value]="option.label" [severity]="getSeverity(option.label)"></p-tag>
-              </ng-template>
+          <label for="inventoryStatus">Rol</label>
+          <p-dropdown [(ngModel)]="selectedRole" placeholder="Rol Seçin" inputId="inventoryStatus" [options]="roles">
           </p-dropdown>
+          <small class="p-error" *ngIf="submitted && !user!.role">Rol Zorunludur.</small>
       </div>
 
       <div class="field">
-          <label class="mb-3">Category</label>
-          <div class="formgrid grid">
-              <div class="field-radiobutton col-6">
-                  <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="product.category"></p-radioButton>
-                  <label for="category1">Accessories</label>
-              </div>
-              <div class="field-radiobutton col-6">
-                  <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.category"></p-radioButton>
-                  <label for="category2">Clothing</label>
-              </div>
-              <div class="field-radiobutton col-6">
-                  <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="product.category"></p-radioButton>
-                  <label for="category3">Electronics</label>
-              </div>
-              <div class="field-radiobutton col-6">
-                  <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="product.category"></p-radioButton>
-                  <label for="category4">Fitness</label>
-              </div>
-          </div>
-      </div>
+        <label for="username">Kullanıcı Adı</label>
+        <input type="text" pInputText id="username" [(ngModel)]="user!.username" required autofocus />
+        <small class="p-error" *ngIf="submitted && !user!.username">Kullanıcı Adı Zorunludur.</small>
+      </div> 
 
-      <div class="formgrid grid">
+      <div class="field">
+        <label for="password">Şifre</label>
+        <input type="password" pInputText id="password" [(ngModel)]="user!.password" required autofocus />
+        <small class="p-error" *ngIf="submitted && !user!.password">Şifre Zorunludur.</small>
+      </div> 
+
+      <!-- <div class="formgrid grid">
           <div class="field col">
               <label for="price">Price</label>
               <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
@@ -118,13 +107,13 @@
               <label for="quantity">Quantity</label>
               <p-inputNumber id="quantity" [(ngModel)]="product.quantity"></p-inputNumber>
           </div>
-      </div>
+      </div> -->
   </ng-template>
 
   <ng-template pTemplate="footer">
       <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
   </ng-template>
-</p-dialog> -->
+</p-dialog>
 
 <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
