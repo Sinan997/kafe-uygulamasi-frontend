@@ -4,8 +4,8 @@
   <p-toolbar styleClass="mb-4 gap-2">
     <ng-template pTemplate="left"></ng-template>
     <ng-template pTemplate="right">
-        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-        <button pButton pRipple [label]="'Delete'" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
+        <button pButton pRipple label="Yeni" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+        <button pButton pRipple label="Sil" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
     </ng-template>
   </p-toolbar>
 
@@ -66,54 +66,45 @@
 </div>
 <p-dialog [(visible)]="userDialog" [style]="{ width: '45%',maxWidth:'450px'}" header="Kullanıcı Ekle" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
+    <form [formGroup]="userForm">
       <div class="field grid">
         <div class="col">
             <label for="name">İsim</label>
-            <input type="text" pInputText id="name" [(ngModel)]="user!.name" required autofocus />
-            <small class="p-error" *ngIf="submitted && !user!.name">İsim zorunludur.</small>
+            <input type="text" pInputText id="name" formControlName="name" required autofocus />
+            <small class="p-error" *ngIf="submitted && name?.invalid">İsim zorunludur.</small>
         </div>
         <div class="col">
             <label for="surname">Soyisim</label>
-            <input type="text" pInputText id="surname" [(ngModel)]="user!.surname" required autofocus />
-            <small class="p-error" *ngIf="submitted && !user!.name">Soyisim zorunludur.</small>
+            <input type="text" pInputText id="surname" name="surname" formControlName="surname" required autofocus />
+            <small class="p-error" *ngIf="submitted && surname?.invalid">Soyisim zorunludur.</small>
         </div>
       </div>
 
       <div class="field">
           <label for="inventoryStatus">Rol</label>
-          <p-dropdown [(ngModel)]="selectedRole" placeholder="Rol Seçin" inputId="inventoryStatus" [options]="roles">
+          <p-dropdown formControlName="role" placeholder="Rol Seçin" inputId="inventoryStatus" [options]="roles">
           </p-dropdown>
-          <small class="p-error" *ngIf="submitted && !user!.role">Rol Zorunludur.</small>
+          <small class="p-error" *ngIf="submitted && role?.invalid">Rol Zorunludur.</small>
       </div>
 
       <div class="field">
         <label for="username">Kullanıcı Adı</label>
-        <input type="text" pInputText id="username" [(ngModel)]="user!.username" required autofocus />
-        <small class="p-error" *ngIf="submitted && !user!.username">Kullanıcı Adı Zorunludur.</small>
+        <input type="text" pInputText id="username" name="username" formControlName="username" required autofocus />
+        <small class="p-error" *ngIf="submitted && username?.invalid">Kullanıcı Adı Zorunludur.</small>
       </div> 
 
       <div class="field">
         <label for="password">Şifre</label>
-        <input type="password" pInputText id="password" [(ngModel)]="user!.password" required autofocus />
-        <small class="p-error" *ngIf="submitted && !user!.password">Şifre Zorunludur.</small>
+        <input type="password" pInputText id="password" formControlName="password" required autofocus />
+        <small class="p-error" *ngIf="submitted && password?.invalid">Şifre Zorunludur.</small>
       </div> 
-
-      <!-- <div class="formgrid grid">
-          <div class="field col">
-              <label for="price">Price</label>
-              <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
-          </div>
-          <div class="field col">
-              <label for="quantity">Quantity</label>
-              <p-inputNumber id="quantity" [(ngModel)]="product.quantity"></p-inputNumber>
-          </div>
-      </div> -->
+    </form>
   </ng-template>
-
   <ng-template pTemplate="footer">
       <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
       <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
   </ng-template>
+
 </p-dialog>
 
-<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+<p-confirmDialog acceptLabel="Evet" rejectLabel="Hayır" [style]="{ width: '450px' }"></p-confirmDialog>

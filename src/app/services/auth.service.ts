@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { loginModel } from '../models/userModel';
-import { ApiRequestService } from './request-services/auth-request.service';
+import { AuthRequestService } from './request-services/auth-request.service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,12 +8,12 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   constructor(
-    private requestService: ApiRequestService,
+    private authRequestService: AuthRequestService,
     private route: Router
   ) {}
 
   doLogin(user: loginModel) {
-    return this.requestService.postLogin(user);
+    return this.authRequestService.postLogin(user);
   }
 
   logout() {

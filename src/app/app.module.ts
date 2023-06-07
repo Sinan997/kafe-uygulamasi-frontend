@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
@@ -21,11 +21,12 @@ import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
   declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, HomeComponent, ErrorPageComponent, SidebarComponent, DashboardPageComponent, TablesPageComponent, WaiterPageComponent, MenuPageComponent, OrdersPageComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     PrimeModule,
     FormsModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
