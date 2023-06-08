@@ -11,14 +11,7 @@ export class SidebarComponent implements OnInit {
   @Output() isSidebarOpenEvent: EventEmitter<boolean> = new EventEmitter();
   @Output() onLogout: EventEmitter<boolean> = new EventEmitter();
   pages: sidebarPageModel[] = [];
-  user: User = {
-    username: 'user',
-    name: 'user',
-    surname: 'user',
-    role: 'role',
-    id: '123',
-  };
-
+  user!: User;
   isSidebarOpen?: boolean;
 
   toggleSidebar() {

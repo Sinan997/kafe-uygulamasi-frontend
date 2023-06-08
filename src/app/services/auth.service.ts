@@ -18,7 +18,7 @@ export class AuthService {
 
   logout() {
     localStorage.clear();
-    this.route.navigate(['login']);
+    location.replace('/login')
   }
 
   isTokenExist(): boolean {

@@ -28,6 +28,20 @@ body {
 }
 
 
+@media screen and (max-width: 992px) {
+  #tableSizeSelectButtons .p-button{
+    font-size: 14px;
+  }
 
+  #clearFilterButton{
+    padding: 0.3rem 0.3rem ;
+    height: fit-content;
+  }
+
+  #filterInput{
+    padding: 0.3rem 0px 0.3rem 2.5rem;
+    width: 100px;
+  }
+}
 
 

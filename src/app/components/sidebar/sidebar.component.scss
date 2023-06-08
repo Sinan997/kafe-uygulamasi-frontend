@@ -259,7 +259,33 @@
   background: none;
 }
 
-.sidebar.open ~ .home-section{
-  left:250px;
-  width: calc(100% - 250px);
+@media screen and (max-width: 460px) {
+  .sidebar{
+    background-color: transparent;
+    min-height: 0;
+    height: 5vh;
+    color: var(--color-default);
+  }
+
+  .sidebar i{
+    color:var(--color-default);
+    text-align: center;
+  }
+
+  ul{
+    display: none;
+  }
+
+  .open ul {
+    display: block;
+  }
+
+  .sidebar.open{
+    min-height: 100vh;
+    background-color: var(--color-default);
+  }
+
+  .open i{
+    color: var(--color-white);
+  }
 }

@@ -11,9 +11,12 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { StyleClassModule } from 'primeng/styleclass';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+
 
 @NgModule({
-  exports:[InputTextModule,ButtonModule,ToastModule,ToolbarModule,TableModule,DialogModule,TagModule,MessagesModule,ConfirmDialogModule,RadioButtonModule,StyleClassModule,DropdownModule],
+  exports:[InputTextModule,SelectButtonModule,ConfirmPopupModule,ButtonModule,ToastModule,ToolbarModule,TableModule,DialogModule,TagModule,MessagesModule,ConfirmDialogModule,RadioButtonModule,StyleClassModule,DropdownModule],
   imports:[],
 })
 

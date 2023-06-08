@@ -8,40 +8,45 @@
         <button pButton pRipple label="Sil" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
     </ng-template>
   </p-toolbar>
-
   <p-table
       #dt
       [value]="users"
-      [rows]="10"
+      [rows]="5"
+      [rowsPerPageOptions]="[5, 10, 25]"
       [paginator]="true"
       [globalFilterFields]="['name', 'username', 'surname', 'role']"
-      [tableStyle]="{ 'width': '100%' }"
+      [tableStyle]="{ 'width': '100%'}"
+      styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
       [(selection)]="selectedUsers"
       [rowHover]="true"
       dataKey="username"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [showCurrentPageReport]="true"
+      [scrollable]="true"
+      scrollHeight="450px"
   >
-      <ng-template pTemplate="caption">
-          <div class="flex align-items-center justify-content-between">
-              <h5 class="m-0">Kullanıcı Yönetimi</h5>
+  <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">              
+          <h5 class="m-0">Kullanıcı Yönetimi</h5>
+          <div class="flex gap-2">
+              <button pButton label="Temizle" id="clearFilterButton" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt)"></button>
               <span class="p-input-icon-left">
                   <i class="pi pi-search"></i>
-                  <input pInputText type="text" #thisInput (input)="dt.filterGlobal(thisInput.value, 'contains')" placeholder="Ara..." />
+                  <input pInputText type="text" id="filterInput" #thisInput (input)="dt.filterGlobal(thisInput.value, 'contains')" placeholder="Ara..." />
               </span>
           </div>
+      </div>
       </ng-template>
       <ng-template pTemplate="header">
           <tr>
-              <th style="width: 4rem">
+              <th style="width: 3rem">
                   <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
               </th>
-              <th pSortableColumn="name" style="min-width:15rem">İsim<p-sortIcon field="name"></p-sortIcon></th>
-              <th pSortableColumn="username">Kullanıcı Adı</th>
+              <th pSortableColumn="name" style="min-width:13rem">İsim<p-sortIcon field="name"></p-sortIcon></th>
+              <th style="min-width:10rem">Kullanıcı Adı</th>
               <th pSortableColumn="role">Rol<p-sortIcon field="price"></p-sortIcon></th>
-              <th style="min-width:10rem">Bilgi</th>
-              <th>Düzenle</th>
-              <th></th>
+              <th >Bilgi</th>
+              <th style="min-width:8rem">Düzenle</th>
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-user>
@@ -54,17 +59,14 @@
               <td>{{ user.role | titlecase }}</td>
               <td><p-tag>Details</p-tag></td>
               <td>
-                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUser(user)"></button>
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUser(user)"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2" (click)="editUser(user)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteUser(user)"></button>
               </td>
           </tr>
       </ng-template>
-      <ng-template pTemplate="summary">
-          <div class="flex align-items-center justify-content-between">Toplam {{ users ? users.length : 0 }} kullanıcı mevcut.</div>
-      </ng-template>
   </p-table>
 </div>
-<p-dialog [(visible)]="userDialog" [style]="{ width: '45%',maxWidth:'450px'}" header="Kullanıcı Ekle" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="userDialog" [closable]="false" [style]="{ width: '45%',maxWidth:'450px'}" header="Kullanıcı Ekle" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
     <form [formGroup]="userForm">
       <div class="field grid">
@@ -95,16 +97,17 @@
 
       <div class="field">
         <label for="password">Şifre</label>
-        <input type="password" pInputText id="password" formControlName="password" required autofocus />
-        <small class="p-error" *ngIf="submitted && password?.invalid">Şifre Zorunludur.</small>
+        <input *ngIf="!isPasswordInputClose" type="password" pInputText id="password" formControlName="password" required autofocus />
+        <small class="p-error" *ngIf="submitted && password?.invalid && !isPasswordInputClose">Şifre Zorunludur.</small>
+        <p-button *ngIf="isPasswordInputClose" label="Şifreyi Değiştir" icon="pi pi-user" styleClass="p-button-raised p-button-text p-button-secondary" (click)="editPassword($event)"></p-button>
       </div> 
     </form>
   </ng-template>
   <ng-template pTemplate="footer">
-      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
+      <p-button label="İptal" icon="pi pi-times" styleClass="p-button-raised p-button-text p-button-secondary" (click)="hideDialog()"></p-button>
+      <p-button label="Kaydet" icon="pi pi-check" styleClass="p-button-raised p-button-text p-button-success" (click)="saveUser()"></p-button>
   </ng-template>
 
 </p-dialog>
 
-<p-confirmDialog acceptLabel="Evet" rejectLabel="Hayır" [style]="{ width: '450px' }"></p-confirmDialog>
+<p-confirmDialog [closable]="false" defaultFocus="close" acceptLabel="Evet" acceptButtonStyleClass="p-button-raised p-button-text p-button-secondary" rejectButtonStyleClass="p-button-raised p-button-text p-button-secondary" rejectLabel="Hayır" [style]="{ width: '450px' }"></p-confirmDialog>

@@ -21,3 +21,14 @@
   left:250px;
   width: calc(100% - 250px);
 }
+
+@media screen and (max-width: 460px) {
+  body{
+    background-color: --color-body;
+  }
+  .home-section{
+    left: 0px;
+    width: 100%;
+    margin-top: 10vh;
+  }
+}

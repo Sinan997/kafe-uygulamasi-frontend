@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserRequestService } from 'src/app/services/request-services/user-request.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { User } from 'src/app/models/userModel';
 import { roleModel } from 'src/app/models/roleModel';
-import { AuthRequestService } from 'src/app/services/request-services/auth-request.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { catchError, of } from 'rxjs';
-
+import { Table } from 'primeng/table';
 @Component({
   selector: 'app-waiter-page',
   templateUrl: './waiter-page.component.html',
@@ -14,6 +13,7 @@ import { catchError, of } from 'rxjs';
   providers:[MessageService,ConfirmationService]
 })
 export class WaiterPageComponent implements OnInit {
+  @ViewChild('thisInput') thisInput?:ElementRef; 
   user?: User;
   submitted?: boolean;
   userDialog?: boolean;
@@ -23,13 +23,16 @@ export class WaiterPageComponent implements OnInit {
   selectedRole?:roleModel
   saveLoading:boolean = false;
   cleanUser = { id: '', name: '', role: '', surname: '', username: '', password: '' }
+  isEdit?:boolean = false;
+  isPasswordInputClose?:boolean = false;
 
   userForm = this.fb.group({
+    id:[''],
     name: ['',Validators.required],
     surname: ['',Validators.required],
     username: ['',Validators.required],
     role: ['',Validators.required],
-    password: ['',Validators.required],
+    password: ['',this.isPasswordInputClose],
   });
   
   constructor(
@@ -37,26 +40,29 @@ export class WaiterPageComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private fb: FormBuilder
-    ) {}
+    ) { }
     
-
+    
   ngOnInit(): void {
     this.userRequestService.getAllUsers().subscribe((result) => {
       this.users = result.users;
+      console.log(this.users);
     });
-
+  
     this.roles = [
       { label: 'Admin', value: 'admin' },
       { label: 'Garson', value: 'waiter' }
     ];
   }
-
+  
   clicked(){
     console.log('clicked');
   }
-
+  
   openNew() {
     this.userForm.reset()
+    this.isEdit = false
+    this.isPasswordInputClose = false
     this.submitted = false;
     this.userDialog = true;
   }
@@ -67,22 +73,72 @@ export class WaiterPageComponent implements OnInit {
         header: 'Onayla',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
+          const ids = this.selectedUsers!.map(selectedUser=> selectedUser._id)
+          this.userRequestService.deleteUsers(ids).pipe(
+            catchError(error=>{
+              console.log('error',error.error);
+              this.messageService.add({ severity: 'error', summary: 'İşlem Başarısız', detail: error.error.message });
+              return of()
+            })
+          ).subscribe(val=>{
             this.users = this.users.filter((val) => !this.selectedUsers?.includes(val));
-            this.selectedUsers = null;
-            this.messageService.add({ severity: 'success', summary: 'Başarılı', detail: 'Kullanıcı Silindi'});
+            this.messageService.add({ severity: 'success', summary: 'Başarılı', detail: val.message});
+            this.users = [...this.users]
+          })
         }
     });
   }
 
   editUser(user:User){
-
+    this.isEdit = true
+    this.isPasswordInputClose = true
+    this.userDialog = true
+    this.userForm.setValue({name:user.name,surname:user.surname,username:user.username,role:user.role,password:'',id:user._id})
   }
 
-  deleteUser(user:User){}
+  
+  editPassword(event: Event) {
+      this.confirmationService.confirm({
+          target: event.target!,
+          message: 'Bu Kullanıcının Şifresini Değiştirmek İstiyor musun?',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.isPasswordInputClose = false
+          }
+      });
+    }
+  
+
+  deleteUser(user:User){
+    this.confirmationService.confirm({
+      message: user.username+' Kullanıcısını silmek istediğine emin misin?',
+      header: 'Onayla',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+          this.userRequestService.deleteUser(user._id).pipe(
+            catchError(error=>{
+              console.log('error',error.error);
+              this.messageService.add({ severity: 'error', summary: 'İşlem Başarısız', detail: error.error.message });
+              return of()
+            })
+          ).subscribe(val=>{
+            this.users = this.users.filter((val) => val._id !== user._id);
+            this.messageService.add({ severity: 'success', summary: 'Başarılı', detail: val.message});
+            this.users = [...this.users]
+          })
+      }
+    });
+  }
 
   hideDialog(){
     this.submitted = false
     this.userDialog = false
+    this.userForm.reset()
+  }
+
+  clear(table:Table){
+    this.thisInput!.nativeElement.value = '';
+    table.clear()
   }
 
   saveUser(){
@@ -94,26 +150,43 @@ export class WaiterPageComponent implements OnInit {
       return
     }
 
-    if(userExist){
+    if(userExist && !this.isEdit){
       this.messageService.add({ severity: 'warn', summary: 'İşlem Başarısız', detail: 'Bu Kullanıcı Adı Kullanılmakta' });
       return
     }else{
       const newUser = {...this.userForm.value} as User
-      this.userRequestService.addUser(newUser).pipe(
-        catchError(error=>{
-          console.log('error',error.error);
-          this.messageService.add({ severity: 'error', summary: 'İşlem Başarısız', detail: error.error.message });
-          return of()
+
+      if(this.isEdit){
+        this.userRequestService.updateUser(newUser).pipe(
+          catchError(error=>{
+            console.log('error',error.error);
+            this.messageService.add({ severity: 'error', summary: 'İşlem Başarısız', detail: error.error.message });
+            return of()
+          })
+        ).subscribe(val=>{
+          this.messageService.add({ severity: 'success', summary: 'Başarılı', detail: val.message});
+          this.users = this.users.map(user => {
+            if(user._id === val.user._id){
+              user = {...val.user}
+            }
+            return user
+          })
         })
-      ).subscribe(val=>{
-        this.messageService.add({ severity: 'success', summary: 'Başarılı', detail: 'Kullanıcı Oluşturuldu'});
-      })
-
-      this.users.push(newUser)
-      this.users = [...this.users]
-      this.userDialog = false
+      }else{
+        this.userRequestService.addUser(newUser).pipe(
+          catchError(error=>{
+            console.log('error',error.error);
+            this.messageService.add({ severity: 'error', summary: 'İşlem Başarısız', detail: error.error.message });
+            return of()
+          })
+        ).subscribe(val=>{
+          this.messageService.add({ severity: 'success', summary: 'Başarılı', detail: val.message});
+          this.users.push(val.user)
+        })
+      }
     }
-
+    this.users = [...this.users]
+    this.userDialog = false
     this.userForm.reset()
   }
 
