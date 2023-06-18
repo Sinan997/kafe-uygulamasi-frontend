@@ -46,7 +46,6 @@ export class WaiterPageComponent implements OnInit {
   ngOnInit(): void {
     this.userRequestService.getAllUsers().subscribe((result) => {
       this.users = result.users;
-      console.log(this.users);
     });
   
     this.roles = [

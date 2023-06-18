@@ -44,7 +44,7 @@
               </th>
               <th pSortableColumn="name" style="min-width:13rem">İsim<p-sortIcon field="name"></p-sortIcon></th>
               <th style="min-width:10rem">Kullanıcı Adı</th>
-              <th pSortableColumn="role">Rol<p-sortIcon field="price"></p-sortIcon></th>
+              <th pSortableColumn="role">Rol<p-sortIcon field="role"></p-sortIcon></th>
               <th >Bilgi</th>
               <th style="min-width:8rem">Düzenle</th>
           </tr>
@@ -66,16 +66,16 @@
       </ng-template>
   </p-table>
 </div>
-<p-dialog [(visible)]="userDialog" [closable]="false" [style]="{ width: '45%',maxWidth:'450px'}" header="Kullanıcı Ekle" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="userDialog" [closable]="false" class="newUserDialog" header="Kullanıcı Ekle" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
     <form [formGroup]="userForm">
-      <div class="field grid">
-        <div class="col">
+      <div class="row">
+        <div class="col-md-6">
             <label for="name">İsim</label>
             <input type="text" pInputText id="name" formControlName="name" required autofocus />
             <small class="p-error" *ngIf="submitted && name?.invalid">İsim zorunludur.</small>
         </div>
-        <div class="col">
+        <div class="col-md-6">
             <label for="surname">Soyisim</label>
             <input type="text" pInputText id="surname" name="surname" formControlName="surname" required autofocus />
             <small class="p-error" *ngIf="submitted && surname?.invalid">Soyisim zorunludur.</small>

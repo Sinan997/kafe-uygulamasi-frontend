@@ -10,7 +10,7 @@ import { basicResponse } from 'src/app/models/api-response-models/basicResponse'
   providedIn: 'root',
 })
 export class UserRequestService {
-  userUrl: string = 'http://localhost:8080/api/user';
+  baseUrl: string = 'http://localhost:8080/api/user';
   headers: HttpHeaders;
 
   constructor(private http: HttpClient, private authService: AuthService) {
@@ -20,24 +20,24 @@ export class UserRequestService {
   }
 
   getAllUsers() {
-    return this.http.get<allUserResponse>(this.userUrl + '/all-users', {
+    return this.http.get<allUserResponse>(this.baseUrl + '/all-users', {
       headers: this.headers,
     });
   }
 
   addUser(user:User) {
-    return this.http.post<addUserResponse>(this.userUrl + '/add-user', user, { headers: this.headers });
+    return this.http.post<addUserResponse>(this.baseUrl + '/add-user', user, { headers: this.headers });
   }
 
   deleteUser(id:string){
-    return this.http.request<basicResponse>('delete',this.userUrl + '/delete-user', { body: { id }, headers: this.headers});
+    return this.http.request<basicResponse>('delete',this.baseUrl + '/delete-user', { body: { id }, headers: this.headers});
   }
 
   deleteUsers(ids:string[]){
-    return this.http.request<basicResponse>('delete',this.userUrl + '/delete-users', { body: { ids }, headers: this.headers});
+    return this.http.request<basicResponse>('delete',this.baseUrl + '/delete-users', { body: { ids }, headers: this.headers});
   }
 
   updateUser(user:User){
-    return this.http.put<addUserResponse>(this.userUrl + '/update-user', user, { headers: this.headers })
+    return this.http.put<addUserResponse>(this.baseUrl + '/update-user', user, { headers: this.headers })
   }
 }

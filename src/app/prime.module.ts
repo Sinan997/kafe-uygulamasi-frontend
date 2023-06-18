@@ -13,10 +13,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { OrderListModule } from 'primeng/orderlist';
 
 
 @NgModule({
-  exports:[InputTextModule,SelectButtonModule,ConfirmPopupModule,ButtonModule,ToastModule,ToolbarModule,TableModule,DialogModule,TagModule,MessagesModule,ConfirmDialogModule,RadioButtonModule,StyleClassModule,DropdownModule],
+  exports:[InputTextModule,OrderListModule,SelectButtonModule,ConfirmPopupModule,ButtonModule,ToastModule,ToolbarModule,TableModule,DialogModule,TagModule,MessagesModule,ConfirmDialogModule,RadioButtonModule,StyleClassModule,DropdownModule],
   imports:[],
 })
 
