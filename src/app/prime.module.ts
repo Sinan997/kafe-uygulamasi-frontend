@@ -14,10 +14,13 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { OrderListModule } from 'primeng/orderlist';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { SkeletonModule } from 'primeng/skeleton';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 @NgModule({
-  exports:[InputTextModule,OrderListModule,SelectButtonModule,ConfirmPopupModule,ButtonModule,ToastModule,ToolbarModule,TableModule,DialogModule,TagModule,MessagesModule,ConfirmDialogModule,RadioButtonModule,StyleClassModule,DropdownModule],
+  exports:[InputTextModule,ProgressSpinnerModule,InputSwitchModule,SkeletonModule,OrderListModule,SelectButtonModule,ConfirmPopupModule,ButtonModule,ToastModule,ToolbarModule,TableModule,DialogModule,TagModule,MessagesModule,ConfirmDialogModule,RadioButtonModule,StyleClassModule,DropdownModule],
   imports:[],
 })
 

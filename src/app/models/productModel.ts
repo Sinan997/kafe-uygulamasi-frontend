@@ -1,5 +1,8 @@
 export interface productModel{
+  _id:string,
   name:string,
   price:number,
-  isAvailable:boolean
+  index:number,
+  isAvailable:boolean,
+  categoryId:string
 }

@@ -9,6 +9,7 @@ import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 import { WaiterPageComponent } from './pages/waiter-page/waiter-page.component';
 import { TablesPageComponent } from './pages/tables-page/tables-page.component';
 import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
+import { CategoryPageComponent } from './pages/category-page/category-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'waiter', component: WaiterPageComponent },
   { path: 'orders', component: OrdersPageComponent },
   { path: 'menu', component: MenuPageComponent },
+  { path: 'category/:id', component: CategoryPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: '**', component: ErrorPageComponent },
 ];
