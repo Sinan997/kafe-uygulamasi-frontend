@@ -1,1 +1,37 @@
-<p>tables-page works!</p>
+<p-toast></p-toast>
+<p-toolbar styleClass="mb-4 gap-2">
+  <ng-template pTemplate="left">
+    <span class="fs-2 fw-medium text-primary-emphasis">Masaları Düzenle</span>
+  </ng-template>
+  <ng-template pTemplate="right">
+  </ng-template>
+</p-toolbar>
+<!-- <div *ngIf="!isTableLoading; else loadingScreen" >
+  <div class="container-xxl card" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let category of categories" cdkDrag>
+        {{category.title}}
+        <div class="d-flex align-items-center justify-content-center">
+          <p-button class="mr-2" label="Ürün Ekle / Düzenle" [style]="{border:'0px'}" styleClass="p-button-link" (click)="navigateToCategory(category)"></p-button>
+          <p-button styleClass="p-button-sm p-button-raised p-button-danger" icon="pi pi-trash" (onClick)="deleteCategory(category)"></p-button>
+        </div>
+    </div>
+  </div>
+</div>
+<ng-template #loadingScreen>
+  <div class="container-xxl card d-flex align-items-center justify-content-center">
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" fill="var(--surface-ground)" animationDuration="0.8s"></p-progressSpinner>
+  </div>
+</ng-template>
+<p-dialog [(visible)]="newCategoryDialog" [closable]="false" [style]="{minWidth: '30rem'}" class="newCategoryDialog" header="Kategori Ekle" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="flex flex-column gap-2">
+      <label htmlFor="username">Kategori Adı</label>
+      <input pInputText id="username" aria-describedby="username-help" [(ngModel)]="newCategoryName"/>
+      <small class="p-error" *ngIf="submitted && newCategoryName.length === 0">Kategori İsmi Boş Olamaz.</small>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <p-button label="İptal" icon="pi pi-times" styleClass="p-button-raised p-button-text p-button-secondary" (onClick)="closeNewCategoryDialog()"></p-button>
+    <p-button label="Ekle" [loading]="newCategoryButtonLoading" icon="pi pi-check" styleClass="p-button-raised p-button-text p-button-success" (onClick)="addNewCategory()"></p-button>
+  </ng-template>
+</p-dialog> -->
