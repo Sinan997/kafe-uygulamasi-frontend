@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { allUserResponse } from 'src/app/models/api-response-models/allUserResponse';
-import { addUserResponse } from 'src/app/models/api-response-models/addUserResponse';
-import { User } from 'src/app/models/userModel';
-import { basicResponse } from 'src/app/models/api-response-models/basicResponse';
+import { AuthService } from '../../core/services/auth.service';
+import { allUserResponse } from 'src/app/models/api-response-models/all-user-response';
+import { addUserResponse } from 'src/app/models/api-response-models/add-user-response';
+import { User } from 'src/app/models/user-model';
+import { basicResponse } from 'src/app/models/api-response-models/basic-response';
 
 @Injectable({
   providedIn: 'root',

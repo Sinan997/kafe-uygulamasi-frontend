@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { isLoggedIn } from './guards/auth.guard';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
@@ -20,7 +19,7 @@ const routes: Routes = [
   { path: 'orders', component: OrdersPageComponent },
   { path: 'menu', component: MenuPageComponent },
   { path: 'category/:id', component: CategoryPageComponent },
-  { path: 'login', component: LoginPageComponent },
+  { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)},
   { path: '**', component: ErrorPageComponent },
 ];
 

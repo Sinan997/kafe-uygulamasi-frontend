@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { categoryModel } from 'src/app/models/categoryModel';
-import { productModel } from 'src/app/models/productModel';
+import { categoryModel } from 'src/app/models/category-model';
+import { productModel } from 'src/app/models/product-model';
 import { MenuRequestService } from 'src/app/services/request-services/menu-request.service';
 
 @Component({

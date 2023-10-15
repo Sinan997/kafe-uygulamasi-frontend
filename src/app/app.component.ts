@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
-import { sidebarPageModel } from './models/sidebarPageModel';
-import { User } from './models/userModel';
+import { AuthService } from './core/services/auth.service';
+import { sidebarPageModel } from './models/sidebar-page-model';
 
 @Component({
   selector: 'app-root',

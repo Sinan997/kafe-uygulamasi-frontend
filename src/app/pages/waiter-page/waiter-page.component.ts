@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserRequestService } from 'src/app/services/request-services/user-request.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { User } from 'src/app/models/userModel';
-import { roleModel } from 'src/app/models/roleModel';
+import { User } from 'src/app/models/user-model';
+import { roleModel } from 'src/app/models/role-model';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { catchError, of } from 'rxjs';
 import { Table } from 'primeng/table';

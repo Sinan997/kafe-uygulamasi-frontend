@@ -1,4 +1,4 @@
-import { User } from "../userModel";
+import { User } from "../user-model";
 
 export interface allUserResponse{
   users:User[],

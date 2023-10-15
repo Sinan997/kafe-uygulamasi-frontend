@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { allCategoriesReponse } from 'src/app/models/api-response-models/allCategoriesResponse';
-import { AuthService } from '../auth.service';
-import { addCategoryRespone } from 'src/app/models/api-response-models/addCategoryResponse';
-import { categoryModel } from 'src/app/models/categoryModel';
-import { allProductsResponse } from 'src/app/models/api-response-models/allProductsResponse';
-import { addProductResponse } from 'src/app/models/api-response-models/addProductResponse';
-import { productModel } from 'src/app/models/productModel';
-import { basicResponse } from 'src/app/models/api-response-models/basicResponse';
+import { allCategoriesReponse } from 'src/app/models/api-response-models/all-categories-response';
+import { AuthService } from '../../core/services/auth.service';
+import { addCategoryRespone } from 'src/app/models/api-response-models/add-category-response';
+import { categoryModel } from 'src/app/models/category-model';
+import { allProductsResponse } from 'src/app/models/api-response-models/all-products-response';
+import { addProductResponse } from 'src/app/models/api-response-models/add-product-response';
+import { productModel } from 'src/app/models/product-model';
+import { basicResponse } from 'src/app/models/api-response-models/basic-response';
 
 @Injectable({
   providedIn: 'root'

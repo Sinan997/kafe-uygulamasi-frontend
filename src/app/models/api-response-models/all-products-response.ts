@@ -1,5 +1,5 @@
-import { categoryModel } from "../categoryModel";
-import { productModel } from "../productModel";
+import { categoryModel } from "../category-model";
+import { productModel } from "../product-model";
 
 
 export interface allProductsResponse {

@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { JwtModule as jwt } from "@auth0/angular-jwt";
+import { AuthService } from '../core/services/auth.service';
 
 
 export const isLoggedIn: CanActivateFn = (route:ActivatedRouteSnapshot, state:RouterStateSnapshot) => {
@@ -10,7 +9,7 @@ export const isLoggedIn: CanActivateFn = (route:ActivatedRouteSnapshot, state:Ro
   if(authService.isLoggedIn()){
     return true
   }else{
-    router.navigate(['menu'])
+    router.navigate(['login'])
     return false
   }
 };

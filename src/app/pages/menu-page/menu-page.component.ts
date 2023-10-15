@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { categoryModel } from 'src/app/models/categoryModel';
+import { categoryModel } from 'src/app/models/category-model';
 import { MenuRequestService } from 'src/app/services/request-services/menu-request.service';
 
 @Component({

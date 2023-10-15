@@ -1,4 +1,4 @@
-import { categoryModel } from '../categoryModel';
+import { categoryModel } from '../category-model';
 
 export interface allCategoriesReponse {
   success: boolean;

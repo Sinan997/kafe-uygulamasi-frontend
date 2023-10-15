@@ -1,4 +1,4 @@
-import { productModel } from "../productModel";
+import { productModel } from "../product-model";
 
 
 export interface addProductResponse {

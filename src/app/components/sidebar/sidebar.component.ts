@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { sidebarPageModel } from 'src/app/models/sidebarPageModel';
-import { User } from 'src/app/models/userModel';
+import { sidebarPageModel } from 'src/app/models/sidebar-page-model';
+import { User } from 'src/app/models/user-model';
 
 @Component({
   selector: 'app-sidebar',
