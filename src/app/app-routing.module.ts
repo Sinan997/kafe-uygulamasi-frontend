@@ -12,14 +12,18 @@ import { CategoryPageComponent } from './pages/category-page/category-page.compo
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [isLoggedIn]},
+  { path: 'home', component: HomeComponent, canActivate: [isLoggedIn] },
   { path: 'dashboard', component: DashboardPageComponent },
   { path: 'tables', component: TablesPageComponent },
   { path: 'waiter', component: WaiterPageComponent },
   { path: 'orders', component: OrdersPageComponent },
   { path: 'menu', component: MenuPageComponent },
   { path: 'category/:id', component: CategoryPageComponent },
-  { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)},
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginModule),
+  },
   { path: '**', component: ErrorPageComponent },
 ];
 
