@@ -89,7 +89,7 @@
         },
         {
           "file": "packages/core/src/index.ts",
-          "hash": "17485950192006573864"
+          "hash": "9347180199302316252"
         },
         {
           "file": "packages/core/src/lib/core.module.ts",
@@ -97,6 +97,67 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "packages/core/src/lib/guards/auth.guard.ts",
+          "hash": "1128113965206598714",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "packages/core/src/lib/guards/index.ts",
+          "hash": "14752230389963493676"
+        },
+        {
+          "file": "packages/core/src/lib/models/auth-response.ts",
+          "hash": "13156406705284059016"
+        },
+        {
+          "file": "packages/core/src/lib/models/auth-user.ts",
+          "hash": "2094335058058576488"
+        },
+        {
+          "file": "packages/core/src/lib/models/index.ts",
+          "hash": "15302096435021345438"
+        },
+        {
+          "file": "packages/core/src/lib/models/rest.ts",
+          "hash": "3652438027582850543",
+          "deps": [
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "packages/core/src/lib/services/auth.service.ts",
+          "hash": "13436212014723179695",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "packages/core/src/lib/services/index.ts",
+          "hash": "9471984365409444477"
+        },
+        {
+          "file": "packages/core/src/lib/services/jwt-decoder.service.ts",
+          "hash": "5768399150701494389",
+          "deps": [
+            "npm:@angular/core",
+            "npm:jwt-decode"
+          ]
+        },
+        {
+          "file": "packages/core/src/lib/services/rest.service.ts",
+          "hash": "18388592851906341524",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:rxjs"
           ]
         },
         {
@@ -108,11 +169,11 @@
         },
         {
           "file": "packages/core/tsconfig.json",
-          "hash": "15487755565970508470"
+          "hash": "15419121806569093811"
         },
         {
           "file": "packages/core/tsconfig.lib.json",
-          "hash": "5796668385415907511"
+          "hash": "15053420602682767443"
         },
         {
           "file": "packages/core/tsconfig.spec.json",
@@ -135,583 +196,6 @@
         {
           "file": ".gitignore",
           "hash": "17090615579869685144"
-        },
-        {
-          "file": ".nx/cache/d/daemon.log",
-          "hash": "10216321148938532939"
-        },
-        {
-          "file": ".nx/cache/d/server-process.json",
-          "hash": "8142739778744137793"
-        },
-        {
-          "file": ".nx/cache/file-map.json",
-          "hash": "7767575157129360581"
-        },
-        {
-          "file": ".nx/cache/lockfile.hash",
-          "hash": "902080237226196953"
-        },
-        {
-          "file": ".nx/cache/parsed-lock-file.json",
-          "hash": "14862947889840996903"
-        },
-        {
-          "file": ".nx/cache/project-graph.json",
-          "hash": "6718029131927139465"
-        },
-        {
-          "file": ".prettierignore",
-          "hash": "3395189204293871444"
-        },
-        {
-          "file": ".prettierrc",
-          "hash": "16267754514737964994"
-        },
-        {
-          "file": ".vscode/extensions.json",
-          "hash": "15904881119927760751"
-        },
-        {
-          "file": ".vscode/launch.json",
-          "hash": "17038929134016848735"
-        },
-        {
-          "file": ".vscode/tasks.json",
-          "hash": "5336636969995539451"
-        },
-        {
-          "file": "README.md",
-          "hash": "16295479195035649483"
-        },
-        {
-          "file": "jest.config.ts",
-          "hash": "12333515226966617182",
-          "deps": [
-            "npm:@nx/jest"
-          ]
-        },
-        {
-          "file": "jest.preset.js",
-          "hash": "9430166341120122740",
-          "deps": [
-            "npm:@nx/jest"
-          ]
-        },
-        {
-          "file": "nx.json",
-          "hash": "1260769448956231814"
-        },
-        {
-          "file": "package-lock.json",
-          "hash": "13004941020046099522"
-        },
-        {
-          "file": "package.json",
-          "hash": "17992592286471855531",
-          "deps": [
-            "npm:@angular/animations",
-            "npm:@angular/cdk",
-            "npm:@angular/common",
-            "npm:@angular/compiler",
-            "npm:@angular/core",
-            "npm:@angular/forms",
-            "npm:@angular/platform-browser",
-            "npm:@angular/platform-browser-dynamic",
-            "npm:@angular/router",
-            "npm:@auth0/angular-jwt",
-            "npm:bootstrap-icons",
-            "npm:jsonwebtoken",
-            "npm:jwt-decode",
-            "npm:primeicons",
-            "npm:primeng",
-            "npm:rxjs",
-            "npm:tslib",
-            "npm:zone.js",
-            "npm:@angular-devkit/build-angular",
-            "npm:@angular-devkit/core",
-            "npm:@angular-devkit/schematics",
-            "npm:@angular-eslint/eslint-plugin",
-            "npm:@angular-eslint/eslint-plugin-template",
-            "npm:@angular-eslint/template-parser",
-            "npm:@angular/cli",
-            "npm:@angular/compiler-cli",
-            "npm:@angular/language-service",
-            "npm:@nx/angular",
-            "npm:@nx/eslint",
-            "npm:@nx/eslint-plugin",
-            "npm:@nx/jest",
-            "npm:@nx/js",
-            "npm:@nx/workspace",
-            "npm:@schematics/angular",
-            "npm:@swc-node/register",
-            "npm:@swc/core",
-            "npm:@types/jasmine",
-            "npm:@types/jest",
-            "npm:@types/node",
-            "npm:@typescript-eslint/eslint-plugin",
-            "npm:@typescript-eslint/parser",
-            "npm:eslint",
-            "npm:eslint-config-prettier",
-            "npm:jasmine-core",
-            "npm:jest",
-            "npm:jest-environment-jsdom",
-            "npm:jest-preset-angular",
-            "npm:jsonc-eslint-parser",
-            "npm:karma",
-            "npm:karma-chrome-launcher",
-            "npm:karma-coverage",
-            "npm:karma-jasmine",
-            "npm:karma-jasmine-html-reporter",
-            "npm:nx",
-            "npm:prettier",
-            "npm:ts-jest",
-            "npm:ts-node",
-            "npm:typescript"
-          ]
-        },
-        {
-          "file": "project.json",
-          "hash": "11573469622019350536"
-        },
-        {
-          "file": "src/app/app-routing.module.ts",
-          "hash": "9716997218502480811",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/app/app.component.html",
-          "hash": "18001596390154585335"
-        },
-        {
-          "file": "src/app/app.component.scss",
-          "hash": "11362318659739827353"
-        },
-        {
-          "file": "src/app/app.component.ts",
-          "hash": "5538793764577178244",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/app.module.ts",
-          "hash": "5264670416825998509",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/platform-browser",
-            "npm:@angular/forms",
-            "npm:@angular/common"
-          ]
-        },
-        {
-          "file": "src/app/components/home/home.component.html",
-          "hash": "15654552112135835414"
-        },
-        {
-          "file": "src/app/components/home/home.component.scss",
-          "hash": "13309967165393621441"
-        },
-        {
-          "file": "src/app/components/home/home.component.ts",
-          "hash": "15103916935606090339",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/components/sidebar/sidebar.component.html",
-          "hash": "10847549438268174719"
-        },
-        {
-          "file": "src/app/components/sidebar/sidebar.component.scss",
-          "hash": "3965606294993147529"
-        },
-        {
-          "file": "src/app/components/sidebar/sidebar.component.spec.ts",
-          "hash": "4610101630782678919",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/components/sidebar/sidebar.component.ts",
-          "hash": "6168335103859897903",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/core/core.module.ts",
-          "hash": "17878791200861935296",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core",
-            "npm:@angular/forms"
-          ]
-        },
-        {
-          "file": "src/app/core/models/login-response.ts",
-          "hash": "13517620975017539131"
-        },
-        {
-          "file": "src/app/core/models/user-model.ts",
-          "hash": "12666539433230931677"
-        },
-        {
-          "file": "src/app/core/services/auth.service.ts",
-          "hash": "14197363061513155721",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/core/services/request-services/auth-request.service.ts",
-          "hash": "8015633341252697129",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/core/tokens/api-token.ts",
-          "hash": "17151564310698014836",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/guards/auth.guard.ts",
-          "hash": "4369757634324386983",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/app/models/api-response-models/add-category-response.ts",
-          "hash": "17719511554333377772"
-        },
-        {
-          "file": "src/app/models/api-response-models/add-product-response.ts",
-          "hash": "3075651256558620357"
-        },
-        {
-          "file": "src/app/models/api-response-models/add-user-response.ts",
-          "hash": "6966954388416599757"
-        },
-        {
-          "file": "src/app/models/api-response-models/all-categories-response.ts",
-          "hash": "14342470910536139472"
-        },
-        {
-          "file": "src/app/models/api-response-models/all-products-response.ts",
-          "hash": "16609397271485627566"
-        },
-        {
-          "file": "src/app/models/api-response-models/all-user-response.ts",
-          "hash": "653400113780448411"
-        },
-        {
-          "file": "src/app/models/api-response-models/basic-response.ts",
-          "hash": "9381209566671498494"
-        },
-        {
-          "file": "src/app/models/api-response-models/error-response.ts",
-          "hash": "13403083386280800947"
-        },
-        {
-          "file": "src/app/models/api-response-models/login-response.ts",
-          "hash": "9404619225569531175"
-        },
-        {
-          "file": "src/app/models/category-model.ts",
-          "hash": "18331216316503872697"
-        },
-        {
-          "file": "src/app/models/product-model.ts",
-          "hash": "7487942098591636526"
-        },
-        {
-          "file": "src/app/models/role-model.ts",
-          "hash": "10011991329193407804"
-        },
-        {
-          "file": "src/app/models/sidebar-page-model.ts",
-          "hash": "9324002529028131880"
-        },
-        {
-          "file": "src/app/models/user-model.ts",
-          "hash": "15783146545205254865"
-        },
-        {
-          "file": "src/app/pages/category-page/category-page.component.html",
-          "hash": "5285501852843572350"
-        },
-        {
-          "file": "src/app/pages/category-page/category-page.component.scss",
-          "hash": "810151116265816663"
-        },
-        {
-          "file": "src/app/pages/category-page/category-page.component.ts",
-          "hash": "2308924934766692021",
-          "deps": [
-            "npm:@angular/cdk",
-            "npm:@angular/core",
-            "npm:@angular/forms",
-            "npm:@angular/router",
-            "npm:primeng"
-          ]
-        },
-        {
-          "file": "src/app/pages/dashboard-page/dashboard-page.component.html",
-          "hash": "9232537383021123442"
-        },
-        {
-          "file": "src/app/pages/dashboard-page/dashboard-page.component.scss",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/app/pages/dashboard-page/dashboard-page.component.spec.ts",
-          "hash": "7200471174535541761",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/pages/dashboard-page/dashboard-page.component.ts",
-          "hash": "2390097672786373705",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/pages/error-page/error-page.component.html",
-          "hash": "94756829722104184"
-        },
-        {
-          "file": "src/app/pages/error-page/error-page.component.scss",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/app/pages/error-page/error-page.component.ts",
-          "hash": "9668338227486825462",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/pages/login/components/login.component.html",
-          "hash": "1887965171893838682"
-        },
-        {
-          "file": "src/app/pages/login/components/login.component.scss",
-          "hash": "6454971630091844751"
-        },
-        {
-          "file": "src/app/pages/login/components/login.component.ts",
-          "hash": "13936204998178579664",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:primeng"
-          ]
-        },
-        {
-          "file": "src/app/pages/login/login.module.ts",
-          "hash": "7467452416307033434",
-          "deps": [
-            "npm:@angular/core",
-            "npm:primeng"
-          ]
-        },
-        {
-          "file": "src/app/pages/login/login.routing.module.ts",
-          "hash": "17596419745425963125",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/app/pages/login-page/login-page.component.html",
-          "hash": "10165388586268868885"
-        },
-        {
-          "file": "src/app/pages/login-page/login-page.component.scss",
-          "hash": "6454971630091844751"
-        },
-        {
-          "file": "src/app/pages/login-page/login-page.component.ts",
-          "hash": "15512563682649475548"
-        },
-        {
-          "file": "src/app/pages/menu-page/menu-page.component.html",
-          "hash": "6744221686366085554"
-        },
-        {
-          "file": "src/app/pages/menu-page/menu-page.component.scss",
-          "hash": "810151116265816663"
-        },
-        {
-          "file": "src/app/pages/menu-page/menu-page.component.ts",
-          "hash": "14271357111479992630",
-          "deps": [
-            "npm:@angular/cdk",
-            "npm:@angular/core",
-            "npm:@angular/forms",
-            "npm:@angular/router",
-            "npm:primeng"
-          ]
-        },
-        {
-          "file": "src/app/pages/orders-page/orders-page.component.html",
-          "hash": "17456658397091357022"
-        },
-        {
-          "file": "src/app/pages/orders-page/orders-page.component.scss",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/app/pages/orders-page/orders-page.component.ts",
-          "hash": "3988548614579377982",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/pages/register-page/register-page.component.html",
-          "hash": "7862782851365140600"
-        },
-        {
-          "file": "src/app/pages/register-page/register-page.component.scss",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/app/pages/register-page/register-page.component.ts",
-          "hash": "7960864777595552885",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/pages/tables-page/tables-page.component.html",
-          "hash": "2742033131618704383"
-        },
-        {
-          "file": "src/app/pages/tables-page/tables-page.component.scss",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/app/pages/tables-page/tables-page.component.ts",
-          "hash": "6344554833501989393",
-          "deps": [
-            "npm:@angular/core",
-            "npm:primeng"
-          ]
-        },
-        {
-          "file": "src/app/pages/waiter-page/waiter-page.component.html",
-          "hash": "11342022824705845457"
-        },
-        {
-          "file": "src/app/pages/waiter-page/waiter-page.component.scss",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/app/pages/waiter-page/waiter-page.component.ts",
-          "hash": "14775889741604667992",
-          "deps": [
-            "npm:@angular/core",
-            "npm:primeng",
-            "npm:@angular/forms",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/app/prime.module.ts",
-          "hash": "1404426124996659839",
-          "deps": [
-            "npm:@angular/core",
-            "npm:primeng"
-          ]
-        },
-        {
-          "file": "src/app/services/request-services/menu-request.service.ts",
-          "hash": "16218937942324073955",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/services/request-services/user-request.service.ts",
-          "hash": "14284427976374435345",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/shared/prime-modules.module.ts",
-          "hash": "17026531911795751275",
-          "deps": [
-            "npm:@angular/core",
-            "npm:primeng"
-          ]
-        },
-        {
-          "file": "src/app/shared/shared.module.ts",
-          "hash": "11199388522765428868",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/assets/profile.jpeg",
-          "hash": "4504650015168108305"
-        },
-        {
-          "file": "src/favicon.ico",
-          "hash": "3887491056732423038"
-        },
-        {
-          "file": "src/index.html",
-          "hash": "3895772842339637820"
-        },
-        {
-          "file": "src/main.ts",
-          "hash": "10147109275000564073",
-          "deps": [
-            "npm:@angular/platform-browser-dynamic"
-          ]
-        },
-        {
-          "file": "src/styles.scss",
-          "hash": "10484901161164806587"
-        },
-        {
-          "file": "tsconfig.app.json",
-          "hash": "17337579397915052279"
-        },
-        {
-          "file": "tsconfig.base.json",
-          "hash": "543729572927094509"
-        },
-        {
-          "file": "tsconfig.json",
-          "hash": "5715963158865355824"
-        },
-        {
-          "file": "tsconfig.spec.json",
-          "hash": "15575553540147145788"
         },
         {
           "file": ".nx/cache/cloud/2310.19.6/index.js",
@@ -873,11 +357,553 @@
         },
         {
           "file": ".nx/cache/cloud/verify.lock",
-          "hash": "3930923885090078952"
+          "hash": "4917121669748830352"
         },
         {
-          "file": ".nx/cache/terminalOutputs/15801672067771942449",
-          "hash": "16774851555495167345"
+          "file": ".nx/cache/d/daemon.log",
+          "hash": "14226123104707864612"
+        },
+        {
+          "file": ".nx/cache/d/server-process.json",
+          "hash": "9499032157643907458"
+        },
+        {
+          "file": ".nx/cache/file-map.json",
+          "hash": "6807510830556074061"
+        },
+        {
+          "file": ".nx/cache/lockfile.hash",
+          "hash": "12379739832601993182"
+        },
+        {
+          "file": ".nx/cache/parsed-lock-file.json",
+          "hash": "8338123223473788644"
+        },
+        {
+          "file": ".nx/cache/project-graph.json",
+          "hash": "6511514183311614224"
+        },
+        {
+          "file": ".nx/cache/run.json",
+          "hash": "1842305755797474355"
+        },
+        {
+          "file": ".nx/cache/terminalOutputs/11681221679510004505",
+          "hash": "2648101554377215925"
+        },
+        {
+          "file": ".nx/cache/terminalOutputs/2647076211101289978",
+          "hash": "14012625182373174661"
+        },
+        {
+          "file": ".nx/cache/terminalOutputs/277201235978513998",
+          "hash": "16210351551720085414"
+        },
+        {
+          "file": ".nx/cache/terminalOutputs/3981162860463460596",
+          "hash": "719622152540701346"
+        },
+        {
+          "file": ".nx/cache/terminalOutputs/9926972295081769091",
+          "hash": "1796443179704263781"
+        },
+        {
+          "file": ".prettierignore",
+          "hash": "3395189204293871444"
+        },
+        {
+          "file": ".prettierrc",
+          "hash": "18058318409455209555"
+        },
+        {
+          "file": "README.md",
+          "hash": "16295479195035649483"
+        },
+        {
+          "file": "jest.config.ts",
+          "hash": "12333515226966617182",
+          "deps": [
+            "npm:@nx/jest"
+          ]
+        },
+        {
+          "file": "jest.preset.js",
+          "hash": "9430166341120122740",
+          "deps": [
+            "npm:@nx/jest"
+          ]
+        },
+        {
+          "file": "nx.json",
+          "hash": "1260769448956231814"
+        },
+        {
+          "file": "package-lock.json",
+          "hash": "4422354410701023169"
+        },
+        {
+          "file": "package.json",
+          "hash": "17992592286471855531"
+        },
+        {
+          "file": "project.json",
+          "hash": "11573469622019350536"
+        },
+        {
+          "file": "settings.json",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/app-routing.module.ts",
+          "hash": "5159803997000204621",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "core"
+          ]
+        },
+        {
+          "file": "src/app/app.component.html",
+          "hash": "12099417425894420890"
+        },
+        {
+          "file": "src/app/app.component.scss",
+          "hash": "11362318659739827353"
+        },
+        {
+          "file": "src/app/app.component.ts",
+          "hash": "14045763030209430136",
+          "deps": [
+            "npm:@angular/core",
+            "core"
+          ]
+        },
+        {
+          "file": "src/app/app.module.ts",
+          "hash": "15169019299254260489",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser",
+            "npm:@angular/forms",
+            "npm:@angular/common",
+            "core"
+          ]
+        },
+        {
+          "file": "src/app/components/home/home.component.html",
+          "hash": "15654552112135835414"
+        },
+        {
+          "file": "src/app/components/home/home.component.scss",
+          "hash": "13309967165393621441"
+        },
+        {
+          "file": "src/app/components/home/home.component.ts",
+          "hash": "15103916935606090339",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/components/sidebar/sidebar.component.html",
+          "hash": "600902649195316920"
+        },
+        {
+          "file": "src/app/components/sidebar/sidebar.component.scss",
+          "hash": "3965606294993147529"
+        },
+        {
+          "file": "src/app/components/sidebar/sidebar.component.spec.ts",
+          "hash": "4610101630782678919",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/components/sidebar/sidebar.component.ts",
+          "hash": "6168335103859897903",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/core/core.module.ts",
+          "hash": "17878791200861935296",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
+        },
+        {
+          "file": "src/app/core/models/login-response.ts",
+          "hash": "13517620975017539131"
+        },
+        {
+          "file": "src/app/core/models/user-model.ts",
+          "hash": "12666539433230931677"
+        },
+        {
+          "file": "src/app/core/services/auth.service.ts",
+          "hash": "14197363061513155721",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/core/services/request-services/auth-request.service.ts",
+          "hash": "8015633341252697129",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/core/tokens/api-token.ts",
+          "hash": "17151564310698014836",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/guards/auth.guard.ts",
+          "hash": "12686582040530457459",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "core"
+          ]
+        },
+        {
+          "file": "src/app/models/api-response-models/add-category-response.ts",
+          "hash": "17719511554333377772"
+        },
+        {
+          "file": "src/app/models/api-response-models/add-product-response.ts",
+          "hash": "3075651256558620357"
+        },
+        {
+          "file": "src/app/models/api-response-models/add-user-response.ts",
+          "hash": "6966954388416599757"
+        },
+        {
+          "file": "src/app/models/api-response-models/all-categories-response.ts",
+          "hash": "14342470910536139472"
+        },
+        {
+          "file": "src/app/models/api-response-models/all-products-response.ts",
+          "hash": "16609397271485627566"
+        },
+        {
+          "file": "src/app/models/api-response-models/all-user-response.ts",
+          "hash": "653400113780448411"
+        },
+        {
+          "file": "src/app/models/api-response-models/basic-response.ts",
+          "hash": "9381209566671498494"
+        },
+        {
+          "file": "src/app/models/api-response-models/error-response.ts",
+          "hash": "13403083386280800947"
+        },
+        {
+          "file": "src/app/models/api-response-models/login-response.ts",
+          "hash": "9404619225569531175"
+        },
+        {
+          "file": "src/app/models/category-model.ts",
+          "hash": "18331216316503872697"
+        },
+        {
+          "file": "src/app/models/product-model.ts",
+          "hash": "7487942098591636526"
+        },
+        {
+          "file": "src/app/models/role-model.ts",
+          "hash": "10011991329193407804"
+        },
+        {
+          "file": "src/app/models/sidebar-page-model.ts",
+          "hash": "9324002529028131880"
+        },
+        {
+          "file": "src/app/models/user-model.ts",
+          "hash": "15783146545205254865"
+        },
+        {
+          "file": "src/app/pages/category-page/category-page.component.html",
+          "hash": "5285501852843572350"
+        },
+        {
+          "file": "src/app/pages/category-page/category-page.component.scss",
+          "hash": "810151116265816663"
+        },
+        {
+          "file": "src/app/pages/category-page/category-page.component.ts",
+          "hash": "2308924934766692021",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/router",
+            "npm:primeng"
+          ]
+        },
+        {
+          "file": "src/app/pages/dashboard-page/dashboard-page.component.html",
+          "hash": "9232537383021123442"
+        },
+        {
+          "file": "src/app/pages/dashboard-page/dashboard-page.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/dashboard-page/dashboard-page.component.spec.ts",
+          "hash": "7200471174535541761",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/pages/dashboard-page/dashboard-page.component.ts",
+          "hash": "2390097672786373705",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/pages/error-page/error-page.component.html",
+          "hash": "94756829722104184"
+        },
+        {
+          "file": "src/app/pages/error-page/error-page.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/error-page/error-page.component.ts",
+          "hash": "9668338227486825462",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/pages/login/components/login.component.html",
+          "hash": "1887965171893838682"
+        },
+        {
+          "file": "src/app/pages/login/components/login.component.scss",
+          "hash": "6454971630091844751"
+        },
+        {
+          "file": "src/app/pages/login/components/login.component.ts",
+          "hash": "7158086497984446039",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:primeng",
+            "core"
+          ]
+        },
+        {
+          "file": "src/app/pages/login/login.module.ts",
+          "hash": "7467452416307033434",
+          "deps": [
+            "npm:@angular/core",
+            "npm:primeng"
+          ]
+        },
+        {
+          "file": "src/app/pages/login/login.routing.module.ts",
+          "hash": "17596419745425963125",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/pages/login-page/login-page.component.html",
+          "hash": "10165388586268868885"
+        },
+        {
+          "file": "src/app/pages/login-page/login-page.component.scss",
+          "hash": "6454971630091844751"
+        },
+        {
+          "file": "src/app/pages/login-page/login-page.component.ts",
+          "hash": "15512563682649475548"
+        },
+        {
+          "file": "src/app/pages/menu-page/menu-page.component.html",
+          "hash": "6744221686366085554"
+        },
+        {
+          "file": "src/app/pages/menu-page/menu-page.component.scss",
+          "hash": "810151116265816663"
+        },
+        {
+          "file": "src/app/pages/menu-page/menu-page.component.ts",
+          "hash": "14271357111479992630",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/router",
+            "npm:primeng"
+          ]
+        },
+        {
+          "file": "src/app/pages/orders-page/orders-page.component.html",
+          "hash": "17456658397091357022"
+        },
+        {
+          "file": "src/app/pages/orders-page/orders-page.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/orders-page/orders-page.component.ts",
+          "hash": "3988548614579377982",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/pages/register-page/register-page.component.html",
+          "hash": "7862782851365140600"
+        },
+        {
+          "file": "src/app/pages/register-page/register-page.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/register-page/register-page.component.ts",
+          "hash": "7960864777595552885",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/pages/tables-page/tables-page.component.html",
+          "hash": "2742033131618704383"
+        },
+        {
+          "file": "src/app/pages/tables-page/tables-page.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/tables-page/tables-page.component.ts",
+          "hash": "6344554833501989393",
+          "deps": [
+            "npm:@angular/core",
+            "npm:primeng"
+          ]
+        },
+        {
+          "file": "src/app/pages/waiter-page/waiter-page.component.html",
+          "hash": "10135852386014250034"
+        },
+        {
+          "file": "src/app/pages/waiter-page/waiter-page.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/waiter-page/waiter-page.component.ts",
+          "hash": "14775889741604667992",
+          "deps": [
+            "npm:@angular/core",
+            "npm:primeng",
+            "npm:@angular/forms",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/app/prime.module.ts",
+          "hash": "1404426124996659839",
+          "deps": [
+            "npm:@angular/core",
+            "npm:primeng"
+          ]
+        },
+        {
+          "file": "src/app/services/request-services/menu-request.service.ts",
+          "hash": "16218937942324073955",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/services/request-services/user-request.service.ts",
+          "hash": "14284427976374435345",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/shared/prime-modules.module.ts",
+          "hash": "17026531911795751275",
+          "deps": [
+            "npm:@angular/core",
+            "npm:primeng"
+          ]
+        },
+        {
+          "file": "src/app/shared/shared.module.ts",
+          "hash": "11199388522765428868",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/assets/profile.jpeg",
+          "hash": "4504650015168108305"
+        },
+        {
+          "file": "src/favicon.ico",
+          "hash": "3887491056732423038"
+        },
+        {
+          "file": "src/index.html",
+          "hash": "3895772842339637820"
+        },
+        {
+          "file": "src/main.ts",
+          "hash": "10147109275000564073",
+          "deps": [
+            "npm:@angular/platform-browser-dynamic"
+          ]
+        },
+        {
+          "file": "src/styles.scss",
+          "hash": "10484901161164806587"
+        },
+        {
+          "file": "tsconfig.app.json",
+          "hash": "17337579397915052279"
+        },
+        {
+          "file": "tsconfig.base.json",
+          "hash": "543729572927094509"
+        },
+        {
+          "file": "tsconfig.json",
+          "hash": "5225636051180914210"
+        },
+        {
+          "file": "tsconfig.spec.json",
+          "hash": "15575553540147145788"
+        },
+        {
+          "file": "yarn.lock",
+          "hash": "8680422218853925249"
+        },
+        {
+          "file": ".nx/cache/terminalOutputs/689921350012932222",
+          "hash": "585723572972224394"
         }
       ]
     }

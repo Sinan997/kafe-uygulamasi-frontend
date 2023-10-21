@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { isLoggedIn } from './guards/auth.guard';
+import { isLoggedIn } from 'core';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { MenuPageComponent } from './pages/menu-page/menu-page.component';
@@ -13,12 +13,12 @@ import { CategoryPageComponent } from './pages/category-page/category-page.compo
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [isLoggedIn] },
-  { path: 'dashboard', component: DashboardPageComponent },
-  { path: 'tables', component: TablesPageComponent },
-  { path: 'waiter', component: WaiterPageComponent },
-  { path: 'orders', component: OrdersPageComponent },
-  { path: 'menu', component: MenuPageComponent },
-  { path: 'category/:id', component: CategoryPageComponent },
+  // { path: 'dashboard', component: DashboardPageComponent },
+  // { path: 'tables', component: TablesPageComponent },
+  // { path: 'waiter', component: WaiterPageComponent },
+  // { path: 'orders', component: OrdersPageComponent },
+  // { path: 'menu', component: MenuPageComponent },
+  // { path: 'category/:id', component: CategoryPageComponent },
   {
     path: 'login',
     loadChildren: () =>

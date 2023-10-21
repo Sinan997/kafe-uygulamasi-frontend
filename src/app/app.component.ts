@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './core/services/auth.service';
+import { AuthService } from 'core';
 import { sidebarPageModel } from './models/sidebar-page-model';
 
 @Component({

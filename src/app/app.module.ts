@@ -16,6 +16,7 @@ import { WaiterPageComponent } from './pages/waiter-page/waiter-page.component';
 import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
+import { CoreModule } from 'core';
 
 @NgModule({
   declarations: [AppComponent, RegisterPageComponent, HomeComponent, ErrorPageComponent, SidebarComponent, DashboardPageComponent, TablesPageComponent, WaiterPageComponent, MenuPageComponent, OrdersPageComponent, CategoryPageComponent],
@@ -26,6 +27,7 @@ import { CategoryPageComponent } from './pages/category-page/category-page.compo
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CoreModule,
     AppRoutingModule,
   ],
   providers: [],
