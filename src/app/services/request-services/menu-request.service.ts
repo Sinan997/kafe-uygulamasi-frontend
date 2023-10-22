@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { allCategoriesReponse } from 'src/app/models/api-response-models/all-categories-response';
-import { AuthService } from '../../core/services/auth.service';
 import { addCategoryRespone } from 'src/app/models/api-response-models/add-category-response';
 import { categoryModel } from 'src/app/models/category-model';
 import { allProductsResponse } from 'src/app/models/api-response-models/all-products-response';
@@ -16,9 +15,9 @@ export class MenuRequestService {
   baseUrl:string = 'http://localhost:8080/api/menu'
   headers: HttpHeaders;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({
-      Authorization: 'Bearer ' + this.authService.token,
+      Authorization: 'Bearer ',
     });
   }
 

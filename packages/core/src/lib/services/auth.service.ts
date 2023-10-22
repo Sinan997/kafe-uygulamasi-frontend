@@ -1,35 +1,52 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthResponse, AuthUserModel, JwtDecoderService } from 'core';
+import { AuthResponse, DecodedTokenModel, JwtDecoderService } from 'core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   http = inject(HttpClient);
+  router = inject(Router);
   jwtDecoder = inject(JwtDecoderService);
 
   private userSubject = new BehaviorSubject(
     this.jwtDecoder.decodeToken(localStorage.getItem('accessToken')),
   );
-  public user: Observable<AuthUserModel | null>;
+  public user: Observable<DecodedTokenModel | null>;
 
   get userValue() {
     return this.userSubject.value;
   }
 
   login(username: string, password: string) {
-    this.http
-      .post<AuthResponse>('http://localhost:8080/api/auth/login', { username, password })
-      .subscribe((res) => {
-        localStorage.setItem('accessToken', res.accessToken);
-        localStorage.setItem('refreshToken', res.refreshToken);
-        this.userSubject.next(this.jwtDecoder.decodeToken(res.accessToken));
-      });
+    return this.http.post<AuthResponse>('http://localhost:8080/api/auth/login', {
+      username,
+      password,
+    });
+  }
+
+  setTokensToLocalStorage(accessToken: string, refreshToken: string) {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    this.userSubject.next(this.jwtDecoder.decodeToken(accessToken));
+  }
+
+  refreshToken() {
+    return this.http
+      .post<AuthResponse>('http://localhost:8080/api/auth/refreshToken', {
+        refreshToken: localStorage.getItem('refreshToken'),
+      })
   }
 
   logout() {
-    this.http.post('http://localhost:8080/api/auth/logout', localStorage.getItem('refreshToken'));
+    this.http
+      .post('http://localhost:8080/api/auth/logout', {
+        refreshToken: localStorage.getItem('refreshToken'),
+      })
+      .subscribe();
     localStorage.clear();
-    location.replace('/login');
+    this.userSubject.next(undefined);
+    this.router.navigate(['login']);
   }
 }

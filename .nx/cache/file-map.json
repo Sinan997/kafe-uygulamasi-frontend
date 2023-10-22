@@ -132,7 +132,7 @@
         },
         {
           "file": "packages/core/src/lib/services/auth.service.ts",
-          "hash": "13436212014723179695",
+          "hash": "17649686366347560080",
           "deps": [
             "npm:@angular/core",
             "npm:rxjs",
@@ -357,11 +357,11 @@
         },
         {
           "file": ".nx/cache/cloud/verify.lock",
-          "hash": "4917121669748830352"
+          "hash": "14296660645423694489"
         },
         {
           "file": ".nx/cache/d/daemon.log",
-          "hash": "14226123104707864612"
+          "hash": "13230562977882701211"
         },
         {
           "file": ".nx/cache/d/server-process.json",
@@ -369,7 +369,7 @@
         },
         {
           "file": ".nx/cache/file-map.json",
-          "hash": "6807510830556074061"
+          "hash": "13482413332561583142"
         },
         {
           "file": ".nx/cache/lockfile.hash",
@@ -464,7 +464,7 @@
         },
         {
           "file": "src/app/app.component.html",
-          "hash": "12099417425894420890"
+          "hash": "820030108216783532"
         },
         {
           "file": "src/app/app.component.scss",
@@ -472,7 +472,7 @@
         },
         {
           "file": "src/app/app.component.ts",
-          "hash": "14045763030209430136",
+          "hash": "15015429811561630008",
           "deps": [
             "npm:@angular/core",
             "core"
@@ -688,20 +688,21 @@
         },
         {
           "file": "src/app/pages/login/components/login.component.html",
-          "hash": "1887965171893838682"
+          "hash": "11964413912012344524"
         },
         {
           "file": "src/app/pages/login/components/login.component.scss",
-          "hash": "6454971630091844751"
+          "hash": "3244421341483603138"
         },
         {
           "file": "src/app/pages/login/components/login.component.ts",
-          "hash": "7158086497984446039",
+          "hash": "7644750624509316597",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
             "npm:primeng",
-            "core"
+            "core",
+            "npm:rxjs"
           ]
         },
         {
@@ -904,6 +905,18 @@
         {
           "file": ".nx/cache/terminalOutputs/689921350012932222",
           "hash": "585723572972224394"
+        },
+        {
+          "file": ".nx/cache/project-graph.json~9607c19d",
+          "hash": "6511514183311614224"
+        },
+        {
+          "file": ".nx/cache/project-graph.json~9040cfb7",
+          "hash": "6511514183311614224"
+        },
+        {
+          "file": ".nx/cache/terminalOutputs/16746781971010919235",
+          "hash": "7276662110000489542"
         }
       ]
     }

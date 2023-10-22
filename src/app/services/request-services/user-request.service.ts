@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthService } from '../../core/services/auth.service';
 import { allUserResponse } from 'src/app/models/api-response-models/all-user-response';
 import { addUserResponse } from 'src/app/models/api-response-models/add-user-response';
 import { User } from 'src/app/models/user-model';
@@ -13,9 +12,9 @@ export class UserRequestService {
   baseUrl: string = 'http://localhost:8080/api/user';
   headers: HttpHeaders;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({
-      Authorization: 'Bearer ' + this.authService.token,
+      Authorization: 'Bearer ',
     });
   }
 

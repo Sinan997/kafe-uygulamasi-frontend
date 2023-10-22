@@ -1,3 +1,3 @@
 export * from './rest'
-export * from './auth-user'
+export * from './decoded-token.model'
 export * from './auth-response'
