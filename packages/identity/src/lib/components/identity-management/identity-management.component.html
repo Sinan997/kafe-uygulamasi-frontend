@@ -1,16 +1,11 @@
 
 <div class="card">
-  <p-toast></p-toast>
-  <p-toolbar styleClass="mb-4 gap-2">
-    <ng-template pTemplate="left">
-        <span class="fs-2 fw-medium text-primary-emphasis">Kullanıcı Yönetimi</span>
-      </ng-template>
-    <ng-template pTemplate="right">
-        <button pButton pRipple label="Yeni" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-        <button pButton pRipple label="Sil" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
-    </ng-template>
-  </p-toolbar>
-  <p-table
+  <app-identity-management-toolbar
+    (addNewUserEvent)="openNew()"
+    (deleteSelectedUsersEvent)="deleteSelectedUsers()"
+    [selectedUsers]="selectedUsers"
+  />
+  <!-- <p-table
       #dt
       [value]="users"
       [rows]="5"
@@ -66,9 +61,9 @@
               </td>
           </tr>
       </ng-template>
-  </p-table>
+  </p-table> -->
 </div>
-<p-dialog [(visible)]="userDialog" [closable]="false" class="newUserDialog" header="Kullanıcı Ekle" [modal]="true" styleClass="p-fluid">
+<!-- <p-dialog [(visible)]="userDialog" [closable]="false" class="newUserDialog" header="Kullanıcı Ekle" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
     <form [formGroup]="userForm">
       <div class="row">
@@ -110,6 +105,6 @@
       <p-button label="Kaydet" icon="pi pi-check" styleClass="p-button-raised p-button-text p-button-success" (click)="saveUser()"></p-button>
   </ng-template>
 
-</p-dialog>
+</p-dialog> -->
 
-<p-confirmDialog [closable]="false" defaultFocus="close" acceptLabel="Evet" acceptButtonStyleClass="p-button-raised p-button-text p-button-secondary" rejectButtonStyleClass="p-button-raised p-button-text p-button-secondary" rejectLabel="Hayır" [style]="{ width: '450px' }"></p-confirmDialog>
+<!-- <p-confirmDialog [closable]="false" defaultFocus="close" acceptLabel="Evet" acceptButtonStyleClass="p-button-raised p-button-text p-button-secondary" rejectButtonStyleClass="p-button-raised p-button-text p-button-secondary" rejectLabel="Hayır" [style]="{ width: '450px' }"></p-confirmDialog> -->

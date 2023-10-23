@@ -12,7 +12,8 @@
     "baseUrl": "./",
     "paths": {
       "account": ["packages/account/src/index.ts"],
-      "core": ["packages/core/src/index.ts"]
+      "core": ["packages/core/src/index.ts"],
+      "identity": ["packages/identity/src/index.ts"]
     }
   }
 }

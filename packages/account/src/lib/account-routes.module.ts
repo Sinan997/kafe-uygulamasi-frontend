@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components';
 
-// import { LoginComponent } from 'account';
-// import { CategoryPageComponent } from './pages/category-page/category-page.component';
-
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },

@@ -28,7 +28,7 @@ import { MessageService } from 'primeng/api';
     SidebarComponent,
     TablesPageComponent,
     // DashboardPageComponent,
-    // WaiterPageComponent,
+    WaiterPageComponent,
     MenuPageComponent,
     // OrdersPageComponent,
     CategoryPageComponent,

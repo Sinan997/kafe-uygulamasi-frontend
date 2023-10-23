@@ -1,0 +1,14 @@
+<p-toolbar styleClass="mb-4 gap-2">
+  <div class="p-toolbar-group-start">
+    <span class="fs-2 fw-medium text-primary-emphasis">Kullanıcı Yönetimi</span>
+  </div>
+  <div class="p-toolbar-group-end">
+    <button (click)="addNewUserEvent.emit()">Yeni</button>
+    <button
+      (click)="deleteSelectedUsersEvent.emit()"
+      [disabled]="!selectedUsers || !selectedUsers.length"
+    >
+      Sil
+    </button>
+  </div>
+</p-toolbar>

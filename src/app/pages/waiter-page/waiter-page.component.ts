@@ -16,7 +16,7 @@ export class WaiterPageComponent implements OnInit {
   @ViewChild('thisInput') thisInput?:ElementRef; 
   user?: User;
   submitted?: boolean;
-  userDialog?: boolean;
+  userDialog: boolean = false;
   users: User[] = [];
   selectedUsers: User[] | null = [];
   roles:roleModel[] = []

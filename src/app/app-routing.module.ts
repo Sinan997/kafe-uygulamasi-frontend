@@ -15,14 +15,18 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [isLoggedIn] },
   // { path: 'dashboard', component: DashboardPageComponent },
   // { path: 'tables', component: TablesPageComponent },
-  // { path: 'waiter', component: WaiterPageComponent },
+  { path: 'waiter', component: WaiterPageComponent },
   // { path: 'orders', component: OrdersPageComponent },
-  { path: 'menu', component: MenuPageComponent },
-  { path: 'category/:id', component: CategoryPageComponent },
+  // { path: 'menu', component: MenuPageComponent },
+  // { path: 'category/:id', component: CategoryPageComponent },
   // { path: 'account/login', component: LoginComponent },
   {
     path: 'account',
     loadChildren: () => import('account').then((m) => m.AccountModule),
+  },
+  {
+    path: 'identity',
+    loadChildren: () => import('identity').then((m) => m.IdentityModule),
   },
   { path: '**', component: ErrorPageComponent },
 ];
