@@ -1,12 +1,11 @@
-<p-toast></p-toast>
-<p-toolbar styleClass="mb-4 gap-2">
+<!-- <p-toolbar styleClass="mb-4 gap-2">
   <ng-template pTemplate="left">
     <span class="fs-2 fw-medium text-primary-emphasis">Masaları Düzenle</span>
   </ng-template>
   <ng-template pTemplate="right">
   </ng-template>
 </p-toolbar>
-<!-- <div *ngIf="!isTableLoading; else loadingScreen" >
+<div *ngIf="!isTableLoading; else loadingScreen" >
   <div class="container-xxl card" cdkDropList (cdkDropListDropped)="drop($event)">
     <div class="example-box" *ngFor="let category of categories" cdkDrag>
         {{category.title}}

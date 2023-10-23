@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PrimeModule } from './prime.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,21 +17,31 @@ import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { CoreModule, JwtInterceptor } from 'core';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
-  declarations: [AppComponent, RegisterPageComponent, HomeComponent, ErrorPageComponent, SidebarComponent, DashboardPageComponent, TablesPageComponent, WaiterPageComponent, MenuPageComponent, OrdersPageComponent, CategoryPageComponent],
+  declarations: [
+    AppComponent,
+    RegisterPageComponent,
+    HomeComponent,
+    ErrorPageComponent,
+    SidebarComponent,
+    TablesPageComponent,
+    // DashboardPageComponent,
+    // WaiterPageComponent,
+    MenuPageComponent,
+    // OrdersPageComponent,
+    CategoryPageComponent,
+  ],
   imports: [
     BrowserModule,
-    PrimeModule,
-    FormsModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    CoreModule.forRoot(),
     AppRoutingModule,
+    CoreModule.forRoot(),
+    PrimeModule,
   ],
   providers: [
-  
+    MessageService
   ],
   bootstrap: [AppComponent],
 })

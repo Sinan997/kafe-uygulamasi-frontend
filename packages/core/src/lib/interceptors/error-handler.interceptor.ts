@@ -22,7 +22,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return this.authService.refreshToken().pipe(
+    return this.authService.refreshTokenHttp().pipe(
       switchMap((res) => {
         request = request.clone({
           setHeaders: {

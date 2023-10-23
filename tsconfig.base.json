@@ -11,6 +11,7 @@
     "lib": ["ES2022", "dom"],
     "baseUrl": "./",
     "paths": {
+      "account": ["packages/account/src/index.ts"],
       "core": ["packages/core/src/index.ts"]
     }
   }

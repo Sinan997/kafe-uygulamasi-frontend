@@ -4,9 +4,9 @@
     <span class="fs-2 fw-medium text-primary-emphasis">Menüyü Güncelle</span>
   </ng-template>
   <ng-template pTemplate="right">
-      <p-button styleClass="p-button-sm p-button-raised p-button-text p-button-success" label="Yeni Kategori" icon="pi pi-plus" class="mr-2" (click)="openNewCategoryDialog()"></p-button>
-      <!-- <p-button styleClass="p-button-sm p-button-raised p-button-text p-button-success" label="Sıralamayı Kaydet" icon="pi pi-check" (click)="setCategoryPlacement()"></p-button> -->
-  </ng-template>
+      <p-button styleClass="p-button-sm p-button-raised p-button-text p-button-success" label="Yeni Kategori" icon="pi pi-plus" class="mr-2" (click)="openNewCategoryDialog()"></p-button> 
+      <p-button styleClass="p-button-sm p-button-raised p-button-text p-button-success" label="Sıralamayı Kaydet" icon="pi pi-check" (click)="setCategoryPlacement()"></p-button> 
+</ng-template>
 </p-toolbar>
   <div *ngIf="!isTableLoading; else loadingScreen" >
     <div class="container-xxl card" cdkDropList (cdkDropListDropped)="drop($event)">

@@ -16,7 +16,7 @@ export const isLoggedIn: CanActivateFn = (
   if (authService.userValue) {
     return true;
   } else {
-    router.navigate(['login']);
+    router.navigate(['account','login']);
     return false;
   }
 };

@@ -17,12 +17,12 @@ const routes: Routes = [
   // { path: 'tables', component: TablesPageComponent },
   // { path: 'waiter', component: WaiterPageComponent },
   // { path: 'orders', component: OrdersPageComponent },
-  // { path: 'menu', component: MenuPageComponent },
-  // { path: 'category/:id', component: CategoryPageComponent },
+  { path: 'menu', component: MenuPageComponent },
+  { path: 'category/:id', component: CategoryPageComponent },
+  // { path: 'account/login', component: LoginComponent },
   {
-    path: 'login',
-    loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginModule),
+    path: 'account',
+    loadChildren: () => import('account').then((m) => m.AccountModule),
   },
   { path: '**', component: ErrorPageComponent },
 ];

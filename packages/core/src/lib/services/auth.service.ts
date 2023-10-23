@@ -19,6 +19,14 @@ export class AuthService {
     return this.userSubject.value;
   }
 
+  get accessToken() {
+    return localStorage.getItem('accessToken');
+  }
+
+  get refreshToken() {
+    return localStorage.getItem('refreshToken');
+  }
+
   login(username: string, password: string) {
     return this.http.post<AuthResponse>('http://localhost:8080/api/auth/login', {
       username,
@@ -32,7 +40,7 @@ export class AuthService {
     this.userSubject.next(this.jwtDecoder.decodeToken(accessToken));
   }
 
-  refreshToken() {
+  refreshTokenHttp() {
     return this.http.post<AuthResponse>('http://localhost:8080/api/auth/refreshToken', {
       refreshToken: localStorage.getItem('refreshToken'),
     });
@@ -46,6 +54,10 @@ export class AuthService {
       .subscribe();
     localStorage.clear();
     this.userSubject.next(undefined);
-    this.router.navigate(['login']);
+    this.router.navigate(['account', 'login']);
+  }
+
+  getUser() {
+    return this.jwtDecoder.decodeToken(this.accessToken);
   }
 }

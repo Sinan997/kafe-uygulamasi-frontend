@@ -18,9 +18,46 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { SkeletonModule } from 'primeng/skeleton';
 import { InputSwitchModule } from 'primeng/inputswitch';
 
-
 @NgModule({
-  exports:[InputTextModule,ProgressSpinnerModule,InputSwitchModule,SkeletonModule,OrderListModule,SelectButtonModule,ConfirmPopupModule,ButtonModule,ToastModule,ToolbarModule,TableModule,DialogModule,TagModule,MessagesModule,ConfirmDialogModule,RadioButtonModule,StyleClassModule,DropdownModule],
+  exports: [
+    ButtonModule,
+    ToastModule,
+    InputTextModule,
+    ProgressSpinnerModule,
+    InputSwitchModule,
+    SkeletonModule,
+    OrderListModule,
+    SelectButtonModule,
+    ConfirmPopupModule,
+    ToolbarModule,
+    TableModule,
+    DialogModule,
+    TagModule,
+    MessagesModule,
+    ConfirmDialogModule,
+    RadioButtonModule,
+    StyleClassModule,
+    DropdownModule,
+  ],
+  imports: [
+    ButtonModule,
+    ToastModule,
+    InputTextModule,
+    ProgressSpinnerModule,
+    InputSwitchModule,
+    SkeletonModule,
+    OrderListModule,
+    SelectButtonModule,
+    ConfirmPopupModule,
+    ToolbarModule,
+    TableModule,
+    DialogModule,
+    TagModule,
+    MessagesModule,
+    ConfirmDialogModule,
+    RadioButtonModule,
+    StyleClassModule,
+    DropdownModule,
+  ]
 })
-
-export class PrimeModule { }
+export class PrimeModule {}
