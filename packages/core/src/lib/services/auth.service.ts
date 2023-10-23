@@ -33,10 +33,9 @@ export class AuthService {
   }
 
   refreshToken() {
-    return this.http
-      .post<AuthResponse>('http://localhost:8080/api/auth/refreshToken', {
-        refreshToken: localStorage.getItem('refreshToken'),
-      })
+    return this.http.post<AuthResponse>('http://localhost:8080/api/auth/refreshToken', {
+      refreshToken: localStorage.getItem('refreshToken'),
+    });
   }
 
   logout() {

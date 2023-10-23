@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,9 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
-  constructor(private http: HttpClient) {
-    http.get('http://localhost:8080/api/user/all-users').subscribe(val=>{
-    })
-  }
-}
+export class HomeComponent {}

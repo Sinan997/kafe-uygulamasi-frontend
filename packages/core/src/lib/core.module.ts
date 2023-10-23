@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from 'core';
+import { ErrorHandlerInterceptor, JwtInterceptor } from 'core';
 
 @NgModule({
   imports: [CommonModule],
@@ -14,6 +14,11 @@ export class CoreModule {
         {
           provide: HTTP_INTERCEPTORS,
           useClass: JwtInterceptor,
+          multi: true,
+        },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: ErrorHandlerInterceptor,
           multi: true,
         },
       ],
