@@ -28,11 +28,6 @@ body {
   width: 26rem !important;
 }
 
-.newUserDialog .p-dialog{
-  width: 45%;
-  max-width: 450px;
-}
-
 .p-icon-wrapper{
   margin-right: 4px;
 }
@@ -51,25 +46,5 @@ body {
   #filterInput{
     padding: 0.3rem 0px 0.3rem 2.5rem;
     width: 100px;
-  }
-}
-
-
-@media screen and (max-width: 670px) {
-  .newUserDialog .p-dialog{
-    width: 65%;
-  }
-}
-
-@media screen and (max-width: 460px) {
-  .newUserDialog {
-    .p-dialog{
-      width: 85%;
-
-      .p-button{
-        font-size: 12px;
-        padding: 0.8rem 0.8rem;
-      }
-    }
   }
 }

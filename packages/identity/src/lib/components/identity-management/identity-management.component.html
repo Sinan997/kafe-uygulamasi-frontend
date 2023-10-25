@@ -1,68 +1,13 @@
-
 <div class="card">
-  <app-identity-management-toolbar
-    (addNewUserEvent)="openNew()"
-    (deleteSelectedUsersEvent)="deleteSelectedUsers()"
-    [selectedUsers]="selectedUsers"
-  />
-  <!-- <p-table
-      #dt
-      [value]="users"
-      [rows]="5"
-      [rowsPerPageOptions]="[5, 10, 25]"
-      [paginator]="true"
-      [globalFilterFields]="['name', 'username', 'surname', 'role']"
-      [tableStyle]="{ 'width': '100%'}"
-      styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
-      [(selection)]="selectedUsers"
-      [rowHover]="true"
-      dataKey="username"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      [showCurrentPageReport]="true"
-      [scrollable]="true"
-      scrollHeight="450px"
-  >
-  <ng-template pTemplate="caption">
-      <div class="flex align-items-center justify-content-between">              
-          <div></div>
-          <div class="flex gap-2">
-              <button pButton label="Temizle" id="clearFilterButton" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt)"></button>
-              <span class="p-input-icon-left">
-                  <i class="pi pi-search"></i>
-                  <input pInputText type="text" id="filterInput" #thisInput (input)="dt.filterGlobal(thisInput.value, 'contains')" placeholder="Ara..." />
-              </span>
-          </div>
-      </div>
-      </ng-template>
-      <ng-template pTemplate="header">
-          <tr>
-              <th style="width: 3rem">
-                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-              </th>
-              <th pSortableColumn="name" style="min-width:13rem">İsim<p-sortIcon field="name"></p-sortIcon></th>
-              <th style="min-width:10rem">Kullanıcı Adı</th>
-              <th pSortableColumn="role">Rol<p-sortIcon field="role"></p-sortIcon></th>
-              <th >Bilgi</th>
-              <th style="min-width:8rem">Düzenle</th>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-user>
-          <tr>
-              <td>
-                  <p-tableCheckbox [value]="user"></p-tableCheckbox>
-              </td>
-              <td>{{ user.name | titlecase}} {{user.surname | titlecase}}</td>
-              <td>{{ user.username }}</td>
-              <td>{{ user.role | titlecase }}</td>
-              <td><p-tag>Details</p-tag></td>
-              <td>
-                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2" (click)="editUser(user)"></button>
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteUser(user)"></button>
-              </td>
-          </tr>
-      </ng-template>
-  </p-table> -->
+  <app-identity-management-toolbar (addNewUserEvent)="openNewUserModal()" />
+  <app-identity-management-table />
 </div>
+
+<app-identity-management-new-user
+  *ngIf="visibleNewUserDialog"
+  [(visibleNewUserDialog)]="visibleNewUserDialog"
+/>
+
 <!-- <p-dialog [(visible)]="userDialog" [closable]="false" class="newUserDialog" header="Kullanıcı Ekle" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
     <form [formGroup]="userForm">

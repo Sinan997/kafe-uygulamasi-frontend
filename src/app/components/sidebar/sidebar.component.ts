@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
     this.pages = [
       { path: 'dashboard', class: 'bx bx-grid-alt', label: 'Panel' },
       { path: 'tables', class: 'bx bx-table', label: 'Masalar' },
-      { path: 'waiter', class: 'bx bx-male', label: 'Garson' },
+      { path: 'identity', class: 'bx bx-male', label: 'Kullanıcı Yönetimi' },
       { path: 'orders', class: 'bx bx-restaurant', label: 'Siparişler' },
       { path: 'menu', class: 'bx bxs-food-menu', label: 'Menü' },
     ];

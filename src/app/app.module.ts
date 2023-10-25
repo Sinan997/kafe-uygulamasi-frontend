@@ -17,7 +17,7 @@ import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { CoreModule, JwtInterceptor } from 'core';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import { MessageService } from 'primeng/api';
     PrimeModule,
   ],
   providers: [
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent],
 })

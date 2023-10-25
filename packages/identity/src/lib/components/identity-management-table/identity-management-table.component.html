@@ -1,0 +1,60 @@
+<p-table
+  #dt
+  [value]="users"
+  [rows]="10"
+  [paginator]="true"
+  [tableStyle]="{ width: '100%' }"
+  styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
+  [rowHover]="true"
+  dataKey="username"
+  currentPageReportTemplate="Sayfa"
+  [showCurrentPageReport]="true"
+  [scrollable]="true"
+  scrollHeight="450px"
+  [loading]="tableLoading"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="min-width: 8rem">Düzenle</th>
+      <th pSortableColumn="name" style="min-width: 13rem">İsim</th>
+      <th style="min-width: 10rem">Kullanıcı Adı</th>
+      <th>Rol</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td>
+        <div class="dropdown">
+          <button
+            class="btn btn-primary btn-sm dropdown-toggle p-2"
+            type="button"
+            data-bs-toggle="dropdown"
+          >
+            İşlemler
+          </button>
+          <ul class="dropdown-menu">
+            <li><a role="button" class="dropdown-item" (click)="deleteUser(user)">Sil</a></li>
+            <li>
+              <a role="button" class="dropdown-item" (click)="openEditUserModal(user)">Düzenle</a>
+            </li>
+          </ul>
+        </div>
+      </td>
+      <td>{{ user.name | titlecase }} {{ user.surname | titlecase }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.role | titlecase }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-confirmDialog #cd [style]="{ width: '50vw' }">
+  <ng-template pTemplate="footer">
+    <button class="btn btn-secondary me-2" (click)="cd.reject()">Hayır</button>
+    <button class="btn btn-primary" (click)="cd.accept()">Evet</button>
+  </ng-template>
+</p-confirmDialog>
+
+<app-identity-management-new-user
+  *ngIf="visibleEditUserDialog"
+  [user]="user"
+  [(visibleEditUserDialog)]="visibleEditUserDialog"
+/>

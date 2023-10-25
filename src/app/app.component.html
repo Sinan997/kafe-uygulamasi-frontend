@@ -3,6 +3,7 @@
   [showTransitionOptions]="'500ms'"
   [hideTransitionOptions]="'500ms'"
 ></p-toast>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 <div *ngIf="authService.userValue; else other_content">
   <app-sidebar (isSidebarOpenEvent)="handleSidebar($event)" (onLogout)="logout()"></app-sidebar>
   <div [ngClass]="isSidebarOpen ? 'home-section open' : 'home-section'">

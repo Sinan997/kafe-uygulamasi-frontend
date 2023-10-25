@@ -6,14 +6,21 @@ import { roleModel } from 'src/app/models/role-model';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { catchError, of } from 'rxjs';
 import { Table } from 'primeng/table';
-import { IdentityManagementToolbarComponent } from '../identity-management-toolbar/identity-management-toolbar.component';
 @Component({
   selector: 'app-waiter-page',
   templateUrl: './identity-management.component.html',
-  styleUrls: ['./identity-management.component.scss'],
   providers: [ConfirmationService],
 })
 export class IdentityManagementComponent implements OnInit {
+  visibleNewUserDialog = false;
+
+  openNewUserModal(){
+    this.visibleNewUserDialog = true;
+  }
+
+
+
+  
   @ViewChild('thisInput') thisInput?: ElementRef;
   user?: User;
   submitted?: boolean;
@@ -44,14 +51,14 @@ export class IdentityManagementComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userRequestService.getAllUsers().subscribe((result) => {
-      this.users = result.users;
-    });
+    // this.userRequestService.getAllUsers().subscribe((result) => {
+    //   this.users = result.users;
+    // });
 
-    this.roles = [
-      { label: 'Admin', value: 'admin' },
-      { label: 'Garson', value: 'waiter' },
-    ];
+    // this.roles = [
+    //   { label: 'Admin', value: 'admin' },
+    //   { label: 'Garson', value: 'waiter' },
+    // ];
   }
 
   clicked() {
@@ -125,6 +132,7 @@ export class IdentityManagementComponent implements OnInit {
   }
 
   deleteUser(user: User) {
+    
     this.confirmationService.confirm({
       message: user.username + ' Kullanıcısını silmek istediğine emin misin?',
       header: 'Onayla',
