@@ -18,6 +18,9 @@ import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { CoreModule, JwtInterceptor } from 'core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { BodyComponent } from './components/body/body.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     MenuPageComponent,
     // OrdersPageComponent,
     CategoryPageComponent,
+    SublevelMenuComponent,
+    SidenavComponent,
+    BodyComponent
   ],
   imports: [
     BrowserModule,

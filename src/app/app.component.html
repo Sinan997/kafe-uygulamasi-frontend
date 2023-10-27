@@ -1,4 +1,4 @@
-<p-toast
+<!-- <p-toast
   [showTransformOptions]="'translateX(100%)'"
   [showTransitionOptions]="'500ms'"
   [hideTransitionOptions]="'500ms'"
@@ -13,4 +13,11 @@
 
 <ng-template #other_content>
   <router-outlet></router-outlet>
-</ng-template>
+</ng-template> -->
+
+
+<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+<app-body
+    [collapsed]="isSideNavCollapsed"
+    [screenWidth]="screenWidth"
+></app-body>

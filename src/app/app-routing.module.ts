@@ -12,7 +12,7 @@ import { CategoryPageComponent } from './pages/category-page/category-page.compo
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [isLoggedIn] },
+  { path: 'home', component: HomeComponent },
   // { path: 'dashboard', component: DashboardPageComponent },
   // { path: 'tables', component: TablesPageComponent },
   { path: 'waiter', component: WaiterPageComponent },
