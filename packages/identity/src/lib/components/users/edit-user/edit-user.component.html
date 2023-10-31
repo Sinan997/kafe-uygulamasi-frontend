@@ -8,7 +8,7 @@
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form">
       <div class="row">
         <div class="col-md-6">
           <label for="name">İsim</label>
@@ -44,8 +44,8 @@
           formControlName="role"
           [ngClass]="{ 'is-invalid': role.invalid && submitted }"
         >
-          <option selected>Rol Seçin</option>
-          <option *ngFor="let role of roles" [ngValue]="role.value">{{ role.label }}</option>
+          <option selected [ngValue]="null">Rol Seçin</option>
+          <option *ngFor="let rol of roles" [ngValue]="rol.value">{{ rol.label }}</option>
         </select>
         <div class="invalid-feedback" *ngIf="submitted && role.invalid">Rol Zorunludur.</div>
       </div>
@@ -63,17 +63,30 @@
           Kullanıcı Adı Zorunludur.
         </div>
       </div>
-
       <div class="field">
         <label for="password">Şifre</label>
         <input
+          *ngIf="!isPasswordInputClose"
           type="password"
           class="form-control"
           id="password"
           formControlName="password"
           [ngClass]="{ 'is-invalid': password.invalid && submitted }"
         />
-        <div class="invalid-feedback" *ngIf="submitted && password.invalid">Şifre Zorunludur.</div>
+        <div
+          class="invalid-feedback"
+          *ngIf="submitted && password.invalid && !isPasswordInputClose"
+        >
+          Şifre Zorunludur.
+        </div>
+        <button
+          *ngIf="isPasswordInputClose"
+          class="d-block btn btn-secondary w-100"
+          (click)="editPassword($event)"
+        >
+          <i class="fal fa-user"></i>
+          Şifreyi Değiştir
+        </button>
       </div>
     </form>
   </ng-template>

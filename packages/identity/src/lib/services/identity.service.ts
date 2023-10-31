@@ -25,4 +25,8 @@ export class IdentityService {
       { body: { id } },
     );
   }
+
+  updateUser(user: User) {
+    return this.http.put<addUserResponse>('http://localhost:8080/api/user/update-user', user);
+  }
 }

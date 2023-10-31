@@ -1,83 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import '~primeicons/primeicons.css';
-@import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "primeng/resources/primeng.css";
-
-
-:root{
-  --color-default:#004f83;
-  --color-second:#0067ac;
-  --color-white:#fff;
-  --color-body:#e4e9f7;
-  --color-light:#e0e0e0;
-}
-
-*{
-  font-family: 'Poppins', sans-serif;
-}
-
-body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: var(--font-family);
-  overflow-x: hidden;
-}
-
-.p-toast{
-  width: 26rem !important;
-}
-
-.p-icon-wrapper{
-  margin-right: 4px;
-}
-
-
-@media screen and (max-width: 992px) {
-  #tableSizeSelectButtons .p-button{
-    font-size: 14px;
-  }
-
-  #clearFilterButton{
-    padding: 0.3rem 0.3rem ;
-    height: fit-content;
-  }
-
-  #filterInput{
-    padding: 0.3rem 0px 0.3rem 2.5rem;
-    width: 100px;
-  }
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    position: relative;
-    font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.card {
-    display: flex;
-    flex-direction: column;
-    border-radius: .5rem;
-    background-color: #fff;
-    margin: 1.25rem 0 1.25rem 0;
-    box-shadow: 0 .25rem .5rem #e6edef;
-
-    .card-head {
-        padding: 1rem 1.5rem;
-        border-bottom: 1px solid #edf1f7;
-        font-size: 1rem;
-        font-weight: 600;
-    }
-
-    .card-body {
-        padding: 1rem 1.5rem; 
-    }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }

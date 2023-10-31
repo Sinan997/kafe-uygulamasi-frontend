@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
-
 @Component({
   standalone: true,
   imports: [CommonModule, ToolbarModule],
-  selector: 'app-identity-management-toolbar',
-  templateUrl: './identity-management-toolbar.component.html',
+  selector: 'app-users-toolbar',
+  templateUrl: './users-toolbar.component.html',
 })
-export class IdentityManagementToolbarComponent {
+export class UsersToolbarComponent {
   @Output() addNewUserEvent = new EventEmitter<boolean>();
 }

@@ -1,23 +1,17 @@
-<!-- <p-toast
+<ng-container *ngIf="authService.userValue; else justRouter">
+  <app-sidenav (onLogout)="logout()" (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+  <app-body
+      [collapsed]="isSideNavCollapsed"
+      [screenWidth]="screenWidth"
+  ></app-body>
+</ng-container>
+
+<ng-template #justRouter>
+  <router-outlet></router-outlet>
+</ng-template>
+
+<p-toast
   [showTransformOptions]="'translateX(100%)'"
   [showTransitionOptions]="'500ms'"
   [hideTransitionOptions]="'500ms'"
 ></p-toast>
-<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-<div *ngIf="authService.userValue; else other_content">
-  <app-sidebar (isSidebarOpenEvent)="handleSidebar($event)" (onLogout)="logout()"></app-sidebar>
-  <div [ngClass]="isSidebarOpen ? 'home-section open' : 'home-section'">
-    <router-outlet></router-outlet>
-  </div>
-</div>
-
-<ng-template #other_content>
-  <router-outlet></router-outlet>
-</ng-template> -->
-
-
-<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
-<app-body
-    [collapsed]="isSideNavCollapsed"
-    [screenWidth]="screenWidth"
-></app-body>

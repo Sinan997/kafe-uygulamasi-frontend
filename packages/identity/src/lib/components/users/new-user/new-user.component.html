@@ -3,10 +3,11 @@
   [modal]="true"
   [visible]="visibleNewUserDialog"
   [closable]="false"
-  class="newUserDialog"
-  header="Kullanıcı Ekle"
-  styleClass="p-fluid"
+  [style]="{ width: '40vw' }"
 >
+  <ng-template pTemplate="header">
+    <span class="fs-4">Yeni Kullanıcı</span>
+  </ng-template>
   <ng-template pTemplate="content">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="row">
@@ -44,7 +45,7 @@
           formControlName="role"
           [ngClass]="{ 'is-invalid': role.invalid && submitted }"
         >
-          <option selected>Rol Seçin</option>
+          <option selected [ngValue]="null">Rol Seçin</option>
           <option *ngFor="let role of roles" [ngValue]="role.value">{{ role.label }}</option>
         </select>
         <div class="invalid-feedback" *ngIf="submitted && role.invalid">Rol Zorunludur.</div>

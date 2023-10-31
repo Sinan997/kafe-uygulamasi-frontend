@@ -1,8 +1,11 @@
-<p-toolbar styleClass="mb-4 gap-2">
+<p-toolbar styleClass="mb-4 p-3">
   <div class="p-toolbar-group-start">
     <span class="fs-2 fw-medium text-primary-emphasis">Kullanıcı Yönetimi</span>
   </div>
   <div class="p-toolbar-group-end">
-    <button class="btn btn-success btn-lg mr-2" (click)="addNewUserEvent.emit()">Yeni</button>
+    <button class="btn btn-success btn-lg" (click)="addNewUserEvent.emit()">
+      <i class="fal fa-plus"></i>
+      Yeni Kullanıcı
+    </button>
   </div>
 </p-toolbar>

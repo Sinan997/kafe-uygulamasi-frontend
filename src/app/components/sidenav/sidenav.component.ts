@@ -17,19 +17,20 @@ interface SideNavToggle {
     fadeInOut,
     trigger('rotate', [
       transition(':enter', [
-        animate('1000ms', 
+        animate(
+          '1000ms',
           keyframes([
-            style({transform: 'rotate(0deg)', offset: '0'}),
-            style({transform: 'rotate(2turn)', offset: '1'})
-          ])
-        )
-      ])
-    ])
-  ]
+            style({ transform: 'rotate(0deg)', offset: '0' }),
+            style({ transform: 'rotate(2turn)', offset: '1' }),
+          ]),
+        ),
+      ]),
+    ]),
+  ],
 })
 export class SidenavComponent implements OnInit {
-
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
+  @Output() onLogout: EventEmitter<boolean> = new EventEmitter();
   collapsed = false;
   screenWidth = 0;
   navData = navbarData;
@@ -38,31 +39,31 @@ export class SidenavComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.screenWidth = window.innerWidth;
-    if(this.screenWidth <= 768 ) {
+    if (this.screenWidth <= 768) {
       this.collapsed = false;
-      this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+      this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
     }
   }
 
   constructor(public router: Router) {}
 
   ngOnInit(): void {
-      this.screenWidth = window.innerWidth;
+    this.screenWidth = window.innerWidth;
   }
 
   toggleCollapse(): void {
     this.collapsed = !this.collapsed;
-    this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+    this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
   }
 
   closeSidenav(): void {
     this.collapsed = false;
-    this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+    this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
   }
 
   handleClick(item: INavbarData): void {
     this.shrinkItems(item);
-    item.expanded = !item.expanded
+    item.expanded = !item.expanded;
   }
 
   getActiveClass(data: INavbarData): string {
@@ -71,11 +72,15 @@ export class SidenavComponent implements OnInit {
 
   shrinkItems(item: INavbarData): void {
     if (!this.multiple) {
-      for(let modelItem of this.navData) {
+      for (let modelItem of this.navData) {
         if (item !== modelItem && modelItem.expanded) {
           modelItem.expanded = false;
         }
       }
     }
+  }
+
+  logout() {
+    this.onLogout.emit();
   }
 }

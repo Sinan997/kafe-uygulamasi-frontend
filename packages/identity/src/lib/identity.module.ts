@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IdentityRoutingModule } from './identity-routing.module';
-import { IdentityManagementComponent } from './components/identity-management/identity-management.component';
-import { IdentityManagementToolbarComponent } from './components/identity-management-toolbar/identity-management-toolbar.component';
-import { IdentityManagementTableComponent } from './components/identity-management-table/identity-management-table.component';
-import { IdentityManagementNewUserComponent } from './components/identity-management-new-user/identity-management-new-user.component';
+import { UsersComponent } from './components/users/users.component';
+import { UsersToolbarComponent } from './components/users/toolbar/users-toolbar.component';
+import { UsersTableComponent } from './components/users/table/users-table.component';
+import { NewUserComponent } from './components/users/new-user/new-user.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @NgModule({
   imports: [
     CommonModule,
     IdentityRoutingModule,
-    IdentityManagementToolbarComponent,
-    IdentityManagementTableComponent,
-    IdentityManagementNewUserComponent,
+    UsersToolbarComponent,
+    UsersTableComponent,
+    NewUserComponent,
     ConfirmDialogModule,
   ],
-  declarations: [IdentityManagementComponent],
+  declarations: [UsersComponent],
 })
 export class IdentityModule {}

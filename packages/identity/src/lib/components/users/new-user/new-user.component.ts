@@ -2,24 +2,24 @@ import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IdentityService } from '../../services/identity.service';
-import { User } from '../../models/user';
+import { IdentityService } from '../../../services/identity.service';
+import { User } from '../../../models/user';
 import { catchError, finalize, of } from 'rxjs';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-identity-management-new-user',
+  selector: 'app-new-user-modal',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, DialogModule],
-  templateUrl: './identity-management-new-user.component.html',
-  styleUrls: ['./identity-management-new-user.component.scss'],
+  templateUrl: './new-user.component.html',
 })
-export class IdentityManagementNewUserComponent {
+export class NewUserComponent {
   @Input() visibleNewUserDialog = true;
   @Output() visibleNewUserDialogChange = new EventEmitter<boolean>();
+  @Output() updateList = new EventEmitter<boolean>();
   fb = inject(FormBuilder);
-  identityService = inject(IdentityService)
-  messageService = inject(MessageService)
+  identityService = inject(IdentityService);
+  messageService = inject(MessageService);
 
   submitted = false;
 
@@ -64,29 +64,32 @@ export class IdentityManagementNewUserComponent {
     }
     const newUser = { ...this.form.value } as User;
 
-    this.identityService.addUser(newUser)
-    .pipe(
-      catchError((error) => {
-        console.log('error', error.error);
+    this.identityService
+      .addUser(newUser)
+      .pipe(
+        catchError((error) => {
+          console.log('error', error.error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'İşlem Başarısız',
+            detail: error.error.message,
+          });
+          return of();
+        }),
+        finalize(() => {
+          this.submitted = false;
+          this.visibleNewUserDialog = false;
+          this.visibleNewUserDialogChange.emit(false);
+        }),
+      )
+      .subscribe((val) => {
         this.messageService.add({
-          severity: 'error',
-          summary: 'İşlem Başarısız',
-          detail: error.error.message,
+          severity: 'success',
+          summary: 'Başarılı',
+          detail: val.message,
         });
-        return of();
-      }),
-      finalize(()=>{
-        this.submitted = false;
-        this.visibleNewUserDialog = false;
-        this.visibleNewUserDialogChange.emit(false);
-      })
-    )
-    .subscribe((val) => {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Başarılı',
-        detail: val.message,
+
+        this.updateList.emit();
       });
-    });
   }
 }

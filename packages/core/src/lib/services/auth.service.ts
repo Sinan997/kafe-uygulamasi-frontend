@@ -47,14 +47,14 @@ export class AuthService {
   }
 
   logout() {
+    this.router.navigate(['account', 'login']);
+    localStorage.clear();
+    this.userSubject.next(undefined);
     this.http
       .post('http://localhost:8080/api/auth/logout', {
         refreshToken: localStorage.getItem('refreshToken'),
       })
       .subscribe();
-    localStorage.clear();
-    this.userSubject.next(undefined);
-    this.router.navigate(['account', 'login']);
   }
 
   getUser() {

@@ -1,0 +1,10 @@
+<div>
+  <app-users-toolbar (addNewUserEvent)="openNewUserModal()" />
+  <app-users-table (updateList)="getUsers()" [users]="users" />
+</div>
+
+<app-new-user-modal
+  *ngIf="visibleNewUserDialog"
+  [(visibleNewUserDialog)]="visibleNewUserDialog"
+  (updateList)="getUsers()"
+/>
