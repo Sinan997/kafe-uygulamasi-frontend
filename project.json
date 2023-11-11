@@ -1,6 +1,6 @@
 {
-  "$schema": "node_modules/nx/schemas/project-schema.json",
   "name": "kafe-uygulamasi",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "generators": {
     "@schematics/angular:component": {
@@ -16,15 +16,10 @@
         "outputPath": "dist/kafe-uygulamasi",
         "index": "src/index.html",
         "main": "src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
+        "polyfills": ["zone.js"],
         "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "src/favicon.ico",
-          "src/assets"
-        ],
+        "assets": ["src/favicon.ico", "src/assets"],
         "styles": [
           "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
           "node_modules/primeng/resources/primeng.min.css",
@@ -58,18 +53,16 @@
         }
       },
       "defaultConfiguration": "production",
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "kafe-uygulamasi:build:production"
+          "buildTarget": "kafe-uygulamasi:build:production"
         },
         "development": {
-          "browserTarget": "kafe-uygulamasi:build:development"
+          "buildTarget": "kafe-uygulamasi:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -77,22 +70,16 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "kafe-uygulamasi:build"
+        "buildTarget": "kafe-uygulamasi:build"
       }
     },
     "test": {
       "executor": "@angular-devkit/build-angular:karma",
       "options": {
-        "polyfills": [
-          "zone.js",
-          "zone.js/testing"
-        ],
+        "polyfills": ["zone.js", "zone.js/testing"],
         "tsConfig": "tsconfig.spec.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "src/favicon.ico",
-          "src/assets"
-        ],
+        "assets": ["src/favicon.ico", "src/assets"],
         "styles": [
           "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
           "node_modules/primeng/resources/primeng.min.css",
