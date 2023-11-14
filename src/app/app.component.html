@@ -1,9 +1,6 @@
 <ng-container *ngIf="authService.userValue; else justRouter">
   <app-sidenav (onLogout)="logout()" (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
-  <app-body
-      [collapsed]="isSideNavCollapsed"
-      [screenWidth]="screenWidth"
-  ></app-body>
+  <app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-body>
 </ng-container>
 
 <ng-template #justRouter>

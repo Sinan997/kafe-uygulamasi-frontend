@@ -1,2 +1,2 @@
-export * from './lib/account.module';
+export * from './lib/account.routes';
 export * from './lib/components';

@@ -7,10 +7,11 @@ import { categoryModel } from 'src/app/models/category-model';
 import { MenuRequestService } from 'src/app/services/request-services/menu-request.service';
 
 @Component({
-  selector: 'app-menu-page',
-  templateUrl: './menu-page.component.html',
-  styleUrls: ['./menu-page.component.scss'],
-  providers: [MessageService, ConfirmationService],
+    selector: 'app-menu-page',
+    templateUrl: './menu-page.component.html',
+    styleUrls: ['./menu-page.component.scss'],
+    providers: [MessageService, ConfirmationService],
+    standalone: true,
 })
 export class MenuPageComponent implements OnInit {
   newCategoryDialog: boolean = false;
