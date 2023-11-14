@@ -1,12 +1,15 @@
 import { Component, Input } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-body',
-  templateUrl: './body.component.html',
-  styleUrls: ['./body.component.scss']
+    selector: 'app-body',
+    templateUrl: './body.component.html',
+    styleUrls: ['./body.component.scss'],
+    standalone: true,
+    imports: [NgClass, RouterOutlet]
 })
 export class BodyComponent {
-
   @Input() collapsed = false;
   @Input() screenWidth = 0;
 

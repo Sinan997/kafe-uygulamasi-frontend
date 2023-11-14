@@ -1,8 +1,10 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Component, Output, EventEmitter, OnInit, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive, RouterLink } from '@angular/router';
 import { fadeInOut, INavbarData } from './helper';
 import { navbarData } from './nav-data';
+import { SublevelMenuComponent } from './sublevel-menu.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -10,23 +12,29 @@ interface SideNavToggle {
 }
 
 @Component({
-  selector: 'app-sidenav',
-  templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss'],
-  animations: [
-    fadeInOut,
-    trigger('rotate', [
-      transition(':enter', [
-        animate(
-          '1000ms',
-          keyframes([
-            style({ transform: 'rotate(0deg)', offset: '0' }),
-            style({ transform: 'rotate(2turn)', offset: '1' }),
-          ]),
-        ),
-      ]),
-    ]),
-  ],
+    selector: 'app-sidenav',
+    templateUrl: './sidenav.component.html',
+    styleUrls: ['./sidenav.component.scss'],
+    animations: [
+        fadeInOut,
+        trigger('rotate', [
+            transition(':enter', [
+                animate('1000ms', keyframes([
+                    style({ transform: 'rotate(0deg)', offset: '0' }),
+                    style({ transform: 'rotate(2turn)', offset: '1' }),
+                ])),
+            ]),
+        ]),
+    ],
+    standalone: true,
+    imports: [
+        NgClass,
+        NgIf,
+        NgFor,
+        RouterLinkActive,
+        RouterLink,
+        SublevelMenuComponent,
+    ],
 })
 export class SidenavComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();

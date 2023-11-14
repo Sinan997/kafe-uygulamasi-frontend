@@ -6,10 +6,21 @@ import {
 import { ConfirmationService } from 'primeng/api';
 import { User } from 'src/app/models/user-model';
 import { IdentityService } from '../../services/identity.service';
+import { NewUserComponent } from './new-user/new-user.component';
+import { NgIf } from '@angular/common';
+import { UsersTableComponent } from './table/users-table.component';
+import { UsersToolbarComponent } from './toolbar/users-toolbar.component';
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  providers: [ConfirmationService],
+    selector: 'app-users',
+    templateUrl: './users.component.html',
+    providers: [ConfirmationService],
+    standalone: true,
+    imports: [
+        UsersToolbarComponent,
+        UsersTableComponent,
+        NgIf,
+        NewUserComponent,
+    ],
 })
 export class UsersComponent implements OnInit {
   visibleNewUserDialog = false;

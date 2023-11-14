@@ -1,11 +1,12 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive, RouterLink } from '@angular/router';
 import { fadeInOut, INavbarData } from './helper';
+import { NgIf, NgFor, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-sublevel-menu',
-  template: `
+    selector: 'app-sublevel-menu',
+    template: `
     <ul
       *ngIf="collapsed && data.items && data.items.length > 0"
       [@submenu]="
@@ -57,30 +58,32 @@ import { fadeInOut, INavbarData } from './helper';
       </li>
     </ul>
   `,
-  styleUrls: ['./sidenav.component.scss'],
-  animations: [
-    fadeInOut,
-    trigger('submenu', [
-      state(
-        'hidden',
-        style({
-          height: '0',
-          overflow: 'hidden',
-        }),
-      ),
-      state(
-        'visible',
-        style({
-          height: '*',
-        }),
-      ),
-      transition('visible <=> hidden', [
-        style({ overflow: 'hidden' }),
-        animate('{{transitionParams}}'),
-      ]),
-      transition('void => *', animate(0)),
-    ]),
-  ],
+    styleUrls: ['./sidenav.component.scss'],
+    animations: [
+        fadeInOut,
+        trigger('submenu', [
+            state('hidden', style({
+                height: '0',
+                overflow: 'hidden',
+            })),
+            state('visible', style({
+                height: '*',
+            })),
+            transition('visible <=> hidden', [
+                style({ overflow: 'hidden' }),
+                animate('{{transitionParams}}'),
+            ]),
+            transition('void => *', animate(0)),
+        ]),
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        NgFor,
+        NgClass,
+        RouterLinkActive,
+        RouterLink,
+    ],
 })
 export class SublevelMenuComponent implements OnInit {
   @Input() data: INavbarData = {

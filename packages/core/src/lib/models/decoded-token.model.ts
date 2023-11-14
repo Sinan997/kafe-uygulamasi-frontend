@@ -4,6 +4,7 @@ export interface DecodedTokenModel{
   name: string;
   surname: string;
   username: string;
+  businessId: string;
   exp: number;
   iat: number;
 }

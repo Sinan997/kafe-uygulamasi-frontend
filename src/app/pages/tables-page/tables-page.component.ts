@@ -3,10 +3,11 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @Component({
-  selector: 'app-tables-page',
-  templateUrl: './tables-page.component.html',
-  styleUrls: ['./tables-page.component.scss'],
-  providers:[MessageService,ConfirmationService]
+    selector: 'app-tables-page',
+    templateUrl: './tables-page.component.html',
+    styleUrls: ['./tables-page.component.scss'],
+    providers: [MessageService, ConfirmationService],
+    standalone: true
 })
 export class TablesPageComponent {
 
