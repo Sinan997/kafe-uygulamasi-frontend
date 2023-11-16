@@ -34,8 +34,8 @@ export class EditUserComponent implements OnInit {
 
   form = this.fb.group({
     _id: ['', Validators.required],
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
+    name: ['',],
+    surname: ['',],
     username: ['', Validators.required],
     role: ['', Validators.required],
     password: [''],
@@ -58,7 +58,7 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form.setValue({
+    this.form.patchValue({
       _id: this.user._id,
       name: this.user.name,
       surname: this.user.surname,
