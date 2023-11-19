@@ -1,10 +1,16 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { categoryModel } from 'src/app/models/category-model';
-import { MenuRequestService } from 'src/app/services/request-services/menu-request.service';
+import { MenuRequestService } from './request';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DialogModule } from 'primeng/dialog';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-menu-page',
@@ -12,6 +18,7 @@ import { MenuRequestService } from 'src/app/services/request-services/menu-reque
     styleUrls: ['./menu-page.component.scss'],
     providers: [MessageService, ConfirmationService],
     standalone: true,
+    imports:[ToastModule,ToolbarModule,ButtonModule,ProgressSpinnerModule,DialogModule,FormsModule,ReactiveFormsModule,CommonModule]
 })
 export class MenuPageComponent implements OnInit {
   newCategoryDialog: boolean = false;

@@ -1,0 +1,13 @@
+<app-menu-toolbar (addNewCategoryEvent)="openNewCategoryDialog()" />
+
+<app-menu-categories-table
+  [categories]="categories"
+  (updateCategoriesList)="get()"
+  (updateCategoryPlacement)="updateCategoryPlacement($event)"
+></app-menu-categories-table>
+
+<app-new-category-modal
+  *ngIf="visibleNewCategoryDialog"
+  [(visibleNewCategoryDialog)]="visibleNewCategoryDialog"
+  (updateCategoriesList)="get()"
+/>

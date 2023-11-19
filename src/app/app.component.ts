@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from 'core';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { BodyComponent } from './components/body/body.component';
+import { SidenavComponent, BodyComponent } from 'theme-shared';
 import { RouterOutlet } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { NgIf } from '@angular/common';

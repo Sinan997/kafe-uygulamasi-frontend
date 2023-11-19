@@ -78,8 +78,7 @@ export class NewUserComponent {
         }),
         finalize(() => {
           this.submitted = false;
-          this.visibleNewUserDialog = false;
-          this.visibleNewUserDialogChange.emit(false);
+          this.hideDialog();
         }),
       )
       .subscribe((val) => {

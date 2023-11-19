@@ -12,8 +12,11 @@
     "baseUrl": "./",
     "paths": {
       "account": ["packages/account/src/index.ts"],
+      "category": ["packages/category/src/index.ts"],
       "core": ["packages/core/src/index.ts"],
-      "identity": ["packages/identity/src/index.ts"]
+      "identity": ["packages/identity/src/index.ts"],
+      "menu": ["packages/menu/src/index.ts"],
+      "theme-shared": ["packages/theme-shared/src/index.ts"]
     }
   }
 }
