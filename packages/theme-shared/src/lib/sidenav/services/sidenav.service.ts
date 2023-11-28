@@ -9,7 +9,7 @@ export class SidenavService {
   menuService = inject(MenuService);
 
   navdata: WritableSignal<INavbarData[]> = signal([
-    { routeLink: 'view', icon: 'fal fa-home', label: 'View' },
+    { routeLink: 'dashboard', icon: 'fal fa-home', label: 'Dashboard' },
     { routeLink: 'generate', icon: 'fal fa-qrcode', label: 'Generate Qr' },
     {
       routeLink: 'menu',
@@ -30,9 +30,13 @@ export class SidenavService {
         label: 'Categories',
         items: [],
       };
+
+      res.categories.sort((a, b) => a.index - b.index);
+
       res.categories.forEach((category) => {
         categories.items?.push({ routeLink: 'category/' + category._id, label: category.title });
       });
+
       this.navdata.update((routes) => {
         let isIncluded;
         routes.forEach((route) => {

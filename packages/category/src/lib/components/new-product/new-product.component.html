@@ -1,0 +1,58 @@
+<p-dialog
+  [draggable]="false"
+  [modal]="true"
+  [visible]="true"
+  [closable]="false"
+  [style]="{ width: '40vw' }"
+>
+  <ng-template pTemplate="content">
+    <form [formGroup]="form">
+      <div class="d-flex flex-column px-2 mb-3">
+        <label for="newProductName" class="form-label">Ürün Adı</label>
+        <input
+          type="text"
+          id="newProductName"
+          class="form-control is-invalid"
+          formControlName="name"
+          [ngClass]="{ 'is-invalid': name.invalid && isSubmitted() }"
+        />
+        @if (name.invalid && isSubmitted()) {
+          <div class="invalid-feedback">
+            Ürün adı boş olamaz
+          </div>
+        }
+      </div>
+      <div class="d-flex flex-column px-2 mb-3">
+        <label for="price" class="form-label">Fiyat</label>
+        <input
+          type="number"
+          id="price"
+          class="form-control is-invalid"
+          formControlName="price"
+          [ngClass]="{ 'is-invalid': price.invalid && isSubmitted() }"
+        />
+        @if (price.invalid && isSubmitted()) {
+          <div class="invalid-feedback">
+            Fiyat Negatif Olamaz.
+          </div>
+        }
+      </div>
+      <div class="d-flex flex-column px-2 mb-3">
+        <div class="form-check form-switch">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Ürün Mevcut mu?</label>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+            formControlName="isAvailable"
+          />
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button class="btn btn-secondary me-2" (click)="hideDialog()">İptal</button>
+    <button class="btn btn-success" (click)="onSubmit()">Kaydet</button>
+  </ng-template>
+</p-dialog>

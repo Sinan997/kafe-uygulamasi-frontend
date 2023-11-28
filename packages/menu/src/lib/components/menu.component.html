@@ -6,8 +6,9 @@
   (updateCategoryPlacement)="updateCategoryPlacement($event)"
 ></app-menu-categories-table>
 
-<app-new-category-modal
-  *ngIf="visibleNewCategoryDialog"
-  [(visibleNewCategoryDialog)]="visibleNewCategoryDialog"
-  (updateCategoriesList)="get()"
-/>
+@if (visibleNewCategoryDialog) {
+  <app-new-category-modal
+    [(visibleNewCategoryDialog)]="visibleNewCategoryDialog"
+    (updateCategoriesList)="get()"
+  />
+}

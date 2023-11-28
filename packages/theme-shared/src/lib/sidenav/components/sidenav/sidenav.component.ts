@@ -7,7 +7,6 @@ import {
   HostListener,
   inject,
   computed,
-  effect,
   Signal,
 } from '@angular/core';
 import { Router, RouterLinkActive, RouterLink } from '@angular/router';

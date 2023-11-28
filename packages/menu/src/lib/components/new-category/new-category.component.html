@@ -8,17 +8,17 @@
   <ng-template pTemplate="content">
     <form [formGroup]="form">
       <div class="d-flex flex-column px-2">
-      <label for="newCategoryName" class="form-label">Kategori Adı</label>
+        <label for="newCategoryName" class="form-label">Kategori Adı</label>
         <input
           type="text"
           id="newCategoryName"
           class="form-control is-invalid"
           formControlName="newCategoryName"
-          [ngClass]="{'is-invalid': newCategoryName.invalid && isSubmitted()}"
+          [ngClass]="{ 'is-invalid': newCategoryName.invalid && isSubmitted() }"
         />
-        <div *ngIf="newCategoryName.invalid && isSubmitted()" class="invalid-feedback">
-          Kategori adı boş olamaz
-        </div>
+        @if (newCategoryName.invalid && isSubmitted()) {
+        <div class="invalid-feedback">Kategori adı boş olamaz</div>
+        }
       </div>
     </form>
   </ng-template>

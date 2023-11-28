@@ -5,8 +5,8 @@ import { fadeInOut, INavbarData } from './helper';
 import { NgIf, NgFor, NgClass } from '@angular/common';
 
 @Component({
-    selector: 'app-sublevel-menu',
-    template: `
+  selector: 'app-sublevel-menu',
+  template: `
     <ul
       *ngIf="collapsed && data.items && data.items.length > 0"
       [@submenu]="
@@ -58,32 +58,32 @@ import { NgIf, NgFor, NgClass } from '@angular/common';
       </li>
     </ul>
   `,
-    styleUrls: ['./sidenav.component.scss'],
-    animations: [
-        fadeInOut,
-        trigger('submenu', [
-            state('hidden', style({
-                height: '0',
-                overflow: 'hidden',
-            })),
-            state('visible', style({
-                height: '*',
-            })),
-            transition('visible <=> hidden', [
-                style({ overflow: 'hidden' }),
-                animate('{{transitionParams}}'),
-            ]),
-            transition('void => *', animate(0)),
-        ]),
-    ],
-    standalone: true,
-    imports: [
-        NgIf,
-        NgFor,
-        NgClass,
-        RouterLinkActive,
-        RouterLink,
-    ],
+  styleUrls: ['./sidenav.component.scss'],
+  animations: [
+    fadeInOut,
+    trigger('submenu', [
+      state(
+        'hidden',
+        style({
+          height: '0',
+          overflow: 'hidden',
+        }),
+      ),
+      state(
+        'visible',
+        style({
+          height: '*',
+        }),
+      ),
+      transition('visible <=> hidden', [
+        style({ overflow: 'hidden' }),
+        animate('{{transitionParams}}'),
+      ]),
+      transition('void => *', animate(0)),
+    ]),
+  ],
+  standalone: true,
+  imports: [NgIf, NgFor, NgClass, RouterLinkActive, RouterLink],
 })
 export class SublevelMenuComponent implements OnInit {
   @Input() data: INavbarData = {

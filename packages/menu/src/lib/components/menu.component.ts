@@ -1,38 +1,27 @@
 import { Component, inject } from '@angular/core';
-import { categoryModel } from '../../models/category';
+import { catchError } from 'rxjs';
+import { SidenavService } from 'theme-shared';
 import { MessageService } from 'primeng/api';
-import { MenuService } from '../../services/menu.service';
+import { categoryModel } from '../models/category';
+import { MenuService } from '../services/menu.service';
 import { MenuToolbarComponent } from './toolbar/menu-toolbar.component';
 import { NewCategoryComponent } from './new-category/new-category.component';
 import { CategoriesTableComponent } from './categories-table/categories-table.component';
-import { NgIf } from '@angular/common';
-import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
   templateUrl: './menu.component.html',
-  imports: [NgIf, MenuToolbarComponent, NewCategoryComponent, CategoriesTableComponent],
+  imports: [MenuToolbarComponent, NewCategoryComponent, CategoriesTableComponent],
 })
 export class MenuComponent {
-  visibleNewCategoryDialog = false;
-
   messageService = inject(MessageService);
   menuService = inject(MenuService);
+  sidenavService = inject(SidenavService);
 
-  openNewCategoryDialog() {
-    this.visibleNewCategoryDialog = true;
-  }
-
+  visibleNewCategoryDialog = false;
   categories: categoryModel[] = [];
-
-  updateCategoryPlacement(categories: categoryModel[]) {
-    this.categories = categories;
-
-    this.setIndexToCategories();
-    this.setCategoryPlacement();
-  }
-
+  
   ngOnInit(): void {
     this.get();
   }
@@ -43,6 +32,14 @@ export class MenuComponent {
       this.sortCategoriesByIndexLocally();
     });
   }
+
+  updateCategoryPlacement(categories: categoryModel[]) {
+    this.categories = categories;
+
+    this.setIndexToCategories();
+    this.setCategoryPlacement();
+  }
+
 
   setIndexToCategories() {
     this.categories = this.categories.map((category, index) => {
@@ -69,6 +66,12 @@ export class MenuComponent {
           summary: 'Sıralama değişti',
           detail: res.message,
         });
+
+        this.sidenavService.updateCategories();
       });
+  }
+
+  openNewCategoryDialog() {
+    this.visibleNewCategoryDialog = true;
   }
 }

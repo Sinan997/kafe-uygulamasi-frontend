@@ -8,9 +8,8 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(CoreModule.forRoot(), BrowserAnimationsModule),
+    importProvidersFrom(CoreModule.forRoot(), BrowserAnimationsModule, HttpClientModule),
     provideRouter(routes),
-    HttpClientModule,
     MessageService,
     ConfirmationService,
   ],

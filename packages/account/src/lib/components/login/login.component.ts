@@ -1,16 +1,16 @@
+import { NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'core';
 import { catchError, finalize } from 'rxjs';
-import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login.component.html',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf],
+  imports: [FormsModule, ReactiveFormsModule, NgClass],
 })
 export class LoginComponent {
   authService = inject(AuthService);

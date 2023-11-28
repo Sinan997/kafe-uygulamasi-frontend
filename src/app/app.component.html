@@ -1,11 +1,11 @@
-<ng-container *ngIf="authService.userValue; else justRouter">
+@if (authService.userValue) {
+<ng-container>
   <app-sidenav (onLogout)="logout()" (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
   <app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-body>
 </ng-container>
-
-<ng-template #justRouter>
-  <router-outlet></router-outlet>
-</ng-template>
+}@else {
+<router-outlet></router-outlet>
+}
 
 <p-toast
   [showTransformOptions]="'translateX(100%)'"

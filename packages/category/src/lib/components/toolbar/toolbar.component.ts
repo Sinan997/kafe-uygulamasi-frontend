@@ -10,7 +10,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 })
 export class CategoryToolbarComponent {
   @Output() addNewProductEvent = new EventEmitter<boolean>();
-
+  
   router = inject(Router);
 
   navigateToMenu() {

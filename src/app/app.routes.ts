@@ -1,15 +1,11 @@
 import { Routes } from '@angular/router';
 import { isLoggedIn } from 'core';
-import { ErrorPageComponent } from './pages/error-page/error-page.component';
-import { MenuPageComponent } from './pages/menu-page/menu-page.component';
-import { CategoryComponent } from 'category';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { DashboardPageComponent } from './components/dashboard-page/dashboard-page.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'view', pathMatch: 'full' },
-  // { path: 'dashboard', component: DashboardPageComponent, canActivate: [isLoggedIn] },
-  // { path: 'tables', component: TablesPageComponent },
-  // { path: 'orders', component: OrdersPageComponent },
-  // { path: 'menu', component: MenuPageComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardPageComponent, canActivate: [isLoggedIn] },
   { path: 'category', loadChildren: () => import('category').then((m) => m.CATEGORY_ROUTES) },
   {
     path: 'account',

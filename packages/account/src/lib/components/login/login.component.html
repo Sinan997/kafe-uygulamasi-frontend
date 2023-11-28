@@ -10,11 +10,11 @@
               class="form-control"
               type="text"
               formControlName="username"
-              [ngClass]="{'is-invalid': username.invalid && isSubmitted()}"
+              [ngClass]="{ 'is-invalid': username.invalid && isSubmitted() }"
             />
-            <div *ngIf="username.invalid && isSubmitted()" class="invalid-feedback">
-              Kullanıcı Adınızı Girin
-            </div>
+            @if (username.invalid && isSubmitted()) {
+            <div class="invalid-feedback">Kullanıcı Adınızı Girin</div>
+            }
           </div>
           <div class="d-flex flex-column px-2">
             <label for="password" class="form-label">Şifre</label>
@@ -23,11 +23,11 @@
               id="password"
               class="form-control is-invalid"
               formControlName="password"
-              [ngClass]="{'is-invalid': password.invalid && isSubmitted()}"
+              [ngClass]="{ 'is-invalid': password.invalid && isSubmitted() }"
             />
-            <div *ngIf="password.invalid && isSubmitted()" class="invalid-feedback">
-              Şifrenizi Girin
-            </div>
+            @if (password.invalid && isSubmitted()) {
+            <div class="invalid-feedback">Şifrenizi Girin</div>
+            }
           </div>
           <div class="px-2 mt-2">
             <button class="btn btn-primary" type="submit">Giriş yap</button>

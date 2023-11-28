@@ -1,11 +1,11 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { categoryModel } from '../../../models/category';
 import { Router } from '@angular/router';
-import { MenuService } from '../../../services/menu.service';
-import { finalize } from 'rxjs';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { catchError, finalize } from 'rxjs';
 import { SidenavService } from 'theme-shared';
+import { categoryModel } from '../../models/category';
+import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-menu-categories-table',
@@ -31,18 +31,36 @@ export class CategoriesTableComponent {
   }
 
   navigateToCategory(category: categoryModel) {
-    this.router.navigate(['menu', 'category', category._id]);
+    this.router.navigate(['category', category._id]);
   }
 
   deleteCategory(deletedCategory: categoryModel) {
-    console.log(deletedCategory._id);
     this.menuService
       .deleteCategory(deletedCategory._id)
-      .pipe(finalize(() => {}))
+      .pipe(
+        catchError((err) => {
+          throw err;
+        }),
+      )
       .subscribe((res) => {
-        this.updateCategoriesList.emit();
-        this.menuService.setCategoriesIndex(this.categories);
+        this.categories = this.categories.filter((prod) => prod._id !== deletedCategory._id);
+        // this.updateCategoriesList.emit();
+        this.updateCategoryPlacement.emit(this.categories);
         this.sidenavService.updateCategories();
       });
   }
+
+  // deleteProduct(product: productModel) {
+  //   this.categoryService
+  //     .deleteProduct(product._id)
+  //     .pipe(
+  //       catchError((err) => {
+  //         throw err;
+  //       }),
+  //     )
+  //     .subscribe((res) => {
+  //       this.categories = this.products.filter((prod) => prod._id !== product._id);
+  //       this.updateProductsPlacement.emit(this.products);
+  //     });
+  // }
 }
