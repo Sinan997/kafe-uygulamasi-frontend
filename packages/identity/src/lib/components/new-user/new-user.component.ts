@@ -1,55 +1,77 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DialogModule } from 'primeng/dialog';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IdentityService } from '../../../services/identity.service';
-import { User } from '../../../models/user';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DialogModule } from 'primeng/dialog';
+import { IdentityService } from '../../services/identity.service';
 import { catchError, finalize, of } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { NgClass } from '@angular/common';
+import { AddUserModel } from '../../models/add-user.model';
 
 @Component({
   selector: 'app-new-user-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DialogModule],
+  imports: [ReactiveFormsModule, DialogModule, NgClass],
   templateUrl: './new-user.component.html',
 })
-export class NewUserComponent {
+export class NewUserComponent implements OnInit {
   @Input() visibleNewUserDialog = true;
   @Output() visibleNewUserDialogChange = new EventEmitter<boolean>();
   @Output() updateList = new EventEmitter<boolean>();
   fb = inject(FormBuilder);
   identityService = inject(IdentityService);
   messageService = inject(MessageService);
+  destroyRef = inject(DestroyRef);
 
-  submitted = false;
+  submitted = signal(false);
 
   form = this.fb.group({
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
+    email: ['', Validators.required],
     username: ['', Validators.required],
     role: ['', Validators.required],
     password: ['', Validators.required],
+    businessName: [''],
   });
 
   roles = [
-    { label: 'Admin', value: 'admin' },
-    { label: 'Garson', value: 'waiter' },
+    { label: 'admin', value: 'admin' },
+    { label: 'business', value: 'business' },
   ];
 
-  get name() {
-    return this.form.controls.name;
-  }
-  get surname() {
-    return this.form.controls.surname;
-  }
   get username() {
     return this.form.controls.username;
+  }
+  get email() {
+    return this.form.controls.email;
   }
   get role() {
     return this.form.controls.role;
   }
   get password() {
     return this.form.controls.password;
+  }
+  get businessName() {
+    return this.form.controls.businessName;
+  }
+
+  ngOnInit(): void {
+    this.role.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
+      if (value === 'business') {
+        this.businessName.setValidators(Validators.required);
+      } else {
+        this.businessName.clearValidators();
+      }
+      this.businessName.updateValueAndValidity();
+    });
   }
 
   hideDialog() {
@@ -58,17 +80,15 @@ export class NewUserComponent {
   }
 
   onSubmit() {
-    this.submitted = true;
+    this.submitted.set(true);
     if (this.form.invalid) {
       return;
     }
-    const newUser = { ...this.form.value } as User;
 
     this.identityService
-      .addUser(newUser)
+      .addUser({ ...this.form.value } as AddUserModel)
       .pipe(
         catchError((error) => {
-          console.log('error', error.error);
           this.messageService.add({
             severity: 'error',
             summary: 'İşlem Başarısız',
@@ -77,8 +97,8 @@ export class NewUserComponent {
           return of();
         }),
         finalize(() => {
-          this.submitted = false;
           this.hideDialog();
+          this.submitted.set(false);
         }),
       )
       .subscribe((val) => {

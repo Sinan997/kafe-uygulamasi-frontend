@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, NgZone, OnInit, Output, inject } from '
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IdentityService } from '../../../services/identity.service';
-import { User } from '../../../models/user';
+import { IdentityService } from '../../services/identity.service';
+import { UserModel } from '../../models/user.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { catchError, finalize, of } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { catchError, finalize, of } from 'rxjs';
   templateUrl: './edit-user.component.html',
 })
 export class EditUserComponent implements OnInit {
-  @Input() user: User;
+  @Input() user: UserModel;
   @Input() visibleEditUserDialog = true;
   @Output() visibleEditUserDialogChange = new EventEmitter<boolean>();
   @Output() updateList = new EventEmitter<boolean>();
@@ -60,8 +60,6 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.form.patchValue({
       _id: this.user._id,
-      name: this.user.name,
-      surname: this.user.surname,
       username: this.user.username,
       role: this.user.role,
       password: '',
@@ -78,7 +76,7 @@ export class EditUserComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    const newUser = { ...this.form.value } as User;
+    const newUser = { ...this.form.value } as UserModel;
     this.identityService
       .updateUser(newUser)
       .pipe(

@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angu
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'core';
 import { catchError, finalize } from 'rxjs';
+import { LoginModel } from '../../models/login.model';
 
 @Component({
   selector: 'app-login-page',
@@ -19,7 +20,7 @@ export class LoginComponent {
   fb = inject(FormBuilder);
 
   loading: boolean = false;
-  user = { username: '', password: '' };
+  user: LoginModel;
 
   isSubmitted = signal(false);
 
@@ -37,12 +38,18 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.loading = true;
     this.isSubmitted.set(true);
+    if (this.form.invalid) {
+      return;
+    }
+    this.loading = true;
     this.authService
       .login(this.username.value!, this.password.value!)
       .pipe(
-        finalize(() => (this.loading = false)),
+        finalize(() => {
+          this.isSubmitted.set(false);
+          this.loading = false;
+        }),
         catchError((err) => {
           this.messageService.add({
             severity: 'error',

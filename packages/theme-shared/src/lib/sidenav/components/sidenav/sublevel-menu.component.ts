@@ -91,6 +91,7 @@ export class SublevelMenuComponent implements OnInit {
     icon: '',
     label: '',
     items: [],
+    role: '',
   };
   @Input() collapsed = false;
   @Input() animating: boolean | undefined;

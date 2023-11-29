@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
-import { User } from '../../../models/user';
-import { IdentityService } from '../../../services/identity.service';
+import { UserModel } from '../../models/user.model';
+import { IdentityService } from '../../services/identity.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { catchError, of } from 'rxjs';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -22,23 +22,23 @@ import { EditUserComponent } from '../edit-user/edit-user.component';
   templateUrl: './users-table.component.html',
 })
 export class UsersTableComponent {
-  @Input() users: User[];
+  @Input() users: UserModel[];
   @Output() updateList = new EventEmitter<boolean>();
 
   identityService = inject(IdentityService);
   confirmationService = inject(ConfirmationService);
   messageService = inject(MessageService);
 
-  user: User;
-  selectedUsers: User[] = [];
+  user: UserModel;
+  selectedUsers: UserModel[] = [];
   visibleEditUserDialog = false;
 
-  openEditUserModal(user: User) {
+  openEditUserModal(user: UserModel) {
     this.visibleEditUserDialog = true;
     this.user = user;
   }
 
-  deleteUser(user: User) {
+  deleteUser(user: UserModel) {
     this.confirmationService.confirm({
       message: user.username + ' Kullanıcısını silmek istediğine emin misin?',
       header: 'Kullanıcı Silme',

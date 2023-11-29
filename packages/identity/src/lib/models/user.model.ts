@@ -1,9 +1,4 @@
-export interface LoginModel {
-  username: string;
-  password: string;
-}
-
-export interface User {
+export interface UserModel {
   _id: string;
   email: string;
   username: string;

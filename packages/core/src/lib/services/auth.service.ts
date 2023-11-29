@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthResponse, DecodedTokenModel, JwtDecoderService } from 'core';
+import { AuthResponse, DecodedUserTokenModel, JwtDecoderService } from 'core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ export class AuthService {
   private userSubject = new BehaviorSubject(
     this.jwtDecoder.decodeToken(localStorage.getItem('accessToken')),
   );
-  public user: Observable<DecodedTokenModel | null>;
+  public user: Observable<DecodedUserTokenModel>;
 
   get userValue() {
     return this.userSubject.value;
@@ -27,25 +27,27 @@ export class AuthService {
     return localStorage.getItem('refreshToken');
   }
 
-  login(username: string, password: string) {
-    return this.http.post<AuthResponse>('http://localhost:8080/api/auth/login', {
-      username,
-      password,
-    });
-  }
-
+  
   setTokensToLocalStorage(accessToken: string, refreshToken: string) {
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
+    console.log(accessToken)
     this.userSubject.next(this.jwtDecoder.decodeToken(accessToken));
   }
-
+  
   refreshTokenHttp() {
     return this.http.post<AuthResponse>('http://localhost:8080/api/auth/refreshToken', {
       refreshToken: localStorage.getItem('refreshToken'),
     });
   }
 
+  login(username: string, password: string) {
+    return this.http.post<AuthResponse>('http://localhost:8080/api/auth/login', {
+      username,
+      password,
+    });
+  }
+  
   logout() {
     this.router.navigate(['account', 'login']);
     localStorage.clear();

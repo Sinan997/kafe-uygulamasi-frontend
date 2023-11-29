@@ -3,8 +3,6 @@
   <app-users-table (updateList)="getUsers()" [users]="users" />
 </div>
 
-<app-new-user-modal
-  *ngIf="visibleNewUserDialog"
-  [(visibleNewUserDialog)]="visibleNewUserDialog"
-  (updateList)="getUsers()"
-/>
+@if (visibleNewUserDialog) {
+<app-new-user-modal [(visibleNewUserDialog)]="visibleNewUserDialog" (updateList)="getUsers()" />
+}

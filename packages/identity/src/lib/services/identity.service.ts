@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { GetUsersResponse } from '../models/get-users-response';
-import { User } from '../models/user';
-import { addUserResponse } from '../models/add-user-response';
+import { GetUsersResponse } from '../models/get-users-response.model';
+import { UserModel } from '../models/user.model';
+import { AddUserModel, AddUserResponseModel } from '../models/add-user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +14,8 @@ export class IdentityService {
     return this.http.get<GetUsersResponse>('http://localhost:8080/api/user/all-users');
   }
 
-  addUser(user: User) {
-    return this.http.post<addUserResponse>('http://localhost:8080/api/user/add-user', user);
+  addUser(user: AddUserModel) {
+    return this.http.post<AddUserResponseModel>('http://localhost:8080/api/user/add-user', user);
   }
 
   deleteUser(id: string) {
@@ -26,7 +26,7 @@ export class IdentityService {
     );
   }
 
-  updateUser(user: User) {
-    return this.http.put<addUserResponse>('http://localhost:8080/api/user/update-user', user);
+  updateUser(user: UserModel) {
+    return this.http.put<AddUserResponseModel>('http://localhost:8080/api/user/update-user', user);
   }
 }

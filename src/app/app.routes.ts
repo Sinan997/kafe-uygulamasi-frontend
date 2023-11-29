@@ -15,10 +15,10 @@ export const routes: Routes = [
     path: 'menu',
     loadChildren: () => import('menu').then((m) => m.MENU_ROUTES),
   },
-  // {
-  //   path: 'identity',
-  //   loadChildren: () => import('identity').then((m) => m.IDENTITY_ROUTES),
-  //   canActivate: [isLoggedIn],
-  // },
+  {
+    path: 'identity',
+    loadChildren: () => import('identity').then((m) => m.IDENTITY_ROUTES),
+    canActivate: [isLoggedIn],
+  },
   { path: '**', component: ErrorPageComponent },
 ];

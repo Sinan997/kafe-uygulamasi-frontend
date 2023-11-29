@@ -1,25 +1,38 @@
 import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { INavbarData } from '../components/sidenav/helper';
 import { MenuService } from 'menu';
+import { AuthService } from 'core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SidenavService {
   menuService = inject(MenuService);
+  authService = inject(AuthService);
+
+  role = this.authService.userValue?.role;
 
   navdata: WritableSignal<INavbarData[]> = signal([
-    { routeLink: 'dashboard', icon: 'fal fa-home', label: 'Dashboard' },
-    { routeLink: 'generate', icon: 'fal fa-qrcode', label: 'Generate Qr' },
+    { routeLink: 'identity', icon: 'fal fa-address-book', label: 'Identity', role: 'admin' },
+    { routeLink: 'dashboard', icon: 'fal fa-home', label: 'Dashboard', role: 'business' },
+    { routeLink: 'generate', icon: 'fal fa-qrcode', label: 'Generate Qr', role: 'business' },
     {
       routeLink: 'menu',
       icon: 'fal fa-bars',
       label: 'Menu',
+      role: 'business',
     },
   ]);
 
   constructor() {
-    this.updateCategories();
+    this.filterNavdata();
+    if(this.role === 'business'){
+      this.updateCategories();
+    }
+  }
+
+  filterNavdata() {
+    this.navdata.set(this.navdata().filter((route) => route.role === this.role));
   }
 
   updateCategories() {
@@ -29,12 +42,17 @@ export class SidenavService {
         icon: 'fal fa-book',
         label: 'Categories',
         items: [],
+        role: 'business',
       };
 
       res.categories.sort((a, b) => a.index - b.index);
 
       res.categories.forEach((category) => {
-        categories.items?.push({ routeLink: 'category/' + category._id, label: category.title });
+        categories.items?.push({
+          routeLink: 'category/' + category._id,
+          label: category.title,
+          role: 'business',
+        });
       });
 
       this.navdata.update((routes) => {

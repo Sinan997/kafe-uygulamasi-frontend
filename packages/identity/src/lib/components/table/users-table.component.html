@@ -12,9 +12,9 @@
   <ng-template pTemplate="header">
     <tr>
       <th>Düzenle</th>
-      <th>İsim</th>
       <th>Kullanıcı Adı</th>
       <th>Rol</th>
+      <th>İşletme Adı</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user>
@@ -36,9 +36,9 @@
           </ul>
         </div>
       </td>
-      <td>{{ user.name }} {{ user.surname }}</td>
       <td>{{ user.username }}</td>
       <td>{{ user.role }}</td>
+      <td>{{ user.businessId?.name }}</td>
     </tr>
   </ng-template>
 </p-table>
