@@ -10,7 +10,7 @@ export class AuthService {
   router = inject(Router);
   jwtDecoder = inject(JwtDecoderService);
 
-  private userSubject = new BehaviorSubject(
+  userSubject = new BehaviorSubject(
     this.jwtDecoder.decodeToken(localStorage.getItem('accessToken')),
   );
   public user: Observable<DecodedUserTokenModel>;
@@ -31,7 +31,6 @@ export class AuthService {
   setTokensToLocalStorage(accessToken: string, refreshToken: string) {
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
-    console.log(accessToken)
     this.userSubject.next(this.jwtDecoder.decodeToken(accessToken));
   }
   

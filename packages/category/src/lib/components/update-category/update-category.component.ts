@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MessageService } from 'primeng/api';
 import { catchError, finalize } from 'rxjs';
 import { SidenavService } from 'theme-shared';
-import { categoryModel } from 'src/app/models/category-model';
+import { CategoryModel } from '../../models';
 import { CategoryService } from '../../services/category.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class UpdateCategoryComponent {
   activatedRoute = inject(ActivatedRoute);
   sidenavService = inject(SidenavService);
 
-  category = signal<categoryModel>({ _id: '0', index: 0, title: '' });
+  category = signal<CategoryModel>({ _id: '0', index: 0, name: '', products: [] });
   isEditing = false;
   isSubmitted = signal(false);
 
@@ -40,14 +40,14 @@ export class UpdateCategoryComponent {
       const categoryId = changed['id'];
       this.categoryService.getCategory(categoryId).subscribe((res) => {
         this.category.set(res.category);
-        this.name.setValue(this.category().title);
+        this.name.setValue(this.category().name);
       });
     });
   }
 
   abortNewCategoryName() {
     this.isEditing = false;
-    this.name.setValue(this.category().title);
+    this.name.setValue(this.category().name);
     this.isSubmitted.set(false);
   }
 
@@ -56,7 +56,7 @@ export class UpdateCategoryComponent {
     if (this.form.invalid) {
       return;
     }
-    if (this.category().title !== this.name.value) {
+    if (this.category().name !== this.name.value) {
       this.categoryService
         .changeCategoryName(this.name.value!, this.category()._id)
         .pipe(

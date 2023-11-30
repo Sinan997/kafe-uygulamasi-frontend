@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { catchError } from 'rxjs';
-import { productModel } from 'src/app/models/product-model';
+import { ProductModel } from '../../models';
 import { CategoryService } from '../../services/category.service';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 
@@ -15,14 +15,14 @@ import { EditProductComponent } from '../edit-product/edit-product.component';
   imports: [CurrencyPipe, NgClass, CdkDropList, CdkDrag, FormsModule, EditProductComponent],
 })
 export class ProductsTableComponent {
-  @Input() products: productModel[];
-  @Output() updateProductsPlacement = new EventEmitter<productModel[]>();
+  @Input() products: ProductModel[];
+  @Output() updateProductsPlacement = new EventEmitter<ProductModel[]>();
   @Output() updateList = new EventEmitter<boolean>();
   categoryService = inject(CategoryService);
 
   isEditing = false;
   visibleEditProductDialog = false;
-  product: productModel;
+  product: ProductModel;
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.products, event.previousIndex, event.currentIndex);
@@ -31,7 +31,7 @@ export class ProductsTableComponent {
     }
   }
 
-  deleteProduct(product: productModel) {
+  deleteProduct(product: ProductModel) {
     this.categoryService
       .deleteProduct(product._id)
       .pipe(
@@ -45,7 +45,7 @@ export class ProductsTableComponent {
       });
   }
 
-  openEditProductModal(product: productModel) {
+  openEditProductModal(product: ProductModel) {
     this.visibleEditProductDialog = true;
     this.product = product;
   }

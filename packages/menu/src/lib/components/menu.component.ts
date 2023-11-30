@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { catchError } from 'rxjs';
 import { SidenavService } from 'theme-shared';
 import { MessageService } from 'primeng/api';
-import { categoryModel } from '../models/category';
-import { MenuService } from '../services/menu.service';
+import { CategoryModel } from 'category';
 import { MenuToolbarComponent } from './toolbar/menu-toolbar.component';
 import { NewCategoryComponent } from './new-category/new-category.component';
 import { CategoriesTableComponent } from './categories-table/categories-table.component';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,8 +20,8 @@ export class MenuComponent {
   sidenavService = inject(SidenavService);
 
   visibleNewCategoryDialog = false;
-  categories: categoryModel[] = [];
-  
+  categories: CategoryModel[] = [];
+
   ngOnInit(): void {
     this.get();
   }
@@ -33,13 +33,12 @@ export class MenuComponent {
     });
   }
 
-  updateCategoryPlacement(categories: categoryModel[]) {
+  updateCategoryPlacement(categories: CategoryModel[]) {
     this.categories = categories;
 
     this.setIndexToCategories();
     this.setCategoryPlacement();
   }
-
 
   setIndexToCategories() {
     this.categories = this.categories.map((category, index) => {

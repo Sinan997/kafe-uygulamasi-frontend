@@ -1,6 +1,6 @@
 import { BasicResponseModel } from 'theme-shared';
 import { CategoryModel } from './category.model';
 
-export interface GetCategoryResponse extends BasicResponseModel {
+export interface ChangeCategoryResponseModel extends BasicResponseModel {
   category: CategoryModel;
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, NgZone, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, NgZone, OnInit, Output, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -26,7 +26,7 @@ export class EditUserComponent implements OnInit {
   ngZone = inject(NgZone);
 
   isPasswordInputClose?: boolean = true;
-  submitted = false;
+  submitted = signal(false);
   roles = [
     { label: 'Admin', value: 'admin' },
     { label: 'Garson', value: 'waiter' },
@@ -34,24 +34,12 @@ export class EditUserComponent implements OnInit {
 
   form = this.fb.group({
     _id: ['', Validators.required],
-    name: ['',],
-    surname: ['',],
     username: ['', Validators.required],
-    role: ['', Validators.required],
     password: [''],
   });
 
-  get name() {
-    return this.form.controls.name;
-  }
-  get surname() {
-    return this.form.controls.surname;
-  }
   get username() {
     return this.form.controls.username;
-  }
-  get role() {
-    return this.form.controls.role;
   }
   get password() {
     return this.form.controls.password;
@@ -61,7 +49,6 @@ export class EditUserComponent implements OnInit {
     this.form.patchValue({
       _id: this.user._id,
       username: this.user.username,
-      role: this.user.role,
       password: '',
     });
   }
@@ -72,7 +59,7 @@ export class EditUserComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
+    this.submitted.set(true);
     if (this.form.invalid) {
       return;
     }
@@ -89,9 +76,8 @@ export class EditUserComponent implements OnInit {
           return of();
         }),
         finalize(() => {
-          this.submitted = false;
-          this.visibleEditUserDialog = false;
-          this.visibleEditUserDialogChange.emit(false);
+          this.submitted.set(false);
+          this.hideDialog();
         }),
       )
       .subscribe((val) => {

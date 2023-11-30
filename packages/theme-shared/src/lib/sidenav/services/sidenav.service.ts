@@ -1,7 +1,8 @@
 import { Injectable, WritableSignal, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { INavbarData } from '../components/sidenav/helper';
 import { MenuService } from 'menu';
-import { AuthService } from 'core';
+import { AuthService, DecodedUserTokenModel } from 'core';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,9 @@ export class SidenavService {
   menuService = inject(MenuService);
   authService = inject(AuthService);
 
-  role = this.authService.userValue?.role;
+  user: DecodedUserTokenModel | undefined;
 
-  navdata: WritableSignal<INavbarData[]> = signal([
+  allRoutes = [
     { routeLink: 'identity', icon: 'fal fa-address-book', label: 'Identity', role: 'admin' },
     { routeLink: 'dashboard', icon: 'fal fa-home', label: 'Dashboard', role: 'business' },
     { routeLink: 'generate', icon: 'fal fa-qrcode', label: 'Generate Qr', role: 'business' },
@@ -22,21 +23,36 @@ export class SidenavService {
       label: 'Menu',
       role: 'business',
     },
-  ]);
+  ];
+
+  navdata: WritableSignal<INavbarData[]> = signal(this.allRoutes);
 
   constructor() {
-    this.filterNavdata();
-    if(this.role === 'business'){
-      this.updateCategories();
-    }
+    this.authService.userSubject.subscribe((user) => {
+      this.user = user;
+      this.resetNavdata();
+      if (user) {
+        this.filterNavdata();
+        if (user.role === 'business') {
+          this.updateCategories();
+        }
+      }
+    });
+  }
+
+  resetNavdata() {
+    this.navdata.set(this.allRoutes);
   }
 
   filterNavdata() {
-    this.navdata.set(this.navdata().filter((route) => route.role === this.role));
+    this.navdata.set(this.navdata().filter((route) => route.role === this.user?.role));
   }
 
   updateCategories() {
     this.menuService.getAllCategories().subscribe((res) => {
+      if (!res.categories.length) {
+        return;
+      }
       let categories: INavbarData = {
         routeLink: 'category',
         icon: 'fal fa-book',
@@ -50,7 +66,7 @@ export class SidenavService {
       res.categories.forEach((category) => {
         categories.items?.push({
           routeLink: 'category/' + category._id,
-          label: category.title,
+          label: category.name,
           role: 'business',
         });
       });

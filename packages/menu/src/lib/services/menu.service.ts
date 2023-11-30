@@ -1,12 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { allCategoriesReponse } from 'src/app/models/api-response-models/all-categories-response';
-import { addCategoryRespone } from 'src/app/models/api-response-models/add-category-response';
-import { categoryModel } from 'src/app/models/category-model';
-import { allProductsResponse } from 'src/app/models/api-response-models/all-products-response';
-import { addProductResponse } from 'src/app/models/api-response-models/add-product-response';
-import { productModel } from 'src/app/models/product-model';
-import { basicResponse } from 'src/app/models/api-response-models/basic-response';
+import { AllCategoriesReponse } from '../models/all-categories-response.model';
+import { BasicResponseModel } from 'theme-shared';
+import { CategoryModel } from 'category';
 
 @Injectable({
   providedIn: 'root',
@@ -17,58 +13,22 @@ export class MenuService {
   constructor(private http: HttpClient) {}
 
   getAllCategories() {
-    return this.http.get<allCategoriesReponse>(this.baseUrl + '/all-categories', {});
+    return this.http.get<AllCategoriesReponse>(this.baseUrl + '/all-categories', {});
   }
 
-  addCategory(title: string) {
-    return this.http.post<addCategoryRespone>(this.baseUrl + '/add-category', { title });
+  addCategory(name: string) {
+    return this.http.post<BasicResponseModel>(this.baseUrl + '/add-category', { name });
   }
 
   deleteCategory(id: string) {
-    return this.http.request<addCategoryRespone>('delete', this.baseUrl + '/delete-category', {
+    return this.http.request<BasicResponseModel>('delete', this.baseUrl + '/delete-category', {
       body: { id },
     });
   }
 
-  setCategoriesIndex(categories: categoryModel[]) {
-    return this.http.post<basicResponse>(this.baseUrl + '/set-categories-index', { categories });
-  }
-
-  changeCategoryName(title: string, categoryId: string) {
-    return this.http.post<addCategoryRespone>(this.baseUrl + '/change-categoryName', {
-      title,
-      categoryId,
+  setCategoriesIndex(categories: CategoryModel[]) {
+    return this.http.post<BasicResponseModel>(this.baseUrl + '/set-categories-index', {
+      categories,
     });
-  }
-
-  getAllProducts(categoryId: string) {
-    return this.http.get<allProductsResponse>(this.baseUrl + '/all-products/' + categoryId);
-  }
-
-  addProduct(categoryId: string, name: string, index: number, price: number, isAvailable: boolean) {
-    return this.http.post<addProductResponse>(this.baseUrl + '/add-product', {
-      categoryId,
-      name,
-      index,
-      price,
-      isAvailable,
-    });
-  }
-
-  updateProduct(name: string, price: number, isAvailable: boolean, productId: string) {
-    return this.http.post<addProductResponse>(this.baseUrl + '/update-product', {
-      name,
-      price,
-      isAvailable,
-      productId,
-    });
-  }
-
-  deleteProduct(productId: string) {
-    return this.http.request<addProductResponse>('delete', this.baseUrl + '/delete-product');
-  }
-
-  setProductsIndex(products: productModel[]) {
-    return this.http.post<basicResponse>(this.baseUrl + '/set-products-index', { products });
   }
 }

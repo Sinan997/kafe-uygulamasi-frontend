@@ -3,53 +3,13 @@
   [modal]="true"
   [visible]="visibleEditUserDialog"
   [closable]="false"
-  class="newUserDialog"
-  header="Kullanıcı Düzenle"
-  styleClass="p-fluid"
+  [style]="{ width: '40vw' }"
 >
+  <ng-template pTemplate="header">
+    <span class="fs-4">Kullanıcı Düzenle</span>
+  </ng-template>
   <ng-template pTemplate="content">
     <form [formGroup]="form">
-      <div class="row">
-        <div class="col-md-6">
-          <label for="name">İsim</label>
-          <input
-            class="form-control"
-            type="text"
-            id="name"
-            formControlName="name"
-            [ngClass]="{ 'is-invalid': name.invalid && submitted }"
-          />
-          <div class="invalid-feedback" *ngIf="submitted && name.invalid">İsim zorunludur.</div>
-        </div>
-        <div class="col-md-6">
-          <label for="surname">Soyisim</label>
-          <input
-            class="form-control"
-            type="text"
-            id="surname"
-            formControlName="surname"
-            [ngClass]="{ 'is-invalid': surname.invalid && submitted }"
-          />
-          <div class="invalid-feedback" *ngIf="submitted && surname.invalid">
-            Soyisim zorunludur.
-          </div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="inventoryStatus">Rol</label>
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          formControlName="role"
-          [ngClass]="{ 'is-invalid': role.invalid && submitted }"
-        >
-          <option selected [ngValue]="null">Rol Seçin</option>
-          <option *ngFor="let rol of roles" [ngValue]="rol.value">{{ rol.label }}</option>
-        </select>
-        <div class="invalid-feedback" *ngIf="submitted && role.invalid">Rol Zorunludur.</div>
-      </div>
-
       <div class="field">
         <label for="username">Kullanıcı Adı</label>
         <input
@@ -57,9 +17,9 @@
           class="form-control"
           id="username"
           formControlName="username"
-          [ngClass]="{ 'is-invalid': username.invalid && submitted }"
+          [ngClass]="{ 'is-invalid': username.invalid && submitted() }"
         />
-        <div class="invalid-feedback" *ngIf="submitted && username.invalid">
+        <div class="invalid-feedback" *ngIf="submitted() && username.invalid">
           Kullanıcı Adı Zorunludur.
         </div>
       </div>
@@ -71,11 +31,11 @@
           class="form-control"
           id="password"
           formControlName="password"
-          [ngClass]="{ 'is-invalid': password.invalid && submitted }"
+          [ngClass]="{ 'is-invalid': password.invalid && submitted() }"
         />
         <div
           class="invalid-feedback"
-          *ngIf="submitted && password.invalid && !isPasswordInputClose"
+          *ngIf="submitted() && password.invalid && !isPasswordInputClose"
         >
           Şifre Zorunludur.
         </div>

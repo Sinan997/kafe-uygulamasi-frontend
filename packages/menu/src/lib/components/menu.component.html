@@ -7,8 +7,8 @@
 ></app-menu-categories-table>
 
 @if (visibleNewCategoryDialog) {
-  <app-new-category-modal
-    [(visibleNewCategoryDialog)]="visibleNewCategoryDialog"
-    (updateCategoriesList)="get()"
-  />
+<app-new-category-modal
+  [(visibleNewCategoryDialog)]="visibleNewCategoryDialog"
+  (updateCategoriesList)="get()"
+/>
 }

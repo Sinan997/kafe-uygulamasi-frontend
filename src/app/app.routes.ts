@@ -6,7 +6,7 @@ import { DashboardPageComponent } from './components/dashboard-page/dashboard-pa
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardPageComponent, canActivate: [isLoggedIn] },
-  { path: 'category', loadChildren: () => import('category').then((m) => m.CATEGORY_ROUTES) },
+  // { path: 'category', loadChildren: () => import('category').then((m) => m.CATEGORY_ROUTES) },
   {
     path: 'account',
     loadChildren: () => import('account').then((m) => m.ACCOUNT_ROUTES),

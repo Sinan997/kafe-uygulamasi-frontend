@@ -1,9 +1,8 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MessageService } from 'primeng/api';
-import { productModel } from 'src/app/models/product-model';
+import { ProductModel } from '../models';
 import { CategoryToolbarComponent } from './toolbar/toolbar.component';
 import { CategoryService } from '../services/category.service';
 import { ProductsTableComponent } from './products-table/products-table.component';
@@ -29,7 +28,7 @@ export class CategoryComponent {
 
   visibleNewProductDialog = false;
   categoryId: string;
-  products: productModel[] = [];
+  products: ProductModel[] = [];
 
   constructor(
     private messageService: MessageService,
@@ -58,7 +57,7 @@ export class CategoryComponent {
     this.visibleNewProductDialog = true;
   }
   
-  updateProductsPlacement(products: productModel[]) {
+  updateProductsPlacement(products: ProductModel[]) {
     this.products = products;
     this.setIndexToProducts();
     this.setProductPlacement();

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgClass } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
-import { productModel } from 'src/app/models/product-model';
+import { MessageService } from 'primeng/api';
+import { ProductModel } from './../../models';
 import { CategoryService } from '../../services/category.service';
 import { UpdateProductModel } from '../../models/update-product.model';
 import { catchError, finalize } from 'rxjs';
-import { MessageService } from 'primeng/api';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-edit-user-modal',
@@ -15,7 +15,7 @@ import { NgClass } from '@angular/common';
   templateUrl: './edit-product.component.html',
 })
 export class EditProductComponent {
-  @Input() product: productModel;
+  @Input() product: ProductModel;
   @Input() visibleEditProductDialog = true;
   @Output() visibleEditProductDialogChange = new EventEmitter<boolean>();
   @Output() updateList = new EventEmitter<boolean>();

@@ -1,10 +1,9 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { catchError, finalize } from 'rxjs';
+import { catchError } from 'rxjs';
 import { SidenavService } from 'theme-shared';
-import { categoryModel } from '../../models/category';
+import { CategoryModel } from '../../../../../category/src/lib/models/category.model';
 import { MenuService } from '../../services/menu.service';
 
 @Component({
@@ -12,12 +11,12 @@ import { MenuService } from '../../services/menu.service';
   standalone: true,
   templateUrl: './categories-table.component.html',
   styleUrl: './categories-table.component.scss',
-  imports: [CdkDropList, CdkDrag, ProgressSpinnerModule],
+  imports: [CdkDropList, CdkDrag],
 })
 export class CategoriesTableComponent {
-  @Input() categories: categoryModel[] = [];
+  @Input() categories: CategoryModel[] = [];
   @Output() updateCategoriesList = new EventEmitter<boolean>();
-  @Output() updateCategoryPlacement = new EventEmitter<categoryModel[]>();
+  @Output() updateCategoryPlacement = new EventEmitter<CategoryModel[]>();
 
   router = inject(Router);
   menuService = inject(MenuService);
@@ -30,11 +29,11 @@ export class CategoriesTableComponent {
     }
   }
 
-  navigateToCategory(category: categoryModel) {
+  navigateToCategory(category: CategoryModel) {
     this.router.navigate(['category', category._id]);
   }
 
-  deleteCategory(deletedCategory: categoryModel) {
+  deleteCategory(deletedCategory: CategoryModel) {
     this.menuService
       .deleteCategory(deletedCategory._id)
       .pipe(
@@ -49,18 +48,4 @@ export class CategoriesTableComponent {
         this.sidenavService.updateCategories();
       });
   }
-
-  // deleteProduct(product: productModel) {
-  //   this.categoryService
-  //     .deleteProduct(product._id)
-  //     .pipe(
-  //       catchError((err) => {
-  //         throw err;
-  //       }),
-  //     )
-  //     .subscribe((res) => {
-  //       this.categories = this.products.filter((prod) => prod._id !== product._id);
-  //       this.updateProductsPlacement.emit(this.products);
-  //     });
-  // }
 }

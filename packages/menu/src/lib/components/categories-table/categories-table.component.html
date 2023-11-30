@@ -1,8 +1,7 @@
-@if (categories.length) {
 <div class="container-fluid card" cdkDropList (cdkDropListDropped)="drop($event)">
   @for (category of categories; track category._id) {
   <div class="example-box" cdkDrag>
-    {{ category.title }}
+    <span class="fs-6">{{ category.name }}</span>
     <div class="d-flex align-items-center justify-content-center">
       <button class="btn btn-primary me-2" (click)="navigateToCategory(category)">
         Ürün Ekle / Düzenle
@@ -12,6 +11,7 @@
       </button>
     </div>
   </div>
+  }@empty {
+  <span class="p-2 m-1 fs-6">Henüz Kategori Eklemediniz.</span>
   }
 </div>
-}
