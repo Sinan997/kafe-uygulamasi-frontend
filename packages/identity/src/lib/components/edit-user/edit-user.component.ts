@@ -6,11 +6,12 @@ import { IdentityService } from '../../services/identity.service';
 import { UserModel } from '../../models/user.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { catchError, finalize, of } from 'rxjs';
+import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 
 @Component({
   selector: 'app-edit-user-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DialogModule],
+  imports: [CommonModule, ReactiveFormsModule, DialogModule, AutoFocusDirective, TrackEnterKeyDirective],
   templateUrl: './edit-user.component.html',
 })
 export class EditUserComponent implements OnInit {

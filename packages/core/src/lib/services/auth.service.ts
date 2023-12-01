@@ -27,13 +27,12 @@ export class AuthService {
     return localStorage.getItem('refreshToken');
   }
 
-  
   setTokensToLocalStorage(accessToken: string, refreshToken: string) {
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
     this.userSubject.next(this.jwtDecoder.decodeToken(accessToken));
   }
-  
+
   refreshTokenHttp() {
     return this.http.post<AuthResponse>('http://localhost:8080/api/auth/refreshToken', {
       refreshToken: localStorage.getItem('refreshToken'),
@@ -46,7 +45,7 @@ export class AuthService {
       password,
     });
   }
-  
+
   logout() {
     this.router.navigate(['account', 'login']);
     localStorage.clear();

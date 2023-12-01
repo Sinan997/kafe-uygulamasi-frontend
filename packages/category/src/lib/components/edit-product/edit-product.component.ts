@@ -7,11 +7,12 @@ import { ProductModel } from './../../models';
 import { CategoryService } from '../../services/category.service';
 import { UpdateProductModel } from '../../models/update-product.model';
 import { catchError, finalize } from 'rxjs';
+import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 
 @Component({
   selector: 'app-edit-user-modal',
   standalone: true,
-  imports: [NgClass, ReactiveFormsModule, DialogModule],
+  imports: [NgClass, ReactiveFormsModule, DialogModule, AutoFocusDirective, TrackEnterKeyDirective],
   templateUrl: './edit-product.component.html',
 })
 export class EditProductComponent {

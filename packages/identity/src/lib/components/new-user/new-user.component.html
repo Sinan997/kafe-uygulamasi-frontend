@@ -4,6 +4,7 @@
   [visible]="visibleNewUserDialog"
   [closable]="false"
   [style]="{ width: '40vw' }"
+  (enterKey)="onSubmit()"
 >
   <ng-template pTemplate="header">
     <span class="fs-4">Yeni Kullanıcı</span>
@@ -16,6 +17,7 @@
           type="email"
           class="form-control"
           id="email"
+          autofocus
           formControlName="email"
           [ngClass]="{ 'is-invalid': email.invalid && submitted() }"
         />

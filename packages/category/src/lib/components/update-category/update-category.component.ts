@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, ElementRef, ViewChild, inject, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -8,11 +8,12 @@ import { catchError, finalize } from 'rxjs';
 import { SidenavService } from 'theme-shared';
 import { CategoryModel } from '../../models';
 import { CategoryService } from '../../services/category.service';
+import { TrackEnterKeyDirective } from 'core';
 
 @Component({
   selector: 'app-update-cagetory',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule, NgClass, TrackEnterKeyDirective],
   templateUrl: './update-category.component.html',
 })
 export class UpdateCategoryComponent {
@@ -22,6 +23,8 @@ export class UpdateCategoryComponent {
   destroyRef = inject(DestroyRef);
   activatedRoute = inject(ActivatedRoute);
   sidenavService = inject(SidenavService);
+
+  @ViewChild('myInput') myInput: ElementRef;
 
   category = signal<CategoryModel>({ _id: '0', index: 0, name: '', products: [] });
   isEditing = false;
@@ -51,6 +54,11 @@ export class UpdateCategoryComponent {
     this.isSubmitted.set(false);
   }
 
+  editButton() {
+    this.isEditing = true;
+    this.myInput.nativeElement.focus();
+  }
+
   onSubmit() {
     this.isSubmitted.set(true);
     if (this.form.invalid) {
@@ -76,6 +84,8 @@ export class UpdateCategoryComponent {
           this.sidenavService.updateCategories();
           this.category.set(res.category);
         });
+      return;
     }
+    this.isEditing = false;
   }
 }

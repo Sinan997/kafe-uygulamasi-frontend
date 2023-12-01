@@ -1,10 +1,7 @@
-@if (products.length) {
 <div class="container-fluid card mt-3" cdkDropList (cdkDropListDropped)="drop($event)">
   @for (product of products; track product._id) {
   <div class="example-box" cdkDrag>
-    <span class="d-flex align-items-center justify-content-center">
-      {{ product.name }}
-    </span>
+    <span class="fs-6">{{ product.name }}</span>
     <div class="d-flex align-items-center justify-content-center">
       <span>{{ product.price | currency : '₺' }}</span>
       <i
@@ -24,9 +21,12 @@
       </button>
     </div>
   </div>
+  }@empty {
+  <span class="p-2 m-1 fs-6">Henüz Ürün Eklemediniz.</span>
   }
 </div>
-} @if (visibleEditProductDialog) {
+
+@if (visibleEditProductDialog) {
 <app-edit-user-modal
   [product]="product"
   [(visibleEditProductDialog)]="visibleEditProductDialog"

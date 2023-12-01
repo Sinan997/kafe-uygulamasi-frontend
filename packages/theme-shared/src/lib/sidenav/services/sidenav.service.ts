@@ -51,6 +51,7 @@ export class SidenavService {
   updateCategories() {
     this.menuService.getAllCategories().subscribe((res) => {
       if (!res.categories.length) {
+        this.resetNavdata();
         return;
       }
       let categories: INavbarData = {

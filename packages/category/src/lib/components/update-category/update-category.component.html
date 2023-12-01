@@ -6,6 +6,7 @@
           type="text"
           class="form-control is-invalid"
           formControlName="name"
+          #myInput
           [readonly]="!isEditing"
           [ngClass]="{ 'is-invalid': name.invalid && isSubmitted() }"
         />
@@ -16,10 +17,10 @@
 
       @if (!isEditing) {
       <div>
-        <button class="btn btn-primary ms-3" (click)="isEditing = !isEditing">Düzenle</button>
+        <button class="btn btn-primary ms-3" (click)="editButton()">Düzenle</button>
       </div>
       }@else{
-      <button class="btn btn-success ms-2" (click)="onSubmit()">
+      <button (enterKey)="onSubmit()" class="btn btn-success ms-2" (click)="onSubmit()">
         <i class="fal fa-check"></i>
       </button>
       <button class="btn btn-danger ms-2" (click)="abortNewCategoryName()">

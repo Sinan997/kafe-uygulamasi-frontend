@@ -3,14 +3,14 @@ import { NgClass } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
-import { SidenavService } from 'theme-shared';
 import { catchError, finalize } from 'rxjs';
+import { SidenavService } from 'theme-shared';
+import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 import { MenuService } from '../../services/menu.service';
-
 @Component({
   selector: 'app-new-category-modal',
   standalone: true,
-  imports: [NgClass, ReactiveFormsModule, DialogModule],
+  imports: [NgClass, ReactiveFormsModule, DialogModule, AutoFocusDirective, TrackEnterKeyDirective],
   templateUrl: './new-category.component.html',
 })
 export class NewCategoryComponent {

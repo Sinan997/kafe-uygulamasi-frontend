@@ -1,6 +1,6 @@
 import { UserModel } from './user.model';
+import { BasicResponseModel } from 'theme-shared';
 
-export interface GetUsersResponse {
+export interface GetUsersResponse extends BasicResponseModel {
   users: UserModel[];
-  success: boolean;
 }

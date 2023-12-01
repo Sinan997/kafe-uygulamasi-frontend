@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { AddProductModel } from '../models/add-product.model';
 import { GetCategoryResponse } from '../models/get-category-response.model';
 import { UpdateProductModel } from '../models/update-product.model';
-import { ProductModel } from '../models'
 import { BasicResponseModel } from 'theme-shared';
+import { ProductModel } from '../models'
 import { AllProductsResponse } from '../models/all-products-response.model';
 import { ChangeCategoryResponseModel } from '../models/change-category-response.model';
 

@@ -1,3 +1,4 @@
-export * from './category.routes'
-export * from './components'
-export * from './models'
+export * from './category.routes';
+export * from './components';
+export * from './services';
+export * from './models';

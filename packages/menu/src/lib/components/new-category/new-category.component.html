@@ -4,6 +4,7 @@
   [visible]="true"
   [closable]="false"
   [style]="{ width: '40vw' }"
+  (enterKey)="onSubmit()"
 >
   <ng-template pTemplate="content">
     <form [formGroup]="form">
@@ -14,6 +15,7 @@
           id="newCategoryName"
           class="form-control is-invalid"
           formControlName="newCategoryName"
+          autofocus
           [ngClass]="{ 'is-invalid': newCategoryName.invalid && isSubmitted() }"
         />
         @if (newCategoryName.invalid && isSubmitted()) {
@@ -24,6 +26,6 @@
   </ng-template>
   <ng-template pTemplate="footer">
     <button class="btn btn-secondary me-2" (click)="hideDialog()">İptal</button>
-    <button class="btn btn-success" (click)="onSubmit()">Kaydet</button>
+    <button class="btn btn-success" type="submit" (click)="onSubmit()">Kaydet</button>
   </ng-template>
 </p-dialog>

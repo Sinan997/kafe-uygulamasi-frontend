@@ -6,11 +6,12 @@ import { MessageService } from 'primeng/api';
 import { CategoryService } from '../../services/category.service';
 import { AddProductModel } from '../../models/add-product.model';
 import { NgClass } from '@angular/common';
+import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 
 @Component({
   selector: 'app-new-product-modal',
   standalone: true,
-  imports: [NgClass, ReactiveFormsModule, DialogModule],
+  imports: [NgClass, ReactiveFormsModule, DialogModule, AutoFocusDirective, TrackEnterKeyDirective],
   templateUrl: './new-product.component.html',
 })
 export class NewProductComponent {

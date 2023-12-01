@@ -3,8 +3,8 @@
 <app-update-cagetory />
 
 <app-products-table
-  (updateProductsPlacement)="updateProductsPlacement($event)"
   [products]="products"
+  (updateProductsPlacement)="updateProductsPlacement($event)"
   (updateList)="get()"
 />
 

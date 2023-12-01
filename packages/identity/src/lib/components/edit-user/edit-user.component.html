@@ -4,6 +4,7 @@
   [visible]="visibleEditUserDialog"
   [closable]="false"
   [style]="{ width: '40vw' }"
+  (enterKey)="onSubmit()"
 >
   <ng-template pTemplate="header">
     <span class="fs-4">Kullanıcı Düzenle</span>
@@ -16,6 +17,7 @@
           type="text"
           class="form-control"
           id="username"
+          autofocus
           formControlName="username"
           [ngClass]="{ 'is-invalid': username.invalid && submitted() }"
         />

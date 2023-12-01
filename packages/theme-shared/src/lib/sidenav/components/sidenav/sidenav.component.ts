@@ -13,7 +13,6 @@ import { Router, RouterLinkActive, RouterLink } from '@angular/router';
 import { fadeInOut, INavbarData } from './helper';
 import { SublevelMenuComponent } from './sublevel-menu.component';
 import { NgClass, NgIf, NgFor } from '@angular/common';
-import { MenuService } from 'menu';
 import { SidenavService } from '../../services';
 
 interface SideNavToggle {
@@ -43,7 +42,6 @@ interface SideNavToggle {
   imports: [NgClass, NgIf, NgFor, RouterLinkActive, RouterLink, SublevelMenuComponent],
 })
 export class SidenavComponent implements OnInit {
-  menuService = inject(MenuService);
   sidenavService = inject(SidenavService);
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   @Output() onLogout: EventEmitter<boolean> = new EventEmitter();

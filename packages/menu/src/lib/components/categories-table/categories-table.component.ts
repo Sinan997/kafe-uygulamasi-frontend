@@ -43,8 +43,7 @@ export class CategoriesTableComponent {
       )
       .subscribe((res) => {
         this.categories = this.categories.filter((prod) => prod._id !== deletedCategory._id);
-        // this.updateCategoriesList.emit();
-        this.updateCategoryPlacement.emit(this.categories);
+        this.updateCategoriesList.emit();
         this.sidenavService.updateCategories();
       });
   }

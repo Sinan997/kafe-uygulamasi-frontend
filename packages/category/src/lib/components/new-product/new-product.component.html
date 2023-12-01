@@ -4,6 +4,7 @@
   [visible]="true"
   [closable]="false"
   [style]="{ width: '40vw' }"
+  (enterKey)="onSubmit()"
 >
   <ng-template pTemplate="content">
     <form [formGroup]="form">
@@ -14,6 +15,7 @@
           id="newProductName"
           class="form-control is-invalid"
           formControlName="name"
+          autofocus
           [ngClass]="{ 'is-invalid': name.invalid && isSubmitted() }"
         />
         @if (name.invalid && isSubmitted()) {

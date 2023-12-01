@@ -16,11 +16,12 @@ import { catchError, finalize, of } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { NgClass } from '@angular/common';
 import { AddUserModel } from '../../models/add-user.model';
+import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 
 @Component({
   selector: 'app-new-user-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, DialogModule, NgClass],
+  imports: [ReactiveFormsModule, DialogModule, NgClass, AutoFocusDirective, TrackEnterKeyDirective],
   templateUrl: './new-user.component.html',
 })
 export class NewUserComponent implements OnInit {
