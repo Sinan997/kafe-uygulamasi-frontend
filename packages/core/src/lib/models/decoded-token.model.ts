@@ -3,7 +3,7 @@ export interface DecodedUserTokenModel {
   email: string;
   username: string;
   role: string;
-  businessId: string;
+  businessId: { _id: string; name: string };
   exp: number;
   iat: number;
 }

@@ -16,6 +16,10 @@ export const routes: Routes = [
     loadChildren: () => import('menu').then((m) => m.MENU_ROUTES),
   },
   {
+    path: 'qrcode',
+    loadChildren: () => import('qrcode').then((m) => m.QRCODE_ROUTES),
+  },
+  {
     path: 'identity',
     loadChildren: () => import('identity').then((m) => m.IDENTITY_ROUTES),
     canActivate: [isLoggedIn],

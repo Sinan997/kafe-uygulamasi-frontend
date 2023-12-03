@@ -1,0 +1,14 @@
+<!-- <p>canvas</p>
+  <canvas #myCanvas width="400" height="400"></canvas> -->
+
+<!-- Your dynamic content goes here -->
+<div #content>
+  <!-- Dynamic content added programmatically -->
+  <div #qrcodetemplate style="height: 500px; width: 500px" [innerHTML]="sanitizeSVG(svg)"></div>
+  <!-- <p>asd</p>
+  <p>dsa</p>
+  <p>esd</p> -->
+</div>
+
+<!-- Button to trigger the download -->
+<button (click)="downloadAsImage()">Download as JPEG</button>
