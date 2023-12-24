@@ -1,0 +1,20 @@
+{
+  "validator": {
+    "email": "Lütfen geçerli bir email adresi girin.",
+    "max": "Max. değer şu olmalı {{ max }}. ({{ actual }} girildi)",
+    "maxlength": "Max. {{ requiredLength }} karakter girilebilir. (şuan {{ actualLength }})",
+    "min": "Min. değer şu olmalı {{ min }}. ({{ actual }} girildi)",
+    "pattern": "Invalid pattern. Please review your input.",
+    "passwordMismatch": "Şifreler eşleşmiyor.",
+    "invalidPassword": "Şifre şunu içermeli {{ description }}.",
+    "required": "Bu alan zorunludur.",
+    "minlength": "Min. {{ requiredLength }} karakter girilebilir. (şuan {{ actualLength }})"
+  },
+  "username": "Kullanıcı adı",
+  "password": "Şifre",
+  "login": "Giriş yap",
+  "selectLanguage": "Dil seçin",
+  "company": "Şirket",
+  "identityManagement": "Kimlik Yönetimi",
+  "logout":"Çıkış Yap"
+}

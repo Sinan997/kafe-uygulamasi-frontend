@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { LanguageDropdownComponent } from '../language-dropdown';
 
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
   styleUrls: ['./body.component.scss'],
   standalone: true,
-  imports: [NgClass, RouterOutlet],
+  imports: [NgClass, RouterOutlet, LanguageDropdownComponent],
 })
 export class BodyComponent {
   @Input() collapsed = false;

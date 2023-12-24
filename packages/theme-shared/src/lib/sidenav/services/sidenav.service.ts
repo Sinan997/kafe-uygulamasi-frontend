@@ -14,9 +14,9 @@ export class SidenavService {
   user: DecodedUserTokenModel | undefined;
 
   allRoutes = [
-    { routeLink: 'identity', icon: 'fal fa-address-book', label: 'Identity', role: 'admin' },
+    { routeLink: 'identity', icon: 'fal fa-address-book', label: 'identityManagement', role: 'admin' },
     { routeLink: 'dashboard', icon: 'fal fa-home', label: 'Dashboard', role: 'business' },
-    { routeLink: 'qrcode', icon: 'fal fa-qrcode', label: 'Generate Qr', role: 'business' },
+    { routeLink: 'qrcode', icon: 'fal fa-qrcode', label: 'logout', role: 'business' },
     {
       routeLink: 'menu',
       icon: 'fal fa-bars',

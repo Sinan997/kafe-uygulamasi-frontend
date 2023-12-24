@@ -48,7 +48,8 @@ export class AuthService {
 
   logout() {
     this.router.navigate(['account', 'login']);
-    localStorage.clear();
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     this.userSubject.next(undefined);
     this.http
       .post('http://localhost:8080/api/auth/logout', {

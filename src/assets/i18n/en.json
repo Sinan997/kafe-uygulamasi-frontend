@@ -1,0 +1,20 @@
+{
+  "validator": {
+    "email": "Please enter a valid email address.",
+    "max": "Max. value should be {{ max }}. ({{ actual }} entered)",
+    "maxlength": "Max. {{ requiredLength }} characters are allowed. (has {{ actualLength }})",
+    "min": "Min. value should be {{ min }}. ({{ actual }} entered)",
+    "pattern": "Invalid pattern. Please review your input.",
+    "passwordMismatch": "Passwords do not match.",
+    "invalidPassword": "Password should include {{ description }}.",
+    "required": "This field is required.",
+    "minlength": "Min. {{ requiredLength }} characters are required. (has {{ actualLength }})"
+  },
+  "username": "Username",
+  "password": "Password",
+  "login": "Login",
+  "selectLanguage": "Select language",
+  "company": "Company",
+  "identityManagement": "Identity Management",
+  "logout":"Logout"
+}

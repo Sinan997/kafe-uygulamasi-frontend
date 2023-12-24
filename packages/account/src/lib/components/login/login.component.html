@@ -1,36 +1,19 @@
+<language-dropdown></language-dropdown>
 <div class="background">
   <div class="container-sm" style="height: 100vh">
     <div class="row h-75 align-items-center">
       <div class="card py-5 px-3 col-sm-11 col-md-9 col-lg-7 col-xl-6 col-xxl-5 mx-auto">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <div class="d-flex flex-column px-2">
-            <label for="username" class="form-label">Kullanıcı Adı</label>
-            <input
-              id="username"
-              class="form-control"
-              type="text"
-              formControlName="username"
-              [ngClass]="{ 'is-invalid': username.invalid && isSubmitted() }"
-            />
-            @if (username.invalid && isSubmitted()) {
-            <div class="invalid-feedback">Kullanıcı Adınızı Girin</div>
-            }
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" [validateOnSubmit]="true">
+          <div class="form-group mb-3">
+            <label for="username" class="form-label">{{ 'username' | translate }}</label>
+            <input id="username" class="form-control" type="text" formControlName="username" />
           </div>
-          <div class="d-flex flex-column px-2">
-            <label for="password" class="form-label">Şifre</label>
-            <input
-              type="password"
-              id="password"
-              class="form-control is-invalid"
-              formControlName="password"
-              [ngClass]="{ 'is-invalid': password.invalid && isSubmitted() }"
-            />
-            @if (password.invalid && isSubmitted()) {
-            <div class="invalid-feedback">Şifrenizi Girin</div>
-            }
+          <div class="form-group mb-4">
+            <label for="password" class="form-label">{{ 'password' | translate }}</label>
+            <input type="password" id="password" class="form-control" formControlName="password" />
           </div>
-          <div class="px-2 mt-2">
-            <button class="btn btn-primary" type="submit">Giriş yap</button>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">{{ 'login' | translate }}</button>
           </div>
         </form>
       </div>

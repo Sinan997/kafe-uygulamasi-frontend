@@ -14,6 +14,7 @@ import { fadeInOut, INavbarData } from './helper';
 import { SublevelMenuComponent } from './sublevel-menu.component';
 import { NgClass, NgIf, NgFor } from '@angular/common';
 import { SidenavService } from '../../services';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -39,7 +40,7 @@ interface SideNavToggle {
     ]),
   ],
   standalone: true,
-  imports: [NgClass, NgIf, NgFor, RouterLinkActive, RouterLink, SublevelMenuComponent],
+  imports: [RouterLink, RouterLinkActive, SublevelMenuComponent, TranslateModule, NgClass, NgIf, NgFor,],
 })
 export class SidenavComponent implements OnInit {
   sidenavService = inject(SidenavService);
@@ -59,7 +60,7 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  constructor(public router: Router) {}
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
