@@ -29,6 +29,7 @@ export class AppComponent {
   }
 
   logout() {
+    this.isSideNavCollapsed = false;
     this.authService.logout();
   }
 }

@@ -1,0 +1,8 @@
+<div>
+  <app-business-toolbar (addNewBusinessEvent)="openNewBusinessModal()" />
+  <app-business-table (updateList)="getBusinesses()" [businesses]="businesses" />
+</div>
+
+@if (visibleNewBusinessDialog) {
+  <app-new-business-modal [(visibleNewBusinessDialog)]="visibleNewBusinessDialog" (updateList)="getBusinesses()" />
+}

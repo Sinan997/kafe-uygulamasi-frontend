@@ -1,0 +1,39 @@
+<p-dialog
+  [draggable]="false"
+  [modal]="true"
+  [visible]="visibleNewBusinessDialog"
+  [closable]="false"
+  [style]="{ width: '40vw' }"
+  (enterKey)="onSubmit()"
+>
+  <ng-template pTemplate="header">
+    <span class="fs-4">{{ 'business.newBusiness' | translate }}</span>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <form [formGroup]="form" id="newBusinessForm" (ngSubmit)="onSubmit()">
+      <div class="form-group mb-3">
+        <label for="email">{{ 'form.name' | translate }} *</label>
+        <input type="email" class="form-control" id="email" formControlName="name" autofocus />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="email">{{ 'form.email' | translate }} *</label>
+        <input type="email" class="form-control" id="email" formControlName="email" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">{{ 'form.password' | translate }} *</label>
+        <input type="password" class="form-control" id="password" formControlName="password" />
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button type="button" class="btn text-decoration-none btn-link me-2" (click)="hideDialog()">
+      {{ 'form.cancel' | translate }}
+    </button>
+    <button form="newBusinessForm" type="submit" class="btn btn-primary">
+      {{ 'form.save' | translate }}
+    </button>
+  </ng-template>
+</p-dialog>

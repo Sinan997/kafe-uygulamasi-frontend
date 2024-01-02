@@ -10,11 +10,44 @@
     "required": "This field is required.",
     "minlength": "Min. {{ requiredLength }} characters are required. (has {{ actualLength }})"
   },
-  "username": "Username",
-  "password": "Password",
-  "login": "Login",
+
+  "identity": {
+    "identityManagement": "Identity Management"
+  },
+
+  "business": {
+    "businessManagement": "Business Management",
+    "newBusiness": "New Business",
+    "businessName": "Business Name",
+    "ownerEmail": "Owner's Email",
+    "ownerUsername": "Owner's Username"
+  },
+
+  "form": {
+    "name": "Name",
+    "username": "Username",
+    "password": "Password",
+    "save": "Save",
+    "email": "Email",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "actions": "Actions"
+  },
+
+  "error": {
+    "MISSING_FIELDS": "Fill required places.",
+    "NAME_EXIST": "Name is already used."
+  },
+
+  "response": {
+    "BUSINESS_DELETED":"Business deleted.",
+    "BUSINESS_CREATED":"Business created."
+  },
+
   "selectLanguage": "Select language",
   "company": "Company",
-  "identityManagement": "Identity Management",
-  "logout":"Logout"
+  "login": "Login",
+  "logout": "Logout",
+  "success":"Success"
 }

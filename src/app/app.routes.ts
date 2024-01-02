@@ -24,5 +24,10 @@ export const routes: Routes = [
     loadChildren: () => import('identity').then((m) => m.IDENTITY_ROUTES),
     canActivate: [isLoggedIn],
   },
+  {
+    path: 'business-management',
+    loadChildren: () => import('business-management').then((m) => m.BUSINESS_MANAGEMENT_ROUTES),
+    canActivate: [isLoggedIn],
+  },
   { path: '**', component: ErrorPageComponent },
 ];

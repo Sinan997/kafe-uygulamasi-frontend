@@ -10,11 +10,44 @@
     "required": "Bu alan zorunludur.",
     "minlength": "Min. {{ requiredLength }} karakter girilebilir. (şuan {{ actualLength }})"
   },
-  "username": "Kullanıcı adı",
-  "password": "Şifre",
-  "login": "Giriş yap",
+
+  "identity": {
+    "identityManagement": "Kullanıcı Yönetimi"
+  },
+
+  "business": {
+    "businessManagement": "İşletme Yönetimi",
+    "newBusiness": "Yeni İşletme",
+    "businessName": "İşletme Adı",
+    "ownerEmail": "Sahibin Emaili",
+    "ownerUsername": "Sahibin Kullanıcı Adı"
+  },
+
+  "form": {
+    "name": "İsim",
+    "username": "Kullanıcı adı",
+    "password": "Şifre",
+    "save": "Kaydet",
+    "email": "Email",
+    "cancel": "İptal",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "actions": "İşlemler"
+  },
+
+  "error": {
+    "MISSING_FIELDS": "Zorunlu alanları doldurun.",
+    "NAME_EXIST": "Bu isim kullanılmakta."
+  },
+
+  "response": {
+    "BUSINESS_DELETED": "İşletme silindi.",
+    "BUSINESS_CREATED":"İşletme oluşturuldu."
+  },
+
   "selectLanguage": "Dil seçin",
   "company": "Şirket",
-  "identityManagement": "Kimlik Yönetimi",
-  "logout":"Çıkış Yap"
+  "login": "Giriş yap",
+  "logout": "Çıkış Yap",
+  "success": "Başarılı"
 }

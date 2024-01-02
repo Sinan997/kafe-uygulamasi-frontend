@@ -12,6 +12,7 @@
     "baseUrl": "./",
     "paths": {
       "account": ["packages/account/src/index.ts"],
+      "business-management": ["packages/business-management/src/index.ts"],
       "category": ["packages/category/src/index.ts"],
       "core": ["packages/core/src/index.ts"],
       "identity": ["packages/identity/src/index.ts"],
