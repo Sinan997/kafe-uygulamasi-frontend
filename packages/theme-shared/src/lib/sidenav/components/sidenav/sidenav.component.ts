@@ -40,7 +40,15 @@ interface SideNavToggle {
     ]),
   ],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, SublevelMenuComponent, TranslateModule, NgClass, NgIf, NgFor,],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    SublevelMenuComponent,
+    TranslateModule,
+    NgClass,
+    NgIf,
+    NgFor,
+  ],
 })
 export class SidenavComponent implements OnInit {
   sidenavService = inject(SidenavService);
@@ -60,7 +68,7 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  constructor(public router: Router) { }
+  constructor(public router: Router) {}
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;

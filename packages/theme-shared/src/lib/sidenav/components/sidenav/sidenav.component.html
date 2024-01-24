@@ -3,7 +3,7 @@
     <button class="logo" (click)="toggleCollapse()">A</button>
     <div class="logo-text" @fadeInOut *ngIf="collapsed">{{ 'company' | translate }}</div>
     <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
-      <i class="fal fa-times close-icon"></i>
+      <i class="fa fa-times close-icon"></i>
     </button>
   </div>
   <div class="scrollwrap scrollwrap_delayed">
@@ -49,7 +49,7 @@
       </li>
       <li class="sidenav-nav-item">
         <a class="sidenav-nav-link" (click)="logout()">
-          <i class="sidenav-link-icon" [class]="'fal fa-sign-out'"></i>
+          <i class="sidenav-link-icon" [class]="'fa fa-sign-out'"></i>
           <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{
             'logout' | translate
           }}</span>

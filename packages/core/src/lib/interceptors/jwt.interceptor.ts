@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService, JwtDecoderService } from 'core';
 
 @Injectable()
-export class SetTokenInterceptor implements HttpInterceptor {
+export class SetAccessTokenInterceptor implements HttpInterceptor {
   authService = inject(AuthService);
   decoder = inject(JwtDecoderService);
 

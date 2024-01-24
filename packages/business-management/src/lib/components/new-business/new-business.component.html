@@ -29,7 +29,11 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button type="button" class="btn text-decoration-none btn-link me-2" (click)="hideDialog()">
+    <button
+      type="button"
+      class="btn text-decoration-none btn-outline-primary me-2"
+      (click)="hideDialog()"
+    >
       {{ 'form.cancel' | translate }}
     </button>
     <button form="newBusinessForm" type="submit" class="btn btn-primary">

@@ -1,1 +1,1 @@
-export * from './basic-response.model'
+export * from '../../../../core/src/lib/models/basic-response.model'

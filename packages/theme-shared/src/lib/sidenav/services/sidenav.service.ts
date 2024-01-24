@@ -1,8 +1,8 @@
 import { Injectable, WritableSignal, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { INavbarData } from '../components/sidenav/helper';
 import { MenuService } from 'menu';
 import { AuthService, DecodedUserTokenModel } from 'core';
+import { sidenavRoutes } from '../sidenav.defaults';
 
 @Injectable({
   providedIn: 'root',
@@ -12,20 +12,7 @@ export class SidenavService {
   authService = inject(AuthService);
 
   user: DecodedUserTokenModel | undefined;
-
-  allRoutes = [
-    { routeLink: 'business-management', icon: 'fal fa-address-book', label: 'business.businessManagement', role: 'admin' },
-    { routeLink: 'identity', icon: 'fal fa-address-book', label: 'identity.identityManagement', role: 'business' },
-    { routeLink: 'dashboard', icon: 'fal fa-home', label: 'Dashboard', role: 'business' },
-    { routeLink: 'qrcode', icon: 'fal fa-qrcode', label: 'logout', role: 'business' },
-    {
-      routeLink: 'menu',
-      icon: 'fal fa-bars',
-      label: 'Menu',
-      role: 'business',
-    },
-  ];
-
+  allRoutes = sidenavRoutes;
   navdata: WritableSignal<INavbarData[]> = signal(this.allRoutes);
 
   constructor() {
@@ -35,7 +22,7 @@ export class SidenavService {
       if (user) {
         this.filterNavdata();
         if (user.role === 'business') {
-          this.updateCategories();
+          // this.updateCategories();
         }
       }
     });
@@ -46,7 +33,9 @@ export class SidenavService {
   }
 
   filterNavdata() {
-    this.navdata.set(this.navdata().filter((route) => route.role === this.user?.role));
+    this.navdata.set(
+      this.navdata().filter((route) => route.role.find((role) => role === this.user?.role)),
+    );
   }
 
   updateCategories() {
@@ -60,7 +49,7 @@ export class SidenavService {
         icon: 'fal fa-book',
         label: 'Categories',
         items: [],
-        role: 'business',
+        role: ['business'],
       };
 
       res.categories.sort((a, b) => a.index - b.index);
@@ -69,7 +58,7 @@ export class SidenavService {
         categories.items?.push({
           routeLink: 'category/' + category._id,
           label: category.name,
-          role: 'business',
+          role: ['business'],
         });
       });
 

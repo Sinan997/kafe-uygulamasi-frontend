@@ -47,15 +47,18 @@ export class AuthService {
   }
 
   logout() {
-    this.router.navigate(['account', 'login']);
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    this.userSubject.next(undefined);
-    this.http
-      .post('http://localhost:8080/api/auth/logout', {
-        refreshToken: localStorage.getItem('refreshToken'),
-      })
-      .subscribe();
+    this.router.navigate(['account', 'login']).then(()=>{
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      setTimeout(() => {
+        this.userSubject.next(undefined);
+      }, 0);
+      this.http
+        .post('http://localhost:8080/api/auth/logout', {
+          refreshToken: localStorage.getItem('refreshToken'),
+        })
+        .subscribe();
+    });
   }
 
   getUser() {

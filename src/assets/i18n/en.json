@@ -36,18 +36,23 @@
   },
 
   "error": {
+    "SERVER_ERROR": "Server failed.",
     "MISSING_FIELDS": "Fill required places.",
-    "NAME_EXIST": "Name is already used."
+    "NAME_EXIST": "{{ name }} is already used.",
+    "USER_NOT_FOUND": "User named '{{ username }}' not found.",
+    "WRONG_PASSWORD": "Wrong password."
   },
 
   "response": {
-    "BUSINESS_DELETED":"Business deleted.",
-    "BUSINESS_CREATED":"Business created."
+    "LOGIN_SUCCESSFULL": "Logged in succesfully.",
+    "BUSINESS_DELETED": "Business deleted.",
+    "BUSINESS_CREATED": "Business created."
   },
 
   "selectLanguage": "Select language",
   "company": "Company",
   "login": "Login",
   "logout": "Logout",
-  "success":"Success"
+  "successKey": "Success",
+  "errorKey": "Error"
 }

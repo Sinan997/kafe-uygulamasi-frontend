@@ -20,7 +20,7 @@ import { CustomMessageService } from 'theme-shared';
     TagModule,
     ConfirmDialogModule,
     EditBusinessComponent,
-    TranslateModule
+    TranslateModule,
   ],
   templateUrl: './business-table.component.html',
 })
@@ -46,12 +46,10 @@ export class BusinessTableComponent {
       header: 'Kullanıcı Silme',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.businessService
-          .deleteBusiness(business._id)
-          .subscribe((val) => {
-            this.customMessageService.success(val.code);
-            this.updateList.emit();
-          });
+        this.businessService.deleteBusiness(business._id).subscribe((val) => {
+          this.customMessageService.success(val);
+          this.updateList.emit();
+        });
       },
     });
   }

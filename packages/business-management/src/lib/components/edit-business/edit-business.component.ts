@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, NgZone, OnInit, Output, inject, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnInit,
+  Output,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,7 +20,13 @@ import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 @Component({
   selector: 'app-edit-business-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DialogModule, AutoFocusDirective, TrackEnterKeyDirective],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    DialogModule,
+    AutoFocusDirective,
+    TrackEnterKeyDirective,
+  ],
   templateUrl: './edit-business.component.html',
 })
 export class EditBusinessComponent implements OnInit {
@@ -36,6 +51,7 @@ export class EditBusinessComponent implements OnInit {
   form = this.fb.group({
     _id: ['', Validators.required],
     username: ['', Validators.required],
+    email: ['', Validators.required],
     password: [''],
   });
 

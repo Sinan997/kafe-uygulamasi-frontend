@@ -6,18 +6,18 @@ import { DashboardPageComponent } from './components/dashboard-page/dashboard-pa
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardPageComponent, canActivate: [isLoggedIn] },
-  { path: 'category', loadChildren: () => import('category').then((m) => m.CATEGORY_ROUTES) },
+  { path: 'category', loadChildren: () => import('category').then((m) => m.CATEGORY_ROUTES), canActivate: [isLoggedIn] },
   {
     path: 'account',
     loadChildren: () => import('account').then((m) => m.ACCOUNT_ROUTES),
   },
   {
     path: 'menu',
-    loadChildren: () => import('menu').then((m) => m.MENU_ROUTES),
+    loadChildren: () => import('menu').then((m) => m.MENU_ROUTES), canActivate: [isLoggedIn]
   },
   {
     path: 'qrcode',
-    loadChildren: () => import('qrcode').then((m) => m.QRCODE_ROUTES),
+    loadChildren: () => import('qrcode').then((m) => m.QRCODE_ROUTES), canActivate: [isLoggedIn]
   },
   {
     path: 'identity',
@@ -27,7 +27,6 @@ export const routes: Routes = [
   {
     path: 'business-management',
     loadChildren: () => import('business-management').then((m) => m.BUSINESS_MANAGEMENT_ROUTES),
-    canActivate: [isLoggedIn],
   },
   { path: '**', component: ErrorPageComponent },
 ];

@@ -36,18 +36,23 @@
   },
 
   "error": {
+    "SERVER_ERROR": "Sunucu hatası.",
     "MISSING_FIELDS": "Zorunlu alanları doldurun.",
-    "NAME_EXIST": "Bu isim kullanılmakta."
+    "NAME_EXIST": "Bu isim kullanılmakta.",
+    "USER_NOT_FOUND": "'{{ username }}' isimli kullanıcı bulunamadı.",
+    "WRONG_PASSWORD": "Şifre yanlış."
   },
 
   "response": {
+    "LOGIN_SUCCESSFULL": "Başarıyla giriş yapıldı.",
     "BUSINESS_DELETED": "İşletme silindi.",
-    "BUSINESS_CREATED":"İşletme oluşturuldu."
+    "BUSINESS_CREATED": "İşletme oluşturuldu."
   },
 
   "selectLanguage": "Dil seçin",
   "company": "Şirket",
   "login": "Giriş yap",
   "logout": "Çıkış Yap",
-  "success": "Başarılı"
+  "successKey": "Başarılı",
+  "errorKey": "Hata"
 }

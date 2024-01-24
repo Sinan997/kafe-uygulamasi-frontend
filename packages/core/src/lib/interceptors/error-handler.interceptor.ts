@@ -1,7 +1,13 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Observable, catchError, of, switchMap, throwError } from 'rxjs';
-import { AuthService, JwtDecoderService } from 'core';
+import { AuthService, JwtDecoderService, isCodeTranslated } from 'core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,6 +20,8 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
   messageService = inject(MessageService);
   translateService = inject(TranslateService);
 
+  errorPrefix = 'error.';
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
@@ -21,7 +29,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
           return this.handle401Error(request, next);
         }
         this.handleWithToast(err);
-        return of();
+        return throwError(() => err);
       }),
     );
   }
@@ -44,17 +52,24 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     );
   }
 
-  private handleWithToast(err: HttpErrorResponse){
+  private handleWithToast(err: HttpErrorResponse) {
     if (err.status === 403) {
       this.authService.logout();
     }
+
+    const message = this.translateService.instant(
+      this.errorPrefix + err.error.code,
+      err.error.data,
+    );
+
+    const isTranslated = isCodeTranslated(this.errorPrefix, message);
+    const errorKey = this.translateService.instant('errorKey');
     if (err.status !== 401 && err.status !== 403) {
       this.messageService.add({
         severity: 'error',
-        summary: 'İşlem Başarısız',
-        detail: this.translateService.instant('error.' + err.error.code),
+        summary: errorKey,
+        detail: isTranslated ? message : err.error.message,
       });
     }
   }
 }
-

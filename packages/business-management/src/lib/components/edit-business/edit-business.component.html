@@ -21,9 +21,10 @@
           formControlName="username"
           [ngClass]="{ 'is-invalid': username.invalid && submitted() }"
         />
-        <div class="invalid-feedback" *ngIf="submitted() && username.invalid">
-          Kullanıcı Adı Zorunludur.
-        </div>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" formControlName="email" />
       </div>
       <div class="field">
         <label for="password">Şifre</label>
@@ -33,20 +34,13 @@
           class="form-control"
           id="password"
           formControlName="password"
-          [ngClass]="{ 'is-invalid': password.invalid && submitted() }"
         />
-        <div
-          class="invalid-feedback"
-          *ngIf="submitted() && password.invalid && !isPasswordInputClose"
-        >
-          Şifre Zorunludur.
-        </div>
         <button
           *ngIf="isPasswordInputClose"
           class="d-block btn btn-secondary w-100"
           (click)="editPassword($event)"
         >
-          <i class="fal fa-user"></i>
+          <i class="fa fa-user"></i>
           Şifreyi Değiştir
         </button>
       </div>
