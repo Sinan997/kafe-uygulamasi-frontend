@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, catchError, of, switchMap, throwError } from 'rxjs';
+import { EMPTY, Observable, catchError, of, switchMap, tap, throwError } from 'rxjs';
 import { AuthService, JwtDecoderService, isCodeTranslated } from 'core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -28,6 +28,10 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         if (err.status === 401) {
           return this.handle401Error(request, next);
         }
+        if (err.status === 403) {
+          this.authService.logout();
+          return EMPTY;
+        }
         this.handleWithToast(err);
         return throwError(() => err);
       }),
@@ -36,6 +40,13 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.authService.refreshTokenHttp().pipe(
+      catchError(() => {
+        this.authService.logout();
+        return of();
+      }),
+      tap((res) => {
+        this.authService.setTokensToLocalStorage(res.accessToken, res.refreshToken);
+      }),
       switchMap((res) => {
         request = request.clone({
           setHeaders: {
@@ -43,20 +54,17 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
           },
         });
         this.authService.setTokensToLocalStorage(res.accessToken, res.refreshToken);
-        return next.handle(request);
-      }),
-      catchError((err) => {
-        this.handleWithToast(err);
-        return of();
+        return next.handle(request).pipe(
+          catchError((err) => {
+            this.handleWithToast(err);
+            return of();
+          }),
+        );
       }),
     );
   }
 
   private handleWithToast(err: HttpErrorResponse) {
-    if (err.status === 403) {
-      this.authService.logout();
-    }
-
     const message = this.translateService.instant(
       this.errorPrefix + err.error.code,
       err.error.data,
@@ -64,12 +72,11 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
     const isTranslated = isCodeTranslated(this.errorPrefix, message);
     const errorKey = this.translateService.instant('errorKey');
-    if (err.status !== 401 && err.status !== 403) {
-      this.messageService.add({
-        severity: 'error',
-        summary: errorKey,
-        detail: isTranslated ? message : err.error.message,
-      });
-    }
+
+    this.messageService.add({
+      severity: 'error',
+      summary: errorKey,
+      detail: isTranslated ? message : err.error.message,
+    });
   }
 }

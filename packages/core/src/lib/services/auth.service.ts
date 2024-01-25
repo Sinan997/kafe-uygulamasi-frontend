@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AuthResponse, DecodedUserTokenModel, JwtDecoderService } from 'core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -47,16 +47,18 @@ export class AuthService {
   }
 
   logout() {
-    this.router.navigate(['account', 'login']).then(()=>{
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      setTimeout(() => {
-        this.userSubject.next(undefined);
-      }, 0);
+    this.router.navigate(['account', 'login']).then(() => {
       this.http
         .post('http://localhost:8080/api/auth/logout', {
           refreshToken: localStorage.getItem('refreshToken'),
         })
+        .pipe(
+          tap(() => {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            this.userSubject.next(undefined);
+          }),
+        )
         .subscribe();
     });
   }

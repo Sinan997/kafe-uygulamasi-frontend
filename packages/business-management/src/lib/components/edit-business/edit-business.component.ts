@@ -1,21 +1,15 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  NgZone,
-  OnInit,
-  Output,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BusinessManagementService } from '../../services/business-management.service';
 import { BusinessModel } from '../../models/business.model';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { catchError, finalize, of } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
+import { tap } from 'rxjs';
 import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CustomMessageService } from 'theme-shared';
+import { EditBusinessModel } from '../../models/edit-business.modal';
 
 @Component({
   selector: 'app-edit-business-modal',
@@ -26,6 +20,7 @@ import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
     DialogModule,
     AutoFocusDirective,
     TrackEnterKeyDirective,
+    TranslateModule,
   ],
   templateUrl: './edit-business.component.html',
 })
@@ -36,28 +31,21 @@ export class EditBusinessComponent implements OnInit {
   @Output() updateList = new EventEmitter<boolean>();
 
   fb = inject(FormBuilder);
-  identityService = inject(BusinessManagementService);
-  messageService = inject(MessageService);
+  service = inject(BusinessManagementService);
+  customMessageService = inject(CustomMessageService);
   confirmationService = inject(ConfirmationService);
-  ngZone = inject(NgZone);
+  translateService = inject(TranslateService);
 
   isPasswordInputClose?: boolean = true;
-  submitted = signal(false);
-  roles = [
-    { label: 'Admin', value: 'admin' },
-    { label: 'Garson', value: 'waiter' },
-  ];
 
   form = this.fb.group({
     _id: ['', Validators.required],
-    username: ['', Validators.required],
+    name: ['', Validators.required],
     email: ['', Validators.required],
+    ownerId: ['', Validators.required],
     password: [''],
   });
 
-  get username() {
-    return this.form.controls.username;
-  }
   get password() {
     return this.form.controls.password;
   }
@@ -65,7 +53,9 @@ export class EditBusinessComponent implements OnInit {
   ngOnInit(): void {
     this.form.patchValue({
       _id: this.business._id,
-      username: this.business.name,
+      name: this.business.name,
+      email: this.business.ownerId.email,
+      ownerId: this.business.ownerId._id,
       password: '',
     });
   }
@@ -76,42 +66,26 @@ export class EditBusinessComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted.set(true);
     if (this.form.invalid) {
       return;
     }
-    const newUser = { ...this.form.value } as BusinessModel;
-    this.identityService
-      .updateUser(newUser)
+    const business = { ...this.form.value } as EditBusinessModel;
+    this.service
+      .updateBusiness(business)
       .pipe(
-        catchError((error) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'İşlem Başarısız',
-            detail: error.error.message,
-          });
-          return of();
-        }),
-        finalize(() => {
-          this.submitted.set(false);
+        tap((res) => {
+          this.customMessageService.success(res);
           this.hideDialog();
+          this.updateList.emit();
         }),
       )
-      .subscribe((val) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Başarılı',
-          detail: val.message,
-        });
-
-        this.updateList.emit();
-      });
+      .subscribe();
   }
 
   editPassword(event: Event) {
     this.confirmationService.confirm({
       target: event.target!,
-      message: 'Bu Kullanıcının Şifresini Değiştirmek İstiyor musun?',
+      message: this.translateService.instant('changePasswordConfirmation'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.isPasswordInputClose = false;

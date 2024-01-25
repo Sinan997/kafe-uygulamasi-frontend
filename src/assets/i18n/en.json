@@ -32,7 +32,8 @@
     "cancel": "Cancel",
     "edit": "Edit",
     "delete": "Delete",
-    "actions": "Actions"
+    "actions": "Actions",
+    "changePassword": "Change password"
   },
 
   "error": {
@@ -40,13 +41,17 @@
     "MISSING_FIELDS": "Fill required places.",
     "NAME_EXIST": "{{ name }} is already used.",
     "USER_NOT_FOUND": "User named '{{ username }}' not found.",
-    "WRONG_PASSWORD": "Wrong password."
+    "WRONG_PASSWORD": "Wrong password.",
+    "BUSINESS_TABLE": "An error occurred while bringing in the businesses.",
+    "BUSINESS_NOT_FOUND": "Business not found."
+
   },
 
   "response": {
     "LOGIN_SUCCESSFULL": "Logged in succesfully.",
-    "BUSINESS_DELETED": "Business deleted.",
-    "BUSINESS_CREATED": "Business created."
+    "BUSINESS_CREATED": "Business created.",
+    "BUSINESS_DELETED": "Business has been deleted succesfully.",
+    "BUSINESS_UPDATED": "Business updated successfully."
   },
 
   "selectLanguage": "Select language",
@@ -54,5 +59,10 @@
   "login": "Login",
   "logout": "Logout",
   "successKey": "Success",
-  "errorKey": "Error"
+  "errorKey": "Error",
+  "changePasswordConfirmation": "Are you sure you want to change password?",
+  "yes": "Yes",
+  "no": "No",
+  "deleteBusinessHeader": "Delete business",
+  "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?"
 }

@@ -14,7 +14,7 @@ import { BusinessModel } from '../models/business.model';
 })
 export class BusinessManagementComponent implements OnInit {
   visibleNewBusinessDialog = false;
-  businessService = inject(BusinessManagementService);
+  service = inject(BusinessManagementService);
   businesses: BusinessModel[] = [];
 
   openNewBusinessModal() {
@@ -26,7 +26,7 @@ export class BusinessManagementComponent implements OnInit {
   }
 
   getBusinesses() {
-    this.businessService.getBusinesses().subscribe((result) => {
+    this.service.getBusinesses().subscribe((result) => {
       this.businesses = result.businesses;
     });
   }

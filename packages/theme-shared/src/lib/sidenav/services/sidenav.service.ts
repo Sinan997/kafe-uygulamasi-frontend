@@ -22,7 +22,7 @@ export class SidenavService {
       if (user) {
         this.filterNavdata();
         if (user.role === 'business') {
-          // this.updateCategories();
+          this.updateCategories();
         }
       }
     });
@@ -33,9 +33,11 @@ export class SidenavService {
   }
 
   filterNavdata() {
-    this.navdata.set(
-      this.navdata().filter((route) => route.role.find((role) => role === this.user?.role)),
-    );
+    this.navdata.update((routes) => {
+      return routes.filter((route) =>
+        route.role ? route.role.find((role) => role === this.user?.role) : true,
+      );
+    });
   }
 
   updateCategories() {

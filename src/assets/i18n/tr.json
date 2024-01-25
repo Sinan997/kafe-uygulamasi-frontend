@@ -32,21 +32,25 @@
     "cancel": "İptal",
     "edit": "Düzenle",
     "delete": "Sil",
-    "actions": "İşlemler"
+    "actions": "İşlemler",
+    "changePassword": "Şifreyi değiştir"
   },
 
   "error": {
     "SERVER_ERROR": "Sunucu hatası.",
     "MISSING_FIELDS": "Zorunlu alanları doldurun.",
-    "NAME_EXIST": "Bu isim kullanılmakta.",
+    "NAME_EXIST": "'{{ name }}' adlı isim kullanılmakta.",
     "USER_NOT_FOUND": "'{{ username }}' isimli kullanıcı bulunamadı.",
-    "WRONG_PASSWORD": "Şifre yanlış."
+    "WRONG_PASSWORD": "Şifre yanlış.",
+    "BUSINESS_TABLE": "İşletmeleri getirirken hata oluştu.",
+    "BUSINESS_NOT_FOUND": "İşletme bulunamadı."
   },
 
   "response": {
     "LOGIN_SUCCESSFULL": "Başarıyla giriş yapıldı.",
-    "BUSINESS_DELETED": "İşletme silindi.",
-    "BUSINESS_CREATED": "İşletme oluşturuldu."
+    "BUSINESS_CREATED": "İşletme oluşturuldu.",
+    "BUSINESS_DELETED": "İşletme başarıyla silindi.",
+    "BUSINESS_UPDATED": "İşletme başarıyla güncellendi."
   },
 
   "selectLanguage": "Dil seçin",
@@ -54,5 +58,10 @@
   "login": "Giriş yap",
   "logout": "Çıkış Yap",
   "successKey": "Başarılı",
-  "errorKey": "Hata"
+  "errorKey": "Hata",
+  "changePasswordConfirmation": "Bu kullanıcının şifresini değiştirmek istiyor musun?",
+  "yes": "Evet",
+  "no": "Hayır",
+  "deleteBusinessHeader": "İşletmeyi sil",
+  "deleteBusinessMessage": "{{ name }} isimli işletmeyi silmek istediğine emin misin?"
 }

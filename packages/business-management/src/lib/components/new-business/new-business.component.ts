@@ -1,4 +1,4 @@
-import { Component, DestroyRef, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { BusinessManagementService } from '../../services/business-management.service';
@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgxValidateCoreModule } from '@ngx-validate/core';
 import { AddBusinessModel } from '../../models/add-business.model';
 import { CustomMessageService } from 'theme-shared';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-new-business-modal',
@@ -28,26 +29,12 @@ export class NewBusinessComponent {
   fb = inject(FormBuilder);
   businessService = inject(BusinessManagementService);
   customMessageService = inject(CustomMessageService);
-  destroyRef = inject(DestroyRef);
 
   form = this.fb.group({
     name: ['', Validators.required],
-    email: ['asd@gmail.com', Validators.required],
-    password: ['123', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
   });
-
-  roles = [
-    { label: 'admin', value: 'admin' },
-    { label: 'business', value: 'business' },
-  ];
-
-  get name() {
-    return this.form.controls.name;
-  }
-
-  get password() {
-    return this.form.controls.password;
-  }
 
   hideDialog() {
     this.visibleNewBusinessDialog = false;
@@ -61,10 +48,13 @@ export class NewBusinessComponent {
 
     this.businessService
       .addBusiness({ ...this.form.value } as AddBusinessModel)
-      .subscribe((val) => {
-        this.customMessageService.success(val);
-        this.hideDialog();
-        this.updateList.emit();
-      });
+      .pipe(
+        tap((res) => {
+          this.customMessageService.success(res);
+          this.hideDialog();
+          this.updateList.emit();
+        }),
+      )
+      .subscribe();
   }
 }

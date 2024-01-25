@@ -11,23 +11,16 @@
   </ng-template>
   <ng-template pTemplate="content">
     <form [formGroup]="form">
-      <div class="field">
-        <label for="username">Kullanıcı Adı</label>
-        <input
-          type="text"
-          class="form-control"
-          id="username"
-          autofocus
-          formControlName="username"
-          [ngClass]="{ 'is-invalid': username.invalid && submitted() }"
-        />
+      <div class="form-group mb-3">
+        <label for="name">{{ 'form.name' | translate }}</label>
+        <input type="text" class="form-control" id="name" autofocus formControlName="name" />
       </div>
-      <div class="field">
-        <label for="email">Email</label>
+      <div class="form-group mb-3">
+        <label for="email">{{ 'form.email' | translate }}</label>
         <input type="text" class="form-control" id="email" formControlName="email" />
       </div>
-      <div class="field">
-        <label for="password">Şifre</label>
+      <div class="form-group mb-3">
+        <label for="password">{{ 'form.password' | translate }}</label>
         <input
           *ngIf="!isPasswordInputClose"
           type="password"
@@ -37,18 +30,20 @@
         />
         <button
           *ngIf="isPasswordInputClose"
-          class="d-block btn btn-secondary w-100"
+          class="d-block btn btn-outline-warning w-100"
           (click)="editPassword($event)"
         >
           <i class="fa fa-user"></i>
-          Şifreyi Değiştir
+          {{ 'form.changePassword' | translate }}
         </button>
       </div>
     </form>
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button class="btn btn-secondary me-2" (click)="hideDialog()">İptal</button>
-    <button class="btn btn-success" (click)="onSubmit()">Kaydet</button>
+    <button class="btn btn-outline-primary me-2" (click)="hideDialog()">
+      {{ 'form.cancel' | translate }}
+    </button>
+    <button class="btn btn-primary" (click)="onSubmit()">{{ 'form.save' | translate }}</button>
   </ng-template>
 </p-dialog>

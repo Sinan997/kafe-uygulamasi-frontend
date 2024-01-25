@@ -1,5 +1,10 @@
 export const sidenavRoutes = [
   {
+    routeLink: '/dashboard',
+    icon: 'fa-regular fa-address-book',
+    label: 'business.businessManagement',
+  },
+  {
     routeLink: 'business-management',
     icon: 'fa-regular fa-address-book',
     label: 'business.businessManagement',
