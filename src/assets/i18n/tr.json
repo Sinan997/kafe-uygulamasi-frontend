@@ -63,5 +63,6 @@
   "yes": "Evet",
   "no": "Hayır",
   "deleteBusinessHeader": "İşletmeyi sil",
-  "deleteBusinessMessage": "{{ name }} isimli işletmeyi silmek istediğine emin misin?"
+  "deleteBusinessMessage": "{{ name }} isimli işletmeyi silmek istediğine emin misin?",
+  "dashboard": "Dashboard"
 }

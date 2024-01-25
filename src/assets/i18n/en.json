@@ -44,7 +44,6 @@
     "WRONG_PASSWORD": "Wrong password.",
     "BUSINESS_TABLE": "An error occurred while bringing in the businesses.",
     "BUSINESS_NOT_FOUND": "Business not found."
-
   },
 
   "response": {
@@ -64,5 +63,6 @@
   "yes": "Yes",
   "no": "No",
   "deleteBusinessHeader": "Delete business",
-  "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?"
+  "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?",
+  "dashboard": "Dashboard"
 }

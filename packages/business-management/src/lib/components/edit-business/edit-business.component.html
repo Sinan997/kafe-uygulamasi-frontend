@@ -47,3 +47,12 @@
     <button class="btn btn-primary" (click)="onSubmit()">{{ 'form.save' | translate }}</button>
   </ng-template>
 </p-dialog>
+
+<p-confirmDialog #cd [style]="{ width: '30vw' }">
+  <ng-template pTemplate="footer">
+    <button class="btn btn-outline-primary me-2" (click)="cd.reject()">
+      {{ 'no' | translate }}
+    </button>
+    <button class="btn btn-primary" (click)="cd.accept()">{{ 'yes' | translate }}</button>
+  </ng-template>
+</p-confirmDialog>

@@ -10,6 +10,7 @@ import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CustomMessageService } from 'theme-shared';
 import { EditBusinessModel } from '../../models/edit-business.modal';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-edit-business-modal',
@@ -21,7 +22,9 @@ import { EditBusinessModel } from '../../models/edit-business.modal';
     AutoFocusDirective,
     TrackEnterKeyDirective,
     TranslateModule,
+    ConfirmDialogModule,
   ],
+  providers: [ConfirmationService],
   templateUrl: './edit-business.component.html',
 })
 export class EditBusinessComponent implements OnInit {
