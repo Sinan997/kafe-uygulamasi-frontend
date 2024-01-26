@@ -19,11 +19,11 @@ export class IdentityService {
     return this.http.post<BasicResponseModel>('http://localhost:8080/api/user/add-user', user);
   }
 
-  deleteUser(id: string) {
+  deleteUser(userId: string) {
     return this.http.request<BasicResponseModel>(
       'delete',
       'http://localhost:8080/api/user/delete-user',
-      { body: { id } },
+      { body: { userId } },
     );
   }
 

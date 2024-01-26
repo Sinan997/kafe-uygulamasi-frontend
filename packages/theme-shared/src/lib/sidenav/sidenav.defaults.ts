@@ -16,12 +16,11 @@ export const sidenavRoutes = [
     label: 'identity.identityManagement',
     role: ['business'],
   },
-  { routeLink: 'dashboard', icon: 'fa-regular fa-home', label: 'Dashboard', role: ['business'] },
-  { routeLink: 'qrcode', icon: 'fa-regular fa-qrcode', label: 'logout', role: ['business'] },
-  {
-    routeLink: 'menu',
-    icon: 'fa-regular fa-bars',
-    label: 'Menu',
-    role: ['business'],
-  },
+  // { routeLink: 'qrcode', icon: 'fa-regular fa-qrcode', label: 'qrcode', role: ['business'] },
+  // {
+  //   routeLink: 'menu',
+  //   icon: 'fa-regular fa-bars',
+  //   label: 'Menu',
+  //   role: ['business'],
+  // },
 ];

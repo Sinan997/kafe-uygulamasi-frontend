@@ -1,79 +1,38 @@
-import {
-  Component,
-  DestroyRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogModule } from 'primeng/dialog';
 import { IdentityService } from '../../services/identity.service';
-import { catchError, finalize, of } from 'rxjs';
-import { MessageService } from 'primeng/api';
-import { NgClass } from '@angular/common';
+import { tap } from 'rxjs';
 import { AddUserModel } from '../../models/add-user.model';
 import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomMessageService } from 'theme-shared';
 
 @Component({
   selector: 'app-new-user-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, DialogModule, NgClass, AutoFocusDirective, TrackEnterKeyDirective],
+  imports: [
+    ReactiveFormsModule,
+    DialogModule,
+    AutoFocusDirective,
+    TrackEnterKeyDirective,
+    TranslateModule,
+  ],
   templateUrl: './new-user.component.html',
 })
-export class NewUserComponent implements OnInit {
+export class NewUserComponent {
   @Input() visibleNewUserDialog = true;
   @Output() visibleNewUserDialogChange = new EventEmitter<boolean>();
   @Output() updateList = new EventEmitter<boolean>();
   fb = inject(FormBuilder);
-  identityService = inject(IdentityService);
-  messageService = inject(MessageService);
-  destroyRef = inject(DestroyRef);
-
-  submitted = signal(false);
+  service = inject(IdentityService);
+  customMessageService = inject(CustomMessageService);
 
   form = this.fb.group({
-    email: ['', Validators.required],
-    username: ['', Validators.required],
-    role: ['', Validators.required],
-    password: ['', Validators.required],
-    businessName: [''],
+    username: ['asd', Validators.required],
+    email: ['asd@gmail.com', Validators.required],
+    password: ['123', Validators.required],
   });
-
-  roles = [
-    { label: 'admin', value: 'admin' },
-    { label: 'business', value: 'business' },
-  ];
-
-  get username() {
-    return this.form.controls.username;
-  }
-  get email() {
-    return this.form.controls.email;
-  }
-  get role() {
-    return this.form.controls.role;
-  }
-  get password() {
-    return this.form.controls.password;
-  }
-  get businessName() {
-    return this.form.controls.businessName;
-  }
-
-  ngOnInit(): void {
-    this.role.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
-      if (value === 'business') {
-        this.businessName.setValidators(Validators.required);
-      } else {
-        this.businessName.clearValidators();
-      }
-      this.businessName.updateValueAndValidity();
-    });
-  }
 
   hideDialog() {
     this.visibleNewUserDialog = false;
@@ -81,35 +40,19 @@ export class NewUserComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted.set(true);
     if (this.form.invalid) {
       return;
     }
 
-    this.identityService
+    this.service
       .addUser({ ...this.form.value } as AddUserModel)
       .pipe(
-        catchError((error) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'İşlem Başarısız',
-            detail: error.error.message,
-          });
-          return of();
-        }),
-        finalize(() => {
+        tap((res) => {
+          this.customMessageService.success(res);
+          this.updateList.emit();
           this.hideDialog();
-          this.submitted.set(false);
         }),
       )
-      .subscribe((val) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Başarılı',
-          detail: val.message,
-        });
-
-        this.updateList.emit();
-      });
+      .subscribe();
   }
 }

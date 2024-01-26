@@ -1,17 +1,38 @@
-import { Component, EventEmitter, Input, NgZone, OnInit, Output, inject, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnInit,
+  Output,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IdentityService } from '../../services/identity.service';
 import { UserModel } from '../../models/user.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { catchError, finalize, of } from 'rxjs';
+import { catchError, finalize, of, tap } from 'rxjs';
 import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
+import { CustomMessageService } from 'theme-shared';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-edit-user-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DialogModule, AutoFocusDirective, TrackEnterKeyDirective],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    DialogModule,
+    AutoFocusDirective,
+    TrackEnterKeyDirective,
+    TranslateModule,
+    ConfirmDialogModule,
+  ],
+  providers: [ConfirmationService],
   templateUrl: './edit-user.component.html',
 })
 export class EditUserComponent implements OnInit {
@@ -21,27 +42,19 @@ export class EditUserComponent implements OnInit {
   @Output() updateList = new EventEmitter<boolean>();
 
   fb = inject(FormBuilder);
-  identityService = inject(IdentityService);
-  messageService = inject(MessageService);
+  service = inject(IdentityService);
+  customMessageService = inject(CustomMessageService);
   confirmationService = inject(ConfirmationService);
-  ngZone = inject(NgZone);
-
+  translateService = inject(TranslateService);
   isPasswordInputClose?: boolean = true;
-  submitted = signal(false);
-  roles = [
-    { label: 'Admin', value: 'admin' },
-    { label: 'Garson', value: 'waiter' },
-  ];
 
   form = this.fb.group({
     _id: ['', Validators.required],
     username: ['', Validators.required],
+    email: ['', Validators.required],
     password: [''],
   });
 
-  get username() {
-    return this.form.controls.username;
-  }
   get password() {
     return this.form.controls.password;
   }
@@ -50,6 +63,7 @@ export class EditUserComponent implements OnInit {
     this.form.patchValue({
       _id: this.user._id,
       username: this.user.username,
+      email: this.user.email,
       password: '',
     });
   }
@@ -60,43 +74,27 @@ export class EditUserComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted.set(true);
     if (this.form.invalid) {
       return;
     }
     const newUser = { ...this.form.value } as UserModel;
-    this.identityService
+    this.service
       .updateUser(newUser)
       .pipe(
-        catchError((error) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'İşlem Başarısız',
-            detail: error.error.message,
-          });
-          return of();
-        }),
-        finalize(() => {
-          this.submitted.set(false);
+        tap((res) => {
+          this.customMessageService.success(res);
+          this.updateList.emit();
           this.hideDialog();
         }),
       )
-      .subscribe((val) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Başarılı',
-          detail: val.message,
-        });
-
-        this.updateList.emit();
-      });
+      .subscribe();
   }
 
   editPassword(event: Event) {
     this.confirmationService.confirm({
       target: event.target!,
-      message: 'Bu Kullanıcının Şifresini Değiştirmek İstiyor musun?',
-      icon: 'pi pi-exclamation-triangle',
+      message: this.translateService.instant('changePasswordConfirmation'),
+      icon: 'fa fa-check',
       accept: () => {
         this.isPasswordInputClose = false;
         setTimeout(() => {

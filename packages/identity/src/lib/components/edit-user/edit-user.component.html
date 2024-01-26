@@ -7,54 +7,56 @@
   (enterKey)="onSubmit()"
 >
   <ng-template pTemplate="header">
-    <span class="fs-4">Kullanıcı Düzenle</span>
+    <span class="fs-4">{{ 'identity.editUser' | translate }}</span>
   </ng-template>
   <ng-template pTemplate="content">
     <form [formGroup]="form">
-      <div class="field">
-        <label for="username">Kullanıcı Adı</label>
+      <div class="form-group mb-3">
+        <label for="username">{{ 'form.username' | translate }}</label>
         <input
           type="text"
           class="form-control"
           id="username"
           autofocus
           formControlName="username"
-          [ngClass]="{ 'is-invalid': username.invalid && submitted() }"
         />
-        <div class="invalid-feedback" *ngIf="submitted() && username.invalid">
-          Kullanıcı Adı Zorunludur.
-        </div>
       </div>
-      <div class="field">
-        <label for="password">Şifre</label>
+      <div class="form-group mb-3">
+        <label for="email">{{ 'form.email' | translate }}</label>
+        <input type="text" class="form-control" id="email" formControlName="email" />
+      </div>
+      <div class="form-group mb-3">
+        <label for="password">{{ 'form.password' | translate }}</label>
         <input
           *ngIf="!isPasswordInputClose"
           type="password"
           class="form-control"
           id="password"
           formControlName="password"
-          [ngClass]="{ 'is-invalid': password.invalid && submitted() }"
         />
-        <div
-          class="invalid-feedback"
-          *ngIf="submitted() && password.invalid && !isPasswordInputClose"
-        >
-          Şifre Zorunludur.
-        </div>
         <button
           *ngIf="isPasswordInputClose"
-          class="d-block btn btn-secondary w-100"
+          class="d-block btn btn-outline-warning w-100"
           (click)="editPassword($event)"
         >
-          <i class="fal fa-user"></i>
-          Şifreyi Değiştir
+          <i class="fa fa-user"></i>
+          {{ 'form.changePassword' | translate }}
         </button>
       </div>
     </form>
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button class="btn btn-secondary me-2" (click)="hideDialog()">İptal</button>
-    <button class="btn btn-success" (click)="onSubmit()">Kaydet</button>
+    <button class="btn btn-outline-primary me-2" (click)="hideDialog()">İptal</button>
+    <button class="btn btn-primary" (click)="onSubmit()">Kaydet</button>
   </ng-template>
 </p-dialog>
+
+<p-confirmDialog #cd [style]="{ width: '30vw' }">
+  <ng-template pTemplate="footer">
+    <button class="btn btn-outline-primary me-2" (click)="cd.reject()">
+      {{ 'no' | translate }}
+    </button>
+    <button class="btn btn-primary" (click)="cd.accept()">{{ 'yes' | translate }}</button>
+  </ng-template>
+</p-confirmDialog>

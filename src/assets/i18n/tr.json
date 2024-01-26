@@ -12,15 +12,24 @@
   },
 
   "identity": {
-    "identityManagement": "Kullanıcı Yönetimi"
+    "identityManagement": "Kullanıcı Yönetimi",
+    "newUser": "Yeni kullanıcı",
+    "editUser": "Kullanıcıyı güncelle",
+    "role": "Rol",
+    "businessName": "İşletme Adı",
+    "deleteUserHeader": "Kullanıcıyı sil",
+    "deleteUserMessage": "{{ username }} isimli kullanıcıyı silmek istediğine emin misin?"
   },
 
   "business": {
     "businessManagement": "İşletme Yönetimi",
-    "newBusiness": "Yeni İşletme",
+    "newBusiness": "Yeni işletme",
+    "editBusiness": "İşletmeyi güncelle",
     "businessName": "İşletme Adı",
     "ownerEmail": "Sahibin Emaili",
-    "ownerUsername": "Sahibin Kullanıcı Adı"
+    "ownerUsername": "Sahibin Kullanıcı Adı",
+    "deleteBusinessHeader": "İşletmeyi sil",
+    "deleteBusinessMessage": "{{ name }} isimli işletmeyi silmek istediğine emin misin?"
   },
 
   "form": {
@@ -39,18 +48,25 @@
   "error": {
     "SERVER_ERROR": "Sunucu hatası.",
     "MISSING_FIELDS": "Zorunlu alanları doldurun.",
-    "NAME_EXIST": "'{{ name }}' adlı isim kullanılmakta.",
-    "USER_NOT_FOUND": "'{{ username }}' isimli kullanıcı bulunamadı.",
+    "NAME_EXIST": "'{{ name }}' ismi kullanılmakta.",
+    "USERNAME_EXIST": "'{{ username }}' kullanıcı adı kullanılmakta.",
+    "EMAIL_EXIST": "Email kullanılmakta.",
+    "USER_NOT_FOUND_AUTH": "'{{ username }}' isimli kullanıcı bulunamadı.",
+    "USER_NOT_FOUND": "Kullanıcı bulunamadı.",
     "WRONG_PASSWORD": "Şifre yanlış.",
     "BUSINESS_TABLE": "İşletmeleri getirirken hata oluştu.",
-    "BUSINESS_NOT_FOUND": "İşletme bulunamadı."
+    "BUSINESS_NOT_FOUND": "İşletme bulunamadı.",
+    "IDENTITY_TABLE": "Kullanıcıları getirirken hata oluştu."
   },
 
   "response": {
     "LOGIN_SUCCESSFULL": "Başarıyla giriş yapıldı.",
     "BUSINESS_CREATED": "İşletme oluşturuldu.",
     "BUSINESS_DELETED": "İşletme başarıyla silindi.",
-    "BUSINESS_UPDATED": "İşletme başarıyla güncellendi."
+    "BUSINESS_UPDATED": "İşletme başarıyla güncellendi.",
+    "USER_CREATED": "Kullanıcı başarıyla oluşturuldu.",
+    "USER_DELETED": "Kullanıcı başarıyla silindi.",
+    "USER_UPDATED": "Kullanıcı başarıyla güncellendi."
   },
 
   "selectLanguage": "Dil seçin",
@@ -62,7 +78,5 @@
   "changePasswordConfirmation": "Bu kullanıcının şifresini değiştirmek istiyor musun?",
   "yes": "Evet",
   "no": "Hayır",
-  "deleteBusinessHeader": "İşletmeyi sil",
-  "deleteBusinessMessage": "{{ name }} isimli işletmeyi silmek istediğine emin misin?",
   "dashboard": "Dashboard"
 }

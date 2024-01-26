@@ -52,9 +52,9 @@
 <p-confirmDialog #cd [style]="{ width: '30vw' }">
   <ng-template pTemplate="footer">
     <button class="btn btn-outline-danger me-2" (click)="cd.reject()">
-      {{ 'no' | translate }}
+      {{ 'form.cancel' | translate }}
     </button>
-    <button class="btn btn-danger" (click)="cd.accept()">{{ 'yes' | translate }}</button>
+    <button class="btn btn-danger" (click)="cd.accept()">{{ 'form.delete' | translate }}</button>
   </ng-template>
 </p-confirmDialog>
 

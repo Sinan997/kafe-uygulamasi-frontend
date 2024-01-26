@@ -11,10 +11,10 @@
 >
   <ng-template pTemplate="header">
     <tr>
-      <th>Düzenle</th>
-      <th>Kullanıcı Adı</th>
-      <th>Rol</th>
-      <th>İşletme Adı</th>
+      <th>{{ 'form.edit' | translate }}</th>
+      <th>{{ 'form.username' | translate }}</th>
+      <th>{{ 'identity.role' | translate }}</th>
+      <th>{{ 'form.email' | translate }}</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user>
@@ -26,26 +26,34 @@
             type="button"
             data-bs-toggle="dropdown"
           >
-            İşlemler
+            {{ 'form.actions' | translate }}
           </button>
           <ul class="dropdown-menu">
-            <li><a role="button" class="dropdown-item" (click)="deleteUser(user)">Sil</a></li>
             <li>
-              <a role="button" class="dropdown-item" (click)="openEditUserModal(user)">Düzenle</a>
+              <a role="button" class="dropdown-item" (click)="openEditUserModal(user)">{{
+                'form.edit' | translate
+              }}</a>
+            </li>
+            <li>
+              <a role="button" class="dropdown-item" (click)="deleteUser(user)">{{
+                'form.delete' | translate
+              }}</a>
             </li>
           </ul>
         </div>
       </td>
       <td>{{ user.username }}</td>
       <td>{{ user.role }}</td>
-      <td>{{ user.businessId?.name }}</td>
+      <td>{{ user.email }}</td>
     </tr>
   </ng-template>
 </p-table>
 <p-confirmDialog #cd [style]="{ width: '30vw' }">
   <ng-template pTemplate="footer">
-    <button class="btn btn-secondary me-2" (click)="cd.reject()">Hayır</button>
-    <button class="btn btn-primary" (click)="cd.accept()">Evet</button>
+    <button class="btn btn-outline-danger me-2" (click)="cd.reject()">
+      {{ 'form.cancel' | translate }}
+    </button>
+    <button class="btn btn-danger" (click)="cd.accept()">{{ 'form.delete' | translate }}</button>
   </ng-template>
 </p-confirmDialog>
 

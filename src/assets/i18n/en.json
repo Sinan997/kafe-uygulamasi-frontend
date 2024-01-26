@@ -12,15 +12,24 @@
   },
 
   "identity": {
-    "identityManagement": "Identity Management"
+    "identityManagement": "Identity Management",
+    "newUser": "New user",
+    "editUser": "Edit user",
+    "role": "Role",
+    "businessName": "Business name",
+    "deleteUserHeader": "Delete user",
+    "deleteUserMessage": "Are you sure you want to delete the user named {{ username }}?"
   },
 
   "business": {
     "businessManagement": "Business Management",
-    "newBusiness": "New Business",
+    "newBusiness": "New business",
+    "editBusiness": "Edit business",
     "businessName": "Business Name",
     "ownerEmail": "Owner's Email",
-    "ownerUsername": "Owner's Username"
+    "ownerUsername": "Owner's Username",
+    "deleteBusinessHeader": "Delete business",
+    "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?"
   },
 
   "form": {
@@ -40,17 +49,24 @@
     "SERVER_ERROR": "Server failed.",
     "MISSING_FIELDS": "Fill required places.",
     "NAME_EXIST": "{{ name }} is already used.",
-    "USER_NOT_FOUND": "User named '{{ username }}' not found.",
+    "USERNAME_EXIST": "{{ username }} is already used.",
+    "EMAIL_EXIST": "Email is already used.",
+    "USER_NOT_FOUND_AUTH": "User named '{{ username }}' not found.",
+    "USER_NOT_FOUND": "User not found.",
     "WRONG_PASSWORD": "Wrong password.",
     "BUSINESS_TABLE": "An error occurred while bringing in the businesses.",
-    "BUSINESS_NOT_FOUND": "Business not found."
+    "BUSINESS_NOT_FOUND": "Business not found.",
+    "IDENTITY_TABLE": "An error occurred while bringing in the users."
   },
 
   "response": {
     "LOGIN_SUCCESSFULL": "Logged in succesfully.",
-    "BUSINESS_CREATED": "Business created.",
+    "BUSINESS_CREATED": "Business created successfully.",
     "BUSINESS_DELETED": "Business has been deleted succesfully.",
-    "BUSINESS_UPDATED": "Business updated successfully."
+    "BUSINESS_UPDATED": "Business updated successfully.",
+    "USER_CREATED": "User created successfully.",
+    "USER_DELETED": "User has been deleted succesfully.",
+    "USER_UPDATED": "User updated successfully."
   },
 
   "selectLanguage": "Select language",
@@ -62,7 +78,6 @@
   "changePasswordConfirmation": "Are you sure you want to change password?",
   "yes": "Yes",
   "no": "No",
-  "deleteBusinessHeader": "Delete business",
-  "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?",
+
   "dashboard": "Dashboard"
 }

@@ -21,9 +21,9 @@ export class SidenavService {
       this.resetNavdata();
       if (user) {
         this.filterNavdata();
-        if (user.role === 'business') {
-          this.updateCategories();
-        }
+        // if (user.role === 'business') {
+        //   this.updateCategories();
+        // }
       }
     });
   }

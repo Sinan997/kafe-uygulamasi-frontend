@@ -1,11 +1,13 @@
 <p-toolbar styleClass="mb-4 p-3">
   <div class="p-toolbar-group-start">
-    <span class="fs-2 fw-medium text-primary-emphasis">Kullanıcı Yönetimi</span>
+    <span class="fs-2 fw-medium text-primary-emphasis">{{
+      'identity.identityManagement' | translate
+    }}</span>
   </div>
   <div class="p-toolbar-group-end">
-    <button class="btn btn-success btn-md" (click)="addNewUserEvent.emit()">
+    <button class="btn btn-primary btn-md" (click)="addNewUserEvent.emit()">
       <i class="fal fa-plus"></i>
-      Yeni Kullanıcı
+      {{ 'identity.newUser' | translate }}
     </button>
   </div>
 </p-toolbar>

@@ -5,6 +5,7 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { UsersTableComponent } from './table/users-table.component';
 import { UsersToolbarComponent } from './toolbar/users-toolbar.component';
 import { UserModel } from '../models/user.model';
+import { tap } from 'rxjs';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -26,8 +27,9 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
-    this.identityService.getUsers().subscribe((result) => {
-      this.users = result.users;
-    });
+    this.identityService
+      .getUsers()
+      .pipe(tap((res) => (this.users = res.users)))
+      .subscribe();
   }
 }

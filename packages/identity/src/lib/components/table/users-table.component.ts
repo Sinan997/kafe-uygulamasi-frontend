@@ -5,32 +5,28 @@ import { TagModule } from 'primeng/tag';
 import { UserModel } from '../../models/user.model';
 import { IdentityService } from '../../services/identity.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { catchError, of } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CustomMessageService } from 'theme-shared';
 
 @Component({
   selector: 'app-users-table',
   standalone: true,
-  imports: [
-    CommonModule,
-    TableModule,
-    TagModule,
-    ConfirmDialogModule,
-    EditUserComponent,
-  ],
+  imports: [CommonModule, TableModule, ConfirmDialogModule, EditUserComponent, TranslateModule],
   templateUrl: './users-table.component.html',
 })
 export class UsersTableComponent {
   @Input() users: UserModel[];
   @Output() updateList = new EventEmitter<boolean>();
 
-  identityService = inject(IdentityService);
+  service = inject(IdentityService);
   confirmationService = inject(ConfirmationService);
-  messageService = inject(MessageService);
+  translateService = inject(TranslateService);
+  customMessageService = inject(CustomMessageService);
 
   user: UserModel;
-  selectedUsers: UserModel[] = [];
   visibleEditUserDialog = false;
 
   openEditUserModal(user: UserModel) {
@@ -40,30 +36,21 @@ export class UsersTableComponent {
 
   deleteUser(user: UserModel) {
     this.confirmationService.confirm({
-      message: user.username + ' Kullanıcısını silmek istediğine emin misin?',
-      header: 'Kullanıcı Silme',
+      message: this.translateService.instant('identity.deleteUserMessage', {
+        username: user.username,
+      }),
+      header: this.translateService.instant('identity.deleteUserHeader'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.identityService
+        this.service
           .deleteUser(user._id)
           .pipe(
-            catchError((error) => {
-              this.messageService.add({
-                severity: 'error',
-                summary: 'İşlem Başarısız',
-                detail: error.error.message,
-              });
-              return of();
+            tap((val) => {
+              this.customMessageService.success(val);
+              this.updateList.emit();
             }),
           )
-          .subscribe((val) => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Başarılı',
-              detail: val.message,
-            });
-            this.updateList.emit();
-          });
+          .subscribe();
       },
     });
   }

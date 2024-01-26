@@ -34,8 +34,10 @@ export class BusinessTableComponent {
 
   deleteBusiness(business: BusinessModel) {
     this.confirmationService.confirm({
-      message: this.translateService.instant('deleteBusinessMessage', { name: business.name }),
-      header: this.translateService.instant('deleteBusinessHeader'),
+      message: this.translateService.instant('business.deleteBusinessMessage', {
+        name: business.name,
+      }),
+      header: this.translateService.instant('business.deleteBusinessHeader'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.businessService
