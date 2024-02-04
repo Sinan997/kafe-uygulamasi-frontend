@@ -1,0 +1,17 @@
+<p-toolbar styleClass="mb-4 p-3">
+  <div class="p-toolbar-group-start">
+    <span class="fs-2 fw-medium text-primary-emphasis">
+      {{ 'menu.addProductToCategoryOrEdit' | translate }}
+    </span>
+  </div>
+  <div class="p-toolbar-group-end">
+    <button class="btn btn-outline-primary me-2" (click)="navigateToMenu()">
+      <i class="fa fa-arrow-left"></i>
+      {{ 'menu.goBack' | translate }}
+    </button>
+    <button class="btn btn-primary btn-md" (click)="addNewProductEvent.emit()">
+      <i class="fa fa-plus"></i>
+      {{ 'menu.newProduct' | translate }}
+    </button>
+  </div>
+</p-toolbar>

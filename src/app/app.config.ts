@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoreModule } from 'core';
+import { CoreModule, API_URL } from 'core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { BLUEPRINTS, NgxValidateCoreModule } from '@ngx-validate/core';
 import { CustomErrorComponent } from './customerror.component';
@@ -20,20 +20,21 @@ export const appConfig: ApplicationConfig = {
       CoreModule.forRoot(),
       NgxValidateCoreModule.forRoot({
         errorTemplate: CustomErrorComponent,
-        blueprints: { ...BLUEPRINTS }
+        blueprints: { ...BLUEPRINTS },
       }),
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-        }
+          deps: [HttpClient],
+        },
       }),
       BrowserAnimationsModule,
-      HttpClientModule
+      HttpClientModule,
     ),
     provideRouter(routes),
     MessageService,
     ConfirmationService,
+    { provide: API_URL, useValue: 'http://localhost:8080/api/' },
   ],
 };

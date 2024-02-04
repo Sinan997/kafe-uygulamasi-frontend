@@ -1,14 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { AllCategoriesReponse } from '../models/all-categories-response.model';
 import { BasicResponseModel } from 'theme-shared';
-import { CategoryModel } from 'category';
+import { CategoryModel, ProductModel } from 'category';
+import { API_URL } from 'core';
+import { GetCategoryResponse } from '../models/get-category-response.model';
+import { AddProductModel } from '../models/add-product.model';
+import { AllProductsResponse } from '../models/all-products-response.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MenuService {
-  baseUrl: string = 'http://localhost:8080/api/menu';
+  baseUrl: string = inject(API_URL) + 'menu';
 
   constructor(private http: HttpClient) {}
 
@@ -30,5 +34,26 @@ export class MenuService {
     return this.http.post<BasicResponseModel>(this.baseUrl + '/set-categories-index', {
       categories,
     });
+  }
+
+  getCategory(categoryId: string) {
+    return this.http.get<GetCategoryResponse>(this.baseUrl + '/get-category/' + categoryId);
+  }
+
+  getAllProducts(categoryId: string) {
+    return this.http.get<AllProductsResponse>(this.baseUrl + '/all-products/' + categoryId);
+  }
+
+  addProduct(input: AddProductModel) {
+    return this.http.post<BasicResponseModel>(this.baseUrl + '/add-product', {
+      categoryId: input.categoryId,
+      name: input.name,
+      price: input.price,
+      isAvailable: input.isAvailable,
+    });
+  }
+
+  setProductsIndex(products: ProductModel[]) {
+    return this.http.post<BasicResponseModel>(this.baseUrl + '/set-products-index', { products });
   }
 }

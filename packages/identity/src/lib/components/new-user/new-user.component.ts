@@ -7,6 +7,7 @@ import { AddUserModel } from '../../models/add-user.model';
 import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomMessageService } from 'theme-shared';
+import { NgxValidateCoreModule } from '@ngx-validate/core';
 
 @Component({
   selector: 'app-new-user-modal',
@@ -17,6 +18,7 @@ import { CustomMessageService } from 'theme-shared';
     AutoFocusDirective,
     TrackEnterKeyDirective,
     TranslateModule,
+    NgxValidateCoreModule
   ],
   templateUrl: './new-user.component.html',
 })
@@ -29,9 +31,9 @@ export class NewUserComponent {
   customMessageService = inject(CustomMessageService);
 
   form = this.fb.group({
-    username: ['asd', Validators.required],
-    email: ['asd@gmail.com', Validators.required],
-    password: ['123', Validators.required],
+    username: ['', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   hideDialog() {

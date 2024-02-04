@@ -13,7 +13,7 @@
     <form [formGroup]="form" id="newBusinessForm" (ngSubmit)="onSubmit()">
       <div class="form-group mb-3">
         <label for="email">{{ 'form.name' | translate }} *</label>
-        <input type="email" class="form-control" id="email" formControlName="name" autofocus />
+        <input type="text" class="form-control" id="email" formControlName="name" autofocus />
       </div>
 
       <div class="form-group mb-3">

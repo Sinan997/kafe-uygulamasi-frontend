@@ -32,6 +32,21 @@
     "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?"
   },
 
+  "menu": {
+    "menu": "Menu",
+    "menuManagement": "Menu Management",
+    "newCategory": "New Category",
+    "categoryName": "Category Name",
+    "categoryEmpty": "You havent add category yet...",
+    "addProductOrDelete": "Add Product / Edit",
+    "addProductToCategoryOrEdit": "Add Product to Category / Edit",
+    "goBack": "Go Back",
+    "newProduct": "New Product",
+    "productName": "Product Name",
+    "isProductAvailable": "Is Product Available?",
+    "productEmpty": "You havent add product yet..."
+  },
+
   "form": {
     "name": "Name",
     "username": "Username",
@@ -56,17 +71,28 @@
     "WRONG_PASSWORD": "Wrong password.",
     "BUSINESS_TABLE": "An error occurred while bringing in the businesses.",
     "BUSINESS_NOT_FOUND": "Business not found.",
-    "IDENTITY_TABLE": "An error occurred while bringing in the users."
+    "IDENTITY_TABLE": "An error occurred while bringing in the users.",
+    "CATEGORY_TABLE": "An error occurred while bringing in the categories.",
+    "CATEGORY_EXIST": "{{ name }} is already used.",
+    "CATEGORY_DELETE_ERROR": "Couldn't delete category.",
+    "CATEGORY_UPDATE": "An error while updating categories."
   },
 
   "response": {
     "LOGIN_SUCCESSFULL": "Logged in succesfully.",
     "BUSINESS_CREATED": "Business created successfully.",
-    "BUSINESS_DELETED": "Business has been deleted succesfully.",
+    "BUSINESS_DELETED": "Business deleted succesfully.",
     "BUSINESS_UPDATED": "Business updated successfully.",
     "USER_CREATED": "User created successfully.",
-    "USER_DELETED": "User has been deleted succesfully.",
-    "USER_UPDATED": "User updated successfully."
+    "USER_DELETED": "User deleted succesfully.",
+    "USER_UPDATED": "User updated successfully.",
+    "CATEGORY_CREATED": "Category created successfully.",
+    "CATEGORY_DELETED": "Category deleted successfully.",
+    "CATEGORY_UPDATED": "Category updated successfully.",
+    "CATEGORIES_UPDATED": "Categories updated successfully.",
+    "PRODUCT_CREATED": "Product created successfully.",
+    "PRODUCT_DELETED": "Product deleted successfully.",
+    "PRODUCT_UPDATED": "Product updated successfully."
   },
 
   "selectLanguage": "Select language",
@@ -78,6 +104,6 @@
   "changePasswordConfirmation": "Are you sure you want to change password?",
   "yes": "Yes",
   "no": "No",
-
+  "price": "Price",
   "dashboard": "Dashboard"
 }

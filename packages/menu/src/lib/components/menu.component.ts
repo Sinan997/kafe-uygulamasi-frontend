@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { catchError } from 'rxjs';
-import { SidenavService } from 'theme-shared';
-import { MessageService } from 'primeng/api';
+import { tap } from 'rxjs';
 import { CategoryModel } from 'category';
 import { MenuToolbarComponent } from './toolbar/menu-toolbar.component';
 import { NewCategoryComponent } from './new-category/new-category.component';
 import { CategoriesTableComponent } from './categories-table/categories-table.component';
 import { MenuService } from '../services/menu.service';
+import { CustomMessageService } from 'theme-shared';
 
 @Component({
   selector: 'app-menu',
@@ -15,9 +14,8 @@ import { MenuService } from '../services/menu.service';
   imports: [MenuToolbarComponent, NewCategoryComponent, CategoriesTableComponent],
 })
 export class MenuComponent {
-  messageService = inject(MessageService);
+  customMessageService = inject(CustomMessageService);
   menuService = inject(MenuService);
-  sidenavService = inject(SidenavService);
 
   visibleNewCategoryDialog = false;
   categories: CategoryModel[] = [];
@@ -27,15 +25,19 @@ export class MenuComponent {
   }
 
   get() {
-    this.menuService.getAllCategories().subscribe((res) => {
-      this.categories = res.categories;
-      this.sortCategoriesByIndexLocally();
-    });
+    this.menuService
+      .getAllCategories()
+      .pipe(
+        tap((res) => {
+          this.categories = res.categories;
+          this.sortCategoriesByIndexLocally();
+        }),
+      )
+      .subscribe();
   }
 
   updateCategoryPlacement(categories: CategoryModel[]) {
     this.categories = categories;
-
     this.setIndexToCategories();
     this.setCategoryPlacement();
   }
@@ -47,27 +49,19 @@ export class MenuComponent {
     });
   }
 
-  sortCategoriesByIndexLocally() {
-    this.categories = this.categories.sort((a, b) => a.index - b.index);
-  }
-
   setCategoryPlacement() {
     this.menuService
       .setCategoriesIndex(this.categories)
       .pipe(
-        catchError((err) => {
-          throw err;
+        tap((res) => {
+          this.customMessageService.success(res);
         }),
       )
-      .subscribe((res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Sıralama değişti',
-          detail: res.message,
-        });
+      .subscribe();
+  }
 
-        this.sidenavService.updateCategories();
-      });
+  sortCategoriesByIndexLocally() {
+    this.categories = this.categories.sort((a, b) => a.index - b.index);
   }
 
   openNewCategoryDialog() {

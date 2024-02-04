@@ -1,16 +1,23 @@
-import { Component, EventEmitter, Input, Output, inject, signal } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-import { MessageService } from 'primeng/api';
-import { catchError, finalize } from 'rxjs';
-import { SidenavService } from 'theme-shared';
+import { tap } from 'rxjs';
 import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 import { MenuService } from '../../services/menu.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxValidateCoreModule } from '@ngx-validate/core';
+import { CustomMessageService } from 'theme-shared';
 @Component({
   selector: 'app-new-category-modal',
   standalone: true,
-  imports: [NgClass, ReactiveFormsModule, DialogModule, AutoFocusDirective, TrackEnterKeyDirective],
+  imports: [
+    ReactiveFormsModule,
+    DialogModule,
+    AutoFocusDirective,
+    TrackEnterKeyDirective,
+    TranslateModule,
+    NgxValidateCoreModule,
+  ],
   templateUrl: './new-category.component.html',
 })
 export class NewCategoryComponent {
@@ -20,10 +27,8 @@ export class NewCategoryComponent {
 
   fb = inject(FormBuilder);
   menuService = inject(MenuService);
-  messageService = inject(MessageService);
-  sidenavService = inject(SidenavService);
+  customMessageService = inject(CustomMessageService);
 
-  isSubmitted = signal(false);
   form = this.fb.group({
     newCategoryName: ['', Validators.required],
   });
@@ -38,35 +43,18 @@ export class NewCategoryComponent {
   }
 
   onSubmit() {
-    this.isSubmitted.set(true);
-
     if (this.form.invalid) {
       return;
     }
-
     this.menuService
       .addCategory(this.newCategoryName.value!)
       .pipe(
-        finalize(() => {
+        tap((res) => {
           this.hideDialog();
           this.updateCategoriesList.emit();
-          this.sidenavService.updateCategories();
-        }),
-        catchError((err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'İşlem Başarısız',
-            detail: err.error.message,
-          });
-          throw err;
+          this.customMessageService.success(res);
         }),
       )
-      .subscribe((res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Kategori Eklendi',
-          detail: res.message,
-        });
-      });
+      .subscribe();
   }
 }

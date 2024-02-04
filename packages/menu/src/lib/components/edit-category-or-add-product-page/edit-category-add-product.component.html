@@ -1,0 +1,17 @@
+<app-product-toolbar (addNewProductEvent)="openNewProductDialog()" />
+
+<app-update-cagetory [categoryId]="categoryId" />
+
+<app-products-table
+  [products]="products"
+  (updateProductsPlacement)="updateProductsPlacement($event)"
+  (updateList)="get()"
+/>
+
+@if (visibleNewProductDialog) {
+<app-new-product-modal
+  [categoryId]="categoryId"
+  [(visibleNewProductDialog)]="visibleNewProductDialog"
+  (updateProductsList)="get()"
+/>
+}

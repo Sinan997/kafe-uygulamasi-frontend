@@ -32,6 +32,21 @@
     "deleteBusinessMessage": "{{ name }} isimli işletmeyi silmek istediğine emin misin?"
   },
 
+  "menu": {
+    "menu": "Menu",
+    "menuManagement": "Menu Yönetimi",
+    "newCategory": "Yeni Kategori",
+    "categoryName": "Kategori Adı",
+    "categoryEmpty": "Henüz kategori eklemediniz...",
+    "addProductOrDelete": "Ürün Ekle / Düzenle",
+    "addProductToCategoryOrEdit": "Kategoriye Ürün Ekle / Düzenle",
+    "goBack": "Geri Dön",
+    "newProduct": "Yeni Ürün",
+    "productName": "Ürün Adı",
+    "isProductAvailable": "Ürün Mevcut mu?",
+    "productEmpty": "Henüz ürün eklemediniz..."
+  },
+
   "form": {
     "name": "İsim",
     "username": "Kullanıcı adı",
@@ -48,15 +63,19 @@
   "error": {
     "SERVER_ERROR": "Sunucu hatası.",
     "MISSING_FIELDS": "Zorunlu alanları doldurun.",
-    "NAME_EXIST": "'{{ name }}' ismi kullanılmakta.",
-    "USERNAME_EXIST": "'{{ username }}' kullanıcı adı kullanılmakta.",
+    "NAME_EXIST": "{{ name }} ismi kullanılmakta.",
+    "USERNAME_EXIST": "{{ username }} kullanıcı adı kullanılmakta.",
     "EMAIL_EXIST": "Email kullanılmakta.",
-    "USER_NOT_FOUND_AUTH": "'{{ username }}' isimli kullanıcı bulunamadı.",
+    "USER_NOT_FOUND_AUTH": "{{ username }} isimli kullanıcı bulunamadı.",
     "USER_NOT_FOUND": "Kullanıcı bulunamadı.",
     "WRONG_PASSWORD": "Şifre yanlış.",
     "BUSINESS_TABLE": "İşletmeleri getirirken hata oluştu.",
     "BUSINESS_NOT_FOUND": "İşletme bulunamadı.",
-    "IDENTITY_TABLE": "Kullanıcıları getirirken hata oluştu."
+    "IDENTITY_TABLE": "Kullanıcıları getirirken hata oluştu.",
+    "CATEGORY_TABLE": "Kategorileri getirirken hata oluştu.",
+    "CATEGORY_EXIST": "{{ name }} ismi kullanılmakta.",
+    "CATEGORY_DELETE_ERROR": "Kategori silinemedi.",
+    "CATEGORY_UPDATE": "Kategorileri güncellerken hata oluştu."
   },
 
   "response": {
@@ -66,7 +85,11 @@
     "BUSINESS_UPDATED": "İşletme başarıyla güncellendi.",
     "USER_CREATED": "Kullanıcı başarıyla oluşturuldu.",
     "USER_DELETED": "Kullanıcı başarıyla silindi.",
-    "USER_UPDATED": "Kullanıcı başarıyla güncellendi."
+    "USER_UPDATED": "Kullanıcı başarıyla güncellendi.",
+    "CATEGORY_CREATED": "Kategori başarıyla oluşturuldu.",
+    "CATEGORY_DELETED": "Kategori başarıyla silindi.",
+    "CATEGORY_UPDATED": "Kategori başarıyla güncellendi.",
+    "CATEGORIES_UPDATED": "Kategoriler başarıyla güncellendi."
   },
 
   "selectLanguage": "Dil seçin",
@@ -78,5 +101,6 @@
   "changePasswordConfirmation": "Bu kullanıcının şifresini değiştirmek istiyor musun?",
   "yes": "Evet",
   "no": "Hayır",
+  "price": "Fiyat",
   "dashboard": "Dashboard"
 }

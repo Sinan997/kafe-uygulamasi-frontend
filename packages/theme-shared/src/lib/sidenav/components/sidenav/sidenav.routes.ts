@@ -16,6 +16,12 @@ export const sidenavRoutes = [
     label: 'identity.identityManagement',
     role: ['business'],
   },
+  {
+    routeLink: 'menu',
+    icon: 'fa-solid fa-book-open',
+    label: 'menu.menu',
+    role: ['business'],
+  },
   // { routeLink: 'qrcode', icon: 'fa-regular fa-qrcode', label: 'qrcode', role: ['business'] },
   // {
   //   routeLink: 'menu',

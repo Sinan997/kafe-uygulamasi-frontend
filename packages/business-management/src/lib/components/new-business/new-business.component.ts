@@ -18,7 +18,7 @@ import { tap } from 'rxjs';
     TranslateModule,
     AutoFocusDirective,
     TrackEnterKeyDirective,
-    NgxValidateCoreModule,
+    NgxValidateCoreModule
   ],
   templateUrl: './new-business.component.html',
 })

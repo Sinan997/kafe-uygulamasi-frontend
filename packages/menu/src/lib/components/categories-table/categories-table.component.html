@@ -4,14 +4,14 @@
     <span class="fs-6">{{ category.name }}</span>
     <div class="d-flex align-items-center justify-content-center">
       <button class="btn btn-primary me-2" (click)="navigateToCategory(category)">
-        Ürün Ekle / Düzenle
+        {{ 'menu.addProductOrDelete' | translate }}
       </button>
       <button class="btn btn-danger" (click)="deleteCategory(category)">
-        <i class="fal fa-trash"></i>
+        <i class="fa fa-trash"></i>
       </button>
     </div>
   </div>
   }@empty {
-  <span class="p-2 m-1 fs-6">Henüz Kategori Eklemediniz.</span>
+  <span class="p-2 m-1 fs-6">{{ 'menu.categoryEmpty' | translate }}</span>
   }
 </div>

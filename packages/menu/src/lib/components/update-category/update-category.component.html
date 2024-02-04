@@ -8,16 +8,14 @@
           formControlName="name"
           #myInput
           [readonly]="!isEditing"
-          [ngClass]="{ 'is-invalid': name.invalid && isSubmitted() }"
         />
-        @if (name.invalid && isSubmitted()) {
-        <div class="invalid-feedback">Ürün adı boş olamaz</div>
-        }
       </div>
 
       @if (!isEditing) {
       <div>
-        <button class="btn btn-primary ms-3" (click)="editButton()">Düzenle</button>
+        <button class="btn btn-primary ms-3" (click)="editButton()">
+          {{ 'form.edit' | translate }}
+        </button>
       </div>
       }@else{
       <button (enterKey)="onSubmit()" class="btn btn-success ms-2" (click)="onSubmit()">

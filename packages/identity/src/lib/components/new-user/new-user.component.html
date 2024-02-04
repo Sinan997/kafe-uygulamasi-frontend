@@ -10,7 +10,7 @@
     <span class="fs-4">{{ 'identity.newUser' | translate }}</span>
   </ng-template>
   <ng-template pTemplate="content">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" id="newUserForm" (ngSubmit)="onSubmit()">
       <div class="form-group mb-3">
         <label for="username">{{ 'form.username' | translate }}</label>
         <input
@@ -37,6 +37,6 @@
     <button class="btn btn-outline-primary me-2" (click)="hideDialog()">
       {{ 'form.cancel' | translate }}
     </button>
-    <button class="btn btn-primary" (click)="onSubmit()">{{ 'form.save' | translate }}</button>
+    <button form="newUserForm" class="btn btn-primary">{{ 'form.save' | translate }}</button>
   </ng-template>
 </p-dialog>

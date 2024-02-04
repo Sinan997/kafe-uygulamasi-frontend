@@ -13,7 +13,7 @@
         <input
           type="text"
           id="newProductName"
-          class="form-control is-invalid"
+          class="form-control"
           formControlName="name"
           autofocus
           [ngClass]="{ 'is-invalid': name.invalid && isSubmitted() }"
@@ -29,7 +29,7 @@
         <input
           type="number"
           id="price"
-          class="form-control is-invalid"
+          class="form-control"
           formControlName="price"
           [ngClass]="{ 'is-invalid': price.invalid && isSubmitted() }"
         />

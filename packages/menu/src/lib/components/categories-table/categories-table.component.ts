@@ -1,8 +1,9 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs';
-import { SidenavService } from 'theme-shared';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomMessageService } from 'theme-shared';
+import { tap } from 'rxjs';
 import { CategoryModel } from '../../../../../category/src/lib/models/category.model';
 import { MenuService } from '../../services/menu.service';
 
@@ -11,7 +12,7 @@ import { MenuService } from '../../services/menu.service';
   standalone: true,
   templateUrl: './categories-table.component.html',
   styleUrl: './categories-table.component.scss',
-  imports: [CdkDropList, CdkDrag],
+  imports: [CdkDropList, CdkDrag, TranslateModule],
 })
 export class CategoriesTableComponent {
   @Input() categories: CategoryModel[] = [];
@@ -20,7 +21,7 @@ export class CategoriesTableComponent {
 
   router = inject(Router);
   menuService = inject(MenuService);
-  sidenavService = inject(SidenavService);
+  customMessageService = inject(CustomMessageService);
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.categories, event.previousIndex, event.currentIndex);
@@ -30,21 +31,18 @@ export class CategoriesTableComponent {
   }
 
   navigateToCategory(category: CategoryModel) {
-    this.router.navigate(['category', category._id]);
+    this.router.navigate(['menu', 'category', category._id]);
   }
 
   deleteCategory(deletedCategory: CategoryModel) {
     this.menuService
       .deleteCategory(deletedCategory._id)
       .pipe(
-        catchError((err) => {
-          throw err;
+        tap((res) => {
+          this.updateCategoriesList.emit();
+          this.customMessageService.success(res);
         }),
       )
-      .subscribe((res) => {
-        this.categories = this.categories.filter((prod) => prod._id !== deletedCategory._id);
-        this.updateCategoriesList.emit();
-        this.sidenavService.updateCategories();
-      });
+      .subscribe();
   }
 }

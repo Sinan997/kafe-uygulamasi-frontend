@@ -1,0 +1,35 @@
+<div class="container-fluid card mt-3" cdkDropList (cdkDropListDropped)="drop($event)">
+  @for (product of products; track product._id) {
+  <div class="example-box" cdkDrag>
+    <span class="fs-6">{{ product.name }}</span>
+    <div class="d-flex align-items-center justify-content-center">
+      <span>{{ product.price | currency : '₺' }}</span>
+      <i
+        class="mx-1 fa fa-circle rounded"
+        [ngClass]="product.isAvailable ? 'text-success' : 'text-danger'"
+      ></i>
+
+      <button
+        class="btn btn-primary mx-2"
+        styleClass="p-button-link"
+        (click)="openEditProductModal(product)"
+      >
+        {{ 'form.edit' | translate }}
+      </button>
+      <button class="btn btn-danger" (click)="deleteProduct(product)">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+  </div>
+  }@empty {
+  <span class="p-2 m-1 fs-6">{{ 'menu.productEmpty' | translate }}</span>
+  }
+</div>
+
+<!-- @if (visibleEditProductDialog) {
+<app-edit-user-modal
+  [product]="product"
+  [(visibleEditProductDialog)]="visibleEditProductDialog"
+  (updateList)="updateList.emit()"
+/>
+} -->

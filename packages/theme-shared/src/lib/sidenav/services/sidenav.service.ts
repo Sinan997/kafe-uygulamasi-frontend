@@ -2,7 +2,7 @@ import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { INavbarData } from '../components/sidenav/helper';
 import { MenuService } from 'menu';
 import { AuthService, DecodedUserTokenModel } from 'core';
-import { sidenavRoutes } from '../sidenav.defaults';
+import { sidenavRoutes } from '../components/sidenav/sidenav.routes';
 
 @Injectable({
   providedIn: 'root',
