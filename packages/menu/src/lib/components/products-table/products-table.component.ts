@@ -5,7 +5,9 @@ import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductModel } from '../../models/product.model';
 import { MenuService } from '../../services';
-// import { EditProductComponent } from '../edit-product/edit-product.component';
+import { tap } from 'rxjs';
+import { EditProductComponent } from '../edit-product-modal/edit-product.component';
+import { CustomMessageService } from 'theme-shared';
 
 @Component({
   selector: 'app-products-table',
@@ -19,7 +21,7 @@ import { MenuService } from '../../services';
     FormsModule,
     TranslateModule,
     NgClass,
-    // EditProductComponent
+    EditProductComponent,
   ],
 })
 export class ProductsTableComponent {
@@ -27,8 +29,8 @@ export class ProductsTableComponent {
   @Output() updateProductsPlacement = new EventEmitter<ProductModel[]>();
   @Output() updateList = new EventEmitter<boolean>();
   menuService = inject(MenuService);
+  customMessageService = inject(CustomMessageService);
 
-  isEditing = false;
   visibleEditProductDialog = false;
   product: ProductModel;
 
@@ -40,17 +42,15 @@ export class ProductsTableComponent {
   }
 
   deleteProduct(product: ProductModel) {
-    // this.menuService
-    //   .deleteProduct(product._id)
-    //   .pipe(
-    //     catchError((err) => {
-    //       throw err;
-    //     }),
-    //   )
-    //   .subscribe((res) => {
-    //     this.products = this.products.filter((prod) => prod._id !== product._id);
-    //     this.updateProductsPlacement.emit(this.products);
-    //   });
+    this.menuService
+      .deleteProduct(product._id)
+      .pipe(
+        tap((res) => {
+          this.customMessageService.success(res);
+          this.updateList.emit(true);
+        }),
+      )
+      .subscribe();
   }
 
   openEditProductModal(product: ProductModel) {

@@ -44,7 +44,8 @@
     "newProduct": "New Product",
     "productName": "Product Name",
     "isProductAvailable": "Is Product Available?",
-    "productEmpty": "You havent add product yet..."
+    "productEmpty": "You havent add product yet...",
+    "editProduct": "Edit Product"
   },
 
   "form": {

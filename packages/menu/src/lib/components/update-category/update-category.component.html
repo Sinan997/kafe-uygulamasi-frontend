@@ -1,5 +1,10 @@
 <div class="container-fluid card">
-  <form [formGroup]="form">
+  <form
+    (enterKey)="onSubmit()"
+    [formGroup]="form"
+    id="changeCategoryNameForm"
+    (ngSubmit)="onSubmit()"
+  >
     <div class="form-group px-2 py-4 d-flex justify-content-between align-items-start">
       <div class="w-100">
         <input
@@ -7,22 +12,22 @@
           class="form-control"
           formControlName="name"
           #myInput
-          [readonly]="!isEditing"
+          [readonly]="!isEditing()"
         />
       </div>
 
-      @if (!isEditing) {
+      @if (!isEditing()) {
       <div>
         <button class="btn btn-primary ms-3" (click)="editButton()">
           {{ 'form.edit' | translate }}
         </button>
       </div>
       }@else{
-      <button (enterKey)="onSubmit()" class="btn btn-success ms-2" (click)="onSubmit()">
-        <i class="fal fa-check"></i>
+      <button type="submit" form="changeCategoryNameForm" class="btn btn-success ms-2">
+        <i class="fa fa-check"></i>
       </button>
       <button class="btn btn-danger ms-2" (click)="abortNewCategoryName()">
-        <i class="fal fa-times"></i>
+        <i class="fa fa-times"></i>
       </button>
       }
     </div>

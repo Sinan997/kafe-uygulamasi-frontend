@@ -7,6 +7,8 @@ import { API_URL } from 'core';
 import { GetCategoryResponse } from '../models/get-category-response.model';
 import { AddProductModel } from '../models/add-product.model';
 import { AllProductsResponse } from '../models/all-products-response.model';
+import { ChangeCategoryResponseModel } from '../models/change-category-response.model';
+import { UpdateProductModel } from '../models/update-product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +46,13 @@ export class MenuService {
     return this.http.get<AllProductsResponse>(this.baseUrl + '/all-products/' + categoryId);
   }
 
+  changeCategoryName(name: string, categoryId: string) {
+    return this.http.post<ChangeCategoryResponseModel>(this.baseUrl + '/change-category-name', {
+      name,
+      categoryId,
+    });
+  }
+
   addProduct(input: AddProductModel) {
     return this.http.post<BasicResponseModel>(this.baseUrl + '/add-product', {
       categoryId: input.categoryId,
@@ -55,5 +64,20 @@ export class MenuService {
 
   setProductsIndex(products: ProductModel[]) {
     return this.http.post<BasicResponseModel>(this.baseUrl + '/set-products-index', { products });
+  }
+
+  deleteProduct(productId: string) {
+    return this.http.request<BasicResponseModel>('delete', this.baseUrl + '/delete-product', {
+      body: { productId },
+    });
+  }
+
+  updateProduct(input: UpdateProductModel) {
+    return this.http.post<BasicResponseModel>(this.baseUrl + '/update-product', {
+      name: input.name,
+      price: input.price,
+      isAvailable: input.isAvailable,
+      productId: input._id,
+    });
   }
 }

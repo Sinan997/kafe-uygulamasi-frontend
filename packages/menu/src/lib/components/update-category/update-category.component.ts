@@ -1,16 +1,13 @@
 import { Component, DestroyRef, ElementRef, Input, ViewChild, inject, signal } from '@angular/core';
-import { NgClass } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MessageService } from 'primeng/api';
-import { catchError, finalize } from 'rxjs';
-import { SidenavService } from 'theme-shared';
+import { CustomMessageService, SidenavService } from 'theme-shared';
 import { TrackEnterKeyDirective } from 'core';
 import { MenuService } from '../../services';
 import { NgxValidateCoreModule } from '@ngx-validate/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CategoryModel } from '../../models/category.model';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-update-cagetory',
@@ -21,7 +18,7 @@ import { CategoryModel } from '../../models/category.model';
 export class UpdateCategoryComponent {
   fb = inject(FormBuilder);
   menuService = inject(MenuService);
-  messageService = inject(MessageService);
+  customMessageService = inject(CustomMessageService);
   destroyRef = inject(DestroyRef);
   activatedRoute = inject(ActivatedRoute);
   sidenavService = inject(SidenavService);
@@ -31,8 +28,7 @@ export class UpdateCategoryComponent {
   @Input() categoryId: string;
 
   category = signal<CategoryModel>({ _id: '0', index: 0, name: '', products: [] });
-  isEditing = false;
-  isSubmitted = signal(false);
+  isEditing = signal(false);
 
   form = this.fb.group({
     name: ['', Validators.required],
@@ -50,43 +46,32 @@ export class UpdateCategoryComponent {
   }
 
   abortNewCategoryName() {
-    // this.isEditing = false;
-    // this.name.setValue(this.category().name);
-    // this.isSubmitted.set(false);
+    this.isEditing.set(false);
+    this.name.setValue(this.category().name);
   }
 
   editButton() {
-    this.isEditing = true;
+    this.isEditing.set(true);
     this.myInput.nativeElement.focus();
   }
 
   onSubmit() {
-    // this.isSubmitted.set(true);
-    // if (this.form.invalid) {
-    //   return;
-    // }
-    // if (this.category().name !== this.name.value) {
-    //   this.categoryService
-    //     .changeCategoryName(this.name.value!, this.category()._id)
-    //     .pipe(
-    //       finalize(() => {
-    //         this.isSubmitted.set(false);
-    //         this.isEditing = false;
-    //       }),
-    //       catchError((err) => {
-    //         throw err;
-    //       }),
-    //     )
-    //     .subscribe((res) => {
-    //       this.messageService.add({
-    //         severity: 'success',
-    //         detail: res.message,
-    //       });
-    //       this.sidenavService.updateCategories();
-    //       this.category.set(res.category);
-    //     });
-    //   return;
-    // }
-    // this.isEditing = false;
+    if (this.form.invalid) {
+      return;
+    }
+    if (this.category().name !== this.name.value) {
+      this.menuService
+        .changeCategoryName(this.name.value!, this.category()._id)
+        .pipe(
+          tap((res) => {
+            this.isEditing.set(false);
+            this.category.set(res.category);
+            this.customMessageService.success(res);
+            this.myInput.nativeElement.blur();
+          }),
+        )
+        .subscribe();
+      return;
+    }
   }
 }

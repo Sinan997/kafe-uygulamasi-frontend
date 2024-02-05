@@ -44,7 +44,8 @@
     "newProduct": "Yeni Ürün",
     "productName": "Ürün Adı",
     "isProductAvailable": "Ürün Mevcut mu?",
-    "productEmpty": "Henüz ürün eklemediniz..."
+    "productEmpty": "Henüz ürün eklemediniz...",
+    "editProduct": "Ürünü Düzenle"
   },
 
   "form": {
@@ -89,7 +90,10 @@
     "CATEGORY_CREATED": "Kategori başarıyla oluşturuldu.",
     "CATEGORY_DELETED": "Kategori başarıyla silindi.",
     "CATEGORY_UPDATED": "Kategori başarıyla güncellendi.",
-    "CATEGORIES_UPDATED": "Kategoriler başarıyla güncellendi."
+    "CATEGORIES_UPDATED": "Kategoriler başarıyla güncellendi.",
+    "PRODUCT_CREATED": "Ürün başarıyla oluşturuldu.",
+    "PRODUCT_DELETED": "Ürün başarıyla silindi.",
+    "PRODUCT_UPDATED": "Ürün başarıyla güncellendi."
   },
 
   "selectLanguage": "Dil seçin",

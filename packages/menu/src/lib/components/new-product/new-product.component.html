@@ -42,7 +42,11 @@
     </form>
   </ng-template>
   <ng-template pTemplate="footer">
-    <button class="btn btn-outline-primary me-2" (click)="hideDialog()">İptal</button>
-    <button form="newProductForm" type="submit" class="btn btn-primary">Kaydet</button>
+    <button class="btn btn-outline-primary me-2" (click)="hideDialog()">
+      {{ 'form.cancel' | translate }}
+    </button>
+    <button form="newProductForm" type="submit" class="btn btn-primary">
+      {{ 'form.save' | translate }}
+    </button>
   </ng-template>
 </p-dialog>
