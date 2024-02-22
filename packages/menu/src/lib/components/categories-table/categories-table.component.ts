@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomMessageService } from 'theme-shared';
 import { tap } from 'rxjs';
-import { CategoryModel } from '../../../../../category/src/lib/models/category.model';
+import { CategoryModel } from '../../models/category.model';
 import { MenuService } from '../../services/menu.service';
 
 @Component({

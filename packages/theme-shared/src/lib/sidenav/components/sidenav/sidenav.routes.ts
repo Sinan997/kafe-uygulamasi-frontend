@@ -22,11 +22,11 @@ export const sidenavRoutes = [
     label: 'menu.menu',
     role: ['business'],
   },
+  {
+    routeLink: 'table',
+    icon: 'fa-solid fa-table',
+    label: 'table.table',
+    role: ['business'],
+  },
   // { routeLink: 'qrcode', icon: 'fa-regular fa-qrcode', label: 'qrcode', role: ['business'] },
-  // {
-  //   routeLink: 'menu',
-  //   icon: 'fa-regular fa-bars',
-  //   label: 'Menu',
-  //   role: ['business'],
-  // },
 ];

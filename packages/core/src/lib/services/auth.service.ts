@@ -1,11 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { AuthResponse, DecodedUserTokenModel, JwtDecoderService } from 'core';
+import { API_URL, AuthResponse, DecodedUserTokenModel, JwtDecoderService } from 'core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  baseUrl: string = inject(API_URL) + 'auth';
   http = inject(HttpClient);
   router = inject(Router);
   jwtDecoder = inject(JwtDecoderService);
@@ -34,13 +35,13 @@ export class AuthService {
   }
 
   refreshTokenHttp() {
-    return this.http.post<AuthResponse>('http://localhost:8080/api/auth/refreshToken', {
+    return this.http.post<AuthResponse>(this.baseUrl + '/refreshToken', {
       refreshToken: localStorage.getItem('refreshToken'),
     });
   }
 
   login(username: string, password: string) {
-    return this.http.post<AuthResponse>('http://localhost:8080/api/auth/login', {
+    return this.http.post<AuthResponse>(this.baseUrl + '/login', {
       username,
       password,
     });

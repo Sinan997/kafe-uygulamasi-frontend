@@ -1,4 +1,4 @@
-import { ProductModel } from 'category';
+import { ProductModel } from './product.model';
 
 export interface CategoryModel {
   _id: string;

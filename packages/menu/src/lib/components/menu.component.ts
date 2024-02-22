@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { tap } from 'rxjs';
-import { CategoryModel } from 'category';
+import { CategoryModel } from '../models/category.model';
 import { MenuToolbarComponent } from './toolbar/menu-toolbar.component';
 import { NewCategoryComponent } from './new-category/new-category.component';
 import { CategoriesTableComponent } from './categories-table/categories-table.component';

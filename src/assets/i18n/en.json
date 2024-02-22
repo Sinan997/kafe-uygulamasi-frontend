@@ -10,7 +10,6 @@
     "required": "This field is required.",
     "minlength": "Min. {{ requiredLength }} characters are required. (has {{ actualLength }})"
   },
-
   "identity": {
     "identityManagement": "Identity Management",
     "newUser": "New user",
@@ -20,7 +19,6 @@
     "deleteUserHeader": "Delete user",
     "deleteUserMessage": "Are you sure you want to delete the user named {{ username }}?"
   },
-
   "business": {
     "businessManagement": "Business Management",
     "newBusiness": "New business",
@@ -31,7 +29,6 @@
     "deleteBusinessHeader": "Delete business",
     "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?"
   },
-
   "menu": {
     "menu": "Menu",
     "menuManagement": "Menu Management",
@@ -47,7 +44,9 @@
     "productEmpty": "You havent add product yet...",
     "editProduct": "Edit Product"
   },
-
+  "table": {
+    "table": "Tables"
+  },
   "form": {
     "name": "Name",
     "username": "Username",
@@ -60,7 +59,6 @@
     "actions": "Actions",
     "changePassword": "Change password"
   },
-
   "error": {
     "SERVER_ERROR": "Server failed.",
     "MISSING_FIELDS": "Fill required places.",
@@ -78,7 +76,6 @@
     "CATEGORY_DELETE_ERROR": "Couldn't delete category.",
     "CATEGORY_UPDATE": "An error while updating categories."
   },
-
   "response": {
     "LOGIN_SUCCESSFULL": "Logged in succesfully.",
     "BUSINESS_CREATED": "Business created successfully.",
@@ -95,7 +92,6 @@
     "PRODUCT_DELETED": "Product deleted successfully.",
     "PRODUCT_UPDATED": "Product updated successfully."
   },
-
   "selectLanguage": "Select language",
   "company": "Company",
   "login": "Login",

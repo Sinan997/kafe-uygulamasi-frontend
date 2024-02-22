@@ -48,6 +48,10 @@
     "editProduct": "Ürünü Düzenle"
   },
 
+  "table": {
+    "table": "Masalar"
+  },
+
   "form": {
     "name": "İsim",
     "username": "Kullanıcı adı",
