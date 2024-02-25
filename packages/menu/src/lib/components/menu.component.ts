@@ -26,7 +26,7 @@ export class MenuComponent {
 
   get() {
     this.menuService
-      .getAllCategories()
+      .getCategories()
       .pipe(
         tap((res) => {
           this.categories = res.categories;

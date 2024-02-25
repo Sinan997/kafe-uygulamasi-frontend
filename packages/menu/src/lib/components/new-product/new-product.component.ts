@@ -26,8 +26,8 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './new-product.component.html',
 })
 export class NewProductComponent {
-  @Input() visibleNewProductDialog = true;
   @Input() categoryId: string;
+  @Input() visibleNewProductDialog = true;
   @Output() visibleNewProductDialogChange = new EventEmitter<boolean>();
   @Output() updateProductsList = new EventEmitter<boolean>();
 

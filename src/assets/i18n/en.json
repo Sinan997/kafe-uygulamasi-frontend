@@ -45,7 +45,18 @@
     "editProduct": "Edit Product"
   },
   "table": {
-    "table": "Tables"
+    "tables": "Tables",
+    "tableManagement": "Table Management",
+    "tableEmpty": "You havent add table yet...",
+    "newTable": "New Table",
+    "newOrder": "New Order",
+    "details": "Details",
+    "categories": "Categories",
+    "products": "Products",
+    "backToCategories": "Back to Categories"
+  },
+  "orders": {
+    "orders": "Orders"
   },
   "form": {
     "name": "Name",
@@ -90,7 +101,10 @@
     "CATEGORIES_UPDATED": "Categories updated successfully.",
     "PRODUCT_CREATED": "Product created successfully.",
     "PRODUCT_DELETED": "Product deleted successfully.",
-    "PRODUCT_UPDATED": "Product updated successfully."
+    "PRODUCT_UPDATED": "Product updated successfully.",
+    "TABLE_CREATED": "Table created successfully.",
+    "TABLE_DELETED": "Table deleted successfully.",
+    "TABLE_UPDATED": "Table updated successfully."
   },
   "selectLanguage": "Select language",
   "company": "Company",

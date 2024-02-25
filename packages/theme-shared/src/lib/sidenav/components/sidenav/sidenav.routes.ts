@@ -25,7 +25,13 @@ export const sidenavRoutes = [
   {
     routeLink: 'table',
     icon: 'fa-solid fa-table',
-    label: 'table.table',
+    label: 'table.tables',
+    role: ['business', 'waiter'],
+  },
+  {
+    routeLink: 'orders',
+    icon: 'fa-solid fa-utensils',
+    label: 'orders.orders',
     role: ['business'],
   },
   // { routeLink: 'qrcode', icon: 'fa-regular fa-qrcode', label: 'qrcode', role: ['business'] },

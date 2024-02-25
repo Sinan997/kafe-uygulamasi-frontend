@@ -18,6 +18,7 @@
       "identity": ["packages/identity/src/index.ts"],
       "menu": ["packages/menu/src/index.ts"],
       "qrcode": ["packages/qrcode/src/index.ts"],
+      "table": ["packages/table/src/index.ts"],
       "theme-shared": ["packages/theme-shared/src/index.ts"]
     }
   }

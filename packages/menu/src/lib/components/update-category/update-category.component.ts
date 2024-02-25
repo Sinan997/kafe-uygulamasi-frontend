@@ -1,7 +1,7 @@
 import { Component, DestroyRef, ElementRef, Input, ViewChild, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustomMessageService, SidenavService } from 'theme-shared';
+import { CustomMessageService } from 'theme-shared';
 import { TrackEnterKeyDirective } from 'core';
 import { MenuService } from '../../services';
 import { NgxValidateCoreModule } from '@ngx-validate/core';
@@ -21,7 +21,6 @@ export class UpdateCategoryComponent {
   customMessageService = inject(CustomMessageService);
   destroyRef = inject(DestroyRef);
   activatedRoute = inject(ActivatedRoute);
-  sidenavService = inject(SidenavService);
   router = inject(Router);
 
   @ViewChild('myInput') myInput: ElementRef;
@@ -71,7 +70,8 @@ export class UpdateCategoryComponent {
           }),
         )
         .subscribe();
-      return;
     }
+    this.isEditing.set(false);
+    this.myInput.nativeElement.blur();
   }
 }

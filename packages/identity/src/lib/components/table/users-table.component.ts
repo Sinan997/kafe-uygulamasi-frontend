@@ -1,11 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { TagModule } from 'primeng/tag';
 import { UserModel } from '../../models/user.model';
 import { IdentityService } from '../../services/identity.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { catchError, of, tap } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
+import { tap } from 'rxjs';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -40,7 +39,6 @@ export class UsersTableComponent {
         username: user.username,
       }),
       header: this.translateService.instant('identity.deleteUserHeader'),
-      icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.service
           .deleteUser(user._id)

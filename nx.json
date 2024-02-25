@@ -29,6 +29,11 @@
           "codeCoverage": true
         }
       }
+    },
+    "@nx/angular:ng-packagr-lite": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "affected": {
@@ -64,5 +69,13 @@
     "@nx/angular:component": {
       "style": "css"
     }
-  }
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    }
+  ]
 }

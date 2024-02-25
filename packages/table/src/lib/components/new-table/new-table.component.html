@@ -1,0 +1,29 @@
+<div class="container-fluid card">
+    <div class="form-group px-2 py-4 d-flex justify-content-between align-items-start">
+      <div class="w-100">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="name"
+          #myInput
+          [readonly]="!isEditing()"
+          (keyup.enter)="onSubmit()"
+        />
+      </div>
+
+      @if (!isEditing()) {
+      <div>
+        <button class="btn btn-primary ms-3" style="white-space: nowrap;" (click)="editButton()">
+          {{ 'table.newTable' | translate }}
+        </button>
+      </div>
+      }@else{
+      <button class="btn btn-success ms-2" (click)="onSubmit()">
+        <i class="fa fa-check"></i>
+      </button>
+      <button class="btn btn-danger ms-2" (click)="abortNewTableName()">
+        <i class="fa fa-times"></i>
+      </button>
+      }
+    </div>
+</div>

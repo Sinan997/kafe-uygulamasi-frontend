@@ -17,11 +17,6 @@ export const routes: Routes = [
     loadChildren: () => import('identity').then((m) => m.IDENTITY_ROUTES),
     canActivate: [isLoggedIn],
   },
-  // {
-  //   path: 'category',
-  //   loadChildren: () => import('category').then((m) => m.CATEGORY_ROUTES),
-  //   canActivate: [isLoggedIn],
-  // },
   {
     path: 'account',
     loadChildren: () => import('account').then((m) => m.ACCOUNT_ROUTES),
@@ -29,6 +24,11 @@ export const routes: Routes = [
   {
     path: 'menu',
     loadChildren: () => import('menu').then((m) => m.MENU_ROUTES),
+    canActivate: [isLoggedIn],
+  },
+  {
+    path: 'table',
+    loadChildren: () => import('table').then((m) => m.TABLE_ROUTES),
     canActivate: [isLoggedIn],
   },
   {

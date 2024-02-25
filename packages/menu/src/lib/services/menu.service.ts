@@ -18,7 +18,7 @@ export class MenuService {
   baseUrl: string = inject(API_URL) + 'menu';
   http = inject(HttpClient);
 
-  getAllCategories() {
+  getCategories() {
     return this.http.get<AllCategoriesReponse>(this.baseUrl + '/all-categories', {});
   }
 

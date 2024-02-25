@@ -1,0 +1,20 @@
+:host ::ng-deep{
+  .new-order-dialog.p-dialog{
+    width: 80vw;
+    height: 80vh;
+  }
+  
+  @media screen and (max-width: 800px){
+    .new-order-dialog.p-dialog{
+      margin-left: 5rem;
+      width: 70vw;
+    }
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
