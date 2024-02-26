@@ -19,4 +19,14 @@ export class TableService {
   getTables(){
     return this.http.get<AllTablesResponse>(this.baseUrl + '/get-tables');
   }
+
+  deleteTable(id: string) {
+    return this.http.request<BasicResponseModel>('delete', this.baseUrl + '/delete-table', {
+      body: { id },
+    });
+  }
+
+  updateTable(id: string, name: string){
+    return this.http.put<BasicResponseModel>(this.baseUrl + '/update-table', { id, name });
+  }
 }

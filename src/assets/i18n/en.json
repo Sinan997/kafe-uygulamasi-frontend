@@ -50,10 +50,15 @@
     "tableEmpty": "You havent add table yet...",
     "newTable": "New Table",
     "newOrder": "New Order",
+    "tableNameHint1": "Name the table like this",
+    "tableNameHint2": "Table 1, Table 2, ...",
     "details": "Details",
     "categories": "Categories",
     "products": "Products",
-    "backToCategories": "Back to Categories"
+    "backToCategories": "Back to Categories",
+    "deleteTableHeader": "Delete Table",
+    "deleteTableMessage": "Are you sure you want to delete the table named {{ name }}?",
+    "addOrdersToTableMessage": "Are you sure you want to add an order to the table named {{ name }}?" 
   },
   "orders": {
     "orders": "Orders"
@@ -85,7 +90,8 @@
     "CATEGORY_TABLE": "An error occurred while bringing in the categories.",
     "CATEGORY_EXIST": "{{ name }} is already used.",
     "CATEGORY_DELETE_ERROR": "Couldn't delete category.",
-    "CATEGORY_UPDATE": "An error while updating categories."
+    "CATEGORY_UPDATE": "An error while updating categories.",
+    "TABLE_NOT_FOUND": "Table not found."
   },
   "response": {
     "LOGIN_SUCCESSFULL": "Logged in succesfully.",

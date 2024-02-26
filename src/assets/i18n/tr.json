@@ -50,10 +50,15 @@
     "tableEmpty": "Henüz masa eklemediniz...",
     "newTable": "Yeni Masa",
     "newOrder": "Sipariş Ekle",
+    "tableNameHint1": "Masayı şu şekilde adlandırın:",
+    "tableNameHint2": "Masa 1, Masa 2, ...",
     "details": "Detaylar",
     "categories": "Kategoriler",
     "products": "Ürünler",
-    "backToCategories": "Kategorilere Geri Dön"
+    "backToCategories": "Kategorilere Geri Dön",
+    "deleteTableHeader": "Masa Sil",
+    "deleteTableMessage": "{{ name }} isimli masayı silmek istediğine emin misin?",
+    "addOrdersToTableMessage": "{{ name }} isimli masaya sipariş eklemek istediğine emin misin?"
   },
   "orders": {
     "orders": "Siparişler"
@@ -85,7 +90,8 @@
     "CATEGORY_TABLE": "Kategorileri getirirken hata oluştu.",
     "CATEGORY_EXIST": "{{ name }} ismi kullanılmakta.",
     "CATEGORY_DELETE_ERROR": "Kategori silinemedi.",
-    "CATEGORY_UPDATE": "Kategorileri güncellerken hata oluştu."
+    "CATEGORY_UPDATE": "Kategorileri güncellerken hata oluştu.",
+    "TABLE_NOT_FOUND": "Masa bulunamadı."
   },
   "response": {
     "LOGIN_SUCCESSFULL": "Başarıyla giriş yapıldı.",

@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { TableModel } from '../../models/table.model';
 import { TableComponent } from '../table/table.component';
 @Component({
@@ -8,7 +8,7 @@ import { TableComponent } from '../table/table.component';
   imports: [TableComponent]
 })
 
-export class AllTablesComponent implements OnInit {
+export class AllTablesComponent{
   tables = input.required<TableModel[]>();
-  ngOnInit() { }
+  @Output() updateList = new EventEmitter();
 }

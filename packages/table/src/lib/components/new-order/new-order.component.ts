@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject, input } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DialogModule } from 'primeng/dialog';
 import { TableService } from '../../services/table.service';
 import { CategoryModel, MenuService } from 'menu';
@@ -9,13 +9,15 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { NgClass } from '@angular/common';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TableModel } from '../../models/table.model';
 
 @Component({
   selector: 'app-new-order-modal',
   templateUrl: 'new-order.component.html',
   styleUrls: ['new-order.component.scss'],
   standalone: true,
-  imports: [TranslateModule, DialogModule, InputNumberModule, ReactiveFormsModule, ConfirmDialogModule, NgClass]
+  imports: [TranslateModule, DialogModule, InputNumberModule, ReactiveFormsModule, ConfirmDialogModule, NgClass],
+  providers: [ConfirmationService]
 })
 
 export class NewOrderComponent implements OnInit {
@@ -23,9 +25,11 @@ export class NewOrderComponent implements OnInit {
   protected readonly service = inject(TableService);
   protected readonly menuService = inject(MenuService);
   protected readonly confirmationService = inject(ConfirmationService);
+  protected readonly translateService = inject(TranslateService);
   selectedCategory: CategoryModel | null = null;
   categories: CategoryModel[];
-  @Input() tableId: string;
+  // @Input() tableId: string;
+  table = input.required<TableModel>();
   @Input() visibleNewOrderDialog = true;
   @Output() visibleNewOrderDialogChange = new EventEmitter<boolean>();
 
@@ -69,6 +73,11 @@ export class NewOrderComponent implements OnInit {
 
   backToCategories() {
     this.selectedCategory = null;
+    this.resetForm();
+  }
+
+  resetForm(){
+    this.selectedCategory = null;
     this.form = this.fb.group({
       products: this.fb.array([])
     });
@@ -86,25 +95,22 @@ export class NewOrderComponent implements OnInit {
 
   onSubmit() {
     if(this.products.find(product => product.get('amount')!.value > 0)){
-      // this.confirmationService.confirm({
-      //   closeOnEscape: true,
-      //   icon: 'fa-solid fa-check',
-      //   message: 'Are you sure that you want to submit the order?',
-      //   accept: () => {
-      //     console.log('accepted');
-      //   }
-      // });
       this.confirmationService.confirm({
-        header: 'Confirmation',
+        header: this.translateService.instant('table.newOrder'),
         acceptIcon: 'pi pi-check mr-2',
         rejectIcon: 'pi pi-times mr-2',
         rejectButtonStyleClass: 'p-button-sm',
         acceptButtonStyleClass: 'p-button-outlined p-button-sm',
         accept: () => {
+          const values = this.products.map(product => product.value).filter(product => product.amount > 0);
+
+          // reset values
+          this.products.forEach(product => product.get('amount')!.setValue(0));
+          this.resetForm();
             // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
         },
         reject: () => {
-            // this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+          this.products.forEach(product => product.get('amount')!.setValue(0));
         }
     });
     }

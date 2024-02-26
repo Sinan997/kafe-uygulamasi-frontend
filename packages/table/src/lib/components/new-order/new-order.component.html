@@ -1,17 +1,26 @@
 <p-dialog [draggable]="false" [modal]="true" [visible]="visibleNewOrderDialog" [closable]="false"
   (enterKey)="onSubmit()" styleClass="new-order-dialog">
   <ng-template pTemplate="header">
-    @if (!selectedCategory) {
-    <span class="fs-4">{{ 'table.categories' | translate }}</span>
-    }@else {
     <div class="d-flex w-100 justify-content-between">
-      <span class="fs-4">{{ 'table.products' | translate }}</span>
-      <button class="btn btn-primary" (click)="backToCategories()">
-        <i class="fa fa-arrow-left"></i>
-        {{'table.backToCategories' | translate}}
-      </button>
+      <span class="fs-4">
+        @if (!selectedCategory) {
+          {{ 'table.categories' | translate }}
+        }@else {
+          {{ 'table.products' | translate }}
+        }
+      </span>
+      <div>
+        @if (selectedCategory) {
+          <button class="btn btn-primary me-2" (click)="backToCategories()">
+            <i class="fa fa-arrow-left"></i>
+            {{'table.backToCategories' | translate}}
+          </button>
+        }
+        <button class="btn btn-secondary" (click)="hideDialog()">
+          <i class="fa fa-xmark"></i>
+        </button>
+      </div>
     </div>
-    }
   </ng-template>
   <ng-template pTemplate="content">
     @if (!selectedCategory) {
@@ -101,7 +110,7 @@
   <ng-template pTemplate="message" let-message>
     <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
       <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
-      <p>Aşağıdaki ürünleri onaylıyor musun?</p>
+      <p>{{'table.addOrdersToTableMessage' | translate: {name:table().name} }}</p>
 
       @for (product of products; track product.value['_id']; let idx = $index) {
       @if (product.value['amount'] > 0) {

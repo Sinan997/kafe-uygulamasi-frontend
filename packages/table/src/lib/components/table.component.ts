@@ -23,7 +23,9 @@ export class TableComponent implements OnInit {
 
   getTables() {
     this.service.getTables().pipe(tap((res) => {
-      this.tables = res.tables;
+      this.tables = res.tables.sort((a,b) => {
+        return Number(a.name.split(' ')[1]) - Number(b.name.split(' ')[1])
+      });
     })).subscribe();
   }
 }
