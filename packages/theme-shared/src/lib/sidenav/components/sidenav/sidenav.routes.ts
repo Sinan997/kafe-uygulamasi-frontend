@@ -34,5 +34,5 @@ export const sidenavRoutes = [
     label: 'orders.orders',
     role: ['business'],
   },
-  // { routeLink: 'qrcode', icon: 'fa-regular fa-qrcode', label: 'qrcode', role: ['business'] },
+  { routeLink: 'qrcode', icon: 'fa-solid fa-qrcode', label: 'qrcode.qrcode', role: ['business'] },
 ];

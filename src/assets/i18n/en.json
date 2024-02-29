@@ -49,8 +49,9 @@
     "tableManagement": "Table Management",
     "tableEmpty": "You havent add table yet...",
     "newTable": "New Table",
+    "tableName": "Table Name",
     "newOrder": "New Order",
-    "tableNameHint1": "Name the table like this",
+    "tableNameHint1": "Name the table like this:",
     "tableNameHint2": "Table 1, Table 2, ...",
     "details": "Details",
     "categories": "Categories",
@@ -58,7 +59,19 @@
     "backToCategories": "Back to Categories",
     "deleteTableHeader": "Delete Table",
     "deleteTableMessage": "Are you sure you want to delete the table named {{ name }}?",
-    "addOrdersToTableMessage": "Are you sure you want to add an order to the table named {{ name }}?" 
+    "addOrdersToTableMessage": "Are you sure you want to add an order to the table named {{ name }}?",
+    "invalidTableNamePattern": "Name the table like this: Table 1, Table 2, ...",
+    "amount": "Amount",
+    "addAll": "Add All",
+    "addedOrders": "Added Orders",
+    "totalPrice": "Total Price",
+    "takeOrder": "Take Order",
+    "tableDetails": "Table Details",
+    "tableDetailsEmpty": "There is no order for this table..."
+  },
+  "qrcode":{
+    "qrcode": "QR Code",
+    "downloadJpeg": "Download in JPEG format."
   },
   "orders": {
     "orders": "Orders"
@@ -110,7 +123,9 @@
     "PRODUCT_UPDATED": "Product updated successfully.",
     "TABLE_CREATED": "Table created successfully.",
     "TABLE_DELETED": "Table deleted successfully.",
-    "TABLE_UPDATED": "Table updated successfully."
+    "TABLE_UPDATED": "Table updated successfully.",
+    "ORDER_CREATED": "Order created successfully.",
+    "ORDERS_TAKEN": "Orders taken successfully."
   },
   "selectLanguage": "Select language",
   "company": "Company",

@@ -10,6 +10,7 @@ import { NgClass } from '@angular/common';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModel } from '../../models/table.model';
+import { CustomMessageService } from 'theme-shared';
 
 @Component({
   selector: 'app-new-order-modal',
@@ -26,9 +27,9 @@ export class NewOrderComponent implements OnInit {
   protected readonly menuService = inject(MenuService);
   protected readonly confirmationService = inject(ConfirmationService);
   protected readonly translateService = inject(TranslateService);
+  protected readonly customMessageService = inject(CustomMessageService);
   selectedCategory: CategoryModel | null = null;
   categories: CategoryModel[];
-  // @Input() tableId: string;
   table = input.required<TableModel>();
   @Input() visibleNewOrderDialog = true;
   @Output() visibleNewOrderDialogChange = new EventEmitter<boolean>();
@@ -76,7 +77,7 @@ export class NewOrderComponent implements OnInit {
     this.resetForm();
   }
 
-  resetForm(){
+  resetForm() {
     this.selectedCategory = null;
     this.form = this.fb.group({
       products: this.fb.array([])
@@ -94,25 +95,22 @@ export class NewOrderComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.products.find(product => product.get('amount')!.value > 0)){
+    if (this.products.find(product => product.get('amount')!.value > 0)) {
       this.confirmationService.confirm({
         header: this.translateService.instant('table.newOrder'),
-        acceptIcon: 'pi pi-check mr-2',
-        rejectIcon: 'pi pi-times mr-2',
-        rejectButtonStyleClass: 'p-button-sm',
-        acceptButtonStyleClass: 'p-button-outlined p-button-sm',
         accept: () => {
-          const values = this.products.map(product => product.value).filter(product => product.amount > 0);
+          const orders = this.products.map(product => product.value).filter(product => product.amount > 0);
 
-          // reset values
-          this.products.forEach(product => product.get('amount')!.setValue(0));
-          this.resetForm();
-            // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+          this.service.addOrder(orders, this.table()._id).pipe(tap((res) => {
+            this.customMessageService.success(res);
+            this.products.forEach(product => product.get('amount')!.setValue(0));
+            this.resetForm();
+          })).subscribe();
         },
         reject: () => {
           this.products.forEach(product => product.get('amount')!.setValue(0));
         }
-    });
+      });
     }
   }
 }

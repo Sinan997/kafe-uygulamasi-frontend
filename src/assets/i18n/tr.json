@@ -49,6 +49,7 @@
     "tableManagement": "Masa Yönetimi",
     "tableEmpty": "Henüz masa eklemediniz...",
     "newTable": "Yeni Masa",
+    "tableName": "Masa Adı",
     "newOrder": "Sipariş Ekle",
     "tableNameHint1": "Masayı şu şekilde adlandırın:",
     "tableNameHint2": "Masa 1, Masa 2, ...",
@@ -58,7 +59,19 @@
     "backToCategories": "Kategorilere Geri Dön",
     "deleteTableHeader": "Masa Sil",
     "deleteTableMessage": "{{ name }} isimli masayı silmek istediğine emin misin?",
-    "addOrdersToTableMessage": "{{ name }} isimli masaya sipariş eklemek istediğine emin misin?"
+    "addOrdersToTableMessage": "{{ name }} isimli masaya sipariş eklemek istediğine emin misin?",
+    "invalidTableNamePattern": "Masayı şu şekilde adlandırın: Masa 1, Masa 2, ...",
+    "amount": "Miktar",
+    "addAll": "Hepsini Ekle",
+    "addedOrders": "Eklenen Siparişler",
+    "totalPrice": "Toplam Fiyat",
+    "takeOrder": "Sipariş Al",
+    "tableDetails": "Masa Detayları",
+    "tableDetailsEmpty": "Bu masa için sipariş bulunmamakta..."
+  },
+  "qrcode":{
+    "qrcode": "QR Kod",
+    "downloadJpeg": "Jpeg Olarak İndir"
   },
   "orders": {
     "orders": "Siparişler"
@@ -110,7 +123,9 @@
     "PRODUCT_UPDATED": "Ürün başarıyla güncellendi.",
     "TABLE_CREATED": "Masa başarıyla oluşturuldu.",
     "TABLE_DELETED": "Masa başarıyla silindi.",
-    "TABLE_UPDATED": "Masa başarıyla güncellendi."
+    "TABLE_UPDATED": "Masa başarıyla güncellendi.",
+    "ORDER_CREATED": "Sipariş başarıyla oluşturuldu.",
+    "ORDERS_TAKEN": "Siparişler başarıyla alındı."
   },
   "selectLanguage": "Dil seçin",
   "company": "Şirket",

@@ -1,0 +1,34 @@
+<p-dialog
+  [draggable]="false"
+  [modal]="true"
+  [visible]="visibleEditTableDialog"
+  [closable]="false"
+  [style]="{ width: '40vw' }"
+  (enterKey)="onSubmit()"
+>
+  <ng-template pTemplate="header">
+    <span class="fs-4">{{ 'menu.editProduct' | translate }}</span>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <form [formGroup]="form" id="editTableForm" (ngSubmit)="onSubmit()">
+      <div class="form-group mb-3">
+        <label for="tableName" class="form-label">{{ 'table.tableName' | translate }}</label>
+        <input
+          type="text"
+          id="tableName"
+          class="form-control"
+          formControlName="name"
+          autofocus
+        />
+      </div>
+    </form>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button class="btn btn-outline-primary me-2" (click)="hideDialog()">
+      {{ 'form.cancel' | translate }}
+    </button>
+    <button class="btn btn-primary" form="editTableForm" type="submit">
+      {{ 'form.save' | translate }}
+    </button>
+  </ng-template>
+</p-dialog>

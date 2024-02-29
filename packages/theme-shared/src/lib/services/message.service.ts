@@ -22,4 +22,13 @@ export class CustomMessageService {
       detail: isTranslated ? message : res.message,
     });
   }
+  error(messageKey: string) {
+    const message = this.translateService.instant(messageKey);
+    const errorKey = this.translateService.instant('errorKey');
+    this.messageService.add({
+      severity: 'error',
+      summary: errorKey,
+      detail: message,
+    });
+  }
 }

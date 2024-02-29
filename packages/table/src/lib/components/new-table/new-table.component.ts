@@ -4,6 +4,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TableService } from '../../services/table.service';
 import { CustomMessageService } from 'theme-shared';
 import { finalize, tap } from 'rxjs';
+import { checkTableName } from '../../utils/name-checker';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-add-table',
@@ -32,6 +34,12 @@ export class NewTableComponent {
   }
 
   onSubmit() {
+    // TODO: Add validation for name input field and show error message if it's not like Table 1, Table 2, etc.
+    if(!checkTableName(this.name)) {
+      this.customMessageService.error('table.invalidTableNamePattern');
+      return;
+    }
+
     this.isEditing.set(false);
     this.myInput.nativeElement.blur();
     if (this.name === '') {

@@ -57,7 +57,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
           catchError((err) => {
             this.handleWithToast(err);
-            return of();
+            return throwError(() => err);
           }),
         );
       }),

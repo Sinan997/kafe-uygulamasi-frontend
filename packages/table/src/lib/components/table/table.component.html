@@ -13,7 +13,7 @@
             </button>
             <ul class="dropdown-menu">
               <li>
-                <a role="button" class="dropdown-item">{{
+                <a role="button" class="dropdown-item" (click)="openEditTableDialog()">{{
                   'form.edit' | translate
                 }}</a>
               </li>
@@ -39,6 +39,21 @@
   <app-new-order-modal
     [table]="table()"
     [(visibleNewOrderDialog)]="visibleNewOrderDialog"
+  />
+}
+
+@if (visibleDetailsDialog) {
+  <app-table-details-modal
+    [table]="table()"
+    [(visibleDetailsDialog)]="visibleDetailsDialog"
+  />
+}
+
+@if (visibleEditTableDialog) {
+  <app-edit-table-modal
+    [table]="table()"
+    [(visibleEditTableDialog)]="visibleEditTableDialog"
+    (updateList)="updateList.emit()"
   />
 }
 

@@ -7,12 +7,14 @@ import { tap } from 'rxjs';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { CustomMessageService } from 'theme-shared';
+import { EditTableComponent } from '../edit-table/edit-table.component';
+import { TableDetailsComponent } from '../table-details/table-details.component';
 
 @Component({
   selector: 'app-table',
   templateUrl: 'table.component.html',
   standalone: true,
-  imports: [TranslateModule, NewOrderComponent, ConfirmDialogModule],
+  imports: [TranslateModule, NewOrderComponent, ConfirmDialogModule, EditTableComponent, TableDetailsComponent],
   providers: [ConfirmationService]
 })
 
@@ -25,12 +27,20 @@ export class TableComponent {
   table = input.required<TableModel>();
 
   visibleNewOrderDialog = false;
+  visibleEditTableDialog = false;
+  visibleDetailsDialog = false;
 
   openNewOrderDialog() {
     this.visibleNewOrderDialog = true;
   }
 
-  openShowDetailsDialog() { }
+  openEditTableDialog() {
+    this.visibleEditTableDialog = true;
+  }
+
+  openShowDetailsDialog() {
+    this.visibleDetailsDialog = true;
+  }
 
   deleteTable() {
     this.confirmationService.confirm({
