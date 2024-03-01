@@ -1,12 +1,15 @@
-<div class="container-fluid card" cdkDropList (cdkDropListDropped)="drop($event)">
+<div class="card" cdkDropList (cdkDropListDropped)="drop($event)">
   @for (category of categories; track category._id) {
   <div class="example-box" cdkDrag>
-    <span class="fs-6">{{ category.name }}</span>
+    <span>
+      {{category.name.length > 8 ? category.name.substring(0,8)+ '..' :
+      category.name}}
+    </span>
     <div class="d-flex align-items-center justify-content-center">
-      <button class="btn btn-primary me-2" (click)="navigateToCategory(category)">
+      <button class="custom-primary btn btn-primary btn-sm" (click)="navigateToCategory(category)">
         {{ 'menu.addProductOrDelete' | translate }}
       </button>
-      <button class="btn btn-danger" (click)="deleteCategory(category)">
+      <button class="custom-primary btn btn-danger btn-sm" (click)="deleteCategory(category)">
         <i class="fa fa-trash"></i>
       </button>
     </div>
@@ -15,3 +18,12 @@
   <span class="p-2 m-1 fs-6">{{ 'menu.categoryEmpty' | translate }}</span>
   }
 </div>
+
+<p-confirmDialog #cd styleClass="basic-dialog">
+  <ng-template pTemplate="footer">
+    <button class="btn btn-outline-danger me-2" (click)="cd.reject()">
+      {{ 'form.cancel' | translate }}
+    </button>
+    <button class="btn btn-danger" (click)="cd.accept()">{{ 'form.delete' | translate }}</button>
+  </ng-template>
+</p-confirmDialog>

@@ -1,22 +1,22 @@
 <p-dialog [draggable]="false" [modal]="true" [visible]="visibleNewOrderDialog" [closable]="false"
   (enterKey)="onSubmit()" styleClass="new-order-dialog">
   <ng-template pTemplate="header">
-    <div class="d-flex w-100 justify-content-between">
+    <div class="new-order-header">
       <span class="fs-4">
         @if (!selectedCategory) {
-          {{ 'table.categories' | translate }}
+        {{ 'table.categories' | translate }}
         }@else {
-          {{ 'table.products' | translate }}
+        {{ 'table.products' | translate }}
         }
       </span>
       <div>
         @if (selectedCategory) {
-          <button class="btn btn-primary me-2" (click)="backToCategories()">
-            <i class="fa fa-arrow-left"></i>
-            {{'table.backToCategories' | translate}}
-          </button>
+        <button class="btn btn-primary back-to-categories-button" (click)="backToCategories()">
+          <i class="fa fa-arrow-left"></i>
+          {{'table.backToCategories' | translate}}
+        </button>
         }
-        <button class="btn btn-secondary" (click)="hideDialog()">
+        <button class="btn btn-secondary xmark-button" (click)="hideDialog()">
           <i class="fa fa-xmark"></i>
         </button>
       </div>
@@ -72,12 +72,15 @@
                     </div>
 
                     <div class='d-flex'>
-                      <button type="button" [disabled]="!product.value['isAvailable']" class="btn btn-secondary me-1"
-                        (click)="decrease(product)">-</button>
+                      <button type="button" [disabled]="!product.value['isAvailable']"
+                        class="btn btn-sm btn-secondary me-1" (click)="decrease(product)">
+                        <i class="fa-solid fa-minus"></i>
+                      </button>
                       <input [disabled]="!product.value['isAvailable']" type="number" formControlName="amount"
                         class="form-control" min="0" value="0">
-                      <button type="button" [disabled]="!product.value['isAvailable']" class="btn btn-secondary ms-1"
-                        (click)="increase(product)">+</button>
+                      <button type="button" [disabled]="!product.value['isAvailable']"
+                        class="btn btn-sm btn-secondary ms-1" (click)="increase(product)"><i
+                          class="fa-solid fa-plus"></i></button>
                     </div>
                   </div>
                 </div>
@@ -91,22 +94,24 @@
     }
   </ng-template>
   <ng-template pTemplate="footer">
-    @if (!selectedCategory) {
-    <button class="btn btn-primary" (click)="hideDialog()">
-      {{ 'form.cancel' | translate }}
-    </button>
-    }@else {
-    <button class="btn btn-outline-primary me-2" (click)="hideDialog()">
-      {{ 'form.cancel' | translate }}
-    </button>
-    <button form="newOrderForm" type="submit" class="btn btn-primary">
-      {{ 'form.save' | translate }}
-    </button>
-    }
+    <div class="pt-3">
+      @if (!selectedCategory) {
+      <button class="btn btn-primary" (click)="hideDialog()">
+        {{ 'form.cancel' | translate }}
+      </button>
+      }@else {
+      <button class="btn btn-outline-primary me-2" (click)="hideDialog()">
+        {{ 'form.cancel' | translate }}
+      </button>
+      <button form="newOrderForm" type="submit" class="btn btn-primary">
+        {{ 'form.save' | translate }}
+      </button>
+      }
+    </div>
   </ng-template>
 </p-dialog>
 
-<p-confirmDialog #cd>
+<p-confirmDialog #cd styleClass="basic-dialog">
   <ng-template pTemplate="message" let-message>
     <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
       <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>

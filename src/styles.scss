@@ -12,7 +12,34 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+
+.basic-dialog.p-dialog{
+  width: 60vw;
+}
+
+@media screen and (max-width: 800px){
+  .basic-dialog.p-dialog{
+    margin-left: 5rem;
+    width: 70vw;
+  }
+}
+
+@media screen and (max-width: 576px){
+  .basic-dialog.p-dialog{
+    width: 80vw;
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 450px){
+  .p-toast{
+    width: 15rem;
+    font-size: 14px;
+  }
 }

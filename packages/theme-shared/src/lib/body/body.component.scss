@@ -7,7 +7,8 @@
   top: 0;
   transition: all 0.5s ease;
   background: #f4f7fa;
-  padding: 3rem;
+  padding: 2rem;
+  padding-top: 4rem;
   overflow-y: scroll;
 }
 
@@ -19,4 +20,22 @@
 .body-md-screen {
   width: calc(100% - 5rem);
   margin-left: 5rem;
+}
+
+@media screen and (max-width: 576px) {
+  .body {
+    width: 100%;
+    margin-left: 0;
+    height: calc(100% - 4rem);
+    padding: 1rem;
+    padding-top: 4rem;
+  }
+  .body-trimmed {
+    width: 100%;
+    margin-left: 0;
+  }
+  .body-md-screen {
+    width: 100%;
+    margin-left: 0;
+  }
 }

@@ -1,9 +1,6 @@
-import { Component, EventEmitter, Input, Output, inject, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
-// import { CategoryService } from '../../services/category.service';
-// import { AddProductModel } from '../../models/add-product.model';
 import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 import { MenuService } from '../../services';
 import { CustomMessageService } from 'theme-shared';

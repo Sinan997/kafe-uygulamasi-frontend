@@ -1,0 +1,38 @@
+<div class="mobile-navbar" [ngClass]="showAll ? 'show' : ''">
+    <div class="mobile-bar d-flex align-items-center">
+        <div style="flex: 1;">
+            <div class="d-flex justify-content-center">
+                @for (data of navData().slice(0,1); track $index) {
+                <a class="link" [routerLink]="[data.routeLink]" [ngClass]="getActiveClass(data)">
+                    {{data.label | translate}}
+                </a>
+                }
+            </div>
+        </div>
+        <div style="flex: 1;" class="d-flex justify-content-center align-items-center h-100">
+            <a class="link" (click)="openRoutes()">
+                <i class="link-icon" [class]="'fa-solid fa-bars'"></i>
+            </a>
+        </div>
+        <div style="flex: 1;">
+            <div class="d-flex justify-content-center">
+                <a class="link" (click)="logout()">
+                    <i class="link-icon" [class]="'fa fa-sign-out'"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div [ngClass]="showAll ? 'show-all-routes': ''">
+        <button class="btn btn-light close-btn" (click)="openRoutes()">
+        <i class="fa fa-xmark"></i>
+        </button>
+        <div class="mt-5">
+            @for (data of navData(); track $index) {
+                <a class="link" [routerLink]="[data.routeLink]" [ngClass]="getActiveClass(data)" (click)="openRoutes()">
+                    {{data.label | translate}}
+                </a>
+                }
+        </div>
+    </div>
+</div>

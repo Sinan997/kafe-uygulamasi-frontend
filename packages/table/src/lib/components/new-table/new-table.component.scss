@@ -1,0 +1,45 @@
+.new-table-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: start
+}
+
+.new-table-button{
+  margin-left: 1rem;
+}
+
+.check-times-buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 1rem;
+}
+
+// .check-time-button{
+//   margin-left: 1rem;
+// }
+.check-button{
+  margin-left: .5rem;
+}
+
+.times-button{
+  margin-left: .5rem;
+}
+
+@media screen and (max-width: 350px) {
+  .new-table-group {
+    flex-direction: column-reverse;
+    justify-content: start;
+    align-items: start;
+  }
+
+  .new-table-button {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+  .check-button{
+    margin-left: 0;
+  }
+}
+

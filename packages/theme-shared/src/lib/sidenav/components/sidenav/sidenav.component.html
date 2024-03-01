@@ -1,7 +1,13 @@
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
   <div class="logo-container">
-    <button class="logo" (click)="toggleCollapse()">A</button>
-    <div class="logo-text" @fadeInOut *ngIf="collapsed">{{ 'company' | translate }}</div>
+    <button class="logo" (click)="toggleCollapse()">
+      @if (collapsed) {
+        <i class="fa-solid fa-arrow-left"></i>
+      }@else {
+        <i class="fa-solid fa-bars"></i>
+      }
+    </button>
+    <!-- <div class="logo-text" @fadeInOut *ngIf="collapsed">{{ 'company' | translate }}</div> -->
     <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
       <i class="fa fa-times close-icon"></i>
     </button>

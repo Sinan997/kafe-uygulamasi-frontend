@@ -42,7 +42,11 @@
     "productName": "Product Name",
     "isProductAvailable": "Is Product Available?",
     "productEmpty": "You havent add product yet...",
-    "editProduct": "Edit Product"
+    "editProduct": "Edit Product",
+    "deleteCategoryHeader": "Delete category",
+    "deleteCategoryMessage": "Are you sure you want to delete the category named {{ name }}?",
+    "deleteProductHeader": "Delete Product",
+    "deleteProductMessage": "Are you sure you want to delete the product named {{ name }}?"
   },
   "table": {
     "tables": "Tables",

@@ -42,7 +42,11 @@
     "productName": "Ürün Adı",
     "isProductAvailable": "Ürün Mevcut mu?",
     "productEmpty": "Henüz ürün eklemediniz...",
-    "editProduct": "Ürünü Düzenle"
+    "editProduct": "Ürünü Düzenle",
+    "deleteCategoryHeader": "Kategoriyi Sil",
+    "deleteCategoryMessage": "{{ name }} isimli kategoriyi silmek istediğine emin misin?",
+    "deleteProductHeader": "Ürünü Sil",
+    "deleteProductMessage": "{{ name }} isimli ürünü silmek istediğine emin misin?"
   },
   "table": {
     "tables": "Masalar",
@@ -137,5 +141,5 @@
   "yes": "Evet",
   "no": "Hayır",
   "price": "Fiyat",
-  "dashboard": "Dashboard"
+  "dashboard": "Ana Sayfa"
 }

@@ -3,9 +3,9 @@
   [modal]="true"
   [visible]="visibleEditTableDialog"
   [closable]="false"
-  [style]="{ width: '40vw' }"
   (enterKey)="onSubmit()"
->
+  styleClass="basic-dialog"
+  >
   <ng-template pTemplate="header">
     <span class="fs-4">{{ 'menu.editProduct' | translate }}</span>
   </ng-template>

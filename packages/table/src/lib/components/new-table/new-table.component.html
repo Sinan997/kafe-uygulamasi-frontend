@@ -1,26 +1,28 @@
 <div class="container-fluid card">
-  <div class="form-group px-2 py-4 d-flex justify-content-between align-items-start">
+  <div class="form-group px-2 py-4 new-table-group">
     <div class="w-100">
       <input type="text" class="form-control" [(ngModel)]="name" #myInput [readonly]="!isEditing()"
         (keyup.enter)="onSubmit()" />
-      <small>{{'table.tableNameHint1' | translate}}
-        <strong>{{'table.tableNameHint2' | translate}}</strong>
-      </small>
     </div>
 
     @if (!isEditing()) {
     <div>
-      <button class="btn btn-primary ms-3" style="white-space: nowrap;" (click)="editButton()">
+      <button class="btn btn-primary new-table-button" style="white-space: nowrap;" (click)="editButton()">
         {{ 'table.newTable' | translate }}
       </button>
     </div>
     }@else{
-    <button class="btn btn-success ms-2" (click)="onSubmit()">
-      <i class="fa fa-check"></i>
-    </button>
-    <button class="btn btn-danger ms-2" (click)="abortNewTableName()">
-      <i class="fa fa-times"></i>
-    </button>
+    <div class="check-times-buttons">
+      <button class="btn btn-success check-button" (click)="onSubmit()">
+        <i class="fa fa-check"></i>
+      </button>
+      <button class="btn btn-danger times-button" (click)="abortNewTableName()">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
     }
   </div>
+  <small>{{'table.tableNameHint1' | translate}}
+    <strong>{{'table.tableNameHint2' | translate}}</strong>
+  </small>
 </div>

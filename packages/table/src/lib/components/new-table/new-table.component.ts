@@ -11,7 +11,8 @@ import { MessageService } from 'primeng/api';
   selector: 'app-add-table',
   standalone: true,
   imports: [FormsModule, TranslateModule],
-  templateUrl: 'new-table.component.html'
+  templateUrl: 'new-table.component.html',
+  styleUrl: 'new-table.component.scss'
 })
 
 export class NewTableComponent {
@@ -35,7 +36,7 @@ export class NewTableComponent {
 
   onSubmit() {
     // TODO: Add validation for name input field and show error message if it's not like Table 1, Table 2, etc.
-    if(!checkTableName(this.name)) {
+    if (!checkTableName(this.name)) {
       this.customMessageService.error('table.invalidTableNamePattern');
       return;
     }

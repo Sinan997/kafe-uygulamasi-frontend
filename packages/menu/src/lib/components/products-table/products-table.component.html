@@ -1,22 +1,22 @@
 <div class="container-fluid card mt-3" cdkDropList (cdkDropListDropped)="drop($event)">
   @for (product of products; track product._id) {
   <div class="example-box" cdkDrag>
-    <span class="fs-6">{{ product.name }}</span>
+    <span>{{ product.name }}</span>
     <div class="d-flex align-items-center justify-content-center">
-      <span>{{ product.price | currency : '₺' }}</span>
+      <span class="me-1">{{ product.price | currency : '₺' }}</span>
       <i
-        class="mx-1 fa fa-circle rounded"
+        class="fa fa-circle rounded"
         [ngClass]="product.isAvailable ? 'text-success' : 'text-danger'"
       ></i>
 
       <button
-        class="btn btn-primary mx-2"
+        class="btn btn-sm btn-primary mx-2"
         styleClass="p-button-link"
         (click)="openEditProductModal(product)"
       >
         {{ 'form.edit' | translate }}
       </button>
-      <button class="btn btn-danger" (click)="deleteProduct(product)">
+      <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)">
         <i class="fa fa-trash"></i>
       </button>
     </div>
@@ -25,6 +25,15 @@
   <span class="p-2 m-1 fs-6">{{ 'menu.productEmpty' | translate }}</span>
   }
 </div>
+
+<p-confirmDialog #cd styleClass="basic-dialog">
+  <ng-template pTemplate="footer">
+    <button class="btn btn-outline-danger me-2" (click)="cd.reject()">
+      {{ 'form.cancel' | translate }}
+    </button>
+    <button class="btn btn-danger" (click)="cd.accept()">{{ 'form.delete' | translate }}</button>
+  </ng-template>
+</p-confirmDialog>
 
 @if (visibleEditProductDialog) {
 <app-edit-user-modal

@@ -1,20 +1,17 @@
 import {
   Component,
   EventEmitter,
-  Input,
-  NgZone,
-  OnInit,
+  Input, OnInit,
   Output,
-  inject,
-  signal,
+  inject
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IdentityService } from '../../services/identity.service';
 import { UserModel } from '../../models/user.model';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { catchError, finalize, of, tap } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
+import { tap } from 'rxjs';
 import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 import { CustomMessageService } from 'theme-shared';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';

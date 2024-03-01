@@ -7,7 +7,9 @@
   >
     @for (lang of langs; track $index) {
     <option [ngValue]="lang">
-      {{ lang | uppercase }}
+      <div>
+        {{ lang | uppercase }}
+      </div>
     </option>
     }
   </select>

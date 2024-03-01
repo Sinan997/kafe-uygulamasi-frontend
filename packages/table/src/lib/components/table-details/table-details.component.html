@@ -11,13 +11,13 @@
   <ng-template pTemplate="content">
     @if (form) {
     <form [formGroup]="form" id="detailsForm" (ngSubmit)="onSubmit()">
-      <div class="row">
+      <div class="row flex-column-reverse flex-md-row">
         <ng-container formArrayName="orders">
-          <div class="col col-md-8 p-0 m-0">
+          <div class="col-md-8 col-12 p-0 m-0">
             @for (order of this.ordersControls; track order.value['_id']; let idx = $index) {
             <div class="card m-2" [formGroupName]="idx">
               <div class="card-body">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex flex-sm-row flex-column">
                   <div class="d-flex justify-content-between">
                     <div class="d-flex flex-column mb-3">
                       <h5 class="card-title border-bottom">
@@ -53,7 +53,7 @@
           </div>
         </ng-container>
         @if (this.orders().length) {
-        <div class="col col-md-4 p-0 m-0 position-fixed" style="right: 1.2rem;">
+        <div class="col-md-4 col-12 p-0 m-0 added-orders">
           <div class="card m-2">
             <div class="card-body">
               <h5 class="card-title">{{'table.addedOrders' | translate}}</h5>

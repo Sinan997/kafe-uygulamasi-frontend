@@ -1,15 +1,40 @@
 :host ::ng-deep{
   .table-detail-dialog.p-dialog{
-    width: 80vw;
-    height: 80vh;
+    width: 90vw;
+    height: 90vh;
+    margin-left: 5rem;
   }
   
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 900px){
     .table-detail-dialog.p-dialog{
-      margin-left: 5rem;
-      width: 70vw;
+      width: 80vw;
     }
   }
+
+  @media screen and (max-width: 576px){
+    .table-detail-dialog.p-dialog{
+      margin-left: 0;
+      height: calc(100% - 6rem);
+      margin-bottom: 5rem;
+    }
+
+    .xmark-button{
+      display: none;
+    }
+  }
+}
+
+.added-orders{
+  position: fixed;
+  right: 1.2rem;
+}
+
+@media screen and (max-width: 768px){
+  .added-orders{
+    right: 0;
+    position: relative;
+  }
+  
 }
 
 /* Chrome, Safari, Edge, Opera */

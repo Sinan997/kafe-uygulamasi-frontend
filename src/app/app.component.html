@@ -1,6 +1,7 @@
 @if (authService.userValue) {
 <ng-container>
-  <app-sidenav (onLogout)="logout()" (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+  <app-sidenav class="sidenav" (onLogout)="logout()" (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+  <app-mobile-navbar class="mobile" [screenWidth]="screenWidth"></app-mobile-navbar>
   <app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-body>
 </ng-container>
 }@else {
@@ -8,6 +9,7 @@
 }
 
 <p-toast
+  class="my-toast"
   [showTransformOptions]="'translateX(100%)'"
   [showTransitionOptions]="'500ms'"
   [hideTransitionOptions]="'500ms'"

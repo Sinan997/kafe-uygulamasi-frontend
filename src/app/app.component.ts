@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { NgIf } from '@angular/common';
 import { DisabledDirective } from './disabled.directive';
+import { MobileNavbarComponent } from 'packages/theme-shared/src/lib/sidenav/components/mobile-navbar/mobile-navbar.component';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -16,7 +17,7 @@ interface SideNavToggle {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [SidenavComponent, BodyComponent, RouterOutlet, ToastModule, NgIf, DisabledDirective],
+  imports: [SidenavComponent,MobileNavbarComponent, BodyComponent, RouterOutlet, ToastModule, NgIf, DisabledDirective],
 })
 export class AppComponent {
   authService = inject(AuthService);
