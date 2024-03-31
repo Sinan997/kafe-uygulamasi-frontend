@@ -75,7 +75,7 @@
   },
   "qrcode":{
     "qrcode": "QR Code",
-    "downloadJpeg": "Download in JPEG format."
+    "downloadJpeg": "Download in SVG format."
   },
   "orders": {
     "orders": "Orders"

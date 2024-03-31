@@ -75,7 +75,7 @@
   },
   "qrcode":{
     "qrcode": "QR Kod",
-    "downloadJpeg": "Jpeg Olarak İndir"
+    "downloadJpeg": "SVG Olarak İndir"
   },
   "orders": {
     "orders": "Siparişler"
