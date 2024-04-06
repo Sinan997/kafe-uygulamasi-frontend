@@ -44,4 +44,10 @@ export class TableService {
   takeOrders(tableId: string, orders: { _id: string; name: string, price: number, amount: number; }[]) {
     return this.http.post<GetTableOrdersResponse>(this.baseUrl + '/take-orders', { tableId, orders });
   }
+
+  deleteOrder(orderId: string, tableId: string){
+    return this.http.request<BasicResponseModel>('delete', this.baseUrl + '/delete-order', {
+      body: { orderId, tableId },
+    });
+  }
 }

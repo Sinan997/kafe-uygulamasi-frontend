@@ -20,12 +20,10 @@ export class QrcodeComponent implements OnInit {
   @ViewChild('qrcodetemplate') qrcodeTemplate: HTMLElement;
 
   ngOnInit(): void {
-    console.log();
     const businessName = this.authService.userValue?.businessId.name;
     const url = 'http://www.localhost:4200/menu/';
     this.qrcodeService.getQrCode(url + businessName).subscribe((res) => {
       this.svg = res.svg;
-      console.log(res.svg);
     });
   }
 

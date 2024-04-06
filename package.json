@@ -26,6 +26,7 @@
     "html2canvas": "^1.0.0",
     "primeng": "^17.0.0",
     "rxjs": "~7.8.0",
+    "socket.io-client": "^4.7.5",
     "tslib": "^2.3.0",
     "zone.js": "0.14.2"
   },
@@ -42,8 +43,8 @@
     "@nx/angular": "~18.0.0",
     "@nx/eslint": "~18.0.0",
     "@nx/eslint-plugin": "~18.0.0",
-    "@nx/jest": "18.0.4",
-    "@nx/js": "18.0.4",
+    "@nx/jest": "18.0.8",
+    "@nx/js": "18.0.8",
     "@nx/workspace": "~18.0.0",
     "@schematics/angular": "^17.0.0",
     "@swc-node/register": "~1.8.0",
@@ -67,7 +68,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "nx": "~18.0.0",
-    "prettier": "^2.6.2",
+    "prettier": "^3.0.0",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "typescript": "~5.2.0"

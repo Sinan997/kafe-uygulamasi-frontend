@@ -1,5 +1,11 @@
-<p-dialog [draggable]="false" [modal]="true" [visible]="visibleDetailsDialog" [closable]="false" (enterKey)="onSubmit()"
-  styleClass="table-detail-dialog">
+<p-dialog
+  [draggable]="false"
+  [modal]="true"
+  [visible]="visibleDetailsDialog"
+  [closable]="false"
+  (enterKey)="onSubmit()"
+  styleClass="table-detail-dialog"
+>
   <ng-template pTemplate="header">
     <div class="d-flex w-100 justify-content-between">
       <span class="fs-4">{{ 'table.tableDetails' | translate }}</span>
@@ -10,72 +16,121 @@
   </ng-template>
   <ng-template pTemplate="content">
     @if (form) {
-    <form [formGroup]="form" id="detailsForm" (ngSubmit)="onSubmit()">
-      <div class="row flex-column-reverse flex-md-row">
-        <ng-container formArrayName="orders">
-          <div class="col-md-8 col-12 p-0 m-0">
-            @for (order of this.ordersControls; track order.value['_id']; let idx = $index) {
-            <div class="card m-2" [formGroupName]="idx">
-              <div class="card-body">
-                <div class="d-flex flex-sm-row flex-column">
-                  <div class="d-flex justify-content-between">
-                    <div class="d-flex flex-column mb-3">
-                      <h5 class="card-title border-bottom">
-                        {{order.value['name'].length > 9 ? order.value['name'].substring(0,9)+ '.' :
-                        order.value['name']}}
-                      </h5>
-                      <span class="border-bottom">{{'table.amount' | translate}}: <span class="fw-bold">
-                          {{maxAmount(order)}}</span></span>
-                      <span>{{'price' | translate}}: <span class="fw-bold">
-                          {{order.value['price']}}</span></span>
-                    </div>
-                  </div>
-
-                  <div class="d-flex flex-column justify-content-between align-items-end">
-                    <div class='d-flex' style="height: fit-content;">
-                      <button type="button" class="btn btn-secondary me-1" (click)="decrease(order)">-</button>
-                      <input type="number" formControlName="amount" class="form-control" style="height: fit-content;">
-                      <button type="button" class="btn btn-secondary ms-1" (click)="increase(order)">+</button>
+      <form [formGroup]="form" id="detailsForm" (ngSubmit)="onSubmit()">
+        <div class="row flex-column-reverse flex-md-row">
+          <ng-container formArrayName="orders">
+            <div class="col-md-7 col-12 p-0 m-0">
+              @for (order of this.ordersControls; track order.value['_id']; let idx = $index) {
+                <div class="card m-2" [formGroupName]="idx">
+                  <div class="card-body">
+                    <button
+                      class="btn btn-danger btn-sm"
+                      style="position: absolute; right: 5px; top: 5px; font-size: 9px"
+                      (click)="deleteOrder(order.value['_id'])"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-5">
+                          <div class="d-flex flex-column mb-3">
+                            <h5 class="card-title border-bottom">
+                              {{
+                                order.value['name'].length > 9
+                                  ? order.value['name'].substring(0, 9) + '.'
+                                  : order.value['name']
+                              }}
+                            </h5>
+                            <span class="border-bottom"
+                              >{{ 'table.amount' | translate }}:
+                              <span class="fw-bold"> {{ maxAmount(order) }}</span></span
+                            >
+                            <span
+                              >{{ 'price' | translate }}:
+                              <span class="fw-bold"> {{ order.value['price'] }}</span></span
+                            >
+                          </div>
+                        </div>
+                        <div class="col-lg-7 d-flex flex-column justify-content-center">
+                          <div class="d-flex" style="height: fit-content">
+                            <button
+                              type="button"
+                              class="btn btn-secondary me-1"
+                              (click)="decrease(order)"
+                            >
+                              -
+                            </button>
+                            <input
+                              type="number"
+                              formControlName="amount"
+                              class="form-control"
+                              style="height: fit-content"
+                              readonly
+                            />
+                            <button
+                              type="button"
+                              class="btn btn-secondary ms-1"
+                              (click)="increase(order)"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            }@empty {
-              <span class="p-2 m-1 fs-6">{{ 'table.tableDetailsEmpty' | translate }}</span>
-            }
-            @if (this.orders().length) {
-            <div class="d-flex justify-content-end me-2">
-              <button class="btn btn-primary justify-self-end" (click)="addAll()">{{'table.addAll' |
-                translate}}</button>
-            </div>
-            }
-          </div>
-        </ng-container>
-        @if (this.orders().length) {
-        <div class="col-md-4 col-12 p-0 m-0 added-orders">
-          <div class="card m-2">
-            <div class="card-body">
-              <h5 class="card-title">{{'table.addedOrders' | translate}}</h5>
-              @for (order of this.addedOrders(); track $index) {
-              <div class="d-flex justify-content-between mt-1 border-bottom">
-                <button class="bg-transparent border-0" (click)="removeOrderFromAdded(order._id)"><i class="fa fa-xmark"></i></button>
-                <span class="card-text">{{order.name}}</span>
-                <span class="fw-bold">{{order.amount}}</span>
-              </div>
+              } @empty {
+                <span class="p-2 m-1 fs-6">{{ 'table.tableDetailsEmpty' | translate }}</span>
+              }
+              @if (this.orders().length) {
+                <div class="d-flex justify-content-end me-2">
+                  <button class="btn btn-primary justify-self-end" (click)="addAll()">
+                    {{ 'table.addAll' | translate }}
+                  </button>
+                </div>
               }
             </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-              <span>
-                {{'table.totalPrice' | translate}}: <span class="fw-bold">{{totalPrice}}</span>
-              </span>
-              <button class="btn btn-sm btn-primary" (click)="takeOrder()">{{'table.takeOrder' | translate}}</button>
+          </ng-container>
+          @if (this.orders().length) {
+            <div class="col-md-5 col-12 p-0 m-0 added-orders">
+              <div class="card m-2">
+                <div class="card-body">
+                  <h5 class="card-title">{{ 'table.addedOrders' | translate }}</h5>
+                  @for (order of this.addedOrders(); track $index) {
+                    <div class="d-flex justify-content-between mt-1 border-bottom">
+                      <button
+                        class="bg-transparent border-0 text-danger"
+                        (click)="removeOrderFromAdded(order._id)"
+                      >
+                        <i class="fa fa-xmark"></i>
+                      </button>
+                      <span class="card-text">{{ order.name }}</span>
+                      <span class="fw-bold">{{ order.amount }}</span>
+                    </div>
+                  }
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                  <span>
+                    {{ 'table.totalPrice' | translate }}:
+                    <span class="fw-bold">{{ totalPrice }}</span>
+                  </span>
+                  @if (!takeOrderLoading()) {
+                    <button class="btn btn-sm btn-primary" (click)="takeOrder()">
+                      {{ 'table.takeOrder' | translate }}
+                    </button>
+                  } @else {
+                    <button class="btn btn-sm btn-primary" type="button" disabled>
+                      <i class="fa-solid fa-spinner fa-spin me-1"></i>
+                      <span>{{ 'loading' | translate }}</span>
+                    </button>
+                  }
+                </div>
+              </div>
             </div>
-          </div>
+          }
         </div>
-        }
-      </div>
-    </form>
+      </form>
     }
   </ng-template>
   <ng-template pTemplate="footer">
@@ -84,3 +139,12 @@
     </button>
   </ng-template>
 </p-dialog>
+
+<p-confirmDialog #cd styleClass="basic-dialog">
+  <ng-template pTemplate="footer">
+    <button class="btn btn-outline-danger me-2" (click)="cd.reject()">
+      {{ 'form.cancel' | translate }}
+    </button>
+    <button class="btn btn-danger" (click)="cd.accept()">{{ 'form.delete' | translate }}</button>
+  </ng-template>
+</p-confirmDialog>

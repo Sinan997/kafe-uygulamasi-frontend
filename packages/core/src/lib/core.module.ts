@@ -1,6 +1,7 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandlerInterceptor, SetAccessTokenInterceptor } from 'core';
+import { LocalStorageListenerService } from './services/local-storage-listener.service';
 
 @NgModule({})
 export class CoreModule {
@@ -17,6 +18,12 @@ export class CoreModule {
           provide: HTTP_INTERCEPTORS,
           useClass: ErrorHandlerInterceptor,
           multi: true,
+        },
+        {
+          provide: APP_INITIALIZER,
+          multi: true,
+          deps: [LocalStorageListenerService],
+          useFactory: () => () => {},
         },
       ],
     };

@@ -73,12 +73,16 @@
     "tableDetails": "Masa Detayları",
     "tableDetailsEmpty": "Bu masa için sipariş bulunmamakta..."
   },
-  "qrcode":{
+  "qrcode": {
     "qrcode": "QR Kod",
     "downloadJpeg": "SVG Olarak İndir"
   },
-  "orders": {
-    "orders": "Siparişler"
+  "order": {
+    "orders": "Siparişler",
+    "amount": "Miktar",
+    "isReady": "Hazır",
+    "orderIsReady": "Sipariş hazır",
+    "orderIsDelivered": "Sipariş teslim edildi"
   },
   "form": {
     "name": "İsim",
@@ -108,7 +112,8 @@
     "CATEGORY_EXIST": "{{ name }} ismi kullanılmakta.",
     "CATEGORY_DELETE_ERROR": "Kategori silinemedi.",
     "CATEGORY_UPDATE": "Kategorileri güncellerken hata oluştu.",
-    "TABLE_NOT_FOUND": "Masa bulunamadı."
+    "TABLE_NOT_FOUND": "Masa bulunamadı.",
+    "ORDER_IS_ALREADY_READY": "Sipariş zaten hazır."
   },
   "response": {
     "LOGIN_SUCCESSFULL": "Başarıyla giriş yapıldı.",
@@ -129,7 +134,10 @@
     "TABLE_DELETED": "Masa başarıyla silindi.",
     "TABLE_UPDATED": "Masa başarıyla güncellendi.",
     "ORDER_CREATED": "Sipariş başarıyla oluşturuldu.",
-    "ORDERS_TAKEN": "Siparişler başarıyla alındı."
+    "ORDERS_TAKEN": "Siparişler başarıyla alındı.",
+    "ORDER_SET_READY": "Sipariş hazırlandı.",
+    "ORDER_SET_DELIVERED": "Sipariş teslim edildi.",
+    "ORDER_DELETED": "Sipariş başarıyla silindi."
   },
   "selectLanguage": "Dil seçin",
   "company": "Şirket",
@@ -141,5 +149,6 @@
   "yes": "Evet",
   "no": "Hayır",
   "price": "Fiyat",
-  "dashboard": "Ana Sayfa"
+  "dashboard": "Ana Sayfa",
+  "loading": "Yükleniyor..."
 }

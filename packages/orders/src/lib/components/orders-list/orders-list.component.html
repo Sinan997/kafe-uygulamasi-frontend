@@ -1,0 +1,13 @@
+@for (order of orders(); track $index; let first = $first) {
+  <div class="card" [ngClass]="{ 'mt-2': !first }">
+    <h5 class="card-header">{{ order.productId.name }} - {{ order.tableId.name }}</h5>
+    <div class="card-body">
+      <h5 class="card-title mb-2">{{ 'order.amount' | translate }}: {{ order.amount }}</h5>
+      <p class="card-text">
+        {{ 'order.isReady' | translate }}: {{ (order.isReady ? 'yes' : 'no') | translate }}
+      </p>
+      <button href="#" class="btn btn-primary me-1" (click)="setOrderReady(order)">{{ 'order.orderIsReady' | translate }}</button>
+      <button href="#" class="btn btn-primary" (click)="setOrderDelivered(order)">{{ 'order.orderIsDelivered' | translate }}</button>
+    </div>
+  </div>
+}

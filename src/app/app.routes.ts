@@ -36,6 +36,11 @@ export const routes: Routes = [
     loadChildren: () => import('qrcode').then((m) => m.QRCODE_ROUTES),
     canActivate: [isLoggedIn],
   },
+  {
+    path: 'orders',
+    loadChildren: () => import('orders').then((m) => m.ORDERS_ROUTES),
+    canActivate: [isLoggedIn],
+  },
 
   { path: '**', component: ErrorPageComponent },
 ];

@@ -73,12 +73,16 @@
     "tableDetails": "Table Details",
     "tableDetailsEmpty": "There is no order for this table..."
   },
-  "qrcode":{
+  "qrcode": {
     "qrcode": "QR Code",
     "downloadJpeg": "Download in SVG format."
   },
-  "orders": {
-    "orders": "Orders"
+  "order": {
+    "orders": "Orders",
+    "amount": "Amount",
+    "isReady": "Ready",
+    "orderIsReady": "Order is ready",
+    "orderIsDelivered": "Order is delivered"
   },
   "form": {
     "name": "Name",
@@ -108,7 +112,8 @@
     "CATEGORY_EXIST": "{{ name }} is already used.",
     "CATEGORY_DELETE_ERROR": "Couldn't delete category.",
     "CATEGORY_UPDATE": "An error while updating categories.",
-    "TABLE_NOT_FOUND": "Table not found."
+    "TABLE_NOT_FOUND": "Table not found.",
+    "ORDER_IS_ALREADY_READY": "Order is already ready."
   },
   "response": {
     "LOGIN_SUCCESSFULL": "Logged in succesfully.",
@@ -129,7 +134,10 @@
     "TABLE_DELETED": "Table deleted successfully.",
     "TABLE_UPDATED": "Table updated successfully.",
     "ORDER_CREATED": "Order created successfully.",
-    "ORDERS_TAKEN": "Orders taken successfully."
+    "ORDERS_TAKEN": "Orders taken successfully.",
+    "ORDER_SET_READY": "Order is ready.",
+    "ORDER_SET_DELIVERED": "Order is delivered.",
+    "ORDER_DELETED": "Order deleted successfully."
   },
   "selectLanguage": "Select language",
   "company": "Company",
@@ -141,5 +149,6 @@
   "yes": "Yes",
   "no": "No",
   "price": "Price",
-  "dashboard": "Dashboard"
+  "dashboard": "Dashboard",
+  "loading": "Loading..."
 }
