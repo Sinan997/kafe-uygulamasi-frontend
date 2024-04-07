@@ -6,8 +6,8 @@
       <p class="card-text">
         {{ 'order.isReady' | translate }}: {{ (order.isReady ? 'yes' : 'no') | translate }}
       </p>
-      <button href="#" class="btn btn-primary me-1" (click)="setOrderReady(order)">{{ 'order.orderIsReady' | translate }}</button>
-      <button href="#" class="btn btn-primary" (click)="setOrderDelivered(order)">{{ 'order.orderIsDelivered' | translate }}</button>
+      <button href="#" class="btn btn-primary mt-1 me-1" (click)="setOrderReady(order)">{{ 'order.orderIsReady' | translate }}</button>
+      <button href="#" class="btn btn-primary mt-1" (click)="setOrderDelivered(order)">{{ 'order.orderIsDelivered' | translate }}</button>
     </div>
   </div>
 }

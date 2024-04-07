@@ -24,6 +24,7 @@ export class CustomMessageService {
   }
   error(messageKey: string) {
     const message = this.translateService.instant(messageKey);
+    console.log(message);
     const errorKey = this.translateService.instant('errorKey');
     this.messageService.add({
       severity: 'error',

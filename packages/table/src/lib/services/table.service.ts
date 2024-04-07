@@ -5,8 +5,7 @@ import { API_URL } from 'core';
 import { AllTablesResponse } from '../models/all-tables-response.model';
 import { TableModel } from '../models/table.model';
 import { GetTableOrdersResponse } from '../models/table-orders-response.model';
-import { OrderModel } from '../models/order.model';
-import { ProductModel } from 'menu';
+import { FormOrderModel } from '../models/form-order.model';
 
 @Injectable({
   providedIn: 'root',
@@ -41,13 +40,16 @@ export class TableService {
     return this.http.post<GetTableOrdersResponse>(this.baseUrl + '/get-table-orders', { tableId });
   }
 
-  takeOrders(tableId: string, orders: { _id: string; name: string, price: number, amount: number; }[]) {
-    return this.http.post<GetTableOrdersResponse>(this.baseUrl + '/take-orders', { tableId, orders });
+  takeOrders(tableId: string, orders: FormOrderModel[]) {
+    return this.http.post<GetTableOrdersResponse>(this.baseUrl + '/take-orders', {
+      tableId,
+      orders,
+    });
   }
 
-  deleteOrder(orderId: string, tableId: string){
+  deleteOrder(orderIds: string[], tableId: string) {
     return this.http.request<BasicResponseModel>('delete', this.baseUrl + '/delete-order', {
-      body: { orderId, tableId },
+      body: { orderIds, tableId },
     });
   }
 }

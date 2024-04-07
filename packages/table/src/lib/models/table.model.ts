@@ -1,4 +1,4 @@
-import { OrderModel } from "./order.model";
+import { OrderModel } from "orders";
 
 export interface TableModel { 
   _id: string;

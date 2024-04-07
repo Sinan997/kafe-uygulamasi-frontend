@@ -11,6 +11,7 @@ import { CustomMessageService } from 'theme-shared';
   standalone: true,
   selector: 'app-orders-list',
   templateUrl: './orders-list.component.html',
+  styleUrl: './orders-list.component.scss',
   imports: [NgClass, TranslateModule],
 })
 export class OrdersListComponent implements OnInit {
