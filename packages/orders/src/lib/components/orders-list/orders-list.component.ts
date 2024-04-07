@@ -11,7 +11,6 @@ import { CustomMessageService } from 'theme-shared';
   standalone: true,
   selector: 'app-orders-list',
   templateUrl: './orders-list.component.html',
-  styleUrl: './orders-list.component.scss',
   imports: [NgClass, TranslateModule],
 })
 export class OrdersListComponent implements OnInit {
@@ -23,19 +22,21 @@ export class OrdersListComponent implements OnInit {
   constructor() {
     effect(() => {
       if (this.socketIOService.isOrderUpdated()) {
-        this.service.getOrders().subscribe((res) => {
-          this.orders.set(res.orders.reverse());
-        });
+        this.getOrders();
       }
     });
   }
 
   ngOnInit(): void {
     if (!this.socketIOService.isOrderUpdated()) {
-      this.service.getOrders().subscribe((res) => {
-        this.orders.set(res.orders.reverse());
-      });
+      this.getOrders();
     }
+  }
+
+  getOrders() {
+    this.service.getOrders().subscribe((res) => {
+      this.orders.set(res.orders.reverse().filter((order) => !order.isDelivered));
+    });
   }
 
   setOrderReady(order: OrderModel) {
