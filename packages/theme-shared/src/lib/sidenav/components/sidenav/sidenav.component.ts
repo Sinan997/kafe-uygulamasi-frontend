@@ -95,7 +95,7 @@ export class SidenavComponent implements OnInit {
   }
 
   getActiveClass(data: INavbarData): string {
-    return this.router.url.includes(data.routeLink) ? 'active' : '';
+    return this.router.url.split('/')[1] === data.routeLink ? 'active' : '';
   }
 
   logout() {

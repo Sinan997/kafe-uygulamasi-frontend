@@ -1,0 +1,6 @@
+<select class="form-select" (change)="setValue($event)">
+  @for (item of categories(); track $index; let first = $first) {
+    <option [value]="item" [selected]="first">{{ item }}</option>
+  }
+</select>
+<canvas id="category-chart"></canvas>

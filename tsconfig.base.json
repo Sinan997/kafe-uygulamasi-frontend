@@ -15,6 +15,7 @@
       "business-management": ["packages/business-management/src/index.ts"],
       "category": ["packages/category/src/index.ts"],
       "core": ["packages/core/src/index.ts"],
+      "dashboard": ["packages/dashboard/src/index.ts"],
       "identity": ["packages/identity/src/index.ts"],
       "menu": ["packages/menu/src/index.ts"],
       "orders": ["packages/orders/src/index.ts"],

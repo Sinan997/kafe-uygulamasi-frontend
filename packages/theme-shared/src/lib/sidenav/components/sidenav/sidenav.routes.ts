@@ -1,6 +1,6 @@
 export const sidenavRoutes = [
   {
-    routeLink: '/dashboard',
+    routeLink: 'dashboard',
     icon: 'fa-solid fa-house-user',
     label: 'dashboard',
   },
