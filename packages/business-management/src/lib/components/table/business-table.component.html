@@ -57,9 +57,12 @@
   </ng-template>
 </p-confirmDialog>
 
-<app-edit-business-modal
-  *ngIf="visibleEditBusinessDialog"
-  [business]="business"
-  [(visibleEditBusinessDialog)]="visibleEditBusinessDialog"
-  (updateList)="updateList.emit()"
-/>
+@defer {
+  @if (visibleEditBusinessDialog) {
+    <app-edit-business-modal
+      [business]="business"
+      [(visibleEditBusinessDialog)]="visibleEditBusinessDialog"
+      (updateList)="updateList.emit()"
+    />
+  }
+}

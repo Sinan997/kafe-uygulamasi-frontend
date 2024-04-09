@@ -3,6 +3,8 @@
   <app-users-table (updateList)="getUsers()" [users]="users" />
 </div>
 
-@if (visibleNewUserDialog) {
-<app-new-user-modal [(visibleNewUserDialog)]="visibleNewUserDialog" (updateList)="getUsers()" />
+@defer {
+  @if (visibleNewUserDialog) {
+    <app-new-user-modal [(visibleNewUserDialog)]="visibleNewUserDialog" (updateList)="getUsers()" />
+  }
 }

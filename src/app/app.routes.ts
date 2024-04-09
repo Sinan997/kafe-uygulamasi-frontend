@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { isLoggedIn } from 'core';
+import { isLoggedIn, isAdmin, isBusiness, emptyRouter } from 'core';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
-import { isAdmin } from 'packages/core/src/lib/guards/isAdmin.guard';
+import { EmptyComponent } from './empty.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', component: EmptyComponent, canActivate: [emptyRouter] },
   {
     path: 'dashboard',
     loadChildren: () => import('dashboard').then((m) => m.DASHBOARD_ROUTES),
-    canActivate: [isLoggedIn],
+    canActivate: [isBusiness],
   },
   {
     path: 'business-management',

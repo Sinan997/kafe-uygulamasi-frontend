@@ -5,12 +5,13 @@ import { forkJoin } from 'rxjs';
 import { AllCategoriesModel } from '../../models/get-all-categories-model';
 import { AllOrdersModel } from '../../models/get-all-orders-model';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
   selector: 'app-category-pie-chart',
   templateUrl: './category-pie-chart.component.html',
-  imports: [FormsModule],
+  imports: [FormsModule, TranslateModule],
 })
 export class CategoryPieChartComponent implements OnInit {
   protected readonly service = inject(DashboardService);
@@ -22,6 +23,8 @@ export class CategoryPieChartComponent implements OnInit {
   selectedCategory = signal('');
   productNames = signal([]);
   orders = signal<AllOrdersModel[]>([]);
+
+  rangeDates: Date[] | [];
 
   pieChartDatasetObj: ChartDataset<'pie', number[]> = {
     label: 'Dataset 1',
@@ -66,7 +69,6 @@ export class CategoryPieChartComponent implements OnInit {
       category!.products.length,
     );
     this.pieChart?.data.datasets.push(this.pieChartDatasetObj);
-    console.log(this.pieChartDatasetObj);
     this.pieChart?.update();
   }
 

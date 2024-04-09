@@ -3,6 +3,7 @@ export const sidenavRoutes = [
     routeLink: 'dashboard',
     icon: 'fa-solid fa-house-user',
     label: 'dashboard',
+    role: ['business'],
   },
   {
     routeLink: 'business-management',

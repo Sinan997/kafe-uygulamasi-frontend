@@ -1,6 +1,22 @@
+<h3>{{ 'table.categories' | translate }}</h3>
 <select class="form-select" (change)="setValue($event)">
   @for (item of categories(); track $index; let first = $first) {
     <option [value]="item" [selected]="first">{{ item }}</option>
   }
 </select>
 <canvas id="category-chart"></canvas>
+
+<!-- <div class="d-flex justify-content-center mt-2">
+  <span class="p-float-label">
+    <label for="birth_date">Birth Date</label>
+    <p-calendar
+      [(ngModel)]="rangeDates"
+      selectionMode="range"
+      [iconDisplay]="'input'"
+      [showIcon]="true"
+      [readonlyInput]="true"
+      inputId="birth_date"
+    >
+    </p-calendar>
+  </span>
+</div> -->

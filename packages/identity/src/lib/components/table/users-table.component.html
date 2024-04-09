@@ -30,9 +30,9 @@
           <ul class="dropdown-menu">
             <li>
               @if (user.role !== 'admin') {
-              <a role="button" class="dropdown-item" (click)="openEditUserModal(user)">{{
-                'form.edit' | translate
-              }}</a>
+                <a role="button" class="dropdown-item" (click)="openEditUserModal(user)">{{
+                  'form.edit' | translate
+                }}</a>
               }
             </li>
             <li>
@@ -58,9 +58,12 @@
   </ng-template>
 </p-confirmDialog>
 
-<app-edit-user-modal
-  *ngIf="visibleEditUserDialog"
-  [user]="user"
-  [(visibleEditUserDialog)]="visibleEditUserDialog"
-  (updateList)="updateList.emit()"
-/>
+@defer {
+  @if (visibleEditUserDialog) {
+    <app-edit-user-modal
+      [user]="user"
+      [(visibleEditUserDialog)]="visibleEditUserDialog"
+      (updateList)="updateList.emit()"
+    />
+  }
+}

@@ -14,10 +14,7 @@ export class BusinessManagementService {
   baseUrl: string = inject(API_URL) + 'admin';
 
   addBusiness(business: AddBusinessModel) {
-    return this.http.post<BasicResponseModel>(
-      this.baseUrl + '/add-business',
-      business,
-    );
+    return this.http.post<BasicResponseModel>(this.baseUrl + '/add-business', business);
   }
 
   getBusinesses() {
@@ -25,17 +22,12 @@ export class BusinessManagementService {
   }
 
   deleteBusiness(id: string) {
-    return this.http.request<BasicResponseModel>(
-      'delete',
-      this.baseUrl + '/delete-business',
-      { body: { id } },
-    );
+    return this.http.request<BasicResponseModel>('delete', this.baseUrl + '/delete-business', {
+      body: { id },
+    });
   }
 
   updateBusiness(business: EditBusinessModel) {
-    return this.http.put<BasicResponseModel>(
-      this.baseUrl + '/update-business',
-      business,
-    );
+    return this.http.put<BasicResponseModel>(this.baseUrl + '/update-business', business);
   }
 }
