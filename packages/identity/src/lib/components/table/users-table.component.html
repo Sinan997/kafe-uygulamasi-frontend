@@ -27,20 +27,20 @@
           >
             {{ 'form.actions' | translate }}
           </button>
-          <ul class="dropdown-menu">
-            <li>
-              @if (user.role !== 'admin') {
+          @if (user.role !== 'business') {
+            <ul class="dropdown-menu">
+              <li>
                 <a role="button" class="dropdown-item" (click)="openEditUserModal(user)">{{
                   'form.edit' | translate
                 }}</a>
-              }
-            </li>
-            <li>
-              <a role="button" class="dropdown-item" (click)="deleteUser(user)">{{
-                'form.delete' | translate
-              }}</a>
-            </li>
-          </ul>
+              </li>
+              <li>
+                <a role="button" class="dropdown-item" (click)="deleteUser(user)">{{
+                  'form.delete' | translate
+                }}</a>
+              </li>
+            </ul>
+          }
         </div>
       </td>
       <td>{{ user.username }}</td>

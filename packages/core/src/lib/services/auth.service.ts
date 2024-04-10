@@ -16,24 +16,6 @@ export class AuthService {
   );
   public user: Observable<DecodedUserTokenModel>;
 
-  get userValue() {
-    return this.userSubject.value;
-  }
-
-  get accessToken() {
-    return localStorage.getItem('accessToken');
-  }
-
-  get refreshToken() {
-    return localStorage.getItem('refreshToken');
-  }
-
-  setTokensToLocalStorage(accessToken: string, refreshToken: string) {
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
-    this.userSubject.next(this.jwtDecoder.decodeToken(accessToken));
-  }
-
   refreshTokenHttp() {
     return this.http.post<AuthResponse>(this.baseUrl + '/refreshToken', {
       refreshToken: localStorage.getItem('refreshToken'),
@@ -62,6 +44,24 @@ export class AuthService {
         )
         .subscribe();
     });
+  }
+
+  get userValue() {
+    return this.userSubject.value;
+  }
+
+  get accessToken() {
+    return localStorage.getItem('accessToken');
+  }
+
+  get refreshToken() {
+    return localStorage.getItem('refreshToken');
+  }
+
+  setTokensToLocalStorage(accessToken: string, refreshToken: string) {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    this.userSubject.next(this.jwtDecoder.decodeToken(accessToken));
   }
 
   getUser() {

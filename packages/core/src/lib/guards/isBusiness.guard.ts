@@ -1,18 +1,13 @@
 import { inject } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivateFn,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
-import { AuthService } from 'core';
+import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
+import { AuthService, Roles } from 'core';
 
 export const isBusiness: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ) => {
   const authService = inject(AuthService);
-  if (authService.userValue && authService.userValue.role === 'business') {
+  if (authService.userValue && authService.userValue.role === Roles.Business) {
     return true;
   } else {
     authService.logout();

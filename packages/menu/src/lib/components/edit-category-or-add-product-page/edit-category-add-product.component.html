@@ -8,10 +8,12 @@
   (updateList)="get()"
 />
 
-@if (visibleNewProductDialog) {
-<app-new-product-modal
-  [categoryId]="categoryId"
-  [(visibleNewProductDialog)]="visibleNewProductDialog"
-  (updateProductsList)="get()"
-/>
+@defer {
+  @if (visibleNewProductDialog) {
+    <app-new-product-modal
+      [categoryId]="categoryId"
+      [(visibleNewProductDialog)]="visibleNewProductDialog"
+      (updateProductsList)="get()"
+    />
+  }
 }

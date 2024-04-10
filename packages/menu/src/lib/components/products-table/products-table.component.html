@@ -1,28 +1,28 @@
 <div class="container-fluid card mt-3" cdkDropList (cdkDropListDropped)="drop($event)">
   @for (product of products; track product._id) {
-  <div class="example-box" cdkDrag>
-    <span>{{ product.name }}</span>
-    <div class="d-flex align-items-center justify-content-center">
-      <span class="me-1">{{ product.price | currency : '₺' }}</span>
-      <i
-        class="fa fa-circle rounded"
-        [ngClass]="product.isAvailable ? 'text-success' : 'text-danger'"
-      ></i>
+    <div class="example-box" cdkDrag>
+      <span>{{ product.name }}</span>
+      <div class="d-flex align-items-center justify-content-center">
+        <span class="me-1">{{ product.price | currency: '₺' }}</span>
+        <i
+          class="fa fa-circle rounded"
+          [ngClass]="product.isAvailable ? 'text-success' : 'text-danger'"
+        ></i>
 
-      <button
-        class="btn btn-sm btn-primary mx-2"
-        styleClass="p-button-link"
-        (click)="openEditProductModal(product)"
-      >
-        {{ 'form.edit' | translate }}
-      </button>
-      <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)">
-        <i class="fa fa-trash"></i>
-      </button>
+        <button
+          class="btn btn-sm btn-primary mx-2"
+          styleClass="p-button-link"
+          (click)="openEditProductModal(product)"
+        >
+          {{ 'form.edit' | translate }}
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
     </div>
-  </div>
-  }@empty {
-  <span class="p-2 m-1 fs-6">{{ 'menu.productEmpty' | translate }}</span>
+  } @empty {
+    <span class="p-2 m-1 fs-6">{{ 'menu.productEmpty' | translate }}</span>
   }
 </div>
 
@@ -35,10 +35,12 @@
   </ng-template>
 </p-confirmDialog>
 
-@if (visibleEditProductDialog) {
-<app-edit-user-modal
-  [product]="product"
-  [(visibleEditProductDialog)]="visibleEditProductDialog"
-  (updateList)="updateList.emit()"
-/>
+@defer {
+  @if (visibleEditProductDialog) {
+    <app-edit-user-modal
+      [product]="product"
+      [(visibleEditProductDialog)]="visibleEditProductDialog"
+      (updateList)="updateList.emit()"
+    />
+  }
 }

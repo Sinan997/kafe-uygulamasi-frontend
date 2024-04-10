@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { AllCategoriesReponse } from '../models/all-categories-response.model';
 import { BasicResponseModel } from 'theme-shared';
-import { CategoryModel} from '../models/category.model';
+import { CategoryModel } from '../models/category.model';
 import { ProductModel } from '../models/product.model';
 import { API_URL } from 'core';
 import { GetCategoryResponse } from '../models/get-category-response.model';

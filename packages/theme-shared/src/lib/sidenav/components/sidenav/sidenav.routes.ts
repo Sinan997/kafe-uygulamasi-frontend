@@ -1,15 +1,15 @@
 export const sidenavRoutes = [
   {
-    routeLink: 'dashboard',
-    icon: 'fa-solid fa-house-user',
-    label: 'dashboard',
-    role: ['business'],
-  },
-  {
     routeLink: 'business-management',
     icon: 'fa-regular fa-address-book',
     label: 'business.businessManagement',
     role: ['admin'],
+  },
+  {
+    routeLink: 'dashboard',
+    icon: 'fa-solid fa-house-user',
+    label: 'dashboard',
+    role: ['business'],
   },
   {
     routeLink: 'identity',
@@ -33,7 +33,7 @@ export const sidenavRoutes = [
     routeLink: 'orders',
     icon: 'fa-solid fa-utensils',
     label: 'order.orders',
-    role: ['business'],
+    role: ['business', 'waiter'],
   },
   { routeLink: 'qrcode', icon: 'fa-solid fa-qrcode', label: 'qrcode.qrcode', role: ['business'] },
   {

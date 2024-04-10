@@ -7,7 +7,7 @@
     "build": "nx build",
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
-    "dev": "yarn && nx serve"
+    "dev": "yarn && nx serve --open"
   },
   "private": true,
   "dependencies": {

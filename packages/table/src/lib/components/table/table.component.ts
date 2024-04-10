@@ -9,15 +9,22 @@ import { ConfirmationService } from 'primeng/api';
 import { CustomMessageService } from 'theme-shared';
 import { EditTableComponent } from '../edit-table/edit-table.component';
 import { TableDetailsComponent } from '../table-details/table-details.component';
+import { PermissionDirective } from 'core';
 
 @Component({
   selector: 'app-table',
   templateUrl: 'table.component.html',
   standalone: true,
-  imports: [TranslateModule, NewOrderComponent, ConfirmDialogModule, EditTableComponent, TableDetailsComponent],
-  providers: [ConfirmationService]
+  imports: [
+    TranslateModule,
+    NewOrderComponent,
+    ConfirmDialogModule,
+    EditTableComponent,
+    TableDetailsComponent,
+    PermissionDirective
+  ],
+  providers: [ConfirmationService],
 })
-
 export class TableComponent {
   protected readonly service = inject(TableService);
   protected readonly confirmationService = inject(ConfirmationService);
@@ -49,10 +56,15 @@ export class TableComponent {
       }),
       header: this.translateService.instant('table.deleteTableHeader'),
       accept: () => {
-        this.service.deleteTable(this.table()._id).pipe(tap((res) => {
-          this.customMessageService.success(res);
-          this.updateList.emit();
-        })).subscribe();
+        this.service
+          .deleteTable(this.table()._id)
+          .pipe(
+            tap((res) => {
+              this.customMessageService.success(res);
+              this.updateList.emit();
+            }),
+          )
+          .subscribe();
       },
     });
   }

@@ -22,11 +22,9 @@ export class IdentityService {
   }
 
   deleteUser(userId: string) {
-    return this.http.request<BasicResponseModel>(
-      'delete',
-      this.baseUrl + '/delete-user',
-      { body: { userId } },
-    );
+    return this.http.request<BasicResponseModel>('delete', this.baseUrl + '/delete-user', {
+      body: { userId },
+    });
   }
 
   updateUser(user: UserModel) {

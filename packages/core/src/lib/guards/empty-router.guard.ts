@@ -6,6 +6,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { AuthService } from 'core';
+import { Roles } from '../constants/roles';
 
 export const emptyRouter: CanActivateFn = (
   route: ActivatedRouteSnapshot,
@@ -13,10 +14,23 @@ export const emptyRouter: CanActivateFn = (
 ) => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  if (authService.userValue && authService.userValue.role === 'admin') {
-    router.navigate(['/business-management']);
-  } else {
-    router.navigate(['/dashboard']);
+  if (!authService.userValue) {
+    router.navigate(['account', 'login']);
+    return false;
   }
+
+  if (authService.userValue.role === Roles.Admin) {
+    router.navigate(['/business-management']);
+    return false;
+  }
+  if (authService.userValue.role === Roles.Business) {
+    router.navigate(['/dashboard']);
+    return false;
+  }
+  if (authService.userValue.role === Roles.Waiter) {
+    router.navigate(['/table']);
+    return false;
+  }
+
   return true;
 };

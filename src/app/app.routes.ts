@@ -6,9 +6,8 @@ import { EmptyComponent } from './empty.component';
 export const routes: Routes = [
   { path: '', component: EmptyComponent, canActivate: [emptyRouter] },
   {
-    path: 'dashboard',
-    loadChildren: () => import('dashboard').then((m) => m.DASHBOARD_ROUTES),
-    canActivate: [isBusiness],
+    path: 'account',
+    loadChildren: () => import('account').then((m) => m.ACCOUNT_ROUTES),
   },
   {
     path: 'business-management',
@@ -16,18 +15,19 @@ export const routes: Routes = [
     canActivate: [isAdmin],
   },
   {
-    path: 'identity',
-    loadChildren: () => import('identity').then((m) => m.IDENTITY_ROUTES),
-    canActivate: [isLoggedIn],
+    path: 'dashboard',
+    loadChildren: () => import('dashboard').then((m) => m.DASHBOARD_ROUTES),
+    canActivate: [isBusiness],
   },
   {
-    path: 'account',
-    loadChildren: () => import('account').then((m) => m.ACCOUNT_ROUTES),
+    path: 'identity',
+    loadChildren: () => import('identity').then((m) => m.IDENTITY_ROUTES),
+    canActivate: [isBusiness],
   },
   {
     path: 'menu',
     loadChildren: () => import('menu').then((m) => m.MENU_ROUTES),
-    canActivate: [isLoggedIn],
+    canActivate: [isBusiness],
   },
   {
     path: 'table',
