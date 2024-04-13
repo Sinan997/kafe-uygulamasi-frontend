@@ -19,15 +19,15 @@
   <ng-template pTemplate="body" let-user>
     <tr>
       <td>
-        <div class="dropdown">
-          <button
-            class="btn btn-primary btn-sm dropdown-toggle p-2"
-            type="button"
-            data-bs-toggle="dropdown"
-          >
-            {{ 'form.actions' | translate }}
-          </button>
-          @if (user.role !== 'business') {
+        @if (user.role !== 'business') {
+          <div class="dropdown">
+            <button
+              class="btn btn-primary btn-sm dropdown-toggle p-2"
+              type="button"
+              data-bs-toggle="dropdown"
+            >
+              {{ 'form.actions' | translate }}
+            </button>
             <ul class="dropdown-menu">
               <li>
                 <a role="button" class="dropdown-item" (click)="openEditUserModal(user)">{{
@@ -40,8 +40,8 @@
                 }}</a>
               </li>
             </ul>
-          }
-        </div>
+          </div>
+        }
       </td>
       <td>{{ user.username }}</td>
       <td>{{ user.role }}</td>

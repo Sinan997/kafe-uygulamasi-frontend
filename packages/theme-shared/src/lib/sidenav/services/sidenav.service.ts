@@ -17,8 +17,21 @@ export class SidenavService {
     this.authService.userSubject.subscribe((user) => {
       this.user = user;
       this.resetNavdata();
+
       if (user) {
         this.filterNavdata();
+      }
+
+      if (this.user?.businessId) {
+        this.navdata.update((routes) => [
+          ...routes,
+          {
+            routeLink: 'qrmenu' + '/' + this.user?.businessId.name,
+            icon: 'fa-solid fa-map',
+            label: 'qrmenu.qrmenu',
+            role: ['business', 'waiter'],
+          },
+        ]);
       }
     });
   }

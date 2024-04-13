@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h2>{{ category().name }}</h2>
+  <div class="row justify-content-center">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">{{ 'form.name' | translate }}</th>
+              <th scope="col">{{ 'price' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of category().products; track $index) {
+              <tr
+                [ngClass]="{
+                  'text-decoration-line-through': !product.isAvailable,
+                  'table-danger': !product.isAvailable
+                }"
+              >
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

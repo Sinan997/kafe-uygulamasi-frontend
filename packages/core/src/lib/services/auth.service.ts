@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { API_URL, AuthResponse, DecodedUserTokenModel, JwtDecoderService } from 'core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -10,6 +11,7 @@ export class AuthService {
   http = inject(HttpClient);
   router = inject(Router);
   jwtDecoder = inject(JwtDecoderService);
+  window = inject(DOCUMENT).defaultView;
 
   userSubject = new BehaviorSubject(
     this.jwtDecoder.decodeToken(localStorage.getItem('accessToken')),
@@ -40,6 +42,7 @@ export class AuthService {
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
             this.userSubject.next(undefined);
+            this.window!.location.reload();
           }),
         )
         .subscribe();

@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { QrcodeService } from '../services/qrcode.service';
-import { AuthService } from 'core';
+import { AuthService, FRONT_URL } from 'core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -10,21 +10,14 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [TranslateModule],
   templateUrl: './qrcode.component.html',
 })
-export class QrcodeComponent implements OnInit {
+export class QrcodeComponent {
   qrcodeService = inject(QrcodeService);
   authService = inject(AuthService);
   sanitizer = inject(DomSanitizer);
+  url = inject(FRONT_URL);
   svg: string;
 
   @ViewChild('qrcodetemplate') qrcodeTemplate: HTMLElement;
-
-  ngOnInit(): void {
-    const businessName = this.authService.userValue?.businessId.name;
-    const url = 'http://www.localhost:4200/menu/';
-    this.qrcodeService.getQrCode(url + businessName).subscribe((res) => {
-      this.svg = res.svg;
-    });
-  }
 
   sanitizeSVG(svgString: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(svgString);
@@ -35,16 +28,20 @@ export class QrcodeComponent implements OnInit {
   items: string[] = ['Item 1', 'Item 2', 'Item 3'];
 
   downloadSVG() {
-    const svgContent = this.svg;
+    const businessName = this.authService.userValue?.businessId.name;
+    const qrlink = this.url + '/qrmenu/' + businessName;
+    this.qrcodeService.getQrCode(qrlink).subscribe((res) => {
+      this.svg = res.svg;
 
-    const blob = new Blob([svgContent], { type: 'image/svg+xml' });
-    const url = window.URL.createObjectURL(blob);
+      const blob = new Blob([this.svg], { type: 'image/svg+xml' });
+      const url = window.URL.createObjectURL(blob);
 
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'qrcode.svg';
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'qrcode.svg';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
   }
 }

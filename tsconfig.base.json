@@ -20,6 +20,7 @@
       "menu": ["packages/menu/src/index.ts"],
       "orders": ["packages/orders/src/index.ts"],
       "qrcode": ["packages/qrcode/src/index.ts"],
+      "qrmenu": ["packages/qrmenu/src/index.ts"],
       "table": ["packages/table/src/index.ts"],
       "theme-shared": ["packages/theme-shared/src/index.ts"]
     }

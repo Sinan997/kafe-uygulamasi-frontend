@@ -13,7 +13,6 @@ export class OrdersService {
 
   getOrders() {
     return this.http.get<GetOrdersResponse>(this.baseUrl + '/all-orders');
-    // return this.http.get<GetUsersResponse>(this.baseUrl + '/all-users');
   }
 
   setOrderReady(orderId: string) {

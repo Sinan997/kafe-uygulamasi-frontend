@@ -1,0 +1,9 @@
+<div class="container-fluid p-0">
+  <div class="row">
+    @for (category of categoriesAndProducts(); track $index) {
+      <div class="col-md-6">
+        <app-category-and-products [category]="category"></app-category-and-products>
+      </div>
+    }
+  </div>
+</div>

@@ -41,7 +41,7 @@ export class CategoryPieChartComponent implements OnInit {
     forkJoin([this.service.getOrders(), this.service.getCategories()]).subscribe((res) => {
       this.orders.set(res[0].orders);
 
-      this.categoriesAndProducts.set(res[1].categories);
+      this.categoriesAndProducts.set(res[1].categories.sort((a, b) => a.index - b.index));
 
       // SET SELECTED CATEGORY
       this.selectedCategory.set(this.categories()[0]);

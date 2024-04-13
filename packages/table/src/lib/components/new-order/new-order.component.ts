@@ -45,7 +45,7 @@ export class NewOrderComponent implements OnInit {
       .getCategories()
       .pipe(
         tap((res) => {
-          this.categories = res.categories;
+          this.categories = res.categories.sort((a, b) => a.index - b.index);
         }),
       )
       .subscribe();
@@ -58,6 +58,7 @@ export class NewOrderComponent implements OnInit {
 
   selectCategory(category: CategoryModel) {
     this.selectedCategory = category;
+    this.selectedCategory.products.sort((a, b) => a.index - b.index);
     this.buildForm(category);
   }
 

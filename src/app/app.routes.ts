@@ -30,13 +30,13 @@ export const routes: Routes = [
     canActivate: [isBusiness],
   },
   {
-    path: 'table',
-    loadChildren: () => import('table').then((m) => m.TABLE_ROUTES),
-    canActivate: [isLoggedIn],
-  },
-  {
     path: 'qrcode',
     loadChildren: () => import('qrcode').then((m) => m.QRCODE_ROUTES),
+    canActivate: [isBusiness],
+  },
+  {
+    path: 'table',
+    loadChildren: () => import('table').then((m) => m.TABLE_ROUTES),
     canActivate: [isLoggedIn],
   },
   {
@@ -44,6 +44,9 @@ export const routes: Routes = [
     loadChildren: () => import('orders').then((m) => m.ORDERS_ROUTES),
     canActivate: [isLoggedIn],
   },
-
+  {
+    path: 'qrmenu/:id',
+    loadChildren: () => import('qrmenu').then((m) => m.QRMENU_ROUTES),
+  },
   { path: '**', component: ErrorPageComponent },
 ];

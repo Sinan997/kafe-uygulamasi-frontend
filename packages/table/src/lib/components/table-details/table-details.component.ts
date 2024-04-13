@@ -136,7 +136,6 @@ export class TableDetailsComponent implements OnInit {
           pickedAmount -= findedOrder.amount;
         } else {
           findedOrder.pickedAmount = pickedAmount;
-          console.log(findedOrder);
           pickedAmount = 0;
         }
         orders.push(findedOrder);
