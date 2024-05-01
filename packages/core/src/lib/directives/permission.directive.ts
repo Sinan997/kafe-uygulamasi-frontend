@@ -21,7 +21,7 @@ export class PermissionDirective {
   @Input() permissionDirective: string;
 
   ngOnChanges(changes: SimpleChanges): void {
-    const userRole = this.authService.getUser()?.role;
+    const userRole = this.authService.userValue?.role;
     if (userRole === this.permissionDirective) {
       this.viewContainerRef.createEmbeddedView(this.templateRef);
     } else {

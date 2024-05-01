@@ -85,7 +85,9 @@
     "amount": "Amount",
     "isReady": "Ready",
     "orderIsReady": "Order is ready",
-    "orderIsDelivered": "Order is delivered"
+    "orderIsDelivered": "Order is delivered",
+    "newOrder": "New Order",
+    "newOrderDescription": "{{quantity}} {{productName}} is ready for {{tableName}}."
   },
   "form": {
     "name": "Name",

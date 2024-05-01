@@ -85,7 +85,9 @@
     "amount": "Miktar",
     "isReady": "Hazır",
     "orderIsReady": "Sipariş hazır",
-    "orderIsDelivered": "Sipariş teslim edildi"
+    "orderIsDelivered": "Sipariş teslim edildi",
+    "newOrder": "Yeni Sipariş",
+    "newOrderDescription": "{{tableName}} için {{quantity}} adet {{productName}} hazır."
   },
   "form": {
     "name": "İsim",

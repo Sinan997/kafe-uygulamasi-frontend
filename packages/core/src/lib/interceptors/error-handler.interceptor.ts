@@ -7,7 +7,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { EMPTY, Observable, catchError, of, switchMap, tap, throwError } from 'rxjs';
-import { AuthService, JwtDecoderService, isCodeTranslated } from 'core';
+import { AuthService, isCodeTranslated } from 'core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,7 +15,6 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
   authService = inject(AuthService);
-  decoder = inject(JwtDecoderService);
   router = inject(Router);
   messageService = inject(MessageService);
   translateService = inject(TranslateService);

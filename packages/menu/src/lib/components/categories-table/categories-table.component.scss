@@ -9,7 +9,6 @@
   box-sizing: border-box;
   cursor: move;
   background: white;
-  font-size: 14px;
 }
 
 .cdk-drag-preview {
@@ -37,14 +36,4 @@
 
 .custom-primary{
   margin-right: 6px;
-}
-
-@media screen and (max-width: 400px){
-  .custom-primary{
-    font-size: 12px;
-  }
-
-  .example-box{
-    font-size: 12px;
-  }
 }

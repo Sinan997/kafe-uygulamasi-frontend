@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule, UntypedFormGroup } from "@angular/for
 import { LanguageService } from "core";
 
 @Component({
-    selector: 'language-dropdown',
+    selector: 'app-language-dropdown',
     templateUrl: './language-dropdown.component.html',
     standalone: true,
     imports: [ReactiveFormsModule, UpperCasePipe]

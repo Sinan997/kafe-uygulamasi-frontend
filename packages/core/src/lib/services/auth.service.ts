@@ -1,6 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { API_URL, AuthResponse, DecodedUserTokenModel, JwtDecoderService } from 'core';
+import {
+  API_URL,
+  AuthResponse,
+  DecodedUserTokenModel,
+  JwtDecoderService,
+  NotificationModel,
+} from 'core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
@@ -17,6 +23,10 @@ export class AuthService {
     this.jwtDecoder.decodeToken(localStorage.getItem('accessToken')),
   );
   public user: Observable<DecodedUserTokenModel>;
+
+  constructor(){
+    this.setTokensToLocalStorage(this.accessToken!, this.refreshToken!);
+  }
 
   refreshTokenHttp() {
     return this.http.post<AuthResponse>(this.baseUrl + '/refreshToken', {
@@ -66,6 +76,11 @@ export class AuthService {
     localStorage.setItem('refreshToken', refreshToken);
     this.userSubject.next(this.jwtDecoder.decodeToken(accessToken));
   }
+
+  // updateNotification(notification: NotificationModel) {
+  //   const notifications = [...this.userValue?.notifications!, notification];
+  //   this.userSubject.next({ ...this.userValue!, notifications });
+  // }
 
   getUser() {
     return this.jwtDecoder.decodeToken(this.accessToken);

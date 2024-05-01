@@ -20,17 +20,52 @@ export class OrdersListComponent implements OnInit {
   orders = signal<OrderModel[]>([]);
 
   constructor() {
-    effect(() => {
-      if (this.socketIOService.isOrderUpdated()) {
-        this.getOrders();
-      }
-    });
+    effect(
+      () => {
+        if (this.socketIOService.isOrderSettedReady()) {
+          this.orders.update((orders) =>
+            orders.map((order) => {
+              if (order._id === this.socketIOService.isOrderSettedReady()) {
+                order.isReady = true;
+              }
+
+              return order;
+            }),
+          );
+        }
+      },
+      { allowSignalWrites: true },
+    );
+
+    effect(
+      () => {
+        if (this.socketIOService.isOrderAdded()) {
+          this.addOrderToList(this.socketIOService.isOrderAdded()!);
+        }
+      },
+      { allowSignalWrites: true },
+    );
+    
+    effect(
+      () => {
+        if (this.socketIOService.isOrderDelivered()) {
+          this.removeOrderFromList(this.socketIOService.isOrderDelivered());
+        }
+      },
+      { allowSignalWrites: true },
+    );
   }
 
   ngOnInit(): void {
-    if (!this.socketIOService.isOrderUpdated()) {
-      this.getOrders();
-    }
+    this.getOrders();
+  }
+
+  addOrderToList(order: OrderModel) {
+    this.orders.update((orders) => [order,...orders]);
+  }
+
+  removeOrderFromList(orderId: string) {
+    this.orders.update((orders) => orders.filter((order) => order._id !== orderId));
   }
 
   getOrders() {

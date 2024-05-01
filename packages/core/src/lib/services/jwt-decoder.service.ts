@@ -5,7 +5,8 @@ import { DecodedUserTokenModel } from 'core';
 export class JwtDecoderService {
   decodeToken(token: string | null): DecodedUserTokenModel | undefined {
     if (token) {
-      return JSON.parse(atob(token.split('.')[1]));
+      const decodedString = decodeURIComponent(escape(atob(token.split('.')[1])));
+      return JSON.parse(decodedString);
     }
   }
 }

@@ -17,18 +17,18 @@
       </div>
 
       @if (!isEditing()) {
-      <div>
-        <button class="btn btn-sm btn-primary ms-3" (click)="editButton()">
-          {{ 'form.edit' | translate }}
+        <div>
+          <button class="btn btn-primary ms-3" (click)="editButton()">
+            {{ 'form.edit' | translate }}
+          </button>
+        </div>
+      } @else {
+        <button type="submit" form="changeCategoryNameForm" class="btn btn-success ms-2">
+          <i class="fa fa-check"></i>
         </button>
-      </div>
-      }@else{
-      <button type="submit" form="changeCategoryNameForm" class="btn btn-sm btn-success ms-2">
-        <i class="fa fa-check"></i>
-      </button>
-      <button class="btn btn-sm btn-danger ms-2" (click)="abortNewCategoryName()">
-        <i class="fa fa-times"></i>
-      </button>
+        <button class="btn btn-danger ms-2" (click)="abortNewCategoryName()">
+          <i class="fa fa-times"></i>
+        </button>
       }
     </div>
   </form>

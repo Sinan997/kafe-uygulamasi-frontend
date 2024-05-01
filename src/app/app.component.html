@@ -1,11 +1,15 @@
 @if (authService.userValue) {
-<ng-container>
-  <app-sidenav class="sidenav" (onLogout)="logout()" (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
-  <app-mobile-navbar class="mobile" [screenWidth]="screenWidth"></app-mobile-navbar>
-  <app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-body>
-</ng-container>
-}@else {
-<router-outlet></router-outlet>
+  <ng-container>
+    <app-sidenav
+      class="sidenav"
+      (onLogout)="logout()"
+      (onToggleSideNav)="onToggleSideNav($event)"
+    ></app-sidenav>
+    <app-mobile-navbar class="mobile" [screenWidth]="screenWidth"></app-mobile-navbar>
+    <app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-body>
+  </ng-container>
+} @else {
+  <router-outlet></router-outlet>
 }
 
 <p-toast

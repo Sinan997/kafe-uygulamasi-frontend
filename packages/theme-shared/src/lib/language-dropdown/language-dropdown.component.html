@@ -1,16 +1,17 @@
-<form [formGroup]="form">
-  <select
-    formControlName="language"
-    (change)="langChange()"
-    class="position-absolute form-select form-select-sm w-auto"
-    style="right: 1%; top: 1%"
-  >
-    @for (lang of langs; track $index) {
-    <option [ngValue]="lang">
-      <div>
-        {{ lang | uppercase }}
-      </div>
-    </option>
-    }
-  </select>
-</form>
+<div class="me-4">
+  <form [formGroup]="form">
+    <select
+      formControlName="language"
+      (change)="langChange()"
+      class="form-select form-select-sm w-auto"
+    >
+      @for (lang of langs; track $index) {
+        <option [ngValue]="lang">
+          <div>
+            {{ lang | uppercase }}
+          </div>
+        </option>
+      }
+    </select>
+  </form>
+</div>

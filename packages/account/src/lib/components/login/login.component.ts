@@ -2,12 +2,13 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { AuthService } from 'core';
+import { AuthService, Roles } from 'core';
 import { LoginModel } from '../../models/login.model';
 import { NgxValidateCoreModule } from '@ngx-validate/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomMessageService, LanguageDropdownComponent } from 'theme-shared';
 import { tap } from 'rxjs';
+import { SocketIOService } from 'orders';
 
 @Component({
   selector: 'app-login-page',
@@ -21,6 +22,7 @@ export class LoginComponent {
   messageService = inject(MessageService);
   fb = inject(FormBuilder);
   customMessageService = inject(CustomMessageService);
+  socketService = inject(SocketIOService);
 
   user: LoginModel;
   form = this.fb.group({
@@ -47,6 +49,9 @@ export class LoginComponent {
         tap((res) => {
           this.customMessageService.success(res);
           this.authService.setTokensToLocalStorage(res.accessToken, res.refreshToken);
+          if(this.authService.userValue?.role !== Roles.Admin){
+            this.socketService.startListening();
+          }
           this.router.navigate(['']);
         }),
       )
