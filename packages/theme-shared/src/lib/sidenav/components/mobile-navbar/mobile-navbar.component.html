@@ -1,38 +1,72 @@
-<div class="mobile-navbar" [ngClass]="showAll ? 'show' : ''">
+<div class="mobile-navbar" [ngClass]="showAll() ? 'show' : ''">
     <div class="mobile-bar d-flex align-items-center">
-        <div style="flex: 1;">
-            <div class="d-flex justify-content-center">
-                @for (data of navData().slice(0,1); track $index) {
-                <a class="link" [routerLink]="[data.routeLink]" [ngClass]="getActiveClass(data)">
-                    {{data.label | translate}}
-                </a>
-                }
-            </div>
-        </div>
-        <div style="flex: 1;" class="d-flex justify-content-center align-items-center h-100">
-            <a class="link" (click)="openRoutes()">
-                <i class="link-icon" [class]="'fa-solid fa-bars'"></i>
+      <div style="flex: 1" class="d-flex justify-content-center align-items-center h-100">
+        <a class="link" (click)="openRoutes()">
+          <i class="link-icon" [class]="'fa-solid fa-bars'"></i>
+        </a>
+      </div>
+    </div>
+  
+    <div [ngClass]="showAll() ? 'show-all-routes' : ''">
+      <button class="close-btn" (click)="openRoutes()">
+        <i class="fa fa-times close-icon"></i>
+      </button>
+      <div class="mt-5">
+        @for (data of navData(); track $index) {
+          @if (data.items && data.items.length > 0) {
+            <a
+              style="cursor: pointer"
+              class="sidenav-nav-link"
+              (click)="handleClick(data)"
+              [ngClass]="getActiveClass(data)"
+            >
+              <i class="sidenav-link-icon" [class]="data.icon"></i>
+              @if (collapsed()) {
+                <span class="sidenav-link-text">
+                  {{ data.label | translate }}
+                </span>
+              }
+              @if (data.items && collapsed()) {
+                <i
+                  class="menu-collapse-icon"
+                  [ngClass]="!data.expanded ? 'fa-solid fa-angle-right' : 'fa-solid fa-angle-down'"
+                ></i>
+              }
             </a>
-        </div>
-        <div style="flex: 1;">
-            <div class="d-flex justify-content-center">
-                <a class="link" (click)="logout()">
-                    <i class="link-icon" [class]="'fa fa-sign-out'"></i>
-                </a>
-            </div>
-        </div>
+          }
+  
+          @if (!data.items || (data.items && data.items.length === 0)) {
+            <a
+              class="sidenav-nav-link"
+              [routerLink]="[data.routeLink]"
+              [ngClass]="getActiveClass(data)"
+              (click)="openRoutes()"
+              style="margin-bottom: 1rem"
+            >
+              <i class="sidenav-link-icon" [class]="data.icon"></i>
+              @if (collapsed()) {
+                <span class="sidenav-link-text">
+                  {{ data.label | translate }}
+                </span>
+              }
+            </a>
+          }
+          @if (collapsed() && data.items && data.items.length > 0) {
+            <app-sublevel-menu
+              [data]="data"
+              [collapsed]="collapsed()"
+              [expanded]="data.expanded"
+              (isNavigated)="openRoutes()"
+            ></app-sublevel-menu>
+          }
+        }
+        <a role="button" class="sidenav-nav-link" (click)="logout()" style="margin-bottom: 1rem">
+          <i class="sidenav-link-icon fa fa-sign-out"></i>
+          @if (collapsed()) {
+            <span class="sidenav-link-text">{{ 'logout' | translate }}</span>
+          }
+        </a>
+      </div>
     </div>
-
-    <div [ngClass]="showAll ? 'show-all-routes': ''">
-        <button class="btn btn-light close-btn" (click)="openRoutes()">
-        <i class="fa fa-xmark"></i>
-        </button>
-        <div class="mt-5">
-            @for (data of navData(); track $index) {
-                <a class="link" [routerLink]="[data.routeLink]" [ngClass]="getActiveClass(data)" (click)="openRoutes()">
-                    {{data.label | translate}}
-                </a>
-                }
-        </div>
-    </div>
-</div>
+  </div>
+  

@@ -8,6 +8,8 @@ import {
   inject,
   computed,
   Signal,
+  output,
+  signal,
 } from '@angular/core';
 import { Router, RouterLinkActive, RouterLink } from '@angular/router';
 import { fadeInOut, INavbarData } from './helper';
@@ -51,38 +53,33 @@ interface SideNavToggle {
   ],
 })
 export class SidenavComponent implements OnInit {
-  sidenavService = inject(SidenavService);
-  @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
-  @Output() onLogout: EventEmitter<boolean> = new EventEmitter();
-  collapsed = false;
-  screenWidth = 0;
+  protected readonly sidenavService = inject(SidenavService);
+  protected readonly router = inject(Router);
+
+
+  readonly onToggleSideNav = output<SideNavToggle>();
+  readonly onLogout = output();
+  collapsed = signal(false);
+  screenWidth = signal(0);
   navData: Signal<INavbarData[]>;
-  multiple: boolean = false;
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.screenWidth = window.innerWidth;
-    if (this.screenWidth <= 768) {
-      this.collapsed = false;
-      this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
+  onResize() {
+    this.screenWidth.set(window.innerWidth);
+    if (this.screenWidth() <= 768) {
+      this.collapsed.set(false);
+      this.onToggleSideNav.emit({ collapsed: this.collapsed(), screenWidth: this.screenWidth() });
     }
   }
 
-  constructor(public router: Router) {}
-
   ngOnInit(): void {
-    this.screenWidth = window.innerWidth;
+    this.screenWidth.set(window.innerWidth);
     this.navData = computed(() => this.sidenavService.navdata());
   }
 
   toggleCollapse(): void {
-    this.collapsed = !this.collapsed;
-    this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
-  }
-
-  closeSidenav(): void {
-    this.collapsed = false;
-    this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
+    this.collapsed.update((val) => !val);
+    this.onToggleSideNav.emit({ collapsed: this.collapsed(), screenWidth: this.screenWidth() });
   }
 
   handleClick(item: INavbarData): void {

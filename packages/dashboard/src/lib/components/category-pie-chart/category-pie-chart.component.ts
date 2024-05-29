@@ -39,6 +39,9 @@ export class CategoryPieChartComponent implements OnInit {
 
   ngOnInit() {
     forkJoin([this.service.getOrders(), this.service.getCategories()]).subscribe((res) => {
+      if (res[0].orders.length === 0) {
+        return;
+      }
       this.orders.set(res[0].orders);
 
       this.categoriesAndProducts.set(res[1].categories.sort((a, b) => a.index - b.index));
