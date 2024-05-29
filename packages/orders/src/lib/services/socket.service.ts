@@ -69,7 +69,6 @@ export class SocketIOService {
   listenNotifications() {
     if (this.authService.userValue?.role === 'waiter') {
       this.socket.on(this.notificationLink(), (notification: NotificationModel) => {
-        // this.authService.updateNotification(notification);
         Swal.fire({
           title: this.translateService.instant('order.newOrder'),
           icon: 'info',

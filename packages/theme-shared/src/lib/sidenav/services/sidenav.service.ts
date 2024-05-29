@@ -1,50 +1,48 @@
 import { Injectable, WritableSignal, inject, signal } from '@angular/core';
-import { INavbarData } from '../components/sidenav/helper';
 import { AuthService, DecodedUserTokenModel } from 'core';
+import { INavbarData } from '../components/sidenav/helper';
 import { sidenavRoutes } from '../components/sidenav/sidenav.routes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SidenavService {
-  authService = inject(AuthService);
+  protected readonly authService = inject(AuthService);
 
-  user: DecodedUserTokenModel | undefined;
-  allRoutes = sidenavRoutes;
-  navdata: WritableSignal<INavbarData[]> = signal(this.allRoutes);
+  user = signal<DecodedUserTokenModel>({} as DecodedUserTokenModel);
+  navdata: WritableSignal<INavbarData[]> = signal(sidenavRoutes);
 
   constructor() {
     this.authService.userSubject.subscribe((user) => {
-      this.user = user;
-      this.resetNavdata();
-
-      if (user) {
-        this.filterNavdata();
+      if (!user) {
+        return;
       }
 
-      if (this.user?.businessId) {
-        this.navdata.update((routes) => [
-          ...routes,
-          {
-            routeLink: 'qrmenu' + '/' + this.user?.businessId.name,
-            icon: 'fa-solid fa-map',
-            label: 'qrmenu.qrmenu',
-            role: ['business', 'waiter'],
-          },
-        ]);
+      this.user.set(user);
+      this.filterNavdata();
+
+      if (this.user().businessId) {
+        this.addQrMenuRoute();
       }
     });
-  }
-
-  resetNavdata() {
-    this.navdata.set(this.allRoutes);
   }
 
   filterNavdata() {
+    this.navdata.set(sidenavRoutes);
     this.navdata.update((routes) => {
-      return routes.filter((route) =>
-        route.role ? route.role.find((role) => role === this.user?.role) : true,
-      );
+      return routes.filter((route) => (route.role ? route.role.find((role) => role === this.user().role) : true));
     });
+  }
+
+  addQrMenuRoute() {
+    this.navdata.update((routes) => [
+      ...routes,
+      {
+        routeLink: 'qrmenu' + '/' + this.user().businessId.name,
+        icon: 'fa-solid fa-map',
+        label: 'qrmenu.qrmenu',
+        role: ['business', 'waiter'],
+      },
+    ]);
   }
 }

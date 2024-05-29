@@ -1,13 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MessageService } from 'primeng/api';
-import { AuthService, Roles } from 'core';
-import { LoginModel } from '../../models/login.model';
 import { NgxValidateCoreModule } from '@ngx-validate/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
 import { CustomMessageService, LanguageDropdownComponent } from 'theme-shared';
-import { tap } from 'rxjs';
+import { AuthService } from 'core';
 import { SocketIOService } from 'orders';
 
 @Component({
@@ -17,44 +15,23 @@ import { SocketIOService } from 'orders';
   imports: [ReactiveFormsModule, NgxValidateCoreModule, LanguageDropdownComponent, TranslateModule],
 })
 export class LoginComponent {
-  authService = inject(AuthService);
-  router = inject(Router);
-  messageService = inject(MessageService);
-  fb = inject(FormBuilder);
-  customMessageService = inject(CustomMessageService);
-  socketService = inject(SocketIOService);
+  protected readonly authService = inject(AuthService);
+  protected readonly router = inject(Router);
+  protected readonly messageService = inject(MessageService);
+  protected readonly fb = inject(FormBuilder);
+  protected readonly customMessageService = inject(CustomMessageService);
+  protected readonly socketService = inject(SocketIOService);
 
-  user: LoginModel;
   form = this.fb.group({
     username: ['', { validators: [Validators.required] }],
     password: ['', { validators: [Validators.required] }],
   });
-
-  get username() {
-    return this.form.controls.username;
-  }
-
-  get password() {
-    return this.form.controls.password;
-  }
 
   onSubmit() {
     if (this.form.invalid) {
       return;
     }
 
-    this.authService
-      .login(this.username.value!, this.password.value!)
-      .pipe(
-        tap((res) => {
-          this.customMessageService.success(res);
-          this.authService.setTokensToLocalStorage(res.accessToken, res.refreshToken);
-          if(this.authService.userValue?.role !== Roles.Admin){
-            this.socketService.startListening();
-          }
-          this.router.navigate(['']);
-        }),
-      )
-      .subscribe();
+    this.authService.login(this.form.controls.username.value!, this.form.controls.password.value!);
   }
 }
