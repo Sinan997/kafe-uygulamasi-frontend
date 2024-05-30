@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { Component, output } from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   standalone: true,
   imports: [ToolbarModule, TranslateModule],
@@ -8,5 +8,5 @@ import { ToolbarModule } from 'primeng/toolbar';
   templateUrl: './businesses-toolbar.component.html',
 })
 export class BusinessToolbarComponent {
-  @Output() addNewBusinessEvent = new EventEmitter<boolean>();
+  addNewBusinessEvent = output();
 }

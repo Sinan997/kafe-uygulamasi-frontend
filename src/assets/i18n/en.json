@@ -27,7 +27,9 @@
     "ownerEmail": "Owner's Email",
     "ownerUsername": "Owner's Username",
     "deleteBusinessHeader": "Delete business",
-    "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?"
+    "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?",
+    "changePasswordConfirmation": "Are you sure you want to change password?",
+    "changePasswordHeader": "Change Password"
   },
   "menu": {
     "menu": "Menu",
@@ -151,10 +153,11 @@
   "logout": "Logout",
   "successKey": "Success",
   "errorKey": "Error",
-  "changePasswordConfirmation": "Are you sure you want to change password?",
   "yes": "Yes",
   "no": "No",
   "price": "Price",
   "dashboard": "Dashboard",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "search": "Search...",
+  "clear": "Clear"
 }

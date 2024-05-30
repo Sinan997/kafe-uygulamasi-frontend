@@ -1,8 +1,8 @@
 <p-dialog
+  [closeOnEscape]="true"
   [draggable]="false"
   [modal]="true"
-  [visible]="visibleEditBusinessDialog"
-  [closable]="false"
+  [(visible)]="visibleEditBusinessDialog"
   styleClass="basic-dialog"
   (enterKey)="onSubmit()"
 >
@@ -21,34 +21,33 @@
       </div>
       <div class="form-group mb-3">
         <label for="password">{{ 'form.password' | translate }}</label>
-        <input
-          *ngIf="!isPasswordInputClose"
-          type="password"
-          class="form-control"
-          id="password"
-          formControlName="password"
-        />
-        <button
-          *ngIf="isPasswordInputClose"
-          class="d-block btn btn-outline-warning w-100"
-          (click)="editPassword($event)"
-        >
-          <i class="fa fa-user"></i>
-          {{ 'form.changePassword' | translate }}
-        </button>
+        @if (!isPasswordInputClose()) {
+          <input type="password" class="form-control" id="password" formControlName="password" />
+        }
+        @if (isPasswordInputClose()) {
+          <button class="d-block btn btn-outline-warning w-100" (click)="editPassword($event)">
+            <i class="fa fa-user"></i>
+            {{ 'form.changePassword' | translate }}
+          </button>
+        }
       </div>
     </form>
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button class="btn btn-outline-primary me-2" (click)="hideDialog()">
+    <button class="btn btn-outline-primary me-2" (click)="visibleEditBusinessDialog.set(false)">
       {{ 'form.cancel' | translate }}
     </button>
     <button class="btn btn-primary" (click)="onSubmit()">{{ 'form.save' | translate }}</button>
   </ng-template>
 </p-dialog>
 
-<p-confirmDialog #cd [style]="{ width: '30vw' }">
+<p-confirmDialog #cd styleClass="basic-confirmDialog">
+  <ng-template pTemplate="header">
+    <h4>
+      {{ 'business.changePasswordHeader' | translate }}
+    </h4>
+  </ng-template>
   <ng-template pTemplate="footer">
     <button class="btn btn-outline-primary me-2" (click)="cd.reject()">
       {{ 'no' | translate }}

@@ -18,28 +18,56 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-
-.basic-dialog.p-dialog{
+.basic-dialog.p-dialog {
   width: 60vw;
 }
 
-@media screen and (max-width: 800px){
-  .basic-dialog.p-dialog{
+@media screen and (max-width: 800px) {
+  .basic-dialog.p-dialog {
     margin-left: 5rem;
     width: 70vw;
   }
 }
 
-@media screen and (max-width: 576px){
-  .basic-dialog.p-dialog{
+@media screen and (max-width: 576px) {
+  .basic-dialog.p-dialog {
     width: 80vw;
     margin-left: 0;
   }
 }
 
-@media screen and (max-width: 450px){
-  .p-toast{
+@media screen and (max-width: 450px) {
+  .p-toast {
     width: 15rem;
     font-size: 14px;
+  }
+}
+
+.basic-confirmDialog {
+  width: 40vw;
+}
+
+@media screen and (max-width: 800px) {
+  .basic-confirmDialog {
+    margin-left: 5rem;
+    width: 60vw;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .basic-confirmDialog {
+    width: 70vw;
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .basic-confirmDialog {
+    .p-dialog-footer {
+      button {
+        margin: 6px 0 0 0 !important;
+        width: 100% !important;
+      }
+    }
   }
 }

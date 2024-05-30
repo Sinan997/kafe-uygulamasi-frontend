@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject, model, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { BusinessManagementService } from '../../services/business-management.service';
@@ -12,34 +12,22 @@ import { tap } from 'rxjs';
 @Component({
   selector: 'app-new-business-modal',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    DialogModule,
-    TranslateModule,
-    AutoFocusDirective,
-    TrackEnterKeyDirective,
-    NgxValidateCoreModule
-  ],
+  imports: [ReactiveFormsModule, DialogModule, TranslateModule, AutoFocusDirective, TrackEnterKeyDirective, NgxValidateCoreModule],
   templateUrl: './new-business.component.html',
 })
 export class NewBusinessComponent {
-  @Input() visibleNewBusinessDialog = true;
-  @Output() visibleNewBusinessDialogChange = new EventEmitter<boolean>();
-  @Output() updateList = new EventEmitter<boolean>();
-  fb = inject(FormBuilder);
-  businessService = inject(BusinessManagementService);
-  customMessageService = inject(CustomMessageService);
+  protected readonly fb = inject(FormBuilder);
+  protected readonly businessService = inject(BusinessManagementService);
+  protected readonly customMessageService = inject(CustomMessageService);
+
+  readonly visibleNewBusinessDialog = model(false);
+  readonly updateList = output();
 
   form = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
-
-  hideDialog() {
-    this.visibleNewBusinessDialog = false;
-    this.visibleNewBusinessDialogChange.emit(false);
-  }
 
   onSubmit() {
     if (this.form.invalid) {
@@ -51,7 +39,7 @@ export class NewBusinessComponent {
       .pipe(
         tap((res) => {
           this.customMessageService.success(res);
-          this.hideDialog();
+          this.visibleNewBusinessDialog.set(false);
           this.updateList.emit();
         }),
       )

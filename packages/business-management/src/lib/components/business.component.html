@@ -1,10 +1,10 @@
 <div>
   <app-business-toolbar (addNewBusinessEvent)="openNewBusinessModal()" />
-  <app-business-table (updateList)="getBusinesses()" [businesses]="businesses" />
+  <app-business-table (updateList)="getBusinesses()" [businesses]="businesses()" />
 </div>
 
 @defer {
-  @if (visibleNewBusinessDialog) {
+  @if (visibleNewBusinessDialog()) {
     <app-new-business-modal
       [(visibleNewBusinessDialog)]="visibleNewBusinessDialog"
       (updateList)="getBusinesses()"

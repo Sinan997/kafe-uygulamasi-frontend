@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { BusinessModel } from '../../models/business.model';
 import { BusinessManagementService } from '../../services/business-management.service';
 import { ConfirmationService } from 'primeng/api';
@@ -17,19 +17,20 @@ import { tap } from 'rxjs';
   templateUrl: './business-table.component.html',
 })
 export class BusinessTableComponent {
-  @Input() businesses: BusinessModel[];
-  @Output() updateList = new EventEmitter<boolean>();
+  protected readonly businessService = inject(BusinessManagementService);
+  protected readonly confirmationService = inject(ConfirmationService);
+  protected readonly customMessageService = inject(CustomMessageService);
+  protected readonly translateService = inject(TranslateService);
 
-  businessService = inject(BusinessManagementService);
-  confirmationService = inject(ConfirmationService);
-  customMessageService = inject(CustomMessageService);
-  translateService = inject(TranslateService);
-  business: BusinessModel;
-  visibleEditBusinessDialog = false;
+  readonly businesses = input.required<BusinessModel[]>();
+  readonly updateList = output();
+
+  selectedBusiness = signal<BusinessModel>({} as BusinessModel);
+  visibleEditBusinessDialog = signal(false);
 
   openEditBusinessModal(business: BusinessModel) {
-    this.visibleEditBusinessDialog = true;
-    this.business = business;
+    this.visibleEditBusinessDialog.set(true);
+    this.selectedBusiness.set(business);
   }
 
   deleteBusiness(business: BusinessModel) {
@@ -37,8 +38,7 @@ export class BusinessTableComponent {
       message: this.translateService.instant('business.deleteBusinessMessage', {
         name: business.name,
       }),
-      header: this.translateService.instant('business.deleteBusinessHeader'),
-      icon: 'pi pi-exclamation-triangle',
+      icon: 'fa-solid fa-triangle-exclamation',
       accept: () => {
         this.businessService
           .deleteBusiness(business._id)
@@ -51,5 +51,10 @@ export class BusinessTableComponent {
           .subscribe();
       },
     });
+  }
+
+  clear(table: Table, input: HTMLInputElement) {
+    table.clear();
+    input.value = '';
   }
 }

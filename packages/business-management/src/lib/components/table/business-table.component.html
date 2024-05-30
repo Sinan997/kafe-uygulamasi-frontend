@@ -1,13 +1,29 @@
 <p-table
   #dt
-  [value]="businesses"
+  [value]="businesses()"
   [rows]="10"
   [paginator]="true"
   [tableStyle]="{ width: '100%', 'min-height': '10rem' }"
   [rowHover]="true"
   dataKey="name"
   [scrollable]="true"
+  [globalFilterFields]="['name', 'ownerId.email', 'ownerId.username']"
 >
+  <ng-template pTemplate="caption">
+    <div class="d-flex justify-content-end">
+      <button label="Clear" class="btn btn-primary" (click)="clear(dt, myInput)">{{ 'clear' | translate }}</button>
+      <span class="p-input-icon-left ml-auto">
+        <i class="pi pi-search"></i>
+        <input
+          class="ms-2 form-control"
+          #myInput
+          type="text"
+          (input)="dt.filterGlobal(myInput.value, 'contains')"
+          [placeholder]="'search' | translate"
+        />
+      </span>
+    </div>
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
       <th>{{ 'form.edit' | translate }}</th>
@@ -20,23 +36,15 @@
     <tr>
       <td>
         <div class="dropdown">
-          <button
-            class="btn btn-primary btn-sm dropdown-toggle p-2"
-            type="button"
-            data-bs-toggle="dropdown"
-          >
+          <button class="btn btn-primary btn-sm dropdown-toggle p-2" type="button" data-bs-toggle="dropdown">
             {{ 'form.actions' | translate }}
           </button>
           <ul class="dropdown-menu">
             <li>
-              <a role="button" class="dropdown-item" (click)="openEditBusinessModal(business)">{{
-                'form.edit' | translate
-              }}</a>
+              <a role="button" class="dropdown-item" (click)="openEditBusinessModal(business)">{{ 'form.edit' | translate }}</a>
             </li>
             <li>
-              <a role="button" class="dropdown-item" (click)="deleteBusiness(business)">{{
-                'form.delete' | translate
-              }}</a>
+              <a role="button" class="dropdown-item" (click)="deleteBusiness(business)">{{ 'form.delete' | translate }}</a>
             </li>
           </ul>
         </div>
@@ -48,7 +56,12 @@
   </ng-template>
 </p-table>
 
-<p-confirmDialog #cd [style]="{ width: '30vw' }">
+<p-confirmDialog #cd styleClass="basic-confirmDialog">
+  <ng-template pTemplate="header">
+    <h4>
+      {{ 'business.deleteBusinessHeader' | translate }}
+    </h4>
+  </ng-template>
   <ng-template pTemplate="footer">
     <button class="btn btn-outline-danger me-2" (click)="cd.reject()">
       {{ 'form.cancel' | translate }}
@@ -58,10 +71,10 @@
 </p-confirmDialog>
 
 @defer {
-  @if (visibleEditBusinessDialog) {
+  @if (visibleEditBusinessDialog()) {
     <app-edit-business-modal
-      [business]="business"
       [(visibleEditBusinessDialog)]="visibleEditBusinessDialog"
+      [business]="selectedBusiness()"
       (updateList)="updateList.emit()"
     />
   }

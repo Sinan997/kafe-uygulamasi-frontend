@@ -1,45 +1,35 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DialogModule } from 'primeng/dialog';
+import { Component, OnInit, inject, input, model, output, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { tap } from 'rxjs';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
 import { BusinessManagementService } from '../../services/business-management.service';
 import { BusinessModel } from '../../models/business.model';
-import { ConfirmationService } from 'primeng/api';
-import { tap } from 'rxjs';
-import { AutoFocusDirective, TrackEnterKeyDirective } from 'core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CustomMessageService } from 'theme-shared';
 import { EditBusinessModel } from '../../models/edit-business.modal';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-edit-business-modal',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    DialogModule,
-    AutoFocusDirective,
-    TrackEnterKeyDirective,
-    TranslateModule,
-    ConfirmDialogModule,
-  ],
+  imports: [ReactiveFormsModule, DialogModule, AutoFocusDirective, TrackEnterKeyDirective, TranslateModule, ConfirmDialogModule],
   providers: [ConfirmationService],
   templateUrl: './edit-business.component.html',
 })
 export class EditBusinessComponent implements OnInit {
-  @Input() business: BusinessModel;
-  @Input() visibleEditBusinessDialog = true;
-  @Output() visibleEditBusinessDialogChange = new EventEmitter<boolean>();
-  @Output() updateList = new EventEmitter<boolean>();
+  protected readonly fb = inject(FormBuilder);
+  protected readonly service = inject(BusinessManagementService);
+  protected readonly customMessageService = inject(CustomMessageService);
+  protected readonly confirmationService = inject(ConfirmationService);
+  protected readonly translateService = inject(TranslateService);
 
-  fb = inject(FormBuilder);
-  service = inject(BusinessManagementService);
-  customMessageService = inject(CustomMessageService);
-  confirmationService = inject(ConfirmationService);
-  translateService = inject(TranslateService);
+  readonly business = input.required<BusinessModel>();
+  readonly visibleEditBusinessDialog = model(false);
+  readonly updateList = output();
 
-  isPasswordInputClose?: boolean = true;
+  isPasswordInputClose = signal(true);
 
   form = this.fb.group({
     _id: ['', Validators.required],
@@ -49,36 +39,27 @@ export class EditBusinessComponent implements OnInit {
     password: [''],
   });
 
-  get password() {
-    return this.form.controls.password;
-  }
-
   ngOnInit(): void {
     this.form.patchValue({
-      _id: this.business._id,
-      name: this.business.name,
-      email: this.business.ownerId.email,
-      ownerId: this.business.ownerId._id,
+      _id: this.business()._id,
+      name: this.business().name,
+      email: this.business().ownerId.email,
+      ownerId: this.business().ownerId._id,
       password: '',
     });
-  }
-
-  hideDialog() {
-    this.visibleEditBusinessDialog = false;
-    this.visibleEditBusinessDialogChange.emit(false);
   }
 
   onSubmit() {
     if (this.form.invalid) {
       return;
     }
-    const business = { ...this.form.value } as EditBusinessModel;
+
     this.service
-      .updateBusiness(business)
+      .updateBusiness({ ...this.form.value } as EditBusinessModel)
       .pipe(
         tap((res) => {
           this.customMessageService.success(res);
-          this.hideDialog();
+          this.visibleEditBusinessDialog.set(false);
           this.updateList.emit();
         }),
       )
@@ -88,13 +69,13 @@ export class EditBusinessComponent implements OnInit {
   editPassword(event: Event) {
     this.confirmationService.confirm({
       target: event.target!,
-      message: this.translateService.instant('changePasswordConfirmation'),
-      icon: 'pi pi-exclamation-triangle',
+      message: this.translateService.instant('business.changePasswordConfirmation'),
+      icon: 'fa-solid fa-circle-exclamation',
       accept: () => {
-        this.isPasswordInputClose = false;
+        this.isPasswordInputClose.set(false);
         setTimeout(() => {
-          this.password.setValidators(Validators.required);
-          this.password.updateValueAndValidity();
+          this.form.controls.password.setValidators(Validators.required);
+          this.form.controls.password.updateValueAndValidity();
         }, 0);
       },
     });

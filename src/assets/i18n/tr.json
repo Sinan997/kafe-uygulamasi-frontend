@@ -27,7 +27,9 @@
     "ownerEmail": "Sahibin Emaili",
     "ownerUsername": "Sahibin Kullanıcı Adı",
     "deleteBusinessHeader": "İşletmeyi sil",
-    "deleteBusinessMessage": "{{ name }} isimli işletmeyi silmek istediğine emin misin?"
+    "deleteBusinessMessage": "{{ name }} isimli işletmeyi silmek istediğine emin misin?",
+    "changePasswordConfirmation": "Bu kullanıcının şifresini değiştirmek istiyor musun?",
+    "changePasswordHeader": "Şifreyi değiştir"
   },
   "menu": {
     "menu": "Menu",
@@ -151,10 +153,11 @@
   "logout": "Çıkış Yap",
   "successKey": "Başarılı",
   "errorKey": "Hata",
-  "changePasswordConfirmation": "Bu kullanıcının şifresini değiştirmek istiyor musun?",
   "yes": "Evet",
   "no": "Hayır",
   "price": "Fiyat",
   "dashboard": "Ana Sayfa",
-  "loading": "Yükleniyor..."
+  "loading": "Yükleniyor...",
+  "search": "Ara...",
+  "clear": "Temizle"
 }

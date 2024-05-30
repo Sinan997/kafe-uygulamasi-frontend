@@ -10,8 +10,8 @@ import { API_URL } from 'core';
   providedIn: 'root',
 })
 export class BusinessManagementService {
-  http = inject(HttpClient);
-  baseUrl: string = inject(API_URL) + 'admin';
+  protected readonly http = inject(HttpClient);
+  protected readonly baseUrl: string = inject(API_URL) + 'admin';
 
   addBusiness(business: AddBusinessModel) {
     return this.http.post<BasicResponseModel>(this.baseUrl + '/add-business', business);
