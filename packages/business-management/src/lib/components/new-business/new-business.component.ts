@@ -20,7 +20,7 @@ export class NewBusinessComponent {
   protected readonly businessService = inject(BusinessManagementService);
   protected readonly customMessageService = inject(CustomMessageService);
 
-  readonly visibleNewBusinessDialog = model(false);
+  readonly visibleNewBusinessDialog = model.required<boolean>();
   readonly updateList = output();
 
   form = this.fb.group({

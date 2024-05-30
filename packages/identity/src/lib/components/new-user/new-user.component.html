@@ -1,8 +1,8 @@
 <p-dialog
   [draggable]="false"
   [modal]="true"
-  [visible]="visibleNewUserDialog"
-  [closable]="false"
+  [(visible)]="visibleNewUserDialog"
+  [closeOnEscape]="true"
   styleClass="basic-dialog"
   (enterKey)="onSubmit()"
 >
@@ -13,13 +13,7 @@
     <form [formGroup]="form" id="newUserForm" (ngSubmit)="onSubmit()">
       <div class="form-group mb-3">
         <label for="username">{{ 'form.username' | translate }}</label>
-        <input
-          type="text"
-          class="form-control"
-          id="username"
-          autofocus
-          formControlName="username"
-        />
+        <input type="text" class="form-control" id="username" autofocus formControlName="username" />
       </div>
       <div class="form-group mb-3">
         <label for="email">{{ 'form.email' | translate }}</label>
@@ -34,7 +28,7 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button class="btn btn-outline-primary me-2" (click)="hideDialog()">
+    <button class="btn btn-outline-primary me-2" (click)="visibleNewUserDialog.set(false)">
       {{ 'form.cancel' | translate }}
     </button>
     <button form="newUserForm" class="btn btn-primary">{{ 'form.save' | translate }}</button>

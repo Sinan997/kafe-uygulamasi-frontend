@@ -1,10 +1,10 @@
 <div>
-  <app-users-toolbar (addNewUserEvent)="openNewUserModal()" />
-  <app-users-table (updateList)="getUsers()" [users]="users" />
+  <app-users-toolbar (addNewUserEvent)="visibleNewUserDialog.set(true)" />
+  <app-users-table (updateList)="getUsers()" [users]="users()" />
 </div>
 
 @defer {
-  @if (visibleNewUserDialog) {
+  @if (visibleNewUserDialog()) {
     <app-new-user-modal [(visibleNewUserDialog)]="visibleNewUserDialog" (updateList)="getUsers()" />
   }
 }

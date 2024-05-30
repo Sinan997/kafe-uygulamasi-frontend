@@ -26,7 +26,7 @@ export class EditBusinessComponent implements OnInit {
   protected readonly translateService = inject(TranslateService);
 
   readonly business = input.required<BusinessModel>();
-  readonly visibleEditBusinessDialog = model(false);
+  readonly visibleEditBusinessDialog = model.required<boolean>();
   readonly updateList = output();
 
   isPasswordInputClose = signal(true);
@@ -69,7 +69,7 @@ export class EditBusinessComponent implements OnInit {
   editPassword(event: Event) {
     this.confirmationService.confirm({
       target: event.target!,
-      message: this.translateService.instant('business.changePasswordConfirmation'),
+      message: this.translateService.instant('changePasswordConfirmation'),
       icon: 'fa-solid fa-circle-exclamation',
       accept: () => {
         this.isPasswordInputClose.set(false);

@@ -27,9 +27,7 @@
     "ownerEmail": "Owner's Email",
     "ownerUsername": "Owner's Username",
     "deleteBusinessHeader": "Delete business",
-    "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?",
-    "changePasswordConfirmation": "Are you sure you want to change password?",
-    "changePasswordHeader": "Change Password"
+    "deleteBusinessMessage": "Are you sure you want to delete the business named {{ name }}?"
   },
   "menu": {
     "menu": "Menu",
@@ -159,5 +157,7 @@
   "dashboard": "Dashboard",
   "loading": "Loading...",
   "search": "Search...",
-  "clear": "Clear"
+  "clear": "Clear",
+  "changePasswordConfirmation": "Are you sure you want to change password?",
+  "changePasswordHeader": "Change Password"
 }

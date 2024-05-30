@@ -1,14 +1,14 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { UserModel } from '../../models/user.model';
-import { IdentityService } from '../../services/identity.service';
-import { ConfirmationService } from 'primeng/api';
 import { tap } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { EditUserComponent } from '../edit-user/edit-user.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CustomMessageService } from 'theme-shared';
+import { UserModel } from '../../models/user.model';
+import { IdentityService } from '../../services/identity.service';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 
 @Component({
   selector: 'app-users-table',
@@ -17,20 +17,20 @@ import { CustomMessageService } from 'theme-shared';
   templateUrl: './users-table.component.html',
 })
 export class UsersTableComponent {
-  @Input() users: UserModel[];
-  @Output() updateList = new EventEmitter<boolean>();
+  protected readonly service = inject(IdentityService);
+  protected readonly confirmationService = inject(ConfirmationService);
+  protected readonly translateService = inject(TranslateService);
+  protected readonly customMessageService = inject(CustomMessageService);
 
-  service = inject(IdentityService);
-  confirmationService = inject(ConfirmationService);
-  translateService = inject(TranslateService);
-  customMessageService = inject(CustomMessageService);
+  readonly users = input.required<UserModel[]>();
+  readonly updateList = output();
 
-  user: UserModel;
-  visibleEditUserDialog = false;
+  selectedUser = signal({} as UserModel);
+  visibleEditUserDialog = signal(false);
 
   openEditUserModal(user: UserModel) {
-    this.visibleEditUserDialog = true;
-    this.user = user;
+    this.visibleEditUserDialog.set(true);
+    this.selectedUser.set(user);
   }
 
   deleteUser(user: UserModel) {
@@ -38,7 +38,7 @@ export class UsersTableComponent {
       message: this.translateService.instant('identity.deleteUserMessage', {
         username: user.username,
       }),
-      header: this.translateService.instant('identity.deleteUserHeader'),
+      icon: 'fa-solid fa-triangle-exclamation',
       accept: () => {
         this.service
           .deleteUser(user._id)

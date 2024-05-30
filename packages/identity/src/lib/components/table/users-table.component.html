@@ -1,6 +1,6 @@
 <p-table
   #dt
-  [value]="users"
+  [value]="users()"
   [rows]="10"
   [paginator]="true"
   [tableStyle]="{ width: '100%', 'min-height': '10rem' }"
@@ -21,23 +21,15 @@
       <td>
         @if (user.role !== 'business') {
           <div class="dropdown">
-            <button
-              class="btn btn-primary btn-sm dropdown-toggle p-2"
-              type="button"
-              data-bs-toggle="dropdown"
-            >
+            <button class="btn btn-primary btn-sm dropdown-toggle p-2" type="button" data-bs-toggle="dropdown">
               {{ 'form.actions' | translate }}
             </button>
             <ul class="dropdown-menu">
               <li>
-                <a role="button" class="dropdown-item" (click)="openEditUserModal(user)">{{
-                  'form.edit' | translate
-                }}</a>
+                <a role="button" class="dropdown-item" (click)="openEditUserModal(user)">{{ 'form.edit' | translate }}</a>
               </li>
               <li>
-                <a role="button" class="dropdown-item" (click)="deleteUser(user)">{{
-                  'form.delete' | translate
-                }}</a>
+                <a role="button" class="dropdown-item" (click)="deleteUser(user)">{{ 'form.delete' | translate }}</a>
               </li>
             </ul>
           </div>
@@ -49,7 +41,12 @@
     </tr>
   </ng-template>
 </p-table>
-<p-confirmDialog #cd styleClass="basic-dialog">
+
+<p-confirmDialog #cd styleClass="basic-confirmDialog">
+  <ng-template pTemplate="header">
+    <h4>{{ 'identity.deleteUserHeader' | translate }}</h4>
+  </ng-template>
+
   <ng-template pTemplate="footer">
     <button class="btn btn-outline-danger me-2" (click)="cd.reject()">
       {{ 'form.cancel' | translate }}
@@ -59,11 +56,7 @@
 </p-confirmDialog>
 
 @defer {
-  @if (visibleEditUserDialog) {
-    <app-edit-user-modal
-      [user]="user"
-      [(visibleEditUserDialog)]="visibleEditUserDialog"
-      (updateList)="updateList.emit()"
-    />
+  @if (visibleEditUserDialog()) {
+    <app-edit-user-modal [user]="selectedUser()" [(visibleEditUserDialog)]="visibleEditUserDialog" (updateList)="updateList.emit()" />
   }
 }

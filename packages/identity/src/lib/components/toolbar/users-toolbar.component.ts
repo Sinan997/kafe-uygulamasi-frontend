@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToolbarModule } from 'primeng/toolbar';
 @Component({
@@ -8,5 +8,5 @@ import { ToolbarModule } from 'primeng/toolbar';
   templateUrl: './users-toolbar.component.html',
 })
 export class UsersToolbarComponent {
-  @Output() addNewUserEvent = new EventEmitter<boolean>();
+  readonly addNewUserEvent = output();
 }

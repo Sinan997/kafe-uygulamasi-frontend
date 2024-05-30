@@ -23,8 +23,7 @@
         <label for="password">{{ 'form.password' | translate }}</label>
         @if (!isPasswordInputClose()) {
           <input type="password" class="form-control" id="password" formControlName="password" />
-        }
-        @if (isPasswordInputClose()) {
+        } @else {
           <button class="d-block btn btn-outline-warning w-100" (click)="editPassword($event)">
             <i class="fa fa-user"></i>
             {{ 'form.changePassword' | translate }}
@@ -45,7 +44,7 @@
 <p-confirmDialog #cd styleClass="basic-confirmDialog">
   <ng-template pTemplate="header">
     <h4>
-      {{ 'business.changePasswordHeader' | translate }}
+      {{ 'changePasswordHeader' | translate }}
     </h4>
   </ng-template>
   <ng-template pTemplate="footer">
