@@ -1,1 +1,2 @@
-export * from './menu.component'
+export * from './category.component';
+export * from './product.component';

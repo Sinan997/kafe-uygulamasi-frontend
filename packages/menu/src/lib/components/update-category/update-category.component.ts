@@ -1,13 +1,12 @@
-import { Component, DestroyRef, ElementRef, Input, ViewChild, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, DestroyRef, ElementRef, inject, input, model, signal, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { tap } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxValidateCoreModule } from '@ngx-validate/core';
 import { CustomMessageService } from 'theme-shared';
 import { TrackEnterKeyDirective } from 'core';
 import { MenuService } from '../../services';
-import { NgxValidateCoreModule } from '@ngx-validate/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { CategoryModel } from '../../models/category.model';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-update-cagetory',
@@ -16,17 +15,17 @@ import { tap } from 'rxjs';
   templateUrl: './update-category.component.html',
 })
 export class UpdateCategoryComponent {
-  fb = inject(FormBuilder);
-  menuService = inject(MenuService);
-  customMessageService = inject(CustomMessageService);
-  destroyRef = inject(DestroyRef);
-  activatedRoute = inject(ActivatedRoute);
-  router = inject(Router);
+  protected readonly fb = inject(FormBuilder);
+  protected readonly menuService = inject(MenuService);
+  protected readonly customMessageService = inject(CustomMessageService);
+  protected readonly destroyRef = inject(DestroyRef);
+  protected readonly activatedRoute = inject(ActivatedRoute);
+  protected readonly router = inject(Router);
 
-  @ViewChild('myInput') myInput: ElementRef;
-  @Input() categoryId: string;
+  readonly myInput = viewChild<ElementRef>('myInput');
+  readonly categoryId = input.required<string>();
+  readonly categoryName = model.required<string>();
 
-  category = signal<CategoryModel>({ _id: '0', index: 0, name: '', products: [] });
   isEditing = signal(false);
 
   form = this.fb.group({
@@ -38,40 +37,35 @@ export class UpdateCategoryComponent {
   }
 
   ngOnInit() {
-    this.menuService.getCategory(this.categoryId).subscribe((res) => {
-      this.category.set(res.category);
-      this.name.setValue(this.category().name);
-    });
+    this.name.setValue(this.categoryName());
   }
 
   abortNewCategoryName() {
     this.isEditing.set(false);
-    this.name.setValue(this.category().name);
+    this.name.setValue(this.categoryName());
   }
 
   editButton() {
     this.isEditing.set(true);
-    this.myInput.nativeElement.focus();
+    this.myInput()?.nativeElement.focus();
   }
 
   onSubmit() {
     if (this.form.invalid) {
       return;
     }
-    if (this.category().name !== this.name.value) {
+    if (this.categoryName() !== this.name.value) {
       this.menuService
-        .changeCategoryName(this.name.value!, this.category()._id)
+        .changeCategoryName(this.name.value!, this.categoryId())
         .pipe(
           tap((res) => {
             this.isEditing.set(false);
-            this.category.set(res.category);
+            this.categoryName.set(this.name.value!);
+            this.myInput()?.nativeElement.blur();
             this.customMessageService.success(res);
-            this.myInput.nativeElement.blur();
           }),
         )
         .subscribe();
     }
-    this.isEditing.set(false);
-    this.myInput.nativeElement.blur();
   }
 }

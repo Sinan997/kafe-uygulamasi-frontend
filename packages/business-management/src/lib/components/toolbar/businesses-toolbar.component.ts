@@ -8,5 +8,5 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './businesses-toolbar.component.html',
 })
 export class BusinessToolbarComponent {
-  addNewBusinessEvent = output();
+  readonly addNewBusinessEvent = output();
 }

@@ -1,13 +1,13 @@
-import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Router } from '@angular/router';
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { tap } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CustomMessageService } from 'theme-shared';
-import { tap } from 'rxjs';
-import { CategoryModel } from '../../models/category.model';
-import { MenuService } from '../../services/menu.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { CategoryModel } from '../../models/category.model';
+import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-menu-categories-table',
@@ -15,28 +15,26 @@ import { ConfirmationService } from 'primeng/api';
   templateUrl: './categories-table.component.html',
   styleUrl: './categories-table.component.scss',
   imports: [CdkDropList, CdkDrag, TranslateModule, ConfirmDialogModule],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService],
 })
 export class CategoriesTableComponent {
-  @Input() categories: CategoryModel[] = [];
-  @Output() updateCategoriesList = new EventEmitter<boolean>();
-  @Output() updateCategoryPlacement = new EventEmitter<CategoryModel[]>();
+  protected readonly router = inject(Router);
+  protected readonly menuService = inject(MenuService);
+  protected readonly customMessageService = inject(CustomMessageService);
+  protected readonly confirmationService = inject(ConfirmationService);
+  protected readonly translateService = inject(TranslateService);
 
-  router = inject(Router);
-  menuService = inject(MenuService);
-  customMessageService = inject(CustomMessageService);
-  confirmationService = inject(ConfirmationService);
-  translateService = inject(TranslateService);
+  readonly categories = input.required<CategoryModel[]>();
+  readonly updateCategoriesList = output();
+  readonly updateCategoryPlacement = output<CategoryModel[]>();
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.categories, event.previousIndex, event.currentIndex);
-    if (event.previousIndex !== event.currentIndex) {
-      this.updateCategoryPlacement.emit(this.categories);
+    if (event.previousIndex === event.currentIndex) {
+      return;
     }
-  }
 
-  navigateToCategory(category: CategoryModel) {
-    this.router.navigate(['menu', 'category', category._id]);
+    moveItemInArray(this.categories(), event.previousIndex, event.currentIndex);
+    this.updateCategoryPlacement.emit(this.categories());
   }
 
   deleteCategory(deletedCategory: CategoryModel) {
@@ -44,7 +42,7 @@ export class CategoriesTableComponent {
       message: this.translateService.instant('menu.deleteCategoryMessage', {
         name: deletedCategory.name,
       }),
-      header: this.translateService.instant('menu.deleteCategoryHeader'),
+      icon: 'fa-solid fa-triangle-exclamation',
       accept: () => {
         this.menuService
           .deleteCategory(deletedCategory._id)
@@ -57,5 +55,9 @@ export class CategoriesTableComponent {
           .subscribe();
       },
     });
+  }
+
+  navigateToCategory(category: CategoryModel) {
+    this.router.navigate(['menu', 'category', category._id], { queryParams: { name: category.name } });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToolbarModule } from 'primeng/toolbar';
 
@@ -9,5 +9,5 @@ import { ToolbarModule } from 'primeng/toolbar';
   imports: [ToolbarModule, TranslateModule],
 })
 export class MenuToolbarComponent {
-  @Output() addNewCategoryEvent = new EventEmitter<boolean>();
+  readonly addNewCategoryEvent = output();
 }

@@ -1,8 +1,8 @@
 <p-dialog
   [draggable]="false"
   [modal]="true"
-  [visible]="visibleNewCategoryDialog"
-  [closable]="false"
+  [(visible)]="visibleNewCategoryDialog"
+  [closeOnEscape]="true"
   (enterKey)="onSubmit()"
   styleClass="basic-dialog"
 >
@@ -12,21 +12,13 @@
   <ng-template pTemplate="content">
     <form [formGroup]="form" id="newCategoryForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="newCategoryName" class="form-label">{{
-          'menu.categoryName' | translate
-        }}</label>
-        <input
-          type="text"
-          id="newCategoryName"
-          class="form-control"
-          formControlName="newCategoryName"
-          autofocus
-        />
+        <label for="newCategoryName" class="form-label">{{ 'menu.categoryName' | translate }}</label>
+        <input type="text" id="newCategoryName" class="form-control" formControlName="newCategoryName" autofocus />
       </div>
     </form>
   </ng-template>
   <ng-template pTemplate="footer">
-    <button class="btn btn-outline-primary me-2" (click)="hideDialog()">
+    <button class="btn btn-outline-primary me-2" (click)="visibleNewCategoryDialog.set(false)">
       {{ 'form.cancel' | translate }}
     </button>
     <button form="newCategoryForm" class="btn btn-primary" type="submit">

@@ -3,4 +3,5 @@ export interface UpdateProductModel {
   name: string;
   price: number;
   isAvailable: boolean;
+  categoryId: string;
 }

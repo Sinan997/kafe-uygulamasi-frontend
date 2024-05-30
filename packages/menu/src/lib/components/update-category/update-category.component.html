@@ -1,21 +1,9 @@
 <div class="container-fluid card">
-  <form
-    (enterKey)="onSubmit()"
-    [formGroup]="form"
-    id="changeCategoryNameForm"
-    (ngSubmit)="onSubmit()"
-  >
+  <form (enterKey)="onSubmit()" [formGroup]="form" id="changeCategoryNameForm" (ngSubmit)="onSubmit()">
     <div class="form-group px-2 py-4 d-flex justify-content-between align-items-center">
       <div class="w-100">
-        <input
-          type="text"
-          class="form-control"
-          formControlName="name"
-          #myInput
-          [readonly]="!isEditing()"
-        />
+        <input type="text" class="form-control" formControlName="name" #myInput [readonly]="!isEditing()" />
       </div>
-
       @if (!isEditing()) {
         <div>
           <button class="btn btn-primary ms-3" (click)="editButton()">

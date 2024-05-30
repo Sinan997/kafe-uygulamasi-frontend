@@ -5,10 +5,8 @@ import { BasicResponseModel } from 'theme-shared';
 import { CategoryModel } from '../models/category.model';
 import { ProductModel } from '../models/product.model';
 import { API_URL } from 'core';
-import { GetCategoryResponse } from '../models/get-category-response.model';
 import { AddProductModel } from '../models/add-product.model';
 import { AllProductsResponse } from '../models/all-products-response.model';
-import { ChangeCategoryResponseModel } from '../models/change-category-response.model';
 import { UpdateProductModel } from '../models/update-product.model';
 
 @Injectable({
@@ -38,16 +36,12 @@ export class MenuService {
     });
   }
 
-  getCategory(categoryId: string) {
-    return this.http.get<GetCategoryResponse>(this.baseUrl + '/get-category/' + categoryId);
-  }
-
   getAllProducts(categoryId: string) {
     return this.http.get<AllProductsResponse>(this.baseUrl + '/all-products/' + categoryId);
   }
 
   changeCategoryName(name: string, categoryId: string) {
-    return this.http.post<ChangeCategoryResponseModel>(this.baseUrl + '/change-category-name', {
+    return this.http.post<BasicResponseModel>(this.baseUrl + '/change-category-name', {
       name,
       categoryId,
     });
@@ -78,6 +72,7 @@ export class MenuService {
       price: input.price,
       isAvailable: input.isAvailable,
       productId: input._id,
+      categoryId: input.categoryId,
     });
   }
 }

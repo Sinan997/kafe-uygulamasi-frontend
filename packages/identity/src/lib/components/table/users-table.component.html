@@ -7,7 +7,23 @@
   [rowHover]="true"
   dataKey="username"
   [scrollable]="true"
+  [globalFilterFields]="['username', 'role', 'email']"
 >
+  <ng-template pTemplate="caption">
+    <div class="d-flex justify-content-end">
+      <button label="Clear" class="btn btn-primary" (click)="clear(dt, myInput)">{{ 'clear' | translate }}</button>
+      <span class="p-input-icon-left ml-auto">
+        <i class="pi pi-search"></i>
+        <input
+          class="ms-2 form-control"
+          #myInput
+          type="text"
+          (input)="dt.filterGlobal(myInput.value, 'contains')"
+          [placeholder]="'search' | translate"
+        />
+      </span>
+    </div>
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
       <th>{{ 'form.edit' | translate }}</th>

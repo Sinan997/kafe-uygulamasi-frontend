@@ -1,7 +1,7 @@
 import { Component, inject, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
 import { tap } from 'rxjs';
+import { Table, TableModule } from 'primeng/table';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -51,5 +51,10 @@ export class UsersTableComponent {
           .subscribe();
       },
     });
+  }
+
+  clear(table: Table, input: HTMLInputElement) {
+    table.clear();
+    input.value = '';
   }
 }

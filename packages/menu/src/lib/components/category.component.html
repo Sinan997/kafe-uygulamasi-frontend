@@ -1,0 +1,13 @@
+<app-menu-toolbar (addNewCategoryEvent)="visibleNewCategoryDialog.set(true)" />
+
+<app-menu-categories-table
+  [categories]="categories()"
+  (updateCategoriesList)="getList()"
+  (updateCategoryPlacement)="updateCategoryPlacement($event)"
+></app-menu-categories-table>
+
+@defer {
+  @if (visibleNewCategoryDialog()) {
+    <app-new-category-modal [(visibleNewCategoryDialog)]="visibleNewCategoryDialog" (updateCategoriesList)="getList()" />
+  }
+}

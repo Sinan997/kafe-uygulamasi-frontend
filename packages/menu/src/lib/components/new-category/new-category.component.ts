@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject, model, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { tap } from 'rxjs';
@@ -10,47 +10,31 @@ import { CustomMessageService } from 'theme-shared';
 @Component({
   selector: 'app-new-category-modal',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    DialogModule,
-    AutoFocusDirective,
-    TrackEnterKeyDirective,
-    TranslateModule,
-    NgxValidateCoreModule,
-  ],
+  imports: [ReactiveFormsModule, DialogModule, AutoFocusDirective, TrackEnterKeyDirective, TranslateModule, NgxValidateCoreModule],
   templateUrl: './new-category.component.html',
 })
 export class NewCategoryComponent {
-  @Input() visibleNewCategoryDialog = true;
-  @Output() visibleNewCategoryDialogChange = new EventEmitter<boolean>();
-  @Output() updateCategoriesList = new EventEmitter<boolean>();
+  protected readonly fb = inject(FormBuilder);
+  protected readonly menuService = inject(MenuService);
+  protected readonly customMessageService = inject(CustomMessageService);
 
-  fb = inject(FormBuilder);
-  menuService = inject(MenuService);
-  customMessageService = inject(CustomMessageService);
+  readonly visibleNewCategoryDialog = model.required<boolean>();
+  readonly updateCategoriesList = output();
 
   form = this.fb.group({
     newCategoryName: ['', Validators.required],
   });
 
-  get newCategoryName() {
-    return this.form.controls.newCategoryName;
-  }
-
-  hideDialog() {
-    this.visibleNewCategoryDialog = false;
-    this.visibleNewCategoryDialogChange.emit(false);
-  }
-
   onSubmit() {
     if (this.form.invalid) {
       return;
     }
+
     this.menuService
-      .addCategory(this.newCategoryName.value!)
+      .addCategory(this.form.controls.newCategoryName.value!)
       .pipe(
         tap((res) => {
-          this.hideDialog();
+          this.visibleNewCategoryDialog.set(false);
           this.updateCategoriesList.emit();
           this.customMessageService.success(res);
         }),

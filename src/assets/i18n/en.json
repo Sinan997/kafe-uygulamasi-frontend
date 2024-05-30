@@ -119,7 +119,8 @@
     "CATEGORY_UPDATE": "An error while updating categories.",
     "TABLE_NOT_FOUND": "Table not found.",
     "ORDER_IS_ALREADY_READY": "Order is already ready.",
-    "NO_ORDER_SELECTED": "No order selected."
+    "NO_ORDER_SELECTED": "No order selected.",
+    "PRODUCT_EXIST": "{{ name }} is already used."
   },
   "response": {
     "LOGIN_SUCCESSFULL": "Logged in succesfully.",

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -10,9 +10,9 @@ import { ToolbarModule } from 'primeng/toolbar';
   imports: [ToolbarModule, TranslateModule],
 })
 export class ProductToolbarComponent {
-  @Output() addNewProductEvent = new EventEmitter<boolean>();
+  protected readonly router = inject(Router);
 
-  router = inject(Router);
+  readonly addNewProductEvent = output();
 
   navigateToMenu() {
     this.router.navigate(['menu']);

@@ -119,7 +119,8 @@
     "CATEGORY_UPDATE": "Kategorileri güncellerken hata oluştu.",
     "TABLE_NOT_FOUND": "Masa bulunamadı.",
     "ORDER_IS_ALREADY_READY": "Sipariş zaten hazır.",
-    "NO_ORDER_SELECTED": "Sipariş seçilmedi."
+    "NO_ORDER_SELECTED": "Sipariş seçilmedi.",
+    "PRODUCT_EXIST": "{{ name }} ismi kullanılmakta."
   },
   "response": {
     "LOGIN_SUCCESSFULL": "Başarıyla giriş yapıldı.",

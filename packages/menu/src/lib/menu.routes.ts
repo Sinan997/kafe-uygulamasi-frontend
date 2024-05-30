@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { MenuComponent } from './components';
-import { EditCategoryOrAddProductComponent } from './components/edit-category-or-add-product-page/edit-category-add-product.component';
+import { CategoryComponent } from './components';
+import { ProductComponent } from './components';
 
 export const MENU_ROUTES: Routes = [
-  { path: '', component: MenuComponent },
-  { path: 'category/:id', component: EditCategoryOrAddProductComponent },
+  { path: '', component: CategoryComponent },
+  { path: 'category/:id', component: ProductComponent },
 ];
