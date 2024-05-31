@@ -75,7 +75,9 @@
     "tableDetails": "Table Details",
     "tableDetailsEmpty": "There is no order for this table...",
     "addOrder": "Add Order",
-    "productList": "Product List"
+    "productList": "Product List",
+    "noCategory": "There is no category...",
+    "noProduct": "There is no product..."
   },
   "qrcode": {
     "qrcode": "QR Code",

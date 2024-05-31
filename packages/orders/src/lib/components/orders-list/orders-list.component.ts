@@ -1,11 +1,11 @@
 import { Component, OnInit, effect, inject, signal } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { tap } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomMessageService } from 'theme-shared';
 import { OrdersService } from '../../services/orders.service';
 import { OrderModel } from '../../models/order.model';
 import { SocketIOService } from '../../services/socket.service';
-import { NgClass } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { tap } from 'rxjs';
-import { CustomMessageService } from 'theme-shared';
 
 @Component({
   standalone: true,
@@ -22,10 +22,10 @@ export class OrdersListComponent implements OnInit {
   constructor() {
     effect(
       () => {
-        if (this.socketIOService.isOrderSettedReady()) {
+        if (this.socketIOService.idOfSettedReadyOrder()) {
           this.orders.update((orders) =>
             orders.map((order) => {
-              if (order._id === this.socketIOService.isOrderSettedReady()) {
+              if (order._id === this.socketIOService.idOfSettedReadyOrder()) {
                 order.isReady = true;
               }
 
@@ -39,17 +39,17 @@ export class OrdersListComponent implements OnInit {
 
     effect(
       () => {
-        if (this.socketIOService.isOrderAdded()) {
-          this.addOrderToList(this.socketIOService.isOrderAdded()!);
+        if (this.socketIOService.addedOrder()) {
+          this.addOrderToList(this.socketIOService.addedOrder()!);
         }
       },
       { allowSignalWrites: true },
     );
-    
+
     effect(
       () => {
-        if (this.socketIOService.isOrderDelivered()) {
-          this.removeOrderFromList(this.socketIOService.isOrderDelivered());
+        if (this.socketIOService.deliveredOrder()) {
+          this.removeOrderFromList(this.socketIOService.deliveredOrder());
         }
       },
       { allowSignalWrites: true },
@@ -61,7 +61,7 @@ export class OrdersListComponent implements OnInit {
   }
 
   addOrderToList(order: OrderModel) {
-    this.orders.update((orders) => [order,...orders]);
+    this.orders.update((orders) => [order, ...orders]);
   }
 
   removeOrderFromList(orderId: string) {

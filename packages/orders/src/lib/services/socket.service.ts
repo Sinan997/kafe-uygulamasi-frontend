@@ -14,34 +14,38 @@ export class SocketIOService {
   socket = io(inject(SOCKET_URL));
 
   user = signal<DecodedUserTokenModel>(this.authService.userValue!);
-  notificationLink = signal('');
   setOrderReadyLink = signal('');
+  notificationLink = signal('');
   newOrderLink = signal('');
   orderDeliveredLink = signal('');
 
   private setOrderReady = signal('');
-  isOrderSettedReady = computed(() => this.setOrderReady());
+  idOfSettedReadyOrder = computed(() => this.setOrderReady());
 
   private setOrderAdded = signal<OrderModel | undefined>(undefined);
-  isOrderAdded = computed(() => this.setOrderAdded());
+  addedOrder = computed(() => this.setOrderAdded());
 
   private setOrderDelivered = signal('');
-  isOrderDelivered = computed(() => this.setOrderDelivered());
+  deliveredOrder = computed(() => this.setOrderDelivered());
 
   constructor() {
-    if (this.user()?.businessId && this.user()?.role !== Roles.Admin) {
-      this.startListening();
-    }
+    console.log('start listening');
+
+    this.authService.userSubject.subscribe((user) => {
+      if (user && user?.businessId && user?.role !== Roles.Admin) {
+        console.log('really started');
+        this.user.set(user);
+        this.startListening();
+      }
+    });
   }
 
   startListening() {
-    this.user.set(this.authService.userValue!);
     this.notificationLink.set(this.user().businessId._id + 'notification');
     this.setOrderReadyLink.set(this.user().businessId._id + 'setorderready');
     this.newOrderLink.set(this.user().businessId._id + 'neworder');
     this.orderDeliveredLink.set(this.user().businessId._id + 'orderdelivered');
 
-    this.listenNotifications();
     this.listenSetOrderReady();
     this.listenNewOrder();
     this.listenSetOrderDelivered();
@@ -49,24 +53,11 @@ export class SocketIOService {
 
   listenNewOrder() {
     this.socket.on(this.newOrderLink(), (order: OrderModel) => {
-      console.log(order);
       this.setOrderAdded.set(order);
     });
   }
 
   listenSetOrderReady() {
-    this.socket.on(this.setOrderReadyLink(), (orderId) => {
-      this.setOrderReady.set(orderId);
-    });
-  }
-
-  listenSetOrderDelivered() {
-    this.socket.on(this.orderDeliveredLink(), (orderId) => {
-      this.setOrderDelivered.set(orderId);
-    });
-  }
-
-  listenNotifications() {
     if (this.authService.userValue?.role === 'waiter') {
       this.socket.on(this.notificationLink(), (notification: NotificationModel) => {
         Swal.fire({
@@ -80,5 +71,15 @@ export class SocketIOService {
         });
       });
     }
+
+    this.socket.on(this.setOrderReadyLink(), (orderId) => {
+      this.setOrderReady.set(orderId);
+    });
+  }
+
+  listenSetOrderDelivered() {
+    this.socket.on(this.orderDeliveredLink(), (orderId) => {
+      this.setOrderDelivered.set(orderId);
+    });
   }
 }

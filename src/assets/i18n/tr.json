@@ -75,7 +75,9 @@
     "tableDetails": "Masa Detayları",
     "tableDetailsEmpty": "Bu masa için sipariş bulunmamakta...",
     "addOrder": "Sipariş Ekle",
-    "productList": "Ürün Listesi"
+    "productList": "Ürün Listesi",
+    "noCategory": "Kategori bulunmamakta...",
+    "noProduct": "Ürün bulunmamakta..."
   },
   "qrcode": {
     "qrcode": "QR Kod",

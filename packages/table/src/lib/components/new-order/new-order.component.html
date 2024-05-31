@@ -39,6 +39,10 @@
                 </div>
               </div>
             </div>
+          } @empty {
+            <div class="d-flex w-full mt-5 fs-4">
+              <p>{{ 'table.noCategory' | translate }}</p>
+            </div>
           }
         </div>
       </div>
@@ -94,6 +98,10 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              } @empty {
+                <div class="d-flex w-full mt-5 fs-4">
+                  <p>{{ 'table.noProduct' | translate }}</p>
                 </div>
               }
             </ng-container>
