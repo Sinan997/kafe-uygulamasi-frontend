@@ -63,6 +63,8 @@
     "backToCategories": "Back to Categories",
     "deleteTableHeader": "Delete Table",
     "deleteTableMessage": "Are you sure you want to delete the table named {{ name }}?",
+    "deleteOrderHeader": "Delete Order",
+    "deleteOrderMessage": "Are you sure you want to delete the order named {{ name }}?",
     "addOrdersToTableMessage": "Are you sure you want to add an order to the table named {{ name }}?",
     "invalidTableNamePattern": "Name the table like this: Table 1, Table 2, ...",
     "amount": "Amount",
@@ -71,7 +73,9 @@
     "totalPrice": "Total Price",
     "takeOrder": "Take Order",
     "tableDetails": "Table Details",
-    "tableDetailsEmpty": "There is no order for this table..."
+    "tableDetailsEmpty": "There is no order for this table...",
+    "addOrder": "Add Order",
+    "productList": "Product List"
   },
   "qrcode": {
     "qrcode": "QR Code",

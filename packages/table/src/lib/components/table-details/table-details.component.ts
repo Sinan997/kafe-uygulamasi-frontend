@@ -1,30 +1,15 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TableModel } from '../../models/table.model';
+import { Component, EventEmitter, Input, OnInit, Output, inject, input, model, signal } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { finalize, tap } from 'rxjs';
 import { DialogModule } from 'primeng/dialog';
-import { TableService } from '../../services/table.service';
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { CustomMessageService } from 'theme-shared';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CustomMessageService } from 'theme-shared';
 import { OrderModel } from 'orders';
+import { TableModel } from '../../models/table.model';
+import { TableService } from '../../services/table.service';
 import { FormOrderModel } from '../../models/form-order.model';
-import { finalize, tap } from 'rxjs';
 
 @Component({
   selector: 'app-table-details-modal',
@@ -40,12 +25,11 @@ export class TableDetailsComponent implements OnInit {
   protected readonly customMessageService = inject(CustomMessageService);
   protected readonly confirmationService = inject(ConfirmationService);
   protected readonly translateService = inject(TranslateService);
-  table = input.required<TableModel>();
-  @Input() visibleDetailsDialog = true;
-  @Output() visibleDetailsDialogChange = new EventEmitter<boolean>();
+
+  readonly table = input.required<TableModel>();
+  readonly visibleDetailsDialog = model.required<boolean>();
 
   takeOrderButtonLoading = signal<boolean>(false);
-
   orders = signal<FormOrderModel[]>([]);
   allOrders = signal<FormOrderModel[]>([]);
 
@@ -74,11 +58,6 @@ export class TableDetailsComponent implements OnInit {
 
     this.orders.set(manipulatedOrders);
     this.allOrders.set(orders.map((order) => ({ ...order, pickedAmount: 0 })));
-  }
-
-  hideDialog() {
-    this.visibleDetailsDialog = false;
-    this.visibleDetailsDialogChange.emit(false);
   }
 
   increase(order: FormOrderModel) {
@@ -127,9 +106,7 @@ export class TableDetailsComponent implements OnInit {
       if (order.pickedAmount === 0) return;
 
       while (pickedAmount > 0) {
-        const findedOrder = this.allOrders().find(
-          (o) => o.productId._id === order.productId._id && o.pickedAmount !== o.amount,
-        );
+        const findedOrder = this.allOrders().find((o) => o.productId._id === order.productId._id && o.pickedAmount !== o.amount);
         if (!findedOrder) break;
         if (pickedAmount > findedOrder.amount) {
           findedOrder.pickedAmount = findedOrder.amount;
@@ -167,10 +144,10 @@ export class TableDetailsComponent implements OnInit {
 
   deleteOrder(order: FormOrderModel) {
     this.confirmationService.confirm({
-      message: this.translateService.instant('table.deleteTableMessage', {
-        name: this.table().name,
+      message: this.translateService.instant('table.deleteOrderMessage', {
+        name: order.productId.name,
       }),
-      header: this.translateService.instant('table.deleteTableHeader'),
+      icon: 'fa-solid fa-triangle-exclamation',
       accept: () => {
         const orderIds = this.allOrders()
           .filter((o) => o.productId._id === order.productId._id)

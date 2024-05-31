@@ -20,6 +20,10 @@ export class MenuService {
     return this.http.get<AllCategoriesReponse>(this.baseUrl + '/all-categories', {});
   }
 
+  getCategoriesWithProducts() {
+    return this.http.get<AllCategoriesReponse>(this.baseUrl + '/all-categories-with-products', {});
+  }
+
   addCategory(name: string) {
     return this.http.post<BasicResponseModel>(this.baseUrl + '/add-category', { name });
   }

@@ -1,129 +1,143 @@
-<p-dialog [draggable]="false" [modal]="true" [visible]="visibleNewOrderDialog" [closable]="false"
-  (enterKey)="onSubmit()" styleClass="new-order-dialog">
+<p-dialog
+  [draggable]="false"
+  [modal]="true"
+  [(visible)]="visibleNewOrderDialog"
+  [closeOnEscape]="true"
+  (enterKey)="onSubmit()"
+  styleClass="new-order-dialog"
+>
   <ng-template pTemplate="header">
     <div class="new-order-header">
       <span class="fs-4">
-        @if (!selectedCategory) {
-        {{ 'table.categories' | translate }}
-        }@else {
-        {{ 'table.products' | translate }}
+        @if (!selectedCategory()) {
+          {{ 'table.categories' | translate }}
+        } @else {
+          <button class="btn btn-primary me-3" (click)="backToCategories()">
+            <i class="fa fa-arrow-left"></i>
+            {{ 'table.backToCategories' | translate }}
+          </button>
         }
       </span>
-      <div>
-        @if (selectedCategory) {
-        <button class="btn btn-primary back-to-categories-button" (click)="backToCategories()">
-          <i class="fa fa-arrow-left"></i>
-          {{'table.backToCategories' | translate}}
-        </button>
-        }
-        <button class="btn btn-secondary xmark-button" (click)="hideDialog()">
-          <i class="fa fa-xmark"></i>
-        </button>
-      </div>
     </div>
   </ng-template>
   <ng-template pTemplate="content">
-    @if (!selectedCategory) {
-    <div class="container-fluid">
-      <div class="row">
-        @for (category of categories; track $index) {
-        <div class="col-xxl-2 col-xl-3 col-md-4 col-sm-6">
-          <div class="container mt-3">
-            <div class="row justify-content-center">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">{{category.name.length > 9 ? category.name.substring(0,9)+ '.' :
-                    category.name}}</h5>
-                  <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="button" (click)="selectCategory(category)">{{'table.newOrder'
-                      | translate}}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        }
-      </div>
-    </div>
-    }@else {
-    <h1 class="mb-4">Ürün Listesi</h1>
-    <div class="container-fluid p-0">
-      <form [formGroup]="form" id="newOrderForm" (ngSubmit)="onSubmit()">
+    @if (!selectedCategory()) {
+      <div class="container-fluid">
         <div class="row">
-          <ng-container formArrayName="products">
-            @for (product of this.products; track product.value['_id']; let idx = $index) {
-            <div class="col-xl-4 col-md-6 p-1" [formGroupName]="idx">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-column">
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex flex-column mb-3">
-                        <h5 class="card-title">
-                          {{product.value['name'].length > 9 ? product.value['name'].substring(0,9)+ '.' :
-                          product.value['name']}}
-                        </h5>
-                        <p class="card-text">Fiyat: {{product.value['price']}}</p>
+          @for (category of categories(); track $index) {
+            <div class="col-xxl-2 col-xl-3 col-md-4 col-sm-6">
+              <div class="container mt-3">
+                <div class="row justify-content-center">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ category.name.length > 9 ? category.name.substring(0, 9) + '.' : category.name }}</h5>
+                      <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="button" (click)="selectCategory(category)">{{ 'table.newOrder' | translate }}</button>
                       </div>
-                      <p class="card-text">
-                        <i class="mx-1 fa fa-circle fa-lg rounded"
-                          [ngClass]="product.value['isAvailable'] ? 'text-success' : 'text-danger'"></i>
-                      </p>
-                    </div>
-
-                    <div class='d-flex'>
-                      <button type="button" [disabled]="!product.value['isAvailable']"
-                        class="btn btn-sm btn-secondary me-1" (click)="decrease(product)">
-                        <i class="fa-solid fa-minus"></i>
-                      </button>
-                      <input [disabled]="!product.value['isAvailable']" type="number" formControlName="amount"
-                        class="form-control" min="0" value="0">
-                      <button type="button" [disabled]="!product.value['isAvailable']"
-                        class="btn btn-sm btn-success ms-1" (click)="increase(product)"><i
-                          class="fa-solid fa-plus"></i></button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            }
-          </ng-container>
+          }
         </div>
-      </form>
-    </div>
+      </div>
+    } @else {
+      <h1 class="mb-4">{{ 'table.productList' | translate }}</h1>
+      <div class="container-fluid p-0">
+        <form [formGroup]="form" id="newOrderForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <ng-container formArrayName="products">
+              @for (product of this.products; track product.value['_id']; let idx = $index) {
+                <div class="col-xl-4 col-md-6 p-1" [formGroupName]="idx">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex flex-column">
+                        <div class="d-flex justify-content-between">
+                          <div class="d-flex flex-column mb-3">
+                            <h5 class="card-title">
+                              {{ product.value['name'].length > 9 ? product.value['name'].substring(0, 9) + '.' : product.value['name'] }}
+                            </h5>
+                            <p class="card-text">{{ 'price' | translate }}: {{ product.value['price'] }}</p>
+                          </div>
+                          <p class="card-text">
+                            <i class="mx-1 fa fa-circle fa-lg rounded" [ngClass]="product.value['isAvailable'] ? 'text-success' : 'text-danger'"></i>
+                          </p>
+                        </div>
+
+                        <div class="d-flex">
+                          <button
+                            type="button"
+                            [disabled]="!product.value['isAvailable']"
+                            class="btn btn-sm btn-secondary me-1"
+                            (click)="decrease(product)"
+                          >
+                            <i class="fa-solid fa-minus"></i>
+                          </button>
+                          <input
+                            [readonly]="!product.value['isAvailable']"
+                            type="number"
+                            formControlName="amount"
+                            class="form-control"
+                            min="0"
+                            value="0"
+                          />
+                          <button
+                            type="button"
+                            [disabled]="!product.value['isAvailable']"
+                            class="btn btn-sm btn-success ms-1"
+                            (click)="increase(product)"
+                          >
+                            <i class="fa-solid fa-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            </ng-container>
+          </div>
+        </form>
+      </div>
     }
   </ng-template>
   <ng-template pTemplate="footer">
     <div class="pt-3">
-      @if (!selectedCategory) {
-      <button class="btn btn-primary" (click)="hideDialog()">
-        {{ 'form.cancel' | translate }}
-      </button>
-      }@else {
-      <button class="btn btn-outline-primary me-2" (click)="hideDialog()">
-        {{ 'form.cancel' | translate }}
-      </button>
-      <button form="newOrderForm" type="submit" class="btn btn-primary">
-        {{ 'form.save' | translate }}
-      </button>
+      @if (!selectedCategory()) {
+        <button class="btn btn-primary" (click)="visibleNewOrderDialog.set(false)">
+          {{ 'form.cancel' | translate }}
+        </button>
+      } @else {
+        <button class="btn btn-outline-primary me-2" (click)="visibleNewOrderDialog.set(false)">
+          {{ 'form.cancel' | translate }}
+        </button>
+        <button form="newOrderForm" type="submit" class="btn btn-primary">
+          {{ 'table.addOrder' | translate }}
+        </button>
       }
     </div>
   </ng-template>
 </p-dialog>
 
-<p-confirmDialog #cd styleClass="basic-dialog">
+<p-confirmDialog #cd styleClass="basic-confirmDialog">
+  <ng-template pTemplate="header">
+    <h4>
+      {{ 'table.newOrder' | translate }}
+    </h4>
+  </ng-template>
+
   <ng-template pTemplate="message" let-message>
     <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
-      <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
-      <p>{{'table.addOrdersToTableMessage' | translate: {name:table().name} }}</p>
+      <p><i class="fa-solid fa-circle-exclamation fw-bold fs-5 me-2"></i>{{ 'table.addOrdersToTableMessage' | translate: { name: table().name } }}</p>
 
       @for (product of products; track product.value['_id']; let idx = $index) {
-      @if (product.value['amount'] > 0) {
-      <div class="d-flex justify-content-between w-full border-bottom mb-2">
-        <span>{{product.value['name']}}</span>
-        <span class="fw-bold">{{product.value['amount']}}</span>
-      </div>
-      }
+        @if (product.value['amount'] > 0) {
+          <div class="d-flex justify-content-between w-full border-bottom mb-2">
+            <span>{{ product.value['name'] }}</span>
+            <span class="fw-bold">{{ product.value['amount'] }}</span>
+          </div>
+        }
       }
     </div>
   </ng-template>

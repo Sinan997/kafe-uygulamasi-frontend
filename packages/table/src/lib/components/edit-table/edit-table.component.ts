@@ -1,63 +1,55 @@
-import { Component, EventEmitter, Input, Output, inject, input } from '@angular/core';
-import { TableModel } from '../../models/table.model';
-import { TranslateModule } from '@ngx-translate/core';
-import { DialogModule } from 'primeng/dialog'; import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgxValidateCoreModule } from '@ngx-validate/core';
-import { checkTableName } from '../../utils/name-checker';
-import { CustomMessageService } from 'theme-shared';
-import { TableService } from '../../services/table.service';
+import { Component, inject, input, model, output } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxValidateCoreModule } from '@ngx-validate/core';
+import { DialogModule } from 'primeng/dialog';
+import { CustomMessageService } from 'theme-shared';
+import { TableModel } from '../../models/table.model';
+import { checkTableName } from '../../utils/name-checker';
+import { TableService } from '../../services/table.service';
 
 @Component({
   selector: 'app-edit-table-modal',
   templateUrl: 'edit-table.component.html',
   standalone: true,
-  imports: [TranslateModule, DialogModule, ReactiveFormsModule, NgxValidateCoreModule]
+  imports: [TranslateModule, DialogModule, ReactiveFormsModule, NgxValidateCoreModule],
 })
-
 export class EditTableComponent {
   protected readonly fb = inject(FormBuilder);
   protected readonly customMessageService = inject(CustomMessageService);
   protected readonly service = inject(TableService);
 
-  // table = input<TableModel>();
-  @Input({ required: true }) table: TableModel;
-  @Input() visibleEditTableDialog = true;
-  @Output() visibleEditTableDialogChange = new EventEmitter<boolean>();
-  @Output() updateList = new EventEmitter<boolean>();
+  readonly table = input.required<TableModel>();
+  readonly visibleEditTableDialog = model.required<boolean>();
+  readonly updateList = output();
 
-  form: FormGroup;
-
-  get name(){
-    return this.form.get('name');
-  }
+  form = this.fb.group({
+    name: this.fb.control('', [Validators.required]),
+  });
 
   ngOnInit() {
-    this.form = this.fb.group({
-      name: this.fb.control(this.table.name, [Validators.required]),
-    });
-  }
-
-  hideDialog() {
-    this.visibleEditTableDialog = false;
-    this.visibleEditTableDialogChange.emit(false);
+    this.form.controls.name.setValue(this.table().name);
   }
 
   onSubmit() {
-    if(!checkTableName(this.name?.value)) {
-      this.customMessageService.error('table.invalidTableNamePattern');
+    if (this.form.invalid) {
       return;
     }
 
+    if (!checkTableName(this.form.controls.name.value!)) {
+      return this.customMessageService.error('table.invalidTableNamePattern');
+    }
+
     this.service
-    .updateTable(this.table._id, this.name?.value)
-    .pipe(
-      tap((res) => {
-        this.hideDialog();
-        this.updateList.emit();
-        this.customMessageService.success(res);
-      }),
-    )
-    .subscribe();
+      .updateTable(this.table()._id, this.form.controls.name.value!)
+      .pipe(
+        tap((res) => {
+          this.visibleEditTableDialog.set(false);
+          this.updateList.emit();
+          this.customMessageService.success(res);
+        }),
+      )
+      .subscribe();
   }
 }

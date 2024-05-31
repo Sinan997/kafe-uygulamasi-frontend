@@ -1,28 +1,22 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { tap } from 'rxjs';
+import { PermissionDirective } from 'core';
 import { NewTableComponent } from './new-table/new-table.component';
 import { TableToolbarComponent } from './toolbar/toolbar.component';
 import { TableModel } from '../models/table.model';
 import { TableService } from '../services/table.service';
-import { AllTablesComponent } from './all-tables/all-tables.component';
-import { tap } from 'rxjs';
-import { PermissionDirective } from 'core';
+import { TablesComponent } from './tables/tables.component';
 
 @Component({
-  selector: 'lib-table',
+  selector: 'app-table',
   standalone: true,
-  imports: [
-    CommonModule,
-    NewTableComponent,
-    TableToolbarComponent,
-    AllTablesComponent,
-    PermissionDirective,
-  ],
+  imports: [NewTableComponent, TableToolbarComponent, TablesComponent, PermissionDirective],
   templateUrl: './table.component.html',
 })
 export class TableComponent implements OnInit {
   protected readonly service = inject(TableService);
-  tables: TableModel[] = [];
+
+  tables = signal<TableModel[]>([]);
 
   ngOnInit(): void {
     this.getTables();
@@ -33,9 +27,11 @@ export class TableComponent implements OnInit {
       .getTables()
       .pipe(
         tap((res) => {
-          this.tables = res.tables.sort((a, b) => {
-            return Number(a.name.split(' ')[1]) - Number(b.name.split(' ')[1]);
-          });
+          this.tables.set(
+            res.tables.sort((a, b) => {
+              return Number(a.name.split(' ')[1]) - Number(b.name.split(' ')[1]);
+            }),
+          );
         }),
       )
       .subscribe();

@@ -1,9 +1,0 @@
-<div class="container-fluid p-0">
-  <div class="row">
-    @for (tables of tables(); track $index) {
-      <div class="col-xxl-2 col-xl-3 col-md-4 col-sm-6">
-        <app-table [table]="tables" (updateList)="updateList.emit()"></app-table>
-      </div>
-    }
-  </div>
-</div>

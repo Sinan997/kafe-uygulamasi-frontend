@@ -1,9 +1,6 @@
-import { MessageService } from "primeng/api";
-
 export function checkTableName(name: string): boolean {
-  // check is it contains space
   try {
-    if (!(/\s/.test(name))) {
+    if (!/\s/.test(name)) {
       return false;
     }
     // check length

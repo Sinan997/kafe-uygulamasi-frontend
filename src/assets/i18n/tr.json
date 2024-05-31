@@ -63,6 +63,8 @@
     "backToCategories": "Kategorilere Geri Dön",
     "deleteTableHeader": "Masa Sil",
     "deleteTableMessage": "{{ name }} isimli masayı silmek istediğine emin misin?",
+    "deleteOrderHeader": "Siparişi Sil",
+    "deleteOrderMessage": "{{ name }} isimli siparişi silmek istediğine emin misin?",
     "addOrdersToTableMessage": "{{ name }} isimli masaya sipariş eklemek istediğine emin misin?",
     "invalidTableNamePattern": "Masayı şu şekilde adlandırın: Masa 1, Masa 2, ...",
     "amount": "Miktar",
@@ -71,7 +73,9 @@
     "totalPrice": "Toplam Fiyat",
     "takeOrder": "Sipariş Al",
     "tableDetails": "Masa Detayları",
-    "tableDetailsEmpty": "Bu masa için sipariş bulunmamakta..."
+    "tableDetailsEmpty": "Bu masa için sipariş bulunmamakta...",
+    "addOrder": "Sipariş Ekle",
+    "productList": "Ürün Listesi"
   },
   "qrcode": {
     "qrcode": "QR Kod",
